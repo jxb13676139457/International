@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+						
+						
+	<!-- loginAction的bean -->
+	<bean id="loginAction" class="com.international.action.logAction">
+		<property name="ud"><!-- 调用set方法给ud赋值，实例化 -->
+			<ref bean="userDao"/>
+		</property>
+	</bean>	
+	
+</beans>
