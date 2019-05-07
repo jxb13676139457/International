@@ -15,7 +15,7 @@
 			value="jdbc:sqlserver://localhost:1433;DatabaseName=userdb">
 		</property>
 		<property name="username" value="sa"></property>
-		<property name="password" value="xiaoliu1997"></property>
+		<property name="password" value=""></property>
 	</bean>
 	<!-- 创建SessionFactory，取代HiberbnateSessionFactory.java -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
