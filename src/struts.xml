@@ -9,9 +9,9 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
 	<package name="default" extends="struts-default">
-		<action name="logAction" class="loginAction">
-			<result name="success">/success.jsp</result>
-			<result name="input">/fail.jsp</result>
+		<action name="adminAction" class="adminAction">
+			<result name="success">/background/addLoginUser.jsp</result>
+			<result name="input">/background/404.html</result>
 		</action> 
 	</package>
 </struts>

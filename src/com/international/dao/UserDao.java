@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.international.model.User;
+import com.international.model.Admin;
 
 public class UserDao {
 
@@ -21,24 +21,24 @@ public class UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public boolean checkLogin(User users){
+	public boolean checkLogin(Admin admin){
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
-			String hql="from User where UserName=? and Password=?";
+			String hql="from Admin where adminId=? and password=?";
 			Query query=session.createQuery(hql);
-			System.out.println("query = "+query);
-			System.out.println("session = "+session);
-			query.setParameter(0, users.getUserName());
-			query.setParameter(1, users.getPassword());
-			List<User> list=query.list();
+			query.setParameter(0, admin.getAdminId());
+			query.setParameter(1, admin.getPassword());
+			//System.out.println(hql);
+			List<Admin> list=query.list();
+			System.out.println(list);
 			if(list.size()>0){
 				return true;
 			}else{
 				return false;
 			}
 		}catch(Exception ex){
-			ex.printStackTrace();;
+			ex.printStackTrace();
 			return false;
 		}finally{
 			session.close();

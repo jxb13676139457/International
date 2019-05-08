@@ -36,20 +36,20 @@
   <div style="text-align:center; margin-top:10px; font-size:60px;color:white"><b>国际合作交流管理系统后台</b> </div>
     <div class="container">
        
-      <form class="login-form" action="adminUserAction!login.action" method="post"
+      <form class="login-form" action="adminAction!login" method="post"
        style="margin-top:80px">    
   
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
-            <label  style="color:red"><s:fielderror/></label>
+            <label style="color:red"><s:fielderror/></label>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" name="user.name" class="form-control" placeholder="用户名" required />
+              <input type="text" name="admins.adminId" class="form-control" placeholder="用户名" required />
               
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" name="user.password" class="form-control" placeholder="密码" required/>
+                <input type="password" name="admins.password" class="form-control" placeholder="密码" required/>
             </div>
           <!--   <label class="checkbox">
                 <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
