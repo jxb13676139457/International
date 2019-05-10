@@ -32,20 +32,17 @@
     <![endif]-->
 </head>
 
-  <body class="login-img3-body">
+<body class="login-img3-body">
   <div style="text-align:center; margin-top:10px; font-size:60px;color:white"><b>国际合作交流管理系统后台</b> </div>
     <div class="container">
-       
-      <form class="login-form" action="adminAction!login" method="post"
+      <form class="login-form" action="loginAction!login" method="post"
        style="margin-top:80px">    
-  
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <label style="color:red"><s:fielderror/></label>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
               <input type="text" name="admins.adminId" class="form-control" placeholder="用户名" required />
-              
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
@@ -58,9 +55,6 @@
             <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
         </div>
       </form>
-
     </div>
-
-
   </body>
 </html>
