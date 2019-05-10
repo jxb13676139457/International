@@ -2,16 +2,14 @@
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
     "http://struts.apache.org/dtds/struts-2.5.dtd">
-
-
 <struts>
 	<!-- 指定action的配置转到Spring的配置文件-->
 	<constant name="struts.objectFactory" value="spring" />
 	
 	<package name="default" extends="struts-default">
-		<action name="adminAction" class="adminAction">
-			<result name="success">/background/addLoginUser.jsp</result>
-			<result name="input">/background/404.html</result>
+		<action name="loginAction" class="loginAction" method="login">
+			<result name="success">/background/addExam.jsp</result>
+			<result name="input">/background/login.jsp</result>
 		</action> 
 	</package>
 </struts>

@@ -1,4 +1,4 @@
-package com.international.action;
+package com.international.actions.admin;
 
 import java.util.Map;
 
@@ -7,7 +7,7 @@ import com.international.model.Admin;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class AdminAction extends ActionSupport{
+public class LoginAction extends ActionSupport {
 	private Admin admins;
 	UserDao ud;
 	
@@ -40,4 +40,6 @@ public class AdminAction extends ActionSupport{
 			return INPUT;
 		}
 	}
+	
+	
 }
