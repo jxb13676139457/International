@@ -7,7 +7,7 @@
 						
 						
 	<!-- loginAction的bean -->
-	<bean id="loginAction" class="com.international.actions.admin.LoginAction">
+	<bean id="adminAction" class="com.international.action.AdminAction">
 		<property name="ud"><!-- 调用set方法给ud赋值，实例化 -->
 			<ref bean="userDao"/>
 		</property>
