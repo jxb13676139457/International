@@ -13,4 +13,10 @@
 		</property>
 	</bean>	
 	
+	<!-- collegeAction的bean -->
+	<bean id="collegeAction" class="com.international.actions.college.CollegeAction">
+		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
+			<ref bean="collegeDao"/>
+		</property>
+	</bean>	
 </beans>

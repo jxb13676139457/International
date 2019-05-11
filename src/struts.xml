@@ -11,5 +11,11 @@
 			<result name="success">/background/addExam.jsp</result>
 			<result name="input">/background/login.jsp</result>
 		</action> 
+		
+		<!-- 国外院校的Action -->
+		<action name="collegeAction" class="collegeAction">
+			<result name="success">/background/abroadCollegeInfor.jsp</result>
+			<result name="input">/background/abroadCollegeInfor.jsp</result>
+		</action> 
 	</package>
 </struts>

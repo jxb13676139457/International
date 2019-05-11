@@ -259,8 +259,8 @@
                 
                      
                     <li>
-                       <form class="navbar-form" action="abroadCollegeAction!searchInformationbyName" method="post">
-                            <input class="form-control" name="searchAbroadName" placeholder="输入查找的关键字" type="text" required/>
+                       <form class="navbar-form" action="collegeAction" method="post">
+                            <input class="form-control" name="search" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                              <i class=" icon_search"></i>&nbsp;&nbsp;
                             <b>搜索</b></button>
@@ -268,7 +268,7 @@
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollege.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="abroadCollegeAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="collegeAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                         
                         <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAbroadCollegeExcel?searchName= ${searchAbroadName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -297,20 +297,20 @@
                                  <th>备注</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="collegeList" var="college" status="st">
+                           <s:iterator value="colleges" var="colleges" status="st">
                               <tr>
-                                 <td><s:property value="#college.name"/></td>
-                                 <td><s:property value="#college.reserve1"/></td>
-                                 <td><s:property value="#college.time"/></td>
-                                 <td><s:property value="#college.type"/></td>
-                                 <td><s:property value="#college.reserve2"/></td>
-                                  <td><s:property value="#college.reserve3"/></td>
-                                 <td><s:property value="#college.status"/></td>
+                                 <td><s:property value="#colleges.collegeName"/></td>
+                                 <td><s:property value="#colleges.country"/></td>
+                                 <td><s:property value="#colleges.startTime"/></td>
+                                 <td><s:property value="#colleges.type"/></td>
+                                 <td><s:property value="#colleges.contactPerson"/></td>
+                                  <td><s:property value="#colleges.phone"/></td>
+                                 <td><s:property value="#colleges.status"/></td>
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#college.id"/>','abroadCollegeAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#college.id"/>', 'abroadCollegeAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#colleges.id"/>','collegeAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#colleges.id"/>', 'collegeAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -325,17 +325,17 @@
 		       <div  style="text-align:center">
 		          <s:if test="#status==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="abroadCollegeAction?pageNo=1">首页</a>]
+                         [<a href="collegeAction?pageNo=1">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="abroadCollegeAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="collegeAction?pageNo=${currentPage-1}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="abroadCollegeAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="collegeAction?pageNo=${currentPage+1}">下一页</a>]
                           </c:if>
          
-                         [<a href="abroadCollegeAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="collegeAction?pageNo=${totalPage}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>
