@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.InternationalStudent" table="InternationalStudent">
+		<id name="studentId" column="studentId">
+			<generator class="assigned"></generator>
+			<!-- 非自增主键生成策略 -->
+		</id>
+		<property name="studentName" column="studentName"></property>
+		<property name="sex" column="sex"></property>
+		<property name="password" column="password"></property>
+		<property name="status" column="status"></property>
+		<property name="classId" column="classId"></property>
+		
+		<!-- 单项n->1关联，由InternationalStudent指向InternationalClass -->
+		<many-to-one name="classes" class="com.international.model.InternationalClass" 
+		cascade="save-update" fetch="select" column="classId" />
+	</class>
+</hibernate-mapping>
