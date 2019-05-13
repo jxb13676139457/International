@@ -47,6 +47,7 @@ public class CollegeDao {
 			session.close();//关闭Session
 		}
 	}
+	
 	/**
 	 *  分页查询国际院校信息
 	 * @return
@@ -83,16 +84,17 @@ public class CollegeDao {
 			session.close();//关闭Session
 		}
 	}
+	
 	/**
 	 *  删除国际院校信息
 	 * @return
 	 */
-	public boolean deleteCollege(int id) {
+	public boolean deleteCollege(int collegeId) {
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
 			//根据id获取要删除的用户
-			College college=(College)session.get(College.class, id);
+			College college=(College)session.get(College.class, collegeId);
 			//删除plane数据
 			Transaction trans=session.beginTransaction();
 			session.delete(college);//删除数据
@@ -102,6 +104,26 @@ public class CollegeDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 			return false;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
+	
+	/**
+	 *  根据id查询国际院校信息
+	 * @return
+	 */
+	public College getAbroadCollegeInforById(int collegeId) {
+		Session session=null;
+		try{
+			session=sessionFactory.openSession();
+			//根据id获取要修改的用户数据
+			College p=(College)session.get(College.class, collegeId);
+			return p;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}finally{//关闭session
 			session.close();//关闭Session
 		}

@@ -251,7 +251,7 @@
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.id" value="${sessionScope.currentCollege.id }"   style="width:300px" type="hidden" required/>
+                                              <input class="form-control" name="updateCollege.collegeId" value="${sessionScope.currentCollege.collegeId }"   style="width:300px" type="hidden" required/>
                                           </div>
                                       </div>
                                      
@@ -260,7 +260,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>国外学院名字</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.name" value="${sessionScope.currentCollege.name }"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="updateCollege.collegeName" value="${sessionScope.currentCollege.collegeName }"  style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -269,7 +269,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>国家</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.reserve1" value="${sessionScope.currentCollege.reserve1 }"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="updateCollege.country" value="${sessionScope.currentCollege.country }"  style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -279,15 +279,15 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>到访时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                          <%--     <input class="form-control" name="updateCollege.time" value="${sessionScope.currentCollege.time}" type="text"  required/> --%>
-                                               <sx:datetimepicker name="updateCollege.time" value="abroadTime" displayFormat="yyyy-MM-dd"/>
+                                          <%--     <input class="form-control" name="updateCollege.time" value="${sessionScope.currentCollege.startTime}" type="text"  required/> --%>
+                                               <sx:datetimepicker name="updateCollege.startTime" value="abroadTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>类型</b></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                               <input class="form-control"  type="text" name="updateCollege.type"   style="width:300px" value="${sessionScope.currentCollege.type }"   />
                                           </div>
@@ -298,7 +298,28 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>联系人</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.reserve2" value="${sessionScope.currentCollege.reserve2}"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="updateCollege.contactPerson" value="${sessionScope.currentCollege.contactPerson}"  style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      
+                                      <div class="form-group ">
+                                      <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>联系人职位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="updateCollege.position" value="${sessionScope.currentCollege.position}"  style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      
+									<div class="form-group ">
+                                      <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>联系电话</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="updateCollege.phone" value="${sessionScope.currentCollege.phone}"  
+                                              style="width:300px" type="text"   onkeyup="value=value.replace(/[^\d]/g,'')" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -306,14 +327,24 @@
                                       
                                        <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>联系电话</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>地址</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.reserve3" value="${sessionScope.currentCollege.reserve3}"  
-                                              style="width:300px" type="text"   onkeyup="value=value.replace(/[^\d]/g,'')" required/>
+                                              <input class="form-control" name="updateCollege.address" value="${sessionScope.currentCollege.address}"  
+                                              style="width:300px" type="text"  required/>
                                           </div>
                                           </div>
                                       </div>
-                                      
+                                                  
+                                       <div class="form-group ">
+                                      <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>邮箱</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="updateCollege.email" value="${sessionScope.currentCollege.email}"  
+                                              style="width:300px" type="text"   required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                                  
                                                       
                                                       
                                       <div class="form-group ">

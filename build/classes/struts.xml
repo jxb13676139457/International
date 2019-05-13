@@ -16,6 +16,10 @@
 		<action name="collegeAction" class="collegeAction">
 			<result name="success">/background/abroadCollegeInfor.jsp</result>
 			<result name="input">/background/abroadCollegeInfor.jsp</result>
+			<result name="deleteSuccess">/background/abroadCollegeInfor.jsp</result>
+			<result name="deleteError">/background/abroadCollegeInfor.jsp</result>
+			<result name="lookSuccess">/background/showAbroadCollegeDetail.jsp</result>
+			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
 	</package>
 </struts>

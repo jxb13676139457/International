@@ -1,10 +1,12 @@
 package com.international.actions.college;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.international.dao.CollegeDao;
 import com.international.model.College;
+import com.international.actions.common.ajaxAction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -12,6 +14,7 @@ public class CollegeAction extends ActionSupport {
 	private List<College> colleges;
 	Map m;
 	CollegeDao cd;
+	College currentCollege;
 	private int id; //界面显示数据的索引
 	private final int pageSize=6; //每页显示记录的个数
 	private int pageNo=1; //计数器,从第1页开始显示
@@ -76,6 +79,7 @@ public class CollegeAction extends ActionSupport {
 	public String execute() {
 		m=ActionContext.getContext().getSession();
 		colleges=cd.queryAllCollege();
+		System.out.println(search);
 		//计算总页数
 		if(colleges.size()%pageSize==0){
 			totalPage=colleges.size()/pageSize;
@@ -91,7 +95,7 @@ public class CollegeAction extends ActionSupport {
 		colleges=cd.queryCollege(search,pageNo,pageSize);
 		//设置当前页
 		currentPage=pageNo;
-		
+		m.put("colleges", colleges);
 		return SUCCESS;
 	}
 	
@@ -101,10 +105,30 @@ public class CollegeAction extends ActionSupport {
 	 */
 	public String deleteObject() {
 		System.out.println("要删除的id:" + id);
-		if(deleteCollege(id))
+		if(cd.deleteCollege(id))
 			return "deleteSuccess";
 		else
 			return "deleteError";
 	}
 	
+	/**
+	 *  修改国际院校信息
+	 * @return
+	 */
+	public String searchObjectById() {
+		m=ActionContext.getContext().getSession();
+		System.out.println("要查询的用户名id:" + id);
+		currentCollege=cd.getAbroadCollegeInforById(id);
+		if(currentCollege!=null) {
+			currentCollege.setStartTime(currentCollege.getStartTime().substring(0, 10));
+			m.put("currentCollege", currentCollege);
+			return "lookSuccess";
+		}
+		else {
+			String message="获取数据失败!";
+			m.put("error", message);
+			return "lookError";
+		}
+		
+	}
 }

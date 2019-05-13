@@ -27,7 +27,8 @@ public class LoginAction extends ActionSupport {
 	//登录
 	public String login(){
 		System.out.println("====="+admins.getAdminId()+","+admins.getPassword()+"=======");
-		//System.out.println(admins);
+		
+		System.out.println("测试");
 		if(ud.checkLogin(admins)){
 			Map session = ActionContext.getContext().getSession();
 			//登录用户存入session

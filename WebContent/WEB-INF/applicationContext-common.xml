@@ -31,6 +31,8 @@
 				<prop key="hibernate.show_sql">true</prop>
 				<!-- 格式化产生的sql语句 -->
 				<prop key="hibernate.format_sql">true</prop>
+				<!-- 只进结果集的处理 -->
+				<prop key="hibernate.jdbc.use_scrollable_resultset">false</prop>
 			</props>
 		</property>
 		<!-- 说明持久化类映射文件 -->

@@ -6,7 +6,7 @@ public class College {
 	int collegeId;			//国外院校ID
 	String collegeName;		//国外院校名称
 	String address;			//国外院校地址ַ
-	Date startTime;		//合作开始时间
+	String startTime;		//合作开始时间
 	String type;			//合作类型
 	String status;			//备注状态
 	String country;			//国家
@@ -46,12 +46,13 @@ public class College {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 
-	public Date getStartTime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(String startTime) {
 		this.startTime = startTime;
 	}
 
