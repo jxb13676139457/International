@@ -5,18 +5,34 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 						
-						
-	<!-- loginAction的bean -->
-	<bean id="loginAction" class="com.international.actions.admin.LoginAction">
+	<!-- 登录的bean -->
+	<bean id="loginAction" class="com.international.actions.admin.LoginAction" scope="prototype">
 		<property name="ud"><!-- 调用set方法给ud赋值，实例化 -->
 			<ref bean="userDao"/>
 		</property>
 	</bean>	
 	
-	<!-- collegeAction的bean -->
+	<!-- 国外院校的bean -->
 	<bean id="collegeAction" class="com.international.actions.college.CollegeAction">
 		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
 			<ref bean="collegeDao"/>
 		</property>
 	</bean>	
+	
+	<!-- 国际班学生的bean -->
+	<bean id="internationalStudentAction" class="com.international.actions.student.InternationalStudentAction">
+	
+	</bean>
+	
+	<!-- 修改管理员信息的bean -->
+	<bean id="updateInfoAction" class="com.international.actions.admin.UpdateInfoAction" scope="prototype">
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+	</bean>
+	
+	<!-- 退出系统的bean -->
+	<bean id="exitAction" class="com.international.actions.admin.ExitAction">
+		
+	</bean>
 </beans>

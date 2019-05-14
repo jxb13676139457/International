@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.College" table="College">
+		<id name="collegeId" column="collegeId">
+			<generator class="native"></generator>
+		</id>
+		<property name="collegeName" column="collegeName"></property>
+		<property name="address" column="address"></property>
+		<property name="startTime" column="startTime"></property>
+		<property name="type" column="type"></property>
+		<property name="status" column="status"></property>
+		<property name="country" column="country"></property>
+		<property name="contactPerson" column="contactPerson"></property>
+		<property name="position" column="position"></property>
+		<property name="phone" column="phone"></property>
+		<property name="email" column="email"></property>
+		<property name="reserves1" column="reserves1"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
+	</class>
+</hibernate-mapping>
