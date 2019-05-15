@@ -2,10 +2,7 @@ package com.international.model;
 
 import java.util.Date;
 
-public class College implements java.io.Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	
+public class College {
 	int collegeId;			//国外院校ID
 	String collegeName;		//国外院校名称
 	String address;			//国外院校地址ַ
