@@ -58,7 +58,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeAction!addObject",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/collegeAction!addObject",
 					    	    	
  					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
 				    	  		      data:$("#AbroadCollegeForm").serialize(),
@@ -279,7 +279,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>国外院校</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addCollege.name"  type="text" style="width:300px" required/>
+                                              <input class="form-control" name="addCollege.collegeName"  type="text" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -288,7 +288,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>国家</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.reserve1" required/>
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.country" required/>
                                           </div>
                                           </div> 
                                       </div>
@@ -297,8 +297,8 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>合作时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <!-- <input class="form-control"  type="text" name="addCollege.time"  required/> -->
-                                               <sx:datetimepicker name="addCollege.time"  displayFormat="yyyy-MM-dd"/>
+                                              <!-- <input class="form-control"  type="text" name="addCollege.startTime"  required/> -->
+                                               <sx:datetimepicker name="addCollege.startTime"  displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -314,21 +314,51 @@
                                       
                                          <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>联系人<span class="required" style="color:red">*</span></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>联系人</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.reserve2" required/>
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.contactPerson" required/>
                                           </div>
                                           </div> 
                                       </div>
                                       
-                                       <div class="form-group ">
+                                      <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>联系电话<span class="required" style="color:red">*</span></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>联系人职位</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.reserve3"  onkeyup="value=value.replace(/[^\d]/g,'')" required />
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.position" />
                                           </div>
                                           </div> 
                                       </div>
+                                      
+                                      
+                                      
+                                       <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>联系电话</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.phone"  onkeyup="value=value.replace(/[^\d]/g,'')" required />
+                                          </div>
+                                          </div> 
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>地址</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.address" required/>
+                                          </div>
+                                          </div> 
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>邮箱</b></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" style="width:300px" name="addCollege.email" />
+                                          </div>
+                                          </div> 
+                                      </div>
+                                      
                                       
                                             <div class="form-group ">
                                                <div  style="margin-left:250px;margin-top:-10px">
@@ -347,7 +377,8 @@
                                       <div class="form-group">
                                           <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" onclick="toSubmit()"><b>添加</b></button>
+                                               <button class="btn btn-primary" onclick="toSubmit()"><b>添加</b></button> 
+                                              <!--<button class="btn btn-primary" type="submit"><b>添加</b></button>-->
                                           </div>
                                           </div>
                                       </div>

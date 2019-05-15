@@ -20,6 +20,7 @@
 			<result name="deleteError">/background/abroadCollegeInfor.jsp</result>
 			<result name="lookSuccess">/background/showAbroadCollegeDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
+			
 		</action> 
 	</package>
 </struts>
