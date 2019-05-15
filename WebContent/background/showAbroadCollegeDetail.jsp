@@ -41,7 +41,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeAction!updateInfor",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/collegeAction!updateInfor",
 					    	    	
  					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
 				    	  		      data:$("#AbroadCollegeForm").serialize(),
@@ -236,7 +236,7 @@
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="abroadCollegeAction"><b>返回上页</b></a></button>
+                            <a href="collegeAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -277,7 +277,7 @@
                                       
                                         <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>到访时间</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>合作时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                           <%--     <input class="form-control" name="updateCollege.time" value="${sessionScope.currentCollege.startTime}" type="text"  required/> --%>
                                                <sx:datetimepicker name="updateCollege.startTime" value="abroadTime" displayFormat="yyyy-MM-dd"/>
@@ -287,7 +287,7 @@
                                       
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>类型</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>类型</b></label>
                                           <div class="col-lg-10">
                                               <input class="form-control"  type="text" name="updateCollege.type"   style="width:300px" value="${sessionScope.currentCollege.type }"   />
                                           </div>
@@ -306,9 +306,9 @@
                                       
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>联系人职位</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>联系人职位</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateCollege.position" value="${sessionScope.currentCollege.position}"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="updateCollege.position" value="${sessionScope.currentCollege.position}"  style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -337,10 +337,10 @@
                                                   
                                        <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>邮箱</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>邮箱</b></label>
                                           <div class="col-lg-10">
                                               <input class="form-control" name="updateCollege.email" value="${sessionScope.currentCollege.email}"  
-                                              style="width:300px" type="text"   required/>
+                                              style="width:300px" type="text"  />
                                           </div>
                                           </div>
                                       </div>
