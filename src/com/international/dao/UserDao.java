@@ -22,7 +22,7 @@ public class UserDao {
 		this.sessionFactory = sessionFactory;
 	}
 
-	//检验登录
+	//检验后台登录
 	public Admin checkLogin(Admin admin){
 		Session session=null;
 		try{
@@ -31,6 +31,7 @@ public class UserDao {
 			Query query=session.createQuery(hql);
 			query.setParameter(0, admin.getAdminId());
 			query.setParameter(1, admin.getPassword());
+			//query.setParameter(2,admin.getType());
 			List<Admin> list=query.list();
 			//System.out.println(list);
 			if(list.size()>0){
@@ -48,7 +49,7 @@ public class UserDao {
 	}
 	
 	//修改管理员信息
-	public boolean updateAdminInfo(Admin admin,String oldPwd,String newPwd,String userName) {
+	public boolean updateAdminInfo(Admin admin,String oldPwd,String newPwd,String reqPwd,String userName) {
 		Session session = null;
 		Transaction tran;
 		//boolean flag = false;
@@ -66,12 +67,20 @@ public class UserDao {
 				return false;
 			}else {
 				admin = list.get(0);
-				admin.setPassword(newPwd);
-				admin.setUserName(userName);
-				tran = session.beginTransaction();
-				session.update(admin);
-				tran.commit();
-				return true;
+				//System.out.println(reqPwd);
+				if(reqPwd.equals(newPwd)) {   //两次密码输入一致
+					System.out.println("密码一致");
+					admin.setPassword(newPwd);
+					admin.setUserName(userName);
+					tran = session.beginTransaction();
+					session.update(admin);
+					tran.commit();
+					return true;
+				}else {
+					System.out.println("两次密码输入不一致");
+					return false;
+				}
+				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();

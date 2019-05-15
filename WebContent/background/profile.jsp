@@ -208,17 +208,21 @@
                           <li><a class="" href="javascript:gotoExitAction();"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                  <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${adminType==1}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>    
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -338,6 +342,12 @@
                                                       <label class="col-lg-2 control-label">新密码  <span style="color:red">*</span></label>
                                                       <div class="col-lg-4">
                                                           <input type="password" class="form-control" name="newPwd" id="newPwd" placeholder=" " minLength="4" required/>
+                                                      </div>
+                                                  </div>
+                                                  <div class="form-group">
+                                                      <label class="col-lg-2 control-label">确认密码  <span style="color:red">*</span></label>
+                                                      <div class="col-lg-4">
+                                                          <input type="password" class="form-control" name="reqPwd" id="reqPwd" placeholder=" " minLength="4" required/>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">

@@ -5,7 +5,7 @@ public class Admin {
 	private String userName;
 	private String password;
 	private String sex;
-	private String reserves1;
+	private int type;
 	private String reserves2;
 	private String reserves3;
 	
@@ -33,11 +33,11 @@ public class Admin {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public String getReserves1() {
-		return reserves1;
+	public int getType() {
+		return type;
 	}
-	public void setReserves1(String reserves1) {
-		this.reserves1 = reserves1;
+	public void setType(int type) {
+		this.type = type;
 	}
 	public String getReserves2() {
 		return reserves2;
@@ -51,7 +51,4 @@ public class Admin {
 	public void setReserves3(String reserves3) {
 		this.reserves3 = reserves3;
 	}
-	
-	
-	
 }

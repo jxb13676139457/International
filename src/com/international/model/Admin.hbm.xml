@@ -10,7 +10,7 @@
 		<property name="userName" column="userName"></property>
 		<property name="password" column="password"></property>
 		<property name="sex" column="sex"></property>
-		<property name="reserves1" column="reserves1"></property>
+		<property name="type" column="type"></property>
 		<property name="reserves2" column="reserves2"></property>
 		<property name="reserves3" column="reserves3"></property>
 	</class>

@@ -35,4 +35,9 @@
 	<bean id="exitAction" class="com.international.actions.admin.ExitAction">
 		
 	</bean>
+	
+	<!-- 超级管理员特有权限的bean -->
+	<bean id="managerAction" class="com.international.actions.admin.ManagerAction">
+	
+	</bean>
 </beans>

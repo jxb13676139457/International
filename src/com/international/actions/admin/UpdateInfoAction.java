@@ -13,6 +13,7 @@ public class UpdateInfoAction extends ActionSupport {
 	UserDao ud;
 	private String oldPwd;
 	private String newPwd;
+	private String reqPwd;
 	private String userName;
 	
 	public Admin getAdmin() {
@@ -45,13 +46,18 @@ public class UpdateInfoAction extends ActionSupport {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+	public String getReqPwd() {
+		return reqPwd;
+	}
+	public void setReqPwd(String reqPwd) {
+		this.reqPwd = reqPwd;
+	}
 	//修改管理员信息
 	public String updateAdmin() {
 		Map session = ActionContext.getContext().getSession();
 		admin = (Admin)session.get("admin");
 		//System.out.println(admin.getUserName());
-		if(ud.updateAdminInfo(admin,oldPwd,newPwd,userName)) {
+		if(ud.updateAdminInfo(admin,oldPwd,newPwd,reqPwd,userName)) {
 			System.out.println("测试");
 			return SUCCESS;
 		}else {

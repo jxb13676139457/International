@@ -39,5 +39,10 @@
 			<result name="success">/background/login.jsp</result>
 			<result name="input">/background/index.jsp</result>
 		</action>
+		
+		<!-- 超级管理员特有权限的Action -->
+		<action name="managerAction" class="managerAction">
+			
+		</action>
 	</package>
 </struts>

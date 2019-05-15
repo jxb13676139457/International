@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginAction extends ActionSupport {
 	private Admin admins;
 	UserDao ud;
-	
+	int adminType;
 	public Admin getAdmins() {
 		return admins;
 	}
@@ -24,11 +24,19 @@ public class LoginAction extends ActionSupport {
 		this.ud = ud;
 	}
 	
+	public int getAdminType() {
+		return adminType;
+	}
+	public void setAdminType(int adminType) {
+		this.adminType = adminType;
+	}
 	//登录
 	public String login(){
 		System.out.println("====="+admins.getAdminId()+","+admins.getPassword()+"=======");
 		Admin admin = ud.checkLogin(admins);
 		if(admin!=null){
+			System.out.println(admin.getType());
+			adminType=admin.getType();
 			Map session = ActionContext.getContext().getSession();
 			//登录用户存入session
 			session.put("admin",admin);
