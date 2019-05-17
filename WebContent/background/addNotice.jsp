@@ -273,13 +273,13 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="noticeForm"  action="">
+                                  <form class="form-validate form-horizontal" method="post" id="noticeForm"  action="noticeAction!addNotice">
                                                                         
                                       <div class="form-group ">
                                       <div  style="margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>通知主题</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="title" type="text" name="addUser.title" style="width:300px" required/>
+                                              <input class="form-control" id="title" type="text" name="notice.title" style="width:300px" required/>
                                           </div>
                                          </div>
                                       </div>
@@ -288,7 +288,7 @@
                                           <div  style="margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time" id="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="notice.time" id="time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -297,7 +297,7 @@
                                        <div  style="margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知来源</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.source" id="source" style="width:300px" type="text" />
+                                              <input class="form-control" name="notice.source" id="source" style="width:300px" type="text" />
                                           </div>
                                       </div>
                                       </div>
@@ -306,7 +306,7 @@
                                         <div  style="margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知作者</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.author" id="author"style="width:300px"  type="text" />
+                                              <input class="form-control" name="notice.author" id="author"style="width:300px"  type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -325,7 +325,7 @@
                                               <div class="form-group">
                                                   <label class="control-label col-sm-2"><b>通知内容</b></label>
                                                   <div class="col-lg-offset-2 col-lg-10">
-                                                      <textarea class="form-control ckeditor" name="addUser.content" id="content" rows="10"></textarea>
+                                                      <textarea class="form-control ckeditor" name="notice.content" id="content" rows="10"></textarea>
                                                   </div>
                                               </div>
                                          </div>

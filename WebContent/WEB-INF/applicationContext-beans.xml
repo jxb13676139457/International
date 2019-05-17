@@ -17,5 +17,17 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+	
+	<bean id="classesDao" class="com.international.dao.ClassesDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<bean id="noticeDao" class="com.international.dao.NoticeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
 </beans>
 						

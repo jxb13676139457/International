@@ -277,7 +277,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="noticeAction!searchInformationbyTime" method="post">
+                       <form class="navbar-form" action="noticeAction!searchNotice" method="post">
                           <input class="form-control" name="searchNoticeTime" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查找</b></button>
                             
@@ -314,12 +314,12 @@
                                                         
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="#session.notices" var="notice" status="st">
                               <tr>
-                                 <td><s:property value="#user.title"/></td>                              
-                                 <td><s:property value="#user.time"/></td>       
-                                 <td><s:property value="#user.source"/></td>      
-                                 <td><s:property value="#user.author"/></td>            
+                                 <td><s:property value="#notice.title"/></td>                              
+                                 <td><s:property value="#notice.time"/></td>       
+                                 <td><s:property value="#notice.source"/></td>      
+                                 <td><s:property value="#notice.author"/></td>            
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 

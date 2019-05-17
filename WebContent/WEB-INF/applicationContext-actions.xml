@@ -19,4 +19,17 @@
 			<ref bean="collegeDao"/>
 		</property>
 	</bean>	
+	
+	<bean id="internationClassAction" class="com.international.actions.classes.InternationClassAction">
+		<property name="clsd">
+			<ref bean="classesDao"/>
+		</property>
+	</bean>	
+	
+	<bean id="noticeAction" class="com.international.actions.infomation.NoticeAction">
+		<property name="nd">
+			<ref bean="noticeDao"/>
+		</property>
+	</bean>
+	
 </beans>

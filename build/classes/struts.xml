@@ -21,5 +21,29 @@
 			<result name="lookSuccess">/background/showAbroadCollegeDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
+		
+		<action name="internationClassAction" class="internationClassAction">
+			<result name="success">/background/internationalClassInfor.jsp</result>
+			<result name="deleteSuccess">/background/internationalClassInfor.jsp</result>
+			<result name="deleteError">/background/internationalClassInfor.jsp</result>
+			<result name="lookSuccess">/background/showClassDetail.jsp</result>
+			<result name="lookError">/background/internationalClassInfor.jsp</result>
+			<result name="updateError">/background/internationalClassInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
+			<result name="addError">/background/internationalClassInfor.jsp</result>
+		</action> 
+		
+		
+		<action name="noticeAction" class="noticeAction">
+			<result name="success">/background/noticeInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+		</action> 
 	</package>
 </struts>
