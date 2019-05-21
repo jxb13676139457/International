@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
   <head>
@@ -122,7 +123,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
@@ -210,7 +211,7 @@
                   </li>
                   <!-- 动态开放此菜单项-->
 					<c:choose>
-						<c:when test="${adminType==1}">
+						<c:when test="${ sessionScope.adminType eq '是'}">
 							<li class="sub-menu">
 		                      <a href="javascript:;" class="">
 		                          <i class="icon_document_alt"></i>
@@ -222,7 +223,7 @@
 		                      </ul>
 		                    </li>    
 						</c:when>
-					</c:choose>    
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>

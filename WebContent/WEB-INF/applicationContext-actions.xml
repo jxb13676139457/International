@@ -31,13 +31,23 @@
 		</property>
 	</bean>
 	
+	<!-- 超级管理员特有权限的bean -->
+	<bean id="managerAction" class="com.international.actions.admin.ManagerAction">
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+	</bean>
+	<bean id="addOperatorAction" class="com.international.actions.admin.AddOperatorAction">
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+	</bean>
+
 	<!-- 退出系统的bean -->
 	<bean id="exitAction" class="com.international.actions.admin.ExitAction">
 		
 	</bean>
 	
-	<!-- 超级管理员特有权限的bean -->
-	<bean id="managerAction" class="com.international.actions.admin.ManagerAction">
 	
-	</bean>
+	
 </beans>

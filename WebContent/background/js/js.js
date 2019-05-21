@@ -1,26 +1,15 @@
-
-
-//ÖØÖÃ²Ù×÷Ô±µÄÃÜÂë
+//é‡ç½®æ“ä½œå‘˜çš„å¯†ç 
 function resetLoginUser(id){
 	
-	if(confirm("È·¶¨ÒªÖØÖÃ¸Ã²Ù×÷Ô±µÄÃÜÂëÂğ£¿")){
+	if(confirm("ç¡®å®šè¦é‡ç½®è¯¥æ“ä½œå‘˜çš„å¯†ç å—ï¼Ÿ")){
 		
 		location.href="adminUserAction!resetLoginUser?id=" + id;
 				
 	}
 }
 
-//É¾³ıµÄ¹ı³Ì
-function deleteProcess(id, str){
-	
-	if(confirm("É¾³ı¿ÉÄÜ»áÉæ¼°¼¶ÁªÉ¾³ıÆäËûĞÅÏ¢£¬È·¶¨ÒªÉ¾³ıÂğ£¿")){
-		
-		location.href=str+id;
-				
-	}
-}
 
-//²éÕÒ¹ı³Ì
+//æŸ¥æ‰¾è¿‡ç¨‹
 function searchProcess(id, str){
 			
 	location.href=str+id;
@@ -28,7 +17,7 @@ function searchProcess(id, str){
 }
 
 
-//¸ù¾İÑ§ºÅÀ´»ñÈ¡Ñ§ÉúµÄĞÅÏ¢
+//ï¿½ï¿½ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  function getStudentInformation(){
     	  
     	  var studentNo= $("#studentNo").val();
@@ -71,7 +60,7 @@ function searchProcess(id, str){
       }
 
 
-//»ñÈ¡¹úÍâÔºĞ£µÄĞÅÏ¢
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ÔºĞ£ï¿½ï¿½ï¿½ï¿½Ï¢
  function getCollegeInformation(){
     
 	 var temp=1;
@@ -87,7 +76,7 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¹úÍâÔºĞ£--</option>';
+	    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ÔºĞ£--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
@@ -120,7 +109,7 @@ function searchProcess(id, str){
    }
  
  
-//»ñÈ¡ÑÅË¼»ú¹¹µÄĞÅÏ¢
+//ï¿½ï¿½È¡ï¿½ï¿½Ë¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
  function getAgencyInformation(){
     	  
 	 var temp=1;
@@ -138,7 +127,7 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ»ú¹¹--</option>';
+	    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
@@ -170,7 +159,7 @@ function searchProcess(id, str){
    	  );
    }
 
- //»ñÈ¡ÑÅË¼ÅàÑµµÄ¿ªÊ¼Ê±¼ä
+ //ï¿½ï¿½È¡ï¿½ï¿½Ë¼ï¿½ï¿½Ñµï¿½Ä¿ï¿½Ê¼Ê±ï¿½ï¿½
  function getStartTime(){
 	  
 	  
@@ -191,7 +180,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿ªÊ¼Ê±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½Ê¼Ê±ï¿½ï¿½--</option>';
                              
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -221,13 +210,13 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 
  }
  
  
- //»¢ÇğÑÅË¼ÅàÑµµÄ½áÊøÊ±¼ä
+ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¼ï¿½ï¿½Ñµï¿½Ä½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
  function getOutTime(){
 	  
 	  
@@ -250,7 +239,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ½áÊøÊ±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -280,14 +269,14 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 	  
 
  }
 
  
-//»ñÈ¡ÑÅË¼ÅàÑµµÄ¿ÎÊ±
+//ï¿½ï¿½È¡ï¿½ï¿½Ë¼ï¿½ï¿½Ñµï¿½Ä¿ï¿½Ê±
  function getCourseHours(){
 	  
 	  
@@ -310,7 +299,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿ÎÊ±--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ê±--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -340,13 +329,13 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 	  
 
  }
  
- //»ñÈ¡ÑÅË¼ÅàÑµµÄÑ§ÆÚ
+ //ï¿½ï¿½È¡ï¿½ï¿½Ë¼ï¿½ï¿½Ñµï¿½ï¿½Ñ§ï¿½ï¿½
  function getSemester(){
 	  
 	  
@@ -372,7 +361,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡ÔñÑ§ÆÚ--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½Ñ§ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -402,12 +391,12 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
  }
 
 	  
-	  //»ñÈ¡Ä£Äâ¿¼ÊÔµÄÊ±¼ä
+	  //ï¿½ï¿½È¡Ä£ï¿½â¿¼ï¿½Ôµï¿½Ê±ï¿½ï¿½
 	  function getSimulationTime(){
 	 	  
 	 	  var temp=1;
@@ -430,7 +419,7 @@ function searchProcess(id, str){
 	 	    	    	  success: function(data){
 	 	    	    		  
 	 	    	    			 var html="";
-	 		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔÊ±¼ä--</option>';
+	 		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 	 		                     for(var i=0; i<data.length; i++){
 	 		                    	
@@ -462,7 +451,7 @@ function searchProcess(id, str){
 	  }
 
  
- //»ñÈ¡Ä£Äâ¿¼ÊÔµÄµØµã
+ //ï¿½ï¿½È¡Ä£ï¿½â¿¼ï¿½ÔµÄµØµï¿½
  function getSimulationLocation(){
 	  
 	  var temp=1;
@@ -486,7 +475,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔµØµã--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ÔµØµï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -518,7 +507,7 @@ function searchProcess(id, str){
 
  
  
- //»ñÈ¡ÕıÊ½¿¼ÊÔµÄÊ±¼ä
+ //ï¿½ï¿½È¡ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ôµï¿½Ê±ï¿½ï¿½
  function getFormalTime(){
 	  
 	  var temp=1;
@@ -541,7 +530,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔÊ±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -573,7 +562,7 @@ function searchProcess(id, str){
  }
 
 
-//»ñÈ¡Ä£Äâ¿¼ÊÔµÄµØµã
+//ï¿½ï¿½È¡Ä£ï¿½â¿¼ï¿½ÔµÄµØµï¿½
 function getFormalLocation(){
  
 
@@ -598,7 +587,7 @@ function getFormalLocation(){
    	    	  success: function(data){
    	    		  
    	    			 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔµØµã--</option>';
+	    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ÔµØµï¿½--</option>';
 
 	                     for(var i=0; i<data.length; i++){
 	                    	

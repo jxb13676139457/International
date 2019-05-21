@@ -1,4 +1,4 @@
-package com.international.actions.common;
+package com.international.actions;
 
 import java.io.IOException;
 import java.io.PrintWriter;
