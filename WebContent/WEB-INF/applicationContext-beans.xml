@@ -19,6 +19,18 @@
 		</property>
 	</bean>	
 	
-	<!--  -->
+	<!-- 活动信息的bean -->
+	<bean id="activityDao" class="com.international.dao.ActivityDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<!-- 协议信息的bean -->
+	<bean id="agreementDao" class="com.international.dao.AgreementDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
 </beans>
 						

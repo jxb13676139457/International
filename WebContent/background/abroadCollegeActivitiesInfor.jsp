@@ -279,17 +279,16 @@
                 <ul class="nav top-menu">        
                 
                   <li>
-                       <form class="navbar-form" action="abroadCollegeActivitiesAction!searchInformationbyNTA" method="post">
+                       <form class="navbar-form" action="collegeActivityAction" method="post">
                              <label><b></b>&nbsp;</label>
                               <label><b>国外院校</b>&nbsp;</label>
-                               <input class="form-control" name="collegeName" placeholder="输入国外院校" type="text" />
+                               <input class="form-control" name="search" placeholder="输入国外院校" type="text" value="${search}"/>
                          
                                 <label><b>主题</b>&nbsp;</label>
-                            <input class="form-control" name="title" placeholder="输入活动主题" type="text"/>
+                            <input class="form-control" name="titles" placeholder="输入活动主题" type="text" value="${titles}"/>
                           
                               <label><b>时间</b>&nbsp;</label>
-                             <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd"/>至
-                           <sx:datetimepicker name="outTime" displayFormat="yyyy-MM-dd"/>
+                             <sx:datetimepicker name="activityTime" displayFormat="yyyy-MM-dd" value="activityTime"/>
             
                             <button type="submit" class="btn btn-default" style="width:120px;height:30px;margin-top:-3px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查询</b></button>
                      
@@ -301,7 +300,7 @@
                                  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollegeActivities.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="abroadCollegeActivitiesAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="collegeActivityAction?search=&titles=&activityTime="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                      
                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAbroadCollegeActivitiesExcel?searchName=${searchCollegeName}">
@@ -338,17 +337,17 @@
                                                         
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="collegeActivities" var="collegeActivities" status="st">
                               <tr>
-                                 <td><s:property value="#user.college.name"/></td>
-                                 <td><s:property value="#user.title"/></td>
-                                 <td><s:property value="#user.time"/></td>       
-                                 <td><s:property value="#user.type"/></td>                  
+                                 <td><s:property value="#collegeActivities.coll.collegeName"/></td>
+                                 <td><s:property value="#collegeActivities.title"/></td>
+                                 <td><s:property value="#collegeActivities.time"/></td>       
+                                 <td><s:property value="#collegeActivities.type"/></td>                  
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','abroadCollegeActivitiesAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'abroadCollegeActivitiesAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#collegeActivities.activityId"/>','collegeActivityAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#collegeActivities.activityId"/>', 'collegeActivityAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -361,19 +360,19 @@
                      
                 <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="abroadCollegeActivitiesAction?pageNo=1">首页</a>]
+                         [<a href="collegeActivityAction?pageNo=1&search=${search}&titles=${titles}&activityTime=${activityTime}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="abroadCollegeActivitiesAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="collegeActivityAction?pageNo=${currentPage-1}&search=${search}&titles=${titles}&activityTime=${activityTime}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="abroadCollegeActivitiesAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="collegeActivityAction?pageNo=${currentPage+1}&search=${search}&titles=${titles}&activityTime=${activityTime}">下一页</a>]
                           </c:if>
          
-                         [<a href="abroadCollegeActivitiesAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="collegeActivityAction?pageNo=${totalPage}&search=${search}&titles=${titles}&activityTime=${activityTime}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

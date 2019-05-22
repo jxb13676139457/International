@@ -8,10 +8,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.international.model.College;
+import com.international.model.CollegeActivity;
+import com.international.model.CollegeAgreement;
 
-public class CollegeDao {
+public class AgreementDao {
 	SessionFactory sessionFactory;
-	public CollegeDao() {
+	public AgreementDao() {
 		
 	}
 	public SessionFactory getSessionFactory() {
@@ -20,33 +22,31 @@ public class CollegeDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	/*
-	 *维护国外院校信息
-	 * */
-	
-	/**
-	 *  查询所有国外院校
-	 * @return
-	 */
-	public List<College> queryAllCollege(String value){
+	public List<CollegeAgreement> queryAllAgreement(String value){
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
 			//获取所有数据
 			String hql1="collegeName like '%"+value+"%'";
-			String hql2="convert(varchar,startTime,120) like '%"+value+"%'";
+			String hql2="convert(varchar,time,120) like '%"+value+"%'";
 			String hql3="type like '%"+value+"%'";
-			String hql4="status like '%"+value+"%'";
-			String hql5="country like '%"+value+"%'";
-			String hql6="contactPerson like '%"+value+"%'";
-			String hql7="phone like '%"+value+"%'";
-			String str=hql1+" or "+hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
+			String hql4="title like '%"+value+"%'";
+			String hql5="fileName like '%"+value+"%'";
+			String hql6="savePath like '%"+value+"%'";
+			
+			//查询名字
+			String queryName="from College where "+hql1;
+			Query query1=session.createQuery(queryName);
+			List<College> list1=query1.list();
+			int v=list1.get(0).getCollegeId();
+			String hql7="coll like '%"+v+"%'";
+			
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
 			//获取所有数据
-			String queryString="from College where "+str;
+			String queryString="from CollegeAgreement where "+str;
 			//创建查询
 			Query query=session.createQuery(queryString);
-			//执行查询获得的结果,list中的每一个元素代表一个College的对象
+			//执行查询获得的结果,list中的每一个元素代表一个CollegeAgreement的对象
 			List list=query.list();//list集合包含College表里所有数据
 			if(list.size()>0)
 				return list;
@@ -60,26 +60,32 @@ public class CollegeDao {
 			session.close();//关闭Session
 		}
 	}
-	
 	/**
 	 *  分页查询国际院校信息
 	 * @return
 	 */
-	public List<College> queryCollege(String value,int pageNo,int pageSize){
+	public List<CollegeAgreement> queryAgreement(String value,int pageNo,int pageSize){
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
-			//hql语句
-			String hql1="collegeName like '%"+value+"%'";
-			String hql2="convert(varchar,startTime,120) like '%"+value+"%'";
-			String hql3="type like '%"+value+"%'";
-			String hql4="status like '%"+value+"%'";
-			String hql5="country like '%"+value+"%'";
-			String hql6="contactPerson like '%"+value+"%'";
-			String hql7="phone like '%"+value+"%'";
-			String str=hql1+" or "+hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
 			//获取所有数据
-			String queryString="from College where "+str;
+			String hql1="collegeName like '%"+value+"%'";
+			String hql2="convert(varchar,time,120) like '%"+value+"%'";
+			String hql3="type like '%"+value+"%'";
+			String hql4="title like '%"+value+"%'";
+			String hql5="fileName like '%"+value+"%'";
+			String hql6="savePath like '%"+value+"%'";
+			
+			//查询名字
+			String queryName="from College where "+hql1;
+			Query query1=session.createQuery(queryName);
+			List<College> list1=query1.list();
+			int v=list1.get(0).getCollegeId();
+			String hql7="coll like '%"+v+"%'";
+			System.out.println("caihuiz");
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
+			//获取所有数据
+			String queryString="from CollegeAgreement where "+str;
 			//创建查询
 			Query query=session.createQuery(queryString);
 			//每次获取第一条数据的索引
@@ -88,7 +94,7 @@ public class CollegeDao {
 			query.setMaxResults(pageSize); 
 
 			//每次最多6条记录
-			List<College> list=query.list();
+			List<CollegeAgreement> list=query.list();
 			return list;
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -99,18 +105,18 @@ public class CollegeDao {
 	}
 	
 	/**
-	 *  删除国际院校信息
+	 *  删除活动信息
 	 * @return
 	 */
-	public boolean deleteCollege(int collegeId) {
+	public boolean deleteAgreement(int agreementId) {
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
 			//根据id获取要删除的用户
-			College college=(College)session.get(College.class, collegeId);
+			CollegeAgreement collegeAgreement=(CollegeAgreement)session.get(CollegeAgreement.class, agreementId);
 			//删除plane数据
 			Transaction trans=session.beginTransaction();
-			session.delete(college);//删除数据
+			session.delete(collegeAgreement);//删除数据
 			trans.commit();
 			return true;
 			
@@ -123,15 +129,15 @@ public class CollegeDao {
 	}
 	
 	/**
-	 *  根据id查询国际院校信息
+	 *  根据id查询活动信息
 	 * @return
 	 */
-	public College getAbroadCollegeInforById(int collegeId) {
+	public CollegeAgreement getCollegeAgreementInforById(int agreementId) {
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
 			//根据id获取要修改的用户数据
-			College p=(College)session.get(College.class, collegeId);
+			CollegeAgreement p=(CollegeAgreement)session.get(CollegeAgreement.class, agreementId);
 			return p;
 			
 		}catch (Exception e) {
@@ -142,16 +148,24 @@ public class CollegeDao {
 		}
 	}
 	/**
-	 *  查询符合条件的国外院校
+	 *  查询符合条件的协议
 	 * @return
 	 */
-	public List<College> queryByhql(String queryString){
+	public List<CollegeAgreement> queryByhql(String queryString,String h){
 		Session session=null;
+
 		try {
 			session=sessionFactory.openSession();
+			//查询名字
+			String queryName="from College where collegeName="+"'"+h+"'";
+			Query query1=session.createQuery(queryName);
+			List<College> list1=query1.list();
+			int value=list1.get(0).getCollegeId();
+			String hql4=" and collegeId like '%"+value+"%'";
+			queryString=queryString +hql4;
 			//创建查询
 			Query query=session.createQuery(queryString);
-			//执行查询获得的结果,list中的每一个元素代表一个College的对象
+			//执行查询获得的结果,list中的每一个元素代表一个CollegeAgreement的对象
 			List list=query.list();//list集合包含College表里所有数据
 			if(list.size()>0)
 				return list;
@@ -166,10 +180,10 @@ public class CollegeDao {
 		}
 	}
 	/**
-	 *  添加国外院校
+	 *  添加协议
 	 * @return
 	 */
-	public int addCollege(College c) {
+	public int addAgreement(CollegeAgreement c) {
 		Session session=null;
 		int num=0; //受影响的行数
 		
@@ -187,30 +201,6 @@ public class CollegeDao {
 		}finally{
 			session.close();
 		}
-		System.out.println(num);
 		return num;
 	}
-	/**
-	 *  更新国外院校
-	 * @return
-	 */
-	public boolean updateCollege(College c) {
-		Session session=null;
-		try{
-			session=sessionFactory.openSession();
-			//保存数据回数据库
-			Transaction trans=session.beginTransaction();
-			//调用保存更新方法
-			session.saveOrUpdate(c);
-			trans.commit();
-			return true;
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}finally{//关闭session
-			session.close();//关闭Session
-		}	
-	}
-	
 }

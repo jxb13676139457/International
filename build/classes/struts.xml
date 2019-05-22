@@ -5,7 +5,7 @@
 <struts>
 	<!-- 指定action的配置转到Spring的配置文件-->
 	<constant name="struts.objectFactory" value="spring" />
-	
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="default" extends="struts-default">
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction" method="login">
@@ -23,6 +23,28 @@
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 			
 		</action> 
+		
+		<!-- 活动的Action -->
+		<action name="collegeActivityAction" class="collegeActivityAction">
+			<result name="success">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="input">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="deleteSuccess">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="deleteError">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="lookSuccess">/background/showAbroadCollegeActivitiesDetail.jsp</result>
+			<result name="lookError">/background/showAbroadCollegeActivitiesDetail.jsp</result>
+		</action>
+		
+		<!-- 协议的Action -->
+		<action name="collegeAgreementAction" class="collegeAgreementAction">
+			<result name="success">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="input">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="deleteSuccess">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="deleteError">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="lookSuccess">/background/showAbroadCollegeProtocolDetail.jsp</result>
+			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
+			<!-- 配置上传的文件路径 -->
+			<param name="savePath">/upload</param>
+		</action>
 		
 		<!-- 学生模块的Action -->
 		<action name="internationalStudentAction" class="internationalStudentAction">
