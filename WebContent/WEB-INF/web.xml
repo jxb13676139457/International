@@ -16,6 +16,7 @@
 	    </listener-class>
 	</listener>
   
+  <!-- sturts2核心过滤器的配置 -->
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>
@@ -27,4 +28,14 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+   <!-- 拦截未登录用户非法访问jsp页面 -->
+ <!--  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.international.common.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/background/*</url-pattern>
+  </filter-mapping> -->
+  
 </web-app>

@@ -1,6 +1,7 @@
 package com.international.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,10 +9,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.international.model.Admin;
+import com.opensymphony.xwork2.ActionContext;
 
 public class UserDao {
 
 	SessionFactory sessionFactory;
+	Admin admin;
 	
 	public UserDao(){}
 	
@@ -20,6 +23,12 @@ public class UserDao {
 	}
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+	public Admin getAdmin() {
+		return admin;
+	}
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	//检验后台登录
@@ -62,7 +71,7 @@ public class UserDao {
 			query.setParameter(0,admin.getAdminId());
 			query.setParameter(1,oldPwd);
 			List<Admin> list = query.list();
-			System.out.println(list);
+			//System.out.println(list);
 			if(list.size()==0) {
 				return false;
 			}else {
@@ -80,7 +89,6 @@ public class UserDao {
 					System.out.println("两次密码输入不一致");
 					return false;
 				}
-				
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -89,4 +97,138 @@ public class UserDao {
 			session.close();
 		}
 	}
+	
+	//查询所有管理员的信息
+	public List<Admin> queryAdmins(String value){
+		Session session = null;
+		try{
+			String hql = "";
+			session = sessionFactory.openSession();
+			String hql1="adminId like '%"+value+"%'";		
+			String hql2="userName like '%"+value+"%'";			
+			String hql3="password like '%"+value+"%'";
+			String hql4="sex like '%"+value+"%'";
+			String hql5="type like '%"+value+"%'";
+			hql="from Admin where "+ hql1 +" or "+ hql2 +" or "+ hql3+" or "+ hql4+" or "+ hql5;
+			Query query = session.createQuery(hql);
+			List list = query.list();
+			if(list.size()>0){
+				return list;
+			}else{
+				return null;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return null;
+		}finally{
+			session.close();
+		}
+	}
+	
+	//分页查询需要显示的数据(每次最多4条记录)
+	public List<Admin> queryByPage(String value,int pageNo,int pageSize){
+		Session session = null;
+		try{
+			String hql = "";
+			session = sessionFactory.openSession();
+			String hql1="adminId like '%"+value+"%'";		
+			String hql2="userName like '%"+value+"%'";			
+			String hql3="password like '%"+value+"%'";
+			String hql4="sex like '%"+value+"%'";
+			String hql5="type like '%"+value+"%'";
+			hql="from Admin where "+ hql1 +" or "+ hql2 +" or "+ hql3+" or "+ hql4+" or "+ hql5;
+			Query query = session.createQuery(hql);
+			//每次获取第一条数据的索引
+			query.setFirstResult((pageNo-1)*pageSize); //设置这一页显示的第一条记录的索引
+			//这一页显示的记录个数
+			query.setMaxResults(pageSize);
+			//每次最多4条记录
+			List<Admin> list = query.list();
+			return list;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			session.close();
+		}
+	}
+	
+	//加入后台操作员
+	public int addOperator(Admin admin) {
+		System.out.println(admin.getAdminId());
+		int count = 0;
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			Transaction tran = session.beginTransaction();
+			count = Integer.valueOf(session.save(admin).toString());
+			tran.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return count;
+	}
+	
+	//删除操作员
+	public boolean deleteOperator(String adminId){
+		System.out.println("前台传过来的id："+adminId);
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			Transaction tran = session.beginTransaction();
+			//根据id获取Admin对象
+			Admin admin = (Admin)session.get(Admin.class,adminId);
+			System.out.println(admin);
+			session.delete(admin);
+			tran.commit();
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			session.close();
+		}
+	}
+	
+	//根据adminId查询选中的操作员，以供修改
+	public Admin queryById(String adminId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Admin admin = (Admin)session.get(Admin.class,adminId);
+			return admin;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			session.close();
+		}
+	}
+	
+	//修改操作员
+	public boolean updateOperator(String adminId,Admin newAdmin) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Admin oldAdmin = (Admin)session.get(Admin.class,adminId);
+			oldAdmin.setPassword(newAdmin.getPassword());
+			oldAdmin.setUserName(newAdmin.getUserName());
+			oldAdmin.setSex(newAdmin.getSex());
+			oldAdmin.setType(newAdmin.getType());
+			Transaction trans = session.beginTransaction();
+			//新修改的数据保存到数据库中
+			session.saveOrUpdate(oldAdmin);
+			trans.commit();
+			//System.out.println(newAdmin.getSex()+","+oldAdmin.getSex());
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			session.close();
+		}
+	}
+	
 }

@@ -1,5 +1,4 @@
 
-
 //重置操作员的密码
 function resetLoginUser(id){
 	
@@ -9,6 +8,7 @@ function resetLoginUser(id){
 				
 	}
 }
+
 
 //删除的过程
 function deleteProcess(id, str){
@@ -20,12 +20,14 @@ function deleteProcess(id, str){
 	}
 }
 
+
 //查找过程
 function searchProcess(id, str){
 			
 	location.href=str+id;
 				
 }
+
 
 
 //根据学号来获取学生的信息
@@ -71,6 +73,7 @@ function searchProcess(id, str){
       }
 
 
+
 //获取国外院校的信息
  function getCollegeInformation(){
     
@@ -87,6 +90,7 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
+
 	    	    		 html=html +'<option selected>--请选择国外院校--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
@@ -120,6 +124,7 @@ function searchProcess(id, str){
    }
  
  
+
 //获取雅思机构的信息
  function getAgencyInformation(){
     	  
@@ -169,6 +174,7 @@ function searchProcess(id, str){
    	  
    	  );
    }
+
 
 //获取雅思培训的开始时间
  function getStartTime(){
@@ -227,6 +233,7 @@ function searchProcess(id, str){
  }
  
  
+
  //虎丘雅思培训的结束时间
  function getOutTime(){
 	  
@@ -287,6 +294,7 @@ function searchProcess(id, str){
  }
 
  
+
 //获取雅思培训的课时
  function getCourseHours(){
 	  
@@ -346,6 +354,7 @@ function searchProcess(id, str){
 
  }
  
+
  //获取雅思培训的学期
  function getSemester(){
 	  
@@ -462,6 +471,7 @@ function searchProcess(id, str){
 	  }
 
  
+
 	//获取模拟考试的地点
  function getSimulationLocation(){
 	  
@@ -518,6 +528,7 @@ function searchProcess(id, str){
 
  
  
+
 //获取正式考试的时间
  function getFormalTime(){
 	  
@@ -571,6 +582,7 @@ function searchProcess(id, str){
 	    	  );
 
  }
+
 
 
 //获取模拟考试的地点

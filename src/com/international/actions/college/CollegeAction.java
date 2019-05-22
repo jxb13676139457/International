@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.international.actions.ajaxAction;
 import com.international.dao.CollegeDao;
 import com.international.model.College;
-import com.international.actions.common.ajaxAction;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 

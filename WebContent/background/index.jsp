@@ -58,6 +58,13 @@
     </style>
   </head>
 
+	<script type="text/javascript">
+     	//用来跳转到查询订单的action
+		function gotoShowAction(){
+			location.href="managerAction!showOperator";
+		}
+    </script>
+        
   <body>
   <!-- container section start -->
    <section id="container" class="">
@@ -79,7 +86,7 @@
                              <img alt="" src="img/avatar1_small.jpg">
                          </span>
                           <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                         <span  style="color:white; font-size:20px"><s:property value="#session.admin.getUserName()"/></span>
+                         <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                          <p class="caret"></p>
                      </a>
                      <ul class="dropdown-menu extended logout">
@@ -197,7 +204,7 @@
                   </li>
                   <!-- 动态开放此菜单项-->
 					<c:choose>
-						<c:when test="${adminType==1}">
+						<c:when test="${ sessionScope.adminType eq '是'}">
 							<li class="sub-menu">
 		                      <a href="javascript:;" class="">
 		                          <i class="icon_document_alt"></i>
@@ -205,7 +212,7 @@
 		                          <span class="menu-arrow arrow_carrot-right"></span>
 		                      </a>
 		                      <ul class="sub">
-		                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
 		                      </ul>
 		                    </li>    
 						</c:when>

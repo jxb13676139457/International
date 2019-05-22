@@ -5,7 +5,7 @@ public class Admin {
 	private String userName;
 	private String password;
 	private String sex;
-	private int type;
+	private String type;
 	private String reserves2;
 	private String reserves3;
 	
@@ -33,10 +33,10 @@ public class Admin {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public int getType() {
+	public String getType() {
 		return type;
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public String getReserves2() {

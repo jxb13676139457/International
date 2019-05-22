@@ -5,7 +5,7 @@
 <hibernate-mapping>
 	<class name="com.international.model.Admin" table="Admin">
 		<id name="adminId" column="adminId">
-			<generator class="uuid"></generator>
+			<generator class="assigned"></generator>
 		</id>
 		<property name="userName" column="userName"></property>
 		<property name="password" column="password"></property>
