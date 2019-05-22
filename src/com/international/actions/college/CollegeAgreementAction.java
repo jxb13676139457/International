@@ -10,7 +10,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 
-import com.international.actions.common.ajaxAction;
+import com.international.common.ajaxAction;
 import com.international.dao.AgreementDao;
 import com.international.dao.CollegeDao;
 import com.international.model.CollegeAgreement;

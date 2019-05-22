@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.international.actions.common.ajaxAction;
+import com.international.common.ajaxAction;
 import com.international.dao.ActivityDao;
 import com.international.dao.CollegeDao;
 import com.international.model.College;
