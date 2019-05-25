@@ -7,14 +7,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.international.model.InternationalClass;
 import com.international.model.Notice;
+import com.international.model.Policy;
 
-public class NoticeDao {
+public class PolicyDao {
 
 	SessionFactory sessionFactory;
 	
-	public NoticeDao() {}
+	public PolicyDao() {}
 
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
@@ -23,42 +23,16 @@ public class NoticeDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	
-	public Notice getNoticeInforById(int id){
-		System.out.println("getNoticeInforById方法打印NoticeId = "+id);
-		Session session=null;	
-		Notice interNotice=null;
-		try{	
-			session=sessionFactory.openSession();	
-			String hql="from Notice where id=?";			
-			Query query =session.createQuery(hql);		
-			query.setParameter(0, id);
-			List<Notice> list=query.list();			 
-			if(list!=null && list.size()>0){
-				interNotice=list.get(0);				
-				return interNotice;
-			}else{				
-				return null;
-			}	
-		}catch(Exception ex){
-			ex.printStackTrace();
-			return null;
-		}finally{        	
-        	session.close();
-        }	
-	}
-	
-	
-	public List<Notice> queryAllNotice(){
-		System.out.println("Notice被调用");
+
+	public List<Policy> queryAllPolicy() {
+		System.out.println("queryAllPolicy被调用");
 		
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
 			System.out.println("session = "+session);
 			//获取所有数据
-			String queryString="from Notice";			
+			String queryString="from Policy";			
 			//创建查询
 			Query query=session.createQuery(queryString);
 			System.out.println("query = "+query);
@@ -76,23 +50,17 @@ public class NoticeDao {
 			session.close();//关闭Session
 		}
 	}
-	
-	
-	public List<Notice> queryNotice(String value,int pageNo,int pageSize){
+
+	public List<Policy> queryPolicy(String value, int pageNo, int pageSize) {
 		Session session=null;
 		try {
 			//hql语句
 			session=sessionFactory.openSession();
-			/*String hql1 = "title like '%"+value+"%'";*/
-			String hql2 = "time like '%"+value+"%'";
-			/*String hql3 = "content like '%"+value+"%'";
-			String hql4 = "source like '%"+value+"%'";
-			String hql5 = "author like '%"+value+"%'";*/
+			String hql1 = "time like '%"+value+"%'";
 			
-			/*String str=hql1+" or "+hql2+" or "+hql3+" or "+hql4+" or "+hql5;*/
-			String str=hql2;
+			String str = hql1;
 			//获取所有数据
-			String queryString="from Notice where "+str;
+			String queryString="from Policy where "+str;
 			//创建查询
 			Query query=session.createQuery(queryString);
 			//每次获取第一条数据的索引
@@ -101,7 +69,7 @@ public class NoticeDao {
 			query.setMaxResults(pageSize); 
 
 			//每次最多6条记录
-			List<Notice> list=query.list();
+			List<Policy> list=query.list();
 			System.out.println("list = "+list);
 			return list;
 		}catch (Exception e) {
@@ -111,15 +79,14 @@ public class NoticeDao {
 			session.close();//关闭Session
 		}
 	}
-	
-	
-	public boolean insertNotice(Notice newNotice){
+
+	public boolean insertPolicy(Policy newPolicy) {
 		Session session = null;
-		System.out.println("insertNotice方法被调用");
+		System.out.println("insertPolicy方法被调用");
 		try{
 			session=sessionFactory.openSession();
 			Transaction trans=session.beginTransaction();
-			Integer.parseInt(session.save(newNotice).toString());
+			Integer.parseInt(session.save(newPolicy).toString());
 			trans.commit();
 			return true;
 		}catch(Exception ex){
@@ -130,13 +97,13 @@ public class NoticeDao {
 		return false;
 	}
 
-	public boolean deleteNotice(int NoticeId) {
+	public boolean deletePolicy(int PolicyId) {
 		Session session=null;
 		try{
-			System.out.println("NoticeId = "+NoticeId);
+			System.out.println("PolicyId = "+PolicyId);
 			session=sessionFactory.openSession();
 			//根据id获取要删除的用户
-			Notice classes=(Notice)session.get(Notice.class, NoticeId);
+			Policy classes=(Policy)session.get(Policy.class, PolicyId);
 			//删除plane数据
 			Transaction trans=session.beginTransaction();
 			session.delete(classes);//删除数据
@@ -151,19 +118,42 @@ public class NoticeDao {
 		}
 	}
 
-	public boolean updateNoticeByID(int id, Notice newNotice) {
+	public Policy getPolicyInforById(int id) {
+		System.out.println("getPolicyInforById方法打印PolicyId = "+id);
+		Session session=null;	
+		Policy interNotice=null;
+		try{	
+			session=sessionFactory.openSession();	
+			String hql="from Policy where id=?";			
+			Query query =session.createQuery(hql);		
+			query.setParameter(0, id);
+			List<Policy> list=query.list();			 
+			if(list!=null && list.size()>0){
+				interNotice=list.get(0);				
+				return interNotice;
+			}else{				
+				return null;
+			}	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}finally{        	
+        	session.close();
+        }	
+	}
+
+	public boolean updatePolicyByID(int id, Policy newPolicy) {
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
-			Notice oldNotice=(Notice)session.get(Notice.class, id);
+			Policy oldPolicy=(Policy)session.get(Policy.class, id);
 			
-			oldNotice.setTitle(newNotice.getTitle());;
-			oldNotice.setTime(newNotice.getTime());
-			oldNotice.setSource(newNotice.getSource());
-			oldNotice.setAuthor(newNotice.getAuthor());
+			oldPolicy.setTitle(newPolicy.getTitle());;
+			oldPolicy.setTime(newPolicy.getTime());
+			oldPolicy.setSource(newPolicy.getSource());
 
 			Transaction trans=session.beginTransaction();
-			session.update(oldNotice);
+			session.update(oldPolicy);
 			trans.commit();
 			return true;
 			

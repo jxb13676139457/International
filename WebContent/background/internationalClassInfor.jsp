@@ -260,7 +260,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                        <form class="navbar-form" action="internationClassAction!searchClass" method="post">
+                        <form class="navbar-form" action="internationClassAction?pageNo=1" method="post">
                             <input class="form-control" name="searchClassName" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                              <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
@@ -268,7 +268,7 @@
                             <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addInternationalClass.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="internationClassAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="internationClassAction?searchClassName=&pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                             
                                  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="importClassExcel?searchName=${searchClassName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -315,37 +315,23 @@
                   </div>
              
                	 <s:set name="status" value="#session.status"></s:set> 
-		       <div  style="text-align:center">
-		       		<a id="choosePage" href="internationClassAction?pageNo=1"><span class="span1">首页</span></a>
-				
-					<c:choose>
-						<c:when test="${currentPage>1}">
-							[<a href="internationClassAction?pageNo=${currentPage-1}">上一页</a>]
-						</c:when>
-					</c:choose>
-					<c:choose>
-						<c:when test="${currentPage<totalPage}">
-							[<a href="internationClassAction?pageNo=${currentPage+1}">下一页</a>]
-						</c:when>
-					</c:choose>
-					<a href="internationClassAction?pageNo=${totalPage}"><span class="span1">尾页</span></a>
-		          <%-- <s:if test="#status==1"> 
-                     <c:if test="${totalPage>0}">
-                         [<a href="internationClassAction?pageNo=1">首页</a>]
-                    
+		       <div  style="text-align:center">		
+		          <s:if test="1==1"> 
+                   <c:if test="${totalPage>0}">
+                         [<a href=" ">首页</a>]
+         
                          <c:if test="${currentPage>1}">
-                             [<a href="internationClassAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="internationClassAction?pageNo=${currentPage-1}&searchClassName=${sessionScope.searchClassName}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="internationClassActionpageNo=${currentPage+1}">下一页</a>]
+                            [<a href="internationClassAction?pageNo=${currentPage+1}&searchClassName=${sessionScope.searchClassName}">下一页</a>]
                           </c:if>
          
-                         [<a href="internationClassAction?pageNo=${totalPage}">尾页</a>]
+                         [<a href="internationClassAction?pageNo=${totalPage}&searchClassName=${sessionScope.searchClassName}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
-                     </c:if>
-                     
-                     </s:if>
+                      </c:if>
+                      </s:if>
                      
                      <s:else>
                          [<a href="internationClassAction!searchClass?pageNo=1 & temp=1">首页</a>]
@@ -362,7 +348,7 @@
                                                                                                      第${currentPage}页/共${totalPage}页
                      
                      
-                     </s:else> --%>
+                     </s:else>
                   </div>
               
               </div>        

@@ -29,5 +29,18 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+	
+	<bean id="newsDao" class="com.international.dao.NewsDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<bean id="policyDao" class="com.international.dao.PolicyDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
 </beans>
 						

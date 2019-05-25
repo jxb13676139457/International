@@ -277,14 +277,14 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="noticeAction!searchNotice" method="post">
+                       <form class="navbar-form" action="noticeAction?pageNo=1" method="post">
                           <input class="form-control" name="searchNoticeTime" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查找</b></button>
                             
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addNotice.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="noticeAction">
+                            <a href="noticeAction?searchNoticeTime=&pageNo=1">
                             <i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                             
                           <button type="button" class="btn btn-default" style="width:80px;height:30px">
@@ -313,6 +313,7 @@
                                  <th>通知作者</th>
                                                         
                                  <th>操作</th>
+                                 <th>索引</th>
                               </tr>
                            <s:iterator value="#session.notices" var="notice" status="st">
                               <tr>
@@ -323,11 +324,12 @@
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','noticeAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'noticeAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#notice.noticeId"/>','noticeAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#notice.noticeId"/>', 'noticeAction!deleteNotice?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
+                                  <td><s:property value="#notice.noticeId"/></td>  
                               </tr>
                               </s:iterator>                             
                            </tbody>
@@ -337,19 +339,19 @@
                      
          <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="noticeAction?pageNo=1">首页</a>]
+                         [<a href=" ">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="noticeAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="noticeAction?pageNo=${currentPage-1}&searchNoticeTime=${sessionScope.searchNoticeTime}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="noticeAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="noticeAction?pageNo=${currentPage+1}&searchNoticeTime=${sessionScope.searchNoticeTime}">下一页</a>]
                           </c:if>
          
-                         [<a href="noticeAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="noticeAction?pageNo=${totalPage}&searchNoticeTime=${sessionScope.searchNoticeTime}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

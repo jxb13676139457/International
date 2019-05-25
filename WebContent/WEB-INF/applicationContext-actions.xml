@@ -32,4 +32,16 @@
 		</property>
 	</bean>
 	
+	<bean id="newsAction" class="com.international.actions.infomation.NewsAction">
+		<property name="nd">
+			<ref bean="newsDao"/>
+		</property>
+	</bean>
+	
+	<bean id="policyAction" class="com.international.actions.infomation.PolicyAction">
+		<property name="pd">
+			<ref bean="policyDao"/>
+		</property>
+	</bean>
+	
 </beans>

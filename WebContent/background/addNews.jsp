@@ -267,13 +267,13 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="" id="newsForm" enctype="multipart/form-data">
+                                  <form class="form-validate form-horizontal" method="post" action="newsAction!addNews" id="newsForm" enctype="multipart/form-data">
                                                                         
                                       <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>新闻主题 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="addUser.title" style="width:300px" required/>
+                                              <input class="form-control"  type="text" name="news.title" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -282,7 +282,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time"  displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="news.time"  displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -291,7 +291,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻来源</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.source" style="width:300px" type="text" />
+                                              <input class="form-control" name="news.source" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -300,7 +300,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻作者</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.author"  style="width:300px"  type="text" />
+                                              <input class="form-control" name="news.author"  style="width:300px"  type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -308,7 +308,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>超链接</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.newsUrl" style="width:300px"   type="text" />
+                                              <input class="form-control" name="news.newsUrl" style="width:300px"   type="text" />
                                           </div>
                                           </div>
                                       </div>

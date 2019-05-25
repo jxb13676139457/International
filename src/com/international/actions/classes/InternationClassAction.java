@@ -13,7 +13,7 @@ public class InternationClassAction extends ActionSupport{
 
 	private List<InternationalClass> classes;
 	Map m;
-	String searchClassName;
+	String searchClassName="";
 	ClassesDao clsd;
 	InternationalClass currentClass;
 	private int id; //界面显示数据的索引
@@ -21,7 +21,6 @@ public class InternationClassAction extends ActionSupport{
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage=0; //当前页
 	private int totalPage=0; //总页数
-	String search="";
 	
 	public String getSearchClassName() {
 		return searchClassName;
@@ -97,19 +96,14 @@ public class InternationClassAction extends ActionSupport{
 		return pageSize;
 	}
 	
-	public String getSearch() {
-		return search;
-	}
-	public void setSearch(String search) {
-		this.search = search;
-	}
 	
 	public String execute() {
 		System.out.println("调用execute方法");
 		System.out.println("clsd = "+clsd);
 		m=ActionContext.getContext().getSession();
+		m.put("searchClassName", searchClassName);
 		classes=clsd.queryAllClass();
-		System.out.println(search);
+		System.out.println(searchClassName);
 		//计算总页数
 		if(classes.size()%pageSize==0){
 			totalPage=classes.size()/pageSize;
@@ -122,8 +116,7 @@ public class InternationClassAction extends ActionSupport{
 			pageNo=totalPage;
 		}
 		//根据当前页查询要在该页上显示的数据
-		classes=clsd.queryClass(search,pageNo,pageSize);
-		//System.out.println("id = "+classes.get(0).getClassId());
+		classes=clsd.queryClass(searchClassName,pageNo,pageSize);
 		//设置当前页
 		currentPage=pageNo;
 		m.put("classes", classes);
@@ -135,7 +128,6 @@ public String searchClass(){
 	System.out.println("SearchClass方法被调用");
 	m=ActionContext.getContext().getSession();
 	classes=clsd.queryAllClass();
-	System.out.println(search);
 	//计算总页数
 	if(classes.size()%pageSize==0){
 		totalPage=classes.size()/pageSize;

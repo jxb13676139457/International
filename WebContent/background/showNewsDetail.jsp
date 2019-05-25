@@ -251,11 +251,11 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="newsForm" action="">
+                                  <form class="form-validate form-horizontal" method="post" id="newsForm" action="newsAction!updateNewsInfor">
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="news.id" value="${news.newsId }"  type="hidden" required/>
                                           </div>
                                       </div>
                                                                         
@@ -264,7 +264,7 @@
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>新闻主题</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="updateUser.title" style="width:300px" value="${sessionScope.currentUser.title }" required/>
+                                              <input class="form-control"  type="text" name="news.title" style="width:300px" value="${news.title }" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -273,7 +273,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" value="noticeTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="news.time" value="noticeTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -282,7 +282,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻来源</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.source" style="width:300px" value="${sessionScope.currentUser.source }" type="text" />
+                                              <input class="form-control" name="news.source" style="width:300px" value="${news.source }" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -291,7 +291,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>新闻作者</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.author" style="width:300px" value="${sessionScope.currentUser.author }"  type="text" />
+                                              <input class="form-control" name="news.author" style="width:300px" value="${news.author }"  type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -299,7 +299,7 @@
                                              <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>超链接</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.newsUrl"  style="width:300px" value="${sessionScope.currentUser.newsUrl }"  type="text" />
+                                              <input class="form-control" name="news.newsUrl"  style="width:300px" value="${news.newsUrl }"  type="text" />
                                           </div>
                                           </div>
                                       </div>

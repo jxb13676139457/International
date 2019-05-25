@@ -5,7 +5,7 @@
 <struts>
 	<!-- 指定action的配置转到Spring的配置文件-->
 	<constant name="struts.objectFactory" value="spring" />
-	
+	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="default" extends="struts-default">
 		<action name="loginAction" class="loginAction" method="login">
 			<result name="success">/background/addExam.jsp</result>
@@ -44,6 +44,54 @@
 			<result name="addSuccess" type="redirectAction">
 				<param name="actionName">noticeAction</param>
 			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+			<result name="deleteError" >/background/noticeInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+			<result name="updateError">/background/noticeInfor.jsp</result>
+			<result name="lookSuccess">/background/showNoticeDetail.jsp</result>
+			<result name="lookError">/background/noticeInfor.jsp</result>
 		</action> 
+		
+		<action name="newsAction" class="newsAction">
+			<result name="success">/background/newsInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="addError">/background/newsInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="deleteError" >/background/newsInfor.jsp</result>
+			<result name="lookSuccess">/background/showNewsDetail.jsp</result>
+			<result name="lookError">/background/newsInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="updateError">/background/newsInfor.jsp</result>
+		</action> 
+		
+		<action name="policyAction" class="policyAction">
+			<result name="success">/background/policyInfor.jsp</result>
+			<result name="addError">/background/policyInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="deleteError" >/background/policyInfor.jsp</result>
+			<result name="lookSuccess">/background/showPolicyDetail.jsp</result>
+			<result name="lookError">/background/policyInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="updateError">/background/policyInfor.jsp</result>
+			<param name="savePath">/upload</param>
+		</action>
+		
 	</package>
 </struts>

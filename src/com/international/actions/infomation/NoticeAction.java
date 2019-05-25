@@ -13,8 +13,9 @@ public class NoticeAction extends ActionSupport{
 	private NoticeDao nd;
 	private List<Notice> notices;
 	private Notice notice;
+	private Notice addNotice;
 	Map m;
-	String searchClassName;
+
 	private int id; //界面显示数据的索引
 	private final int pageSize=6; //每页显示记录的个数
 	private int pageNo=1; //计数器,从第1页开始显示
@@ -47,12 +48,6 @@ public class NoticeAction extends ActionSupport{
 	}
 	public void setM(Map m) {
 		this.m = m;
-	}
-	public String getSearchClassName() {
-		return searchClassName;
-	}
-	public void setSearchClassName(String searchClassName) {
-		this.searchClassName = searchClassName;
 	}
 	public int getId() {
 		return id;
@@ -93,6 +88,7 @@ public class NoticeAction extends ActionSupport{
 		System.out.println("nd = "+nd);
 		System.out.println("execute默认方法被调用");
 		m=ActionContext.getContext().getSession();
+		m.put("searchNoticeTime", searchNoticeTime);
 		notices=nd.queryAllNotice();
 		System.out.println(searchNoticeTime);
 		//计算总页数
@@ -145,6 +141,9 @@ public class NoticeAction extends ActionSupport{
 	}
 	
 	
+	/*
+	 * 增加信息
+	 */
 	public String addNotice() {
 		System.out.println("addClass方法被调用了");
 		System.out.println("Notice对象信息 = "+notice);
@@ -157,6 +156,58 @@ public class NoticeAction extends ActionSupport{
 		if(nd.insertNotice(notice))
 			return "addSuccess";
 		return "addError";
+	}
+	
+	
+	/**
+	 *  删除通知信息
+	 */
+	public String deleteNotice() {
+
+		System.out.println("要删除的id:" + id);
+		if(nd.deleteNotice(id))
+			return "deleteSuccess";
+		else
+			return "deleteError";
+	}
+	
+	
+	/*
+	 * 更新通知信息
+	 * */
+	public  String updateNoticeInfor(){
+		System.out.println("updateNoticeInfor被调用");
+		Map  session =ActionContext.getContext().getSession();	
+		System.out.println("Notice对象信息 = "+notice);
+		System.out.println("Notice对象ID = "+notice.getNoticeId());
+		System.out.println("Notice对象Title = "+notice.getTitle());
+		System.out.println("Notice对象Time = "+notice.getTime());
+		System.out.println("Notice对象Source = "+notice.getSource());
+		System.out.println("Notice对象content = "+notice.getContent());
+		notice.setTime((notice.getTime().substring(0, 10)));
+		System.out.println("要更新的id:" + id);
+		if(nd.updateNoticeByID(id, notice))
+			return "updateSuccess";
+		else
+			return "updateError";
+
+    }
+	
+	
+	public String searchObjectById() {
+		System.out.println("id = "+id);
+		
+		notice = nd.getNoticeInforById(id);
+		if(notice!=null) {
+			System.out.println("Notice对象信息 = "+notice);
+			System.out.println("Notice对象ID = "+notice.getNoticeId());
+			System.out.println("Notice对象Title = "+notice.getTitle());
+			System.out.println("Notice对象Time = "+notice.getTime());
+			System.out.println("Notice对象Source = "+notice.getSource());
+			
+			return "lookSuccess";
+		}
+		return "lookError";
 	}
 		
 }
