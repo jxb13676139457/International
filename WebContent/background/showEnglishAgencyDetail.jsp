@@ -215,11 +215,11 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="englishAgencyAction!updateInfor.action">
+                                  <form class="form-validate form-horizontal" method="post" action="englishAgencyAction!updateAgencyInfor">
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateAgency.id" value="${sessionScope.currentAgency.id }"  type="hidden" required/>
+                                              <input class="form-control" name="agency.agencyId" value="${agency.agencyId }"  type="hidden" required/>
                                           </div>
                                       </div>
                                      
@@ -228,7 +228,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
 	                                          <label for="cname" class="control-label col-lg-2"><b>雅思机构名字</b><span class="required" style="color:red">*</span></label>
 	                                          <div class="col-lg-10">
-	                                              <input class="form-control" name="updateAgency.name" value="${sessionScope.currentAgency.name }" style="width:300px"  type="text" required/>
+	                                              <input class="form-control" name="agency.agencyName" value="${agency.agencyName }" style="width:300px"  type="text" required/>
 	                                          </div>
                                           </div>
                                       </div>
@@ -237,7 +237,7 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b><b>合作时间</b></b></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateAgency.Reserve1"  value="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="agency.time"  value="agency.time" displayFormat="yyyy-MM-dd"/>
                                            </div>
                                           </div>
                                       </div>
@@ -246,7 +246,18 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>联系人</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateAgency.reserve2" value="${sessionScope.currentAgency.reserve2}"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="agency.cotactPerson" value="${agency.cotactPerson}"  style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      
+                                      <div class="form-group ">
+                                      <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>职位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="agency.position" value="${agency.position}"  
+                                              style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -256,8 +267,19 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>联系电话</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateAgency.reserve3" value="${sessionScope.currentAgency.reserve3}"  
-                                              style="width:300px" type="text"   onkeyup="value=value.replace(/[^\d]/g,'')" required/>
+                                              <input class="form-control" name="agency.phone" value="${agency.phone}"  
+                                              style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      
+                                      <div class="form-group ">
+                                      <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>邮件</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="agency.email" value="${agency.email}"  
+                                              style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>

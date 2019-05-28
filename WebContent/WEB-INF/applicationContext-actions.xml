@@ -44,4 +44,10 @@
 		</property>
 	</bean>
 	
+	<bean id="englishAgencyAction" class="com.international.actions.ielts.AgencyAction">
+		<property name="ad">
+			<ref bean="agencyDao"/>
+		</property>
+	</bean>
+	
 </beans>

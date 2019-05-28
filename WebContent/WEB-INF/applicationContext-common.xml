@@ -44,6 +44,7 @@
 				<value>com/international/model/Notice.hbm.xml</value>
 				<value>com/international/model/News.hbm.xml</value>
 				<value>com/international/model/Policy.hbm.xml</value>
+				<value>com/international/model/Agency.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

@@ -42,5 +42,11 @@
 		</property>
 	</bean>	
 	
+	<bean id="agencyDao" class="com.international.dao.AgencyDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
 </beans>
 						

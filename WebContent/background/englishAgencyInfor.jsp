@@ -259,14 +259,14 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="englishAgencyAction!searchInformationbyName" method="post">
-                            <input class="form-control" name="searchAgenchName" placeholder="输入查找的关键字" type="text" required/>
+                       <form class="navbar-form" action="englishAgencyAction!searchAgency" method="post">
+                            <input class="form-control" name="searchAgency" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                             
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addEnglishAgency.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="englishAgencyAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="englishAgencyAction?searchAgency="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                               
                                 <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportEnglishAgencyExcel?searchName=${searchAgenchName }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -290,20 +290,24 @@
                                  <th>雅思机构</th>
                                  <th>合作时间</th>
                                  <th>联系人</th>
+                                 <th>职位</th>
                                  <th>联系电话</th>
+                                 <th>邮件</th>
                                  <th>操作</th>
                               </tr>
                            <s:iterator value="agencyList" var="agency" status="st">
                               <tr>
-                                 <td><s:property value="#agency.name"/></td>
-                                 <td><s:property value="#agency.reserve1"/></td>
-                                 <td><s:property value="#agency.reserve2"/></td>
-                                 <td><s:property value="#agency.reserve3"/></td>
+                                 <td><s:property value="#agency.agencyName"/></td>
+                                 <td><s:property value="#agency.time"/></td>
+                                 <td><s:property value="#agency.cotactPerson"/></td>
+                                 <td><s:property value="#agency.position"/></td>
+                                 <td><s:property value="#agency.phone"/></td>
+                                 <td><s:property value="#agency.email"/></td>
                                   <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#agency.id"/>','englishAgencyAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#agency.id"/>', 'englishAgencyAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#agency.agencyId"/>','englishAgencyAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#agency.agencyId"/>', 'englishAgencyAction!deleteAgency?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>

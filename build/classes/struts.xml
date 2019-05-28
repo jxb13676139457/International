@@ -93,5 +93,23 @@
 			<param name="savePath">/upload</param>
 		</action>
 		
+		<action name="englishAgencyAction" class="englishAgencyAction">
+			<result name="success">/background/englishAgencyInfor.jsp</result>
+			<result name="addError">/background/englishAgencyInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="deleteError" >/background/englishAgencyInfor.jsp</result>
+			<result name="lookSuccess">/background/showEnglishAgencyDetail.jsp</result>
+			<result name="lookError">/background/englishAgencyInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="updateError">/background/englishAgencyInfor.jsp</result>
+		</action>
+		
 	</package>
 </struts>
