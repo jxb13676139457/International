@@ -43,7 +43,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeActivitiesAction!updateInfor",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/collegeActivityAction!updateInfor",
 					    	    	
  					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
 				    	  		      data:$("#collegeActivityForm").serialize(),
@@ -240,7 +240,7 @@
 				</div>
 			</div>
 		  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="abroadCollegeActivitiesAction"><b>返回上页</b></a></button>
+                            <a href="collegeActivityAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -255,7 +255,7 @@
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateActivity.activityId" value="${sessionScope.currentActivity.activityId }"  type="hidden" required/>
                                           </div>
                                       </div>
                                                                         
@@ -264,7 +264,7 @@
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>国外院校</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="collegeName" value="${sessionScope.currentUser.college.name}" style="width:300px"  type="text" required/>
+                                              <input class="form-control" name="collegeName" value="${sessionScope.currentActivity.coll.collegeName}" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -273,7 +273,7 @@
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>活动主题</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.title" value="${sessionScope.currentUser.title}" style="width:300px"  type="text" required/>
+                                              <input class="form-control" name="updateActivity.title" value="${sessionScope.currentActivity.title}" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -282,7 +282,7 @@
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>活动时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" value="activityTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="updateActivity.time" value="activityTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -290,9 +290,9 @@
                                       
                                        <div class="form-group ">
                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>参加人数</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>活动类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.type" value="${sessionScope.currentUser.type}" style="width:300px"  type="text" required/>
+                                              <input class="form-control" name="updateActivity.type" value="${sessionScope.currentActivity.type}" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -301,7 +301,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>活动内容</b></span></label>
                                           <div class="col-lg-10">
-                                              <textarea rows="10" cols="130" name="updateUser.content" style="width:300px"  >${sessionScope.currentUser.content}</textarea>
+                                              <textarea rows="10" cols="130" name="updateActivity.content" style="width:300px"  >${sessionScope.currentActivity.content}</textarea>
                                           </div>
                                           </div>
                                       </div>

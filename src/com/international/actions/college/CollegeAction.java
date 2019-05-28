@@ -1,6 +1,7 @@
 package com.international.actions.college;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -29,8 +30,8 @@ public class CollegeAction extends ActionSupport {
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage=0; //当前页
 	private int totalPage=0; //总页数
-	String search="";
-	String abroadTime;
+	String search="";//查询条件
+	String abroadTime;//合作时间
 	public CollegeAction() {
 		
 	}
@@ -119,7 +120,11 @@ public class CollegeAction extends ActionSupport {
 	}
 	public String execute() {
 		m=ActionContext.getContext().getSession();
-		colleges=cd.queryAllCollege();
+		m.put("searchCollege", search);
+		colleges=cd.queryAllCollege(search);
+		//查询到是空直接返回
+		if(colleges==null)
+			return SUCCESS;
 		//System.out.println(search);
 		//计算总页数
 		if(colleges.size()%pageSize==0){
@@ -156,7 +161,7 @@ public class CollegeAction extends ActionSupport {
 	}
 	
 	/**
-	 *  修改国际院校信息
+	 *  修改前查询国际院校信息
 	 * @return
 	 */
 	public String searchObjectById() {
@@ -181,7 +186,7 @@ public class CollegeAction extends ActionSupport {
 	 * @return
 	 */
 	public void addObject() throws IOException{
-		//HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletRequest request = ServletActionContext.getRequest();
 		String message="";
 		System.out.println(addCollege.getCollegeName());
 		addCollege.setStartTime(addCollege.getStartTime().toString().substring(0,10));
@@ -213,6 +218,10 @@ public class CollegeAction extends ActionSupport {
 		}
 		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
+	/**
+	 *  修改国际院校信息
+	 * @return
+	 */
 	public void updateInfor() throws IOException{
 		updateCollege.setStartTime(updateCollege.getStartTime().substring(0, 10));
 		String message="";
@@ -240,6 +249,16 @@ public class CollegeAction extends ActionSupport {
 			message="已存在该条信息";
 		}
 		ajaxAction.toJson(ServletActionContext.getResponse(),message);
+	}
+	/**
+	 *  获取国际院校信息到select列表中
+	 * @return
+	 */
+	public void getCollegeInformation() throws IOException{
+		String hql="from College";
+		List<College> collegeList= new ArrayList<College>();
+		collegeList=cd.queryByhql(hql);
+		ajaxAction.toJson(ServletActionContext.getResponse(),collegeList);
 	}
 }
 

@@ -211,15 +211,15 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                     <form class="navbar-form" action="abroadCollegeProtocolAction!searchInformation" method="post">
-                            <input class="form-control" name="protocolCollegeName" placeholder="输入查找的国外学院" type="text" required/>
+                     <form class="navbar-form" action="collegeAgreementAction" method="post">
+                            <input class="form-control" name="search" placeholder="输入查找的国外学院" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;
                             <b>搜索</b></button>
                              
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollegeProtocol.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="abroadCollegeProtocolAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="collegeAgreementAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                             
                         <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAbroadCollegeProtocolExcel?searchName=${protocolCollegeName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -247,18 +247,18 @@
                                  <th>下载协议</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="collegeAgreements" var="collegeAgreements" status="st">
                               <tr>
-                                   <td><s:property value="#user.college.name"/></td>
-                                    <td><s:property value="#user.title"/></td>
-                                 <td><s:property value="#user.time"/></td>
-                                 <td><s:property value="#user.type"/></td>                          
-                                  <td><a href="downLoad.action?fileName=<s:property value="#user.name"/>"><s:property value="#user.name"/></a></td>
+                                   <td><s:property value="#collegeAgreements.coll.collegeName"/></td>
+                                    <td><s:property value="#collegeAgreements.title"/></td>
+                                 <td><s:property value="#collegeAgreements.time"/></td>
+                                 <td><s:property value="#collegeAgreements.type"/></td>                          
+                                  <td><a href="downLoad.action?fileName=<s:property value="#collegeAgreements.fileName"/>"><s:property value="#collegeAgreements.fileName"/></a></td>
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','abroadCollegeProtocolAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'abroadCollegeProtocolAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#collegeAgreements.agreementId"/>','collegeAgreementAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#collegeAgreements.agreementId"/>', 'collegeAgreementAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -270,19 +270,19 @@
                      </div> 
                  <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="abroadCollegeProtocolAction?pageNo=1">首页</a>]
+                         [<a href="collegeAgreementAction?pageNo=1">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="abroadCollegeProtocolAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="collegeAgreementAction?pageNo=${currentPage-1}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="abroadCollegeProtocolAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="collegeAgreementAction?pageNo=${currentPage+1}">下一页</a>]
                           </c:if>
          
-                         [<a href="abroadCollegeProtocolAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="collegeAgreementAction?pageNo=${totalPage}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

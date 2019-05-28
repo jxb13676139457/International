@@ -19,6 +19,26 @@
 		</property>
 	</bean>	
 	
+	<!-- 活动的bean -->
+	<bean id="collegeActivityAction" class="com.international.actions.college.CollegeActivityAction">
+		<property name="ad"><!-- 调用set方法给ad赋值，实例化 -->
+			<ref bean="activityDao"/>
+		</property>
+		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
+			<ref bean="collegeDao"/>
+		</property>
+	</bean>
+	
+	<!-- 协议的bean -->
+	<bean id="collegeAgreementAction" class="com.international.actions.college.CollegeAgreementAction">
+		<property name="agd"><!-- 调用set方法给agd赋值，实例化 -->
+			<ref bean="agreementDao"/>
+		</property>
+		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
+			<ref bean="collegeDao"/>
+		</property>
+	</bean>
+	
 	<!-- 国际班学生的bean -->
 	<bean id="internationalStudentAction" class="com.international.actions.student.InternationalStudentAction">
 		<property name="sd">

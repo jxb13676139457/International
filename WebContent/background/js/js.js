@@ -1,9 +1,21 @@
+
 //重置操作员的密码
 function resetLoginUser(id){
 	
 	if(confirm("确定要重置该操作员的密码吗？")){
 		
 		location.href="adminUserAction!resetLoginUser?id=" + id;
+				
+	}
+}
+
+
+//删除的过程
+function deleteProcess(id, str){
+	
+	if(confirm("删除可能会涉及级联删除其他信息，确定要删除吗？")){
+		
+		location.href=str+id;
 				
 	}
 }
@@ -17,7 +29,8 @@ function searchProcess(id, str){
 }
 
 
-//����ѧ������ȡѧ������Ϣ
+
+//根据学号来获取学生的信息
  function getStudentInformation(){
     	  
     	  var studentNo= $("#studentNo").val();
@@ -60,7 +73,8 @@ function searchProcess(id, str){
       }
 
 
-//��ȡ����ԺУ����Ϣ
+
+//获取国外院校的信息
  function getCollegeInformation(){
     
 	 var temp=1;
@@ -68,7 +82,7 @@ function searchProcess(id, str){
    	      {
    	    	  
    	    	  type:"post",
-   	    	  url:"http://localhost:8080/Graduate/abroadCollegeAction!getCollegeInformation",
+   	    	  url:"http://localhost:8080/InternationalSys/background/collegeAction!getCollegeInformation",
    	    	  data:{},
    	    	  dataType:"json",			    	
    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -76,19 +90,20 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--��ѡ�����ԺУ--</option>';
+
+	    	    		 html=html +'<option selected>--请选择国外院校--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
 	                    	   for(var j=0; j<i; j++){
 	                    	
-	                    		 if(data[i].name==(data[j].name)){
+	                    		 if(data[i].collegeName==(data[j].collegeName)){
 	                    			 temp=0;
 	                    			 break;
 	                    		 }
 	                    	 }
 	                    	 if(temp==1){
-	                    		 html=html +'<option value=""+ data[i].name+"">'+data[i].name+'</option>';
+	                    		 html=html +'<option value=""+ data[i].collegeName+"">'+data[i].collegeName+'</option>';
 	                    	 }
 	                    	 temp=1;
 	                     }
@@ -109,7 +124,8 @@ function searchProcess(id, str){
    }
  
  
-//��ȡ��˼��������Ϣ
+
+//获取雅思机构的信息
  function getAgencyInformation(){
     	  
 	 var temp=1;
@@ -159,7 +175,8 @@ function searchProcess(id, str){
    	  );
    }
 
- //��ȡ��˼��ѵ�Ŀ�ʼʱ��
+
+//获取雅思培训的开始时间
  function getStartTime(){
 	  
 	  
@@ -216,7 +233,8 @@ function searchProcess(id, str){
  }
  
  
- //������˼��ѵ�Ľ���ʱ��
+
+ //虎丘雅思培训的结束时间
  function getOutTime(){
 	  
 	  
@@ -276,7 +294,8 @@ function searchProcess(id, str){
  }
 
  
-//��ȡ��˼��ѵ�Ŀ�ʱ
+
+//获取雅思培训的课时
  function getCourseHours(){
 	  
 	  
@@ -335,7 +354,8 @@ function searchProcess(id, str){
 
  }
  
- //��ȡ��˼��ѵ��ѧ��
+
+ //获取雅思培训的学期
  function getSemester(){
 	  
 	  
@@ -396,7 +416,7 @@ function searchProcess(id, str){
  }
 
 	  
-	  //��ȡģ�⿼�Ե�ʱ��
+ 	  //获取模拟考试的时间
 	  function getSimulationTime(){
 	 	  
 	 	  var temp=1;
@@ -451,7 +471,8 @@ function searchProcess(id, str){
 	  }
 
  
- //��ȡģ�⿼�Եĵص�
+
+	//获取模拟考试的地点
  function getSimulationLocation(){
 	  
 	  var temp=1;
@@ -507,7 +528,8 @@ function searchProcess(id, str){
 
  
  
- //��ȡ��ʽ���Ե�ʱ��
+
+//获取正式考试的时间
  function getFormalTime(){
 	  
 	  var temp=1;
@@ -562,7 +584,8 @@ function searchProcess(id, str){
  }
 
 
-//��ȡģ�⿼�Եĵص�
+
+//获取模拟考试的地点
 function getFormalLocation(){
  
 
