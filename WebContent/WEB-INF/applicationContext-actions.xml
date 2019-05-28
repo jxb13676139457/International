@@ -21,7 +21,9 @@
 	
 	<!-- 国际班学生的bean -->
 	<bean id="internationalStudentAction" class="com.international.actions.student.InternationalStudentAction">
-	
+		<property name="sd">
+			<ref bean="studentDao"/>
+		</property>
 	</bean>
 	
 	<!-- 修改管理员信息的bean -->

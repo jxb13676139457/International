@@ -6,16 +6,16 @@
 	<class name="com.international.model.InternationalStudent" table="InternationalStudent">
 		<id name="studentId" column="studentId">
 			<!-- 非自增主键生成策略 -->
-			<generator class="uuid"></generator>
+			<generator class="assigned"></generator>
 		</id>
 		<property name="studentName" column="studentName"></property>
 		<property name="sex" column="sex"></property>
 		<property name="password" column="password"></property>
 		<property name="status" column="status"></property>
-		<property name="classId" column="classId"></property>
+		<!-- <property name="classId" column="classId"></property> -->
 		
-		<!-- 单向n->1关联，由InternationalStudent指向InternationalClass -->
+		<!-- 双向n->1关联，外键，由InternationalStudent指向InternationalClass -->
 		<many-to-one name="classes" class="com.international.model.InternationalClass" 
-		cascade="all" fetch="select" column="classId" />
+		cascade="all" lazy="false" fetch="join" column="classId" />
 	</class>
 </hibernate-mapping>

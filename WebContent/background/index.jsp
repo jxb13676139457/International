@@ -59,7 +59,7 @@
   </head>
 
 	<script type="text/javascript">
-     	//用来跳转到查询订单的action
+     	//用来跳转到维护操作员模块的action
 		function gotoShowAction(){
 			location.href="managerAction!showOperator";
 		}
@@ -129,7 +129,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showOperator">维护国际学生信息</a></li>
                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
                           <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                           <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>

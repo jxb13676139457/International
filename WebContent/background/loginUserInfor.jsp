@@ -39,40 +39,56 @@
 				location.href="managerAction";
 			}
        </script>
-
+		<script type="text/javascript">
+			      function toSubmit(){
+		    		  $.ajax(		  
+			    	      {
+			    	    	  type:"post",
+			    	    	  url:"http://localhost:8080/InternationalSys/background/managerAction!showOperator",
+				    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+		    	  		      data:$("#showloginUser").serialize(),
+			    	    	  dataType:"json",	
+			    	    	  async:false,
+			    	    	  success: function(data){
+			    	    		  if(data!=null && data!=""){
+			    	    			  alert(data);
+			    	    		  }
+			                   }
+			    	      }
+			    	  );
+			      }
+		</script>
 	<script type="text/javascript">
+		//批量添加管理员
 	      function tijiao(){
 	    	  var checkID=[];
 	    	  $("input[name='checkbox']:checked").each(function(i){
 	    		  checkID[i]=$(this).val();
 	    	  });
 	    	  alert(checkID[i]);  //弹出提示
-	    	  /* if(checkID.length>0){
-	    		  $.ajax(
-		    	      {
-		    	    	  type:"post",
-		    	    	  url:"http://localhost:8080/InternationalSys/managerAction!toJson",
-		    	    	  data:{checkID:checkID},
-		    	    	  dataType:"json",			    	
-		    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		    	    	  traditional:true,
-		    	    	  success: function(data){
-		    	    		  if(data){
-		    	    			   alert("设置成功");
-		    	    			   window.location.href("http://localhost:8080/Graduate/loginUserInformationAction!execute");
-		    	    		  }else{
-		    	    			   alert("该用户已经是管理员,请重试！");
-		    	    		  }
-		                   }
-		    	      }
-		    	  );
+	    	  if(checkID.length>0){
+	    		  $.ajax({
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/managerAction!toJson",
+	    	    	  data:{checkID:checkID},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){
+	    	    		  if(data){
+	    	    			   alert("设置成功");
+	    	    			   window.location.href("http://localhost:8080/Graduate/loginUserInformationAction!execute");
+	    	    		  }else{
+	    	    			   alert("该用户已经是管理员,请重试！");
+	    	    		  }
+	                   }
+	    	      });
 	    	  }else{
 	    		  alert("请选择一条数据!");
-	    	  } */
+	    	  }
 	      }
-	</script>
-	
-	<script type="text/javascript">
+	      
+		//批量解除管理员
 	      function toReset(){
 	    	  var checkID=[];
 	    	  $("input[name='checkbox']:checked").each(function(i){
@@ -80,25 +96,23 @@
 	    	  });
 	    	  
 	    	  if(checkID.length>0){
-	    		  $.ajax(
-		    	      {
-		    	    	  type:"post",
-		    	    	  url:"http://localhost:8080/Graduate/adminUserAction!deleteUser",
-		    	    	  data:{checkID:checkID},
-		    	    	  dataType:"json",			    	
-		    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		    	    	  traditional:true,
-		    	    	  success: function(data){
-		    	    		  if(data){
-		    	    			   alert("成功解除管理员权限");
-		    	    			   
-		    	    			   window.location.href("http://localhost:8080/Graduate/loginUserInformationAction!execute");
-		    	    		  }else{
-		    	    			   alert("解除管理员权限失败,请判断该用户是不是管理员！");
-		    	    		  }
-		                   }
-		    	      }
-		    	  );
+	    		  $.ajax({
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/Graduate/adminUserAction!deleteUser",
+	    	    	  data:{checkID:checkID},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){
+	    	    		  if(data){
+	    	    			   alert("成功解除管理员权限");
+	    	    			   
+	    	    			   window.location.href("http://localhost:8080/Graduate/loginUserInformationAction!execute");
+	    	    		  }else{
+	    	    			   alert("解除管理员权限失败,请判断该用户是不是管理员！");
+	    	    		  }
+	                   }
+	    	      });
 	    	  }else{
 	    		  alert("请选择一条数据!");
 	    	  }
@@ -175,7 +189,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showOperator">维护国际学生信息</a></li>
                            <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
                             <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
@@ -287,14 +301,14 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                        <form class="navbar-form" action="managerAction!showOperator" method="post">
+                        <form class="navbar-form" action="managerAction!showOperator" id="showloginUser" method="post">
                           <input class="form-control" name="loginUserName" placeholder="输入要查找的关键字" type="text" required/>
                           <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                           
                           <button type="button" class="btn btn-default" style="width:80px;height:30px">
                           <a href="addLoginUser.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
-                         <!--    <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                          <a href="loginUserInformationAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button> -->
+                          <button type="button" class="btn btn-default" style="width:120px;height:30px">
+                          <a href="managerAction!showOperator"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                        
                           <%--  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                           <a href="exportLoginUserExcel?searchName=${loginUserName }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button> --%>

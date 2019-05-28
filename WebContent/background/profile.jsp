@@ -62,6 +62,13 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
     
+    <script type="text/javascript">
+     	//用来跳转到查询订单的action
+		function gotoShowAction(){
+			location.href="managerAction!showOperator";
+		}
+    </script>
+    
    	 <!-- 判断有没有重复名字的管理员-->
 	 <%
 	     String s=(String)request.getAttribute("updateInfor");
@@ -219,7 +226,7 @@
 		                          <span class="menu-arrow arrow_carrot-right"></span>
 		                      </a>
 		                      <ul class="sub">
-		                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
 		                      </ul>
 		                    </li>    
 						</c:when>

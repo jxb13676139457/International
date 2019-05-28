@@ -81,196 +81,140 @@
 			%>
     
   </head>
-
+  
+		<script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	    </script>
   <body>
   
     <!-- 自动生成时间的年级 -->
-    			   <script language="javascript" type="text/javascript"> 
-						window.onload=function(){ 
-						//设置年份的选择 
-						var myDate= new Date(); 
-						var startYear=myDate.getFullYear()-5;//起始年份 
-						var endYear=myDate.getFullYear()+10;//结束年份 
-						var obj=document.getElementById('myYear');
-						
-						for (var i=startYear;i<=endYear;i++) 
-						{ 
-						obj.options.add(new Option(i,i)); 
-						}  
-					}
-			</script> 
-				<!-- 根据年级来获取专业的信息 -->
-			<script type="text/javascript">
-			
-			      function getProfession(){
-
-			    	  var temp=1;
-			    	  var grade= $("#myYear").find("option:selected").val();
-		    	  
-			    	  if(grade!=null){
-			    		
-			    		  $.ajax(			    		
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getProfessionInformation",
-					    	    	  data:{grade:grade},
-					    	    	  dataType:"json",			    	
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){			
+ 	<script language="javascript" type="text/javascript"> 
+		window.onload=function(){ 
+			//设置年份的选择 
+			var myDate= new Date(); 
+			var startYear=myDate.getFullYear()-5;//起始年份 
+			var endYear=myDate.getFullYear()+10;//结束年份 
+			var obj=document.getElementById('myYear');
+			//把数据添加到option中
+			for (var i=startYear;i<=endYear;i++) { 
+				obj.options.add(new Option(i,i)); 
+			}  
+		}
+	</script> 
 	
-						    	    		 var html="";
-						    	    		 html=html +'<option selected></option>';
+	<!-- 根据年级来获取专业的信息 -->
+	<script type="text/javascript">
+	      function getProfession(){
+	    	  var temp=1;
+	    	  //获取选中的年级option数据
+	    	  var grade= $("#myYear").find("option:selected").val();
+	    	  if(grade!=null){
+	    		  $.ajax({
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getProfessionInformation",
+	    	    	  data:{grade:grade},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){			
+	    	    		 var html="";
+	    	    		 html=html +'<option selected></option>';
+	                     for(var i=0; i<data.length; i++){
+                    	   for(var j=0; j<i; j++){
+                    		 if(data[i].reserve2==(data[j].reserve2)){
+                    			 temp=0;
+                    			 break;
+                    		 }
+                    	   }
+                    	   if(temp==1){
+                    		 html=html +'<option value=""+ data[i].reserve2+"">'+data[i].reserve2+'</option>';
+                    	   }
+                    	   temp=1;
+	                     }
+	                     $('#pro').html(html);
+	                  },
+	                  error: function(data){
+	                		 var html="";
+    	    				 $('#pro').html(html);
+	                  }
+	    	    });
+	    	  }else{
+	    		  alert("请选择一条数据!");
+	    	  }
+	      }
+	      //提示先选年级，再选专业，才有班级信息searchToji()
+	      function searchToji(){
+	    	  var temp=1;
+	    	  var grade= $("#myYear").find("option:selected").val();
+	    	  var profession= $("#pro").find("option:selected").val();
+	    	  if(grade==null || profession==null ){
+	    		  alert("先选年级，再选专业，才有班级信息");
+	    	  }
+	      }
+	</script>
 			
-						                     for(var i=0; i<data.length; i++){
-						                    	
-						                    	   for(var j=0; j<i; j++){
-						                    				 
-						                    		 if(data[i].reserve2==(data[j].reserve2)){
-						                    			 temp=0;
-						                    			 break;
-						                    		 }
-						                    	 }
-						                    	 if(temp==1){
-						                    		 html=html +'<option value=""+ data[i].reserve2+"">'+data[i].reserve2+'</option>';
-						                    	 }
-						                    	 temp=1;
-						                     }
-						                     
-						                     $('#pro').html(html);
-					    	    	
-					                   },
-					                   
-					                   error: function(data){
-					                	   
-					                		 var html="";
-				    	    				 $('#pro').html(html);
-					                   }
-		  
-					    	    	  }			    	      
-					    	  
-					    	  );
-			    	  }else{
-			    		  
-			    		  alert("请选择一条数据!");
-			    	  }
-			    	  
-			    
-			      }
-			      
-			      //提示先选年级，再选专业，才有班级信息searchToji()
-			        function searchToji(){
-
-			    	  var temp=1;
-			    	  var grade= $("#myYear").find("option:selected").val();
-			    	  var profession= $("#pro").find("option:selected").val();
-		    	  
-			    	  if(grade==null || profession==null ){
-			    		
-			    		  alert("先选年级，再选专业，才有班级信息");
-			    	  }
-			    
-			      }
-			      
-			      
-			</script>
+	<!-- 根据年级来获取班级的信息 -->
+	<script type="text/javascript">
+	      function getClassInformation(){
+	    	  var grade= $("#myYear").find("option:selected").val();
+	    	  var profession=$("#pro").find("option:selected").text();
+	    	  if(profession!=null){
+	    		  $.ajax({
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getclassInfromation",
+	    	    	  data:{profession:profession,grade:grade},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){
+	    	    		 var html="";
+	    	    		 html=html +'<option></option>';
+	                     for(var i=0; i<data.length; i++){
+	                    	html=html +'<option value=""+ data[i].className+"">'+data[i].className+'</option>';
+	                     }
+	                     $('#cla').html(html);
+	                   },   
+	                   error: function(data){
+	                		 var html="";
+	                		 $('#cla').html(html);
+	                   }
+	    	      });
+	    	  }else{
+	    		  alert("请选择一条数据!");
+	    	  }
+	      }
+	</script>
 			
-			
-				<!-- 根据年级来获取班级的信息 -->
-			<script type="text/javascript">
-			
-			      function getClassInformation(){
-			    	  
-			    	  var grade= $("#myYear").find("option:selected").val();
-			    	  var profession=$("#pro").find("option:selected").text();
-			    	  			    	   
-			    	  if(profession!=null){
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getclassInfromation",
-					    	    	  data:{profession:profession,grade:grade},
-					    	    	  dataType:"json",			    	
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		 var html="";
-					    	    		 
-					    	    		 html=html +'<option></option>';
-					                     for(var i=0; i<data.length; i++){
-					                    	                                   
-					                    		 html=html +'<option value=""+ data[i].className+"">'+data[i].className+'</option>';
-					                    	
-					                     }
-					                     
-					                     $('#cla').html(html);
-					                   },   
-					                   error: function(data){
-					                	   
-					                		 var html="";
-					                		 $('#cla').html(html);
-					                   }
-		  
-					    
-					    	    	  
-					    	    	  
-					    	      }
-					    	      
-					    	  
-					    	  );
-			    	  }else{
-			    		  
-			    		  alert("请选择一条数据!");
-			    	  }
-			    	  
-			    
-			      }
-			</script>
-			
-			
-		<script type="text/javascript">
-			
-			      function toSubmit(){
-		
-			    	  var formData = new FormData($("#studentExcel")[0]);  // 要求使用的html对象
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!importExcel",
-					    	    	
- 					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
-				    	  		      data:formData,
-					    	    	  dataType:"json",	
-					    	    	  async:false,			    
-					    	          contentType: false,  
-					    	          processData: false, 
-					    	    	  success: function(data){
-			    	    	
-					    	    		  if(data!=null && data!=""){
-					    	    			
-					    	    			  alert(data);
-					    	    			  
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-
-			      }
-			</script>
-			
+	<script type="text/javascript">
+		      function toSubmit(){
+		    	  var formData = new FormData($("#studentExcel")[0]);  // 要求使用的html对象
+	    		  $.ajax({
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!importExcel",
+		    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:formData,
+	    	    	  dataType:"json",	
+	    	    	  async:false,			    
+	    	          contentType: false,  
+	    	          processData: false, 
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      });
+		      }
+	</script>
 		
   <!-- container section start -->
     <section id="container" class="">
-     
-      
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -291,7 +235,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -300,7 +244,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -317,14 +261,12 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
-                               
+                  
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_table"></i>
@@ -332,7 +274,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showOperator">维护国际学生信息</a></li>
                            <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
                             <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
@@ -367,7 +309,6 @@
                                <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
-
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -403,20 +344,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                   <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -429,8 +375,8 @@
 		  <div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
-								<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
-						<li><i class="fa fa-table"></i>维护国际学生信息</li>
+								<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
+						<li><i class="fa fa-table"></i>维护国际班学生信息</li>
 					</ol>
 				</div>
 			</div>
@@ -440,66 +386,58 @@
                 <ul class="nav top-menu">            
                              
                  <li>
-                       <form class="navbar-form" action="studentInformationAction!searchStudentGFCS" method="post">
-                             <label><b>年级</b>&nbsp;</label>
-                             <select id="myYear" name="grade" 
-                                         style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:5px;-moz-border-radius :3px;"
-                                         onchange="getProfession()">
-                                            <option selected></option>
-                              </select> 
-                                <label><b>专业</b>&nbsp;</label>
-                             <select id="pro" name="profession" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-                                                onchange="getClassInformation()">                               
-                               
-                               </select>
-                                 <label><b>班级</b>&nbsp;</label>
-                             <select id="cla" name="className" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-                             
-                                onmouseover="searchToji()">                           
-                                            
-                                            </select>
-                                   <label><b>状态</b>&nbsp;</label>           
-                               <select name="status2" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;" >
-                                                    <option selected></option>
-                                                    <option>在班</option>
-                                                    <option>已出国</option>
-                                                    <option>已转班</option>
-                               </select>
-                            <button type="submit" onclick="serachToji()" class="btn btn-default" style="width:120px;height:30px;margin-top:-3px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查询统计</b></button>
-                     
-                        </form>
-                        </li>
-                        
-                        
-                    <li style="margin-top:10px">
-                       <form class="navbar-form" action="studentInformationAction!searchStudent" method="post" enctype="multipart/form-data">
-                            <input class="form-control" name="studentInformation" placeholder="输入查找的关键字" type="text" required/>
-                            <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
+                    <form class="navbar-form" action="studentInformationAction!searchStudentGFCS" method="post">
+                          <label><b>年级</b>&nbsp;</label>
+                          <select id="myYear" name="grade" 
+                                      style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:5px;-moz-border-radius :3px;"
+                                      onchange="getProfession()">
+                                         <option selected></option>
+                           </select> 
+                             <label><b>专业</b>&nbsp;</label>
+                          <select id="pro" name="profession" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"
+                                             onchange="getClassInformation()">                               
                             
-                               <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="addStudent.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
-                              <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="studentInformationAction?status=1"><i class="icon_menu"></i>&nbsp;&nbsp;
-                            <b>显示全部</b></a></button>
-      
-                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportInterStudentExcel?searchName=${studentInformation}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
-                            
-                            <!--   <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href=studentInformationAction!importExcel><i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b></a></button> -->
-                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
-									<i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b>
-								</button>
+                            </select>
+                              <label><b>班级</b>&nbsp;</label>
+                          <select id="cla" name="className" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"
+                             onmouseover="searchToji()">                           
+                           </select>
+                                <label><b>状态</b>&nbsp;</label>           
+                           <select name="status2" style="width:150px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;" >
+                                 <option selected></option>
+                                 <option>在班</option>
+                                 <option>已出国</option>
+                                 <option>已转班</option>
+                           </select>
+                         <button type="submit" onclick="serachToji()" class="btn btn-default" style="width:120px;height:30px;margin-top:-3px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查询统计</b></button>
+                     </form>
+                </li>
+                        
+	               <li style="margin-top:10px">
+	                   <form class="navbar-form" action="internationalStudentAction!showOperator" method="post" enctype="multipart/form-data">
+	                        <input class="form-control" name="loginUserName" placeholder="输入查找的关键字" type="text" required/>
+	                        <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
+	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
+	                        	<a href="addStudent.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
+	                        <button type="button" class="btn btn-default" style="width:120px;height:30px">
+	                        <a href="internationalStudentAction!showOperator"><i class="icon_menu"></i>&nbsp;&nbsp;
+	                        <b>显示全部</b></a></button>
+	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
+	                        	<a href="exportInterStudentExcel?searchName=${studentInformation}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+	                        <!--   <button type="button" class="btn btn-default" style="width:80px;height:30px">
+	                        <a href=studentInformationAction!importExcel><i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b></a></button> -->
+	                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
+								<i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b>
+							</button>
 							<a class="btn btn-default" href="downLoad.action?fileName=国际班学生信息模板.xls" style="width:140px;height:30px">	<i class="icon_download"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a>	
-                        </form>
-                    </li>
-                                   
+	                    </form>
+	              </li>
                 </ul>
                 <!--  search form end -->                
               </div>
 			</div>
 			
-						<!-- 模态框（Modal） -->
+			<!-- 模态框（Modal） -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -510,13 +448,11 @@
 							<h4 class="modal-title" id="myModalLabel">
 								上传国际班学生EXCEL表
 							</h4>					
-							
 						</div>
 						<div class="modal-body">
 						   <form enctype="multipart/form-data" id="studentExcel" method="post">
 				                 <input id="file-zh" name="upload" type="file"
 				                    multiple>	
-				                    
 				                    <br/><br/>
 				                	<b><a class="btn btn-primary" href="downLoad.action?fileName=国际班学生信息模板.xls">下载国际班学生信息模板</a></b>	
 				            </form>
@@ -538,7 +474,6 @@
               <div class="row">
                   <div class="col-lg-12">
                       <section class="panel">
-                     
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr style="background-color:#ededed">
@@ -552,23 +487,21 @@
                                  <th>状态</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="StudentList" var="student" status="st">
+                           <s:iterator value="students" var="student" status="st">
                               <tr>
-                                 <td><s:property value="#student.grade"/></td>
+                                 <td><s:property value="#student.classes.grade"/></td>
                                  <td><s:property value="#student.studentNo"/></td>
                                  <td><s:property value="#student.password"/></td>
                                  <td><s:property value="#student.studentName"/></td>
                                     <td><s:property value="#student.reserve2"/></td>
                                  <td><s:property value="#student.interClass.className"/></td>
                                  <td><s:property value="#student.profession"/></td>
-                              
                                  <td><s:property value="#student.status"/></td>
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
                                       <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#student.id"/>','studentInformationAction!searchStudentById?id=')"><i class="icon_pencil"></i></a>
                                       <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#student.id"/>', 'studentInformationAction!deleteStudent?id=')"><i class="icon_trash_alt"></i></a>
-                            
                                   </div>
                                   </td>
                               </tr>
@@ -582,42 +515,36 @@
 		          <s:if test="#status==1"> 
                       <c:if test="${totalPage>0}">
                          [<a href="studentInformationAction?pageNo=1">首页</a>]
-         
                          <c:if test="${currentPage>1}">
                              [<a href="studentInformationAction?pageNo=${currentPage-1}">上一页</a>]
                         </c:if>
-         
                          <c:if test="${currentPage<totalPage}">
                             [<a href="studentInformationAction?pageNo=${currentPage+1}">下一页</a>]
                           </c:if>
-         
                          [<a href="studentInformationAction?pageNo=${totalPage}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
+                  </s:if>
                       
-                      </s:if>
-                      
-                      <s:else>
-                      
-                           <c:if test="${totalPage>0}">
-                         [<a href="studentInformationAction!searchStudent?pageNo=1 & temp=1">首页</a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="studentInformationAction!searchStudent?pageNo=${currentPage-1} & temp=1">上一页</a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="studentInformationAction!searchStudent?pageNo=${currentPage+1} & temp=1">下一页</a>]
-                          </c:if>
-         
-                         [<a href="studentInformationAction!searchStudent?pageNo=${totalPage} & temp=1">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      
-                      </s:else>
-                  </div>
-                     
-                
+                   <s:else>
+                   
+                        <c:if test="${totalPage>0}">
+                      [<a href="studentInformationAction!searchStudent?pageNo=1 & temp=1">首页</a>]
+      
+                      <c:if test="${currentPage>1}">
+                          [<a href="studentInformationAction!searchStudent?pageNo=${currentPage-1} & temp=1">上一页</a>]
+                     </c:if>
+      
+                      <c:if test="${currentPage<totalPage}">
+                         [<a href="studentInformationAction!searchStudent?pageNo=${currentPage+1} & temp=1">下一页</a>]
+                       </c:if>
+      
+                      [<a href="studentInformationAction!searchStudent?pageNo=${totalPage} & temp=1">尾页</a>]	
+                                                                                                  第${currentPage}页/共${totalPage}页
+                   </c:if>
+                   
+                   </s:else>
+                </div>
               </div>
               <!-- page end-->
           </section>
@@ -634,7 +561,5 @@
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
     <script src="js/js.js"  charset="gb2312"></script>
-  
-			
   </body>
 </html>

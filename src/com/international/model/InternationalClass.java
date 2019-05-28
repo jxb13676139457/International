@@ -8,12 +8,18 @@ public class InternationalClass {
 	private String className;
 	private String grade;
 	private String major;
-
-	
 	private String reserves1;
 	private String reserves2;
 	private String reserves3;
 	
+	private Set<InternationalStudent> interStudents;  //关联的对象
+	
+	public Set<InternationalStudent> getInterStudents() {
+		return interStudents;
+	}
+	public void setInterStudents(Set<InternationalStudent> interStudents) {
+		this.interStudents = interStudents;
+	}
 	public int getClassId() {
 		return classId;
 	}

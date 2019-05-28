@@ -35,46 +35,29 @@
     <![endif]-->
     
     		<script type="text/javascript">
-			
 			      function toSubmit(){
-                       
 			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/loginUserInformationAction!updateInfor",
-					    	    	
- 					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
-				    	  		      data:$("#loginUserForm").serialize(),
-					    	    	  dataType:"json",	
-					    	    	  async:false,
-					    	        
-					    	    	  success: function(data){
-			    	    	
-					    	    		  if(data!=null && data!=""){
-					    	    			
-					    	    			  alert(data);
-					    	    			  
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-
+				    	      {
+				    	    	  type:"post",
+				    	    	  url:"http://localhost:8080/InternationalSys/background/managerAction!editLoginUser",
+					    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+			    	  		      data:$("#loginUserForm").serialize(),
+				    	    	  dataType:"json",	
+				    	    	  async:false,
+				    	    	  success: function(data){
+				    	    		  if(data!=null && data!=""){
+				    	    			  alert(data);
+				    	    		  }
+				                   }
+				    	      }
+				    	  );
 			      }
 			</script>
-			
-       
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -132,8 +115,6 @@
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -250,7 +231,7 @@
 				</div>
 			</div>
 		  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="managerAction"><b>返回上页</b></a></button>
+                            <a href="managerAction!showOperator"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -261,7 +242,7 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="loginUserForm" action="managerAction!editLoginUser">
+                                  <form class="form-validate form-horizontal" method="post" id="loginUserForm">
                                         <%-- <div class="form-group ">
                                           <div class="col-lg-10">
                                               <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>

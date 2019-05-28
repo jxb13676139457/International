@@ -5,10 +5,16 @@
 <hibernate-mapping>
 	<class name="com.international.model.InternationalClass" table="InternationalClass">
 		<id name="classId" column="classId">
+			<!-- 自增主键策略 -->
 			<generator class="native"></generator>
 		</id>
 		<property name="className" column="className"></property>
 		<property name="grade" column="grade"></property>
 		<property name="major" column="major"></property>
+		<!-- 关联的国际班学生对象 -->
+		<set name="interStudents" cascade="all" table="internationalStudent" inverse="true">
+			<key column="classId" not-null="true"></key>
+			<one-to-many class="com.international.model.InternationalStudent"/>
+		</set>
 	</class>
 </hibernate-mapping>

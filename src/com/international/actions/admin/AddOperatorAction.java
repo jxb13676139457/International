@@ -3,9 +3,12 @@ package com.international.actions.admin;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import com.international.dao.UserDao;
 import com.international.model.Admin;
 import com.opensymphony.xwork2.ActionSupport;
+import com.international.common.ajaxAction;
 
 public class AddOperatorAction extends ActionSupport{
 	
@@ -40,18 +43,20 @@ public class AddOperatorAction extends ActionSupport{
 	}
 
 	//添加管理员
-	public String execute() throws IOException {
+	public void addLoginUser() throws IOException {
 		int count = 0;
+		String message = "";
 		count = ud.addOperator(admin);
 		System.out.println(count);
 		if(count>0) {
 			System.out.println("添加成功");
+			message = "添加成功";
 			admins = ud.queryAdmins(loginUserName);
-			return "admins";
 		}else{
 			System.out.println("添加失败");
-			return INPUT;
+			message = "添加失败";
 		}
+		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
 
 }

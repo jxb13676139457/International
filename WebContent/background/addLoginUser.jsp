@@ -34,7 +34,7 @@
     	<script type="text/javascript">
 	     	//用来跳转到查询订单的action
 			function gotoShowAction(){
-				location.href="managerAction";
+				location.href="managerAction!showOperator";
 			}
        </script>
 
@@ -43,22 +43,44 @@
 			     if(s!=null)
 			     {
 			 %>
-			 
 				 <script type="text/javascript" language="javascript">
-				 
 					alert("<%=s%>");
 				</script>
 			<%
 			     }
 			%>
+			
+			<script type="text/javascript">
+			      function toSubmit(){
+			    		  $.ajax(		  
+				    	      {
+				    	    	  type:"post",
+				    	    	  url:"http://localhost:8080/InternationalSys/background/addOperatorAction!addLoginUser",
+					    	  	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+			    	  		      data:$("#addLoginUser").serialize(),
+				    	    	  dataType:"json",	
+				    	    	  async:false,
+				    	    	  success: function(data){
+				    	    		  if(data!=null && data!=""){
+				    	    			  alert(data);
+				    	    		  }
+				                   }
+				    	      }
+				    	  );
+			      }
+			</script>
+    
+         <style>  
+           #logo{
+            width: 40px;//重置大小，最终图片大小确定
+            transform:scale(2);//设置缩放比例
+        }
+        </style>
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -67,7 +89,6 @@
             <!--logo start-->
     <!--      <img src="img/logo3.png" style="width:100px;height:50px" class="col-sm-4" > -->
               <a href="index.jsp" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
-             
             <!--logo end-->              
  
                 <ul>
@@ -159,7 +180,6 @@
                           <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
-
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -239,7 +259,7 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="addOperatorAction">
+                                  <form class="form-validate form-horizontal" id="addLoginUser" method="post" >
                                       <div class="form-group ">
                                           <div  style="margin-left:250px">
                                           <label for="cname" class="control-label col-lg-2">用户名 <span class="required" style="color:red">*</span></label>
@@ -292,13 +312,12 @@
                                       <div class="form-group">
                                        <div  style="margin-left:500px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit">添加 </button>
+                                              <button class="btn btn-primary" onclick="toSubmit()">添加 </button>
                                           </div>
                                           </div>
                                       </div>
                                   </form>
                               </div>
-
                           </div>
                       </section>
                   </div>
@@ -323,8 +342,5 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-
-			
-
   </body>
 </html>

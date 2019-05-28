@@ -40,6 +40,8 @@
 			<list>
 				<value>com/international/model/Admin.hbm.xml</value>
 				<value>com/international/model/College.hbm.xml</value>
+				<value>com/international/model/InternationalClass.hbm.xml</value>
+				<value>com/international/model/InternationalStudent.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

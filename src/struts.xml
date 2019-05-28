@@ -22,17 +22,6 @@
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
 		
-		<!-- 学生模块的Action -->
-		<action name="internationalStudentAction" class="internationalStudentAction">
-		
-		</action>
-		
-		<!-- 修改管理员密码的Action -->
-		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
-			<result name="success">/background/login.jsp</result>
-			<result name="input">/background/profile.jsp</result>
-		</action>
-		
 		<!-- 超级管理员特有权限的Action -->
 		<action name="managerAction" class="managerAction">
 			<result name="success">/background/loginUserInfor.jsp</result>
@@ -41,16 +30,20 @@
 			<result name="delSucc" type="redirectAction">
 				<param name="actionName">managerAction!showOperator</param>
 			</result>
-			<result name="updateSucc" type="redirectAction">
-				<param name="actionName">managerAction!showOperator</param>
-			</result>
 		</action>
 		<!-- 添加操作员 -->
-		<action name="addOperatorAction" class="addOperatorAction">
-			<result name="admins" type="redirectAction">
-				<param name="actionName">managerAction!showOperator</param>
-			</result>
-			<result name="input">/background/addLoginUser.jsp</result>
+		<action name="addOperatorAction" class="addOperatorAction"></action>
+		
+		<!-- 学生模块的Action -->
+		<action name="internationalStudentAction" class="internationalStudentAction">
+			<result name="success">/background/studentsInfor.jsp</result>
+			<result name="input">/background/studentsInfor.jsp</result>
+		</action>
+		
+		<!-- 修改管理员密码的Action -->
+		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
+			<result name="success">/background/login.jsp</result>
+			<result name="input">/background/profile.jsp</result>
 		</action>
 		
 		<!-- 退出系统的Action -->

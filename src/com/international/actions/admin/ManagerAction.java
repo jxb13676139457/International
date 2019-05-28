@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.international.common.ajaxAction;
 import com.international.dao.UserDao;
 import com.international.model.Admin;
 import com.opensymphony.xwork2.ActionContext;
@@ -115,30 +116,40 @@ public class ManagerAction extends ActionSupport {
 	
 	//分页查询+筛选
 	public String showOperator(){
-		//System.out.println("测试分页查询");
-		Map map = ActionContext.getContext().getSession();
-		map.put("search",loginUserName);
+		//Map map = ActionContext.getContext().getSession();
+		//map.put("search",loginUserName);
 		//查询所有数据存于集合对象中
 		admins = ud.queryAdmins(loginUserName);
-		if(admins.size()%pageSize==0){
-			totalPage = admins.size()/pageSize; 
-		}else{
-			totalPage = admins.size()/pageSize+1;
-		}
-		if(pageNo<=0){
-			pageNo = 1;
-		}else if(pageNo>=totalPage){
-			pageNo = totalPage;
-		}
-		//根据当前页查询要在该页上显示的4条数据
-		//admins = ud.queryByPage(pageNo,pageSize);
-		admins = ud.queryByPage(loginUserName,pageNo,pageSize);
-		System.out.println(admins);
-		//设置当前页
-		currentPage = pageNo;
-		if(admins!=null){
-			return SUCCESS;
-		}else{
+		System.out.println("查询全部的："+admins);
+		if(admins!=null) {
+			if(admins.size()%pageSize==0){
+				totalPage = admins.size()/pageSize; 
+			}else{
+				totalPage = admins.size()/pageSize+1;
+			}
+			if(pageNo<=0){
+				pageNo = 1;
+			}else if(pageNo>=totalPage){
+				pageNo = totalPage;
+			}
+			//分页，根据当前页查询要在该页上显示的4条数据
+			admins = ud.queryByPage(loginUserName,pageNo,pageSize);
+			System.out.println(admins);
+			//设置当前页
+			currentPage = pageNo;
+			if(admins!=null){
+				loginUserName = "";  //为了重置搜索框传的值，避免点击显示全部按钮还会保留传入的值进而还是在筛选
+				return SUCCESS;
+			}else{
+				loginUserName = "";
+				return INPUT;
+			}
+		}else {
+			//搜索不到数据，则把分页的页码清零
+			pageNo = 0;
+			totalPage = 0;
+			currentPage = 0;
+			loginUserName = "";
 			return INPUT;
 		}
 	}
@@ -169,14 +180,18 @@ public class ManagerAction extends ActionSupport {
 	}
 	
 	//修改操作员信息
-	public String editLoginUser() {
+	public void editLoginUser() throws IOException {
+		String message = "";
 		if(ud.updateOperator(adminId,admin)) {
 			System.out.println("更新成功");
-			return "updateSucc";
+			message = "更新成功";
+			//return "updateSucc";
 		}else {
 			System.out.println("更新失败");
-			return INPUT;
+			message = "更新失败";
+			//return INPUT;
 		}
+		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
 }
 
