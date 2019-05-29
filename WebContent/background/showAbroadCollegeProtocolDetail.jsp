@@ -43,7 +43,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeProtocolAction!updateInfor",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/collegeAgreementAction!updateInfor",
 					    	    	  data: formData,  
 /* 					    	  		注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
 //					    	  		data:$('#formid').serialize(); */

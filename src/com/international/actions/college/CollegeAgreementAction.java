@@ -36,12 +36,23 @@ public class CollegeAgreementAction extends ActionSupport{
 	File upload;//上传文件
 	String uploadFileName;//上传文件名
 	String savePath;//上传文件的保存路径
+	String uploadContentType;//封装上传文件的类型
 	Map m;
 	public CollegeAgreementAction() {
 		
 	}
 	
 	
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+
+
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+
+
 	public List<CollegeAgreement> getAgreementList() {
 		return agreementList;
 	}
@@ -275,52 +286,110 @@ public class CollegeAgreementAction extends ActionSupport{
 	}
 	
 	/**
+	 *  修改活动信息
+	 * @return
+	 */
+	public void updateInfor() throws IOException{
+		String message="";
+		//获取需要上传文件的文件路径  
+		String path=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +this.uploadFileName);
+		String deletepath=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +updateAgreement.getFileName());
+		//判断文件是否上传，如果上传的话将会创建该目录 
+		//System.out.println(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\" +"jsp作用.txt"));
+		System.out.println(path);
+		if(uploadFileName!=null&&!uploadFileName.equals("")) {
+			File target= new File(path); // 定义目标文件对象
+			File deleteFile=new File(deletepath);//要删除的文件对象
+			if (deleteFile.exists() && deleteFile.isFile())
+				deleteFile.delete();
+			try {
+				FileUtils.copyFile(upload, target);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			// 删除临时文件
+			upload.delete();
+			// 更新文件名
+			updateAgreement.setFileName(this.uploadFileName);
+			updateAgreement.setTime(updateAgreement.getTime().substring(0, 10));
+			// 查询collegeId
+			String hh = "from College where collegeName='" + collegeName + "'";
+			updateAgreement.setColl(cd.queryByhql(hh).get(0));
+			// hql语句
+			String hql1 = "coll = '" + updateAgreement.getColl().getCollegeId() + "'";
+			String hql2 = "time = '" + updateAgreement.getTime() + "'";
+			String hql3 = "type = '" + updateAgreement.getType() + "'";
+			String hql4 = "fileName = '" + updateAgreement.getFileName() + "'";
+			String hql5 = "title like '%" + updateAgreement.getTitle() + "%'";
+			String hql = "from CollegeAgreement where " + hql1 + " and " + hql2 + " and " + hql3 + " and " + hql4
+					+ " and " + hql5;
+			agreementList = agd.queryByhql(hql, collegeName);
+			if (agreementList == null || agreementList.size() == 0) {
+				if (agd.updateAgreement(updateAgreement)) {
+					message = "更新成功";
+				} else {
+					message = "更新失败";
+				}
+			} else {
+				message = "已存在该条信息";
+			}
+		}
+		else {
+			message="以上信息不能为空";
+		}
+		ajaxAction.toJson(ServletActionContext.getResponse(),message);
+	}
+	
+	/**
 	 *  添加协议信息
 	 * @return
 	 */
 	public void addObject() throws IOException{
+		String message="";
 		//获取需要上传文件的文件路径  
-		System.out.println("jlm");
 		String path=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +this.uploadFileName);
 		//判断文件是否上传，如果上传的话将会创建该目录 
-		//String dir=
 		
-		System.out.println("ccccwj");
+		System.out.println(path);
 		File target= new File(path); // 定义目标文件对象
-		addAgreement.setFileName(this.uploadFileName);
-		
-		try {
-			System.out.println("qqqqwj");
-			FileUtils.copyFile(upload, target);
-			System.out.println("hhhhwj");
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		//删除临时文件
-		upload.delete();
-		String message="";
-		//hql语句
-		String hql2="time = '"+addAgreement.getTime()+"'";
-		String hql3="type = '"+addAgreement.getType()+"'";
-		String hql4="fileName = '"+addAgreement.getFileName()+"'";
-		String hql5="title like '%"+addAgreement.getTitle()+"%'";
-		String hql="from CollegeAgreement where "  +hql2  +" and " +hql3 +" and " +hql4+" and "+ hql5;
-		//查出是否有相同的数据在数据库中
-		System.out.println("zzzcwj");
-		agreementList=agd.queryByhql(hql,collegeName);
-		if(agreementList==null || agreementList.size()==0) {
-			String hh="from College where collegeName='"+collegeName+"'";
-			addAgreement.setColl(cd.queryByhql(hh).get(0));
-			if(agd.addAgreement(addAgreement)>0) {
-				message="添加成功";
+		//有协议才能进行添加
+		if(uploadFileName!=null&&!uploadFileName.equals("")) {
+			addAgreement.setFileName(this.uploadFileName);
+			addAgreement.setTime(addAgreement.getTime().toString().substring(0, 10));
+			try {
+				FileUtils.copyFile(upload, target);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			else {
-				message="添加失败";
+			// 删除临时文件
+			upload.delete();
+
+			// hql语句
+			String hql2 = "time = '" + addAgreement.getTime() + "'";
+			String hql3 = "type = '" + addAgreement.getType() + "'";
+			String hql4 = "fileName = '" + addAgreement.getFileName() + "'";
+			String hql5 = "title like '%" + addAgreement.getTitle() + "%'";
+			String hql = "from CollegeAgreement where " + hql2 + " and " + hql3 + " and " + hql4 + " and " + hql5;
+			// 查出是否有相同的数据在数据库中
+			//System.out.println(addAgreement.getTime());
+			agreementList = agd.queryByhql(hql, collegeName);
+			if (agreementList == null || agreementList.size() == 0) {
+				String hh = "from College where collegeName='" + collegeName + "'";
+				addAgreement.setColl(cd.queryByhql(hh).get(0));
+				if (agd.addAgreement(addAgreement) > 0) {
+					message = "添加成功";
+				} else {
+					message = "添加失败";
+				}
+			} else {
+				message = "已存在该条信息";
 			}
 		}
 		else {
-			message="已存在该条信息";
+			message="以上不能为空";
 		}
+			
 		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
 }

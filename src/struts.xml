@@ -81,6 +81,23 @@
 			<result name="success">/background/login.jsp</result>
 			<result name="input">/background/index.jsp</result>
 		</action>
+		
+		<!-- 文件下载Action -->
+    		
+      	<action name="downLoad" class="DocDownloadAction">
+			<result name="download" type="stream">
+				<!-- 调用action中返回流的方法 -->
+				<!-- 允许下载的文件类型：此处指定为所有的二进制文件类型 在tomacat的conf/web.xml中找exe对应的<mime-type> -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 对应Action中的属性：就是返回流的属性【其实就是getAttrInputStream()中的attrInputStream】 -->
+				<param name="inputName">attrInputStream</param>
+				<!-- 下载头，包括：浏览器显示的文件名 filename=${downFileName}这不是el表达式， el表达式仅能用于jsp，这是struts在配置文件中的取值符号 -->
+				<param name="contentDisposition">attachment;filename=${downFileName}</param>
+				<!-- 缓冲区大小设置 -->
+				<param name="bufferSize">1024</param>
+			</result>
+    	</action>
+		
 	</package>
 	
 </struts>
