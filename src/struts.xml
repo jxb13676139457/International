@@ -23,6 +23,96 @@
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
 		
+
+		<action name="internationClassAction" class="internationClassAction">
+			<result name="success">/background/internationalClassInfor.jsp</result>
+			<result name="deleteSuccess">/background/internationalClassInfor.jsp</result>
+			<result name="deleteError">/background/internationalClassInfor.jsp</result>
+			<result name="lookSuccess">/background/showClassDetail.jsp</result>
+			<result name="lookError">/background/internationalClassInfor.jsp</result>
+			<result name="updateError">/background/internationalClassInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
+			<result name="addError">/background/internationalClassInfor.jsp</result>
+		</action> 
+		
+		
+		<action name="noticeAction" class="noticeAction">
+			<result name="success">/background/noticeInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+			<result name="deleteError" >/background/noticeInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">noticeAction</param>
+			</result>
+			<result name="updateError">/background/noticeInfor.jsp</result>
+			<result name="lookSuccess">/background/showNoticeDetail.jsp</result>
+			<result name="lookError">/background/noticeInfor.jsp</result>
+		</action> 
+		
+		<action name="newsAction" class="newsAction">
+			<result name="success">/background/newsInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="addError">/background/newsInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="deleteError" >/background/newsInfor.jsp</result>
+			<result name="lookSuccess">/background/showNewsDetail.jsp</result>
+			<result name="lookError">/background/newsInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">newsAction</param>
+			</result>
+			<result name="updateError">/background/newsInfor.jsp</result>
+		</action> 
+		
+		<action name="policyAction" class="policyAction">
+			<result name="success">/background/policyInfor.jsp</result>
+			<result name="addError">/background/policyInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="deleteError" >/background/policyInfor.jsp</result>
+			<result name="lookSuccess">/background/showPolicyDetail.jsp</result>
+			<result name="lookError">/background/policyInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">policyAction</param>
+			</result>
+			<result name="updateError">/background/policyInfor.jsp</result>
+			<param name="savePath">/upload</param>
+		</action>
+		
+		<action name="englishAgencyAction" class="englishAgencyAction">
+			<result name="success">/background/englishAgencyInfor.jsp</result>
+			<result name="addError">/background/englishAgencyInfor.jsp</result>
+			<result name="addSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="deleteError" >/background/englishAgencyInfor.jsp</result>
+			<result name="lookSuccess">/background/showEnglishAgencyDetail.jsp</result>
+			<result name="lookError">/background/englishAgencyInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">englishAgencyAction</param>
+			</result>
+			<result name="updateError">/background/englishAgencyInfor.jsp</result>
+		</action>
+
 		<!-- 活动的Action -->
 		<action name="collegeActivityAction" class="collegeActivityAction">
 			<result name="success">/background/abroadCollegeActivitiesInfor.jsp</result>
@@ -101,6 +191,7 @@
 				<param name="bufferSize">1024</param>
 			</result>
     	</action>
+
 		
 	</package>
 	

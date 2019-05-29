@@ -266,13 +266,13 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="policyForm" action="" enctype="multipart/form-data">
+                                  <form class="form-validate form-horizontal" method="post" id="policyForm" action="policyAction!addPolicy" enctype="multipart/form-data">
                                                                         
                                       <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>政策法规主题 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="addUser.title" style="width:300px" required/>
+                                              <input class="form-control"  type="text" name="policy.title" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -281,7 +281,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="policy.time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -290,7 +290,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规来源</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.source" style="width:300px" type="text" />
+                                              <input class="form-control" name="policy.source" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -299,7 +299,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规作者</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.author" style="width:300px" type="text" />
+                                              <input class="form-control" name="policy.author" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -316,14 +316,14 @@
                                     
                             
                                       
-                                       <div class="form-group ">
+                                       <!-- <div class="form-group ">
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规内容</b></label>
                                           <div class="col-lg-10">
-                                              <textarea rows="10" cols="130" name="addUser.content" style="width:300px"></textarea>
+                                              <textarea rows="10" cols="130" name="policy.content" style="width:300px"></textarea>
                                           </div>
                                           </div>
-                                      </div>
+                                      </div> -->
                                                                                                                 
                                       
                                       <div class="form-group">

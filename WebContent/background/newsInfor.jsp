@@ -276,19 +276,19 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="newsAction!searchInformationbyTime" method="post">
+                       <form class="navbar-form" action="newsAction!searchNotice?pageNo=1" method="post">
 
-                              <input class="form-control" name="searchNewsTime" placeholder="输入查找的关键字" type="text" required/>
+                              <input class="form-control" name="searchNews" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查找</b></button>
                             
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addNews.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="newsAction">
+                            <a href="newsAction?searchNews=&pageNo=1">
                              <i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                       
                          <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportNewsExcel?searchName=${searchNewsTime }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+                            <a href="exportNewsExcel?searchName=${searchNews }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
                         </form>
                     </li>                    
                 </ul>
@@ -313,20 +313,20 @@
                                  <th>超链接</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="newsList" var="news" status="st">
                               <tr>
-                                 <td><s:property value="#user.title"/></td>                              
-                                 <td><s:property value="#user.time"/></td>       
-                                 <td><s:property value="#user.source"/></td>      
-                                 <td><s:property value="#user.author"/></td> 
-                                 <td> <a href="<s:property value="#user.newsUrl"/>">
-                                  <s:property value="#user.title"/></a></td>     
+                                 <td><s:property value="#news.title"/></td>                              
+                                 <td><s:property value="#news.time"/></td>       
+                                 <td><s:property value="#news.source"/></td>      
+                                 <td><s:property value="#news.author"/></td> 
+                                 <td> <a href="<s:property value="#news.newsUrl"/>">
+                                  <s:property value="#news.title"/></a></td>     
                                  
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','newsAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'newsAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#news.newsId"/>','newsAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#news.newsId"/>', 'newsAction!deleteNotice?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -339,7 +339,7 @@
                      
            <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="newsAction?pageNo=1">首页</a>]
          

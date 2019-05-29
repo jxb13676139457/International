@@ -294,11 +294,11 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="noticeForm" action="">
+                                  <form class="form-validate form-horizontal" method="post" id="noticeForm" action="noticeAction!updateNoticeInfor">
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  id="id" type="hidden" required/>
+                                              <input class="form-control" name="notice.noticeId" value="${notice.noticeId }"  id="id" type="hidden" required/>
                                           </div>
                                       </div>
                                                                         
@@ -307,7 +307,7 @@
                                         <div  style="margin-left:1px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>通知主题</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="title" name="updateUser.title" value="${sessionScope.currentUser.title }" style="width:300px" required/>
+                                              <input class="form-control"  type="text" id="title" name="notice.title" value="${notice.title }" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -316,7 +316,7 @@
                                          <div  style="margin-left:1px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" value="noticeTime" id="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="notice.time" value="notice.time" id="time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -325,7 +325,7 @@
                                       <div  style="margin-left:0px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知来源</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.source" id="source" value="${sessionScope.currentUser.source }" style="width:300px" type="text" />
+                                              <input class="form-control" name="notice.source" id="source" value="${notice.source }" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -334,7 +334,7 @@
                                        <div  style="margin-left:0px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>通知作者</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.author" id="author" value="${sessionScope.currentUser.author }" style="width:300px" type="text" />
+                                              <input class="form-control" name="notice.author" id="author" value="${notice.author }" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -352,7 +352,7 @@
                                               <div class="form-group">
                                                   <label class="control-label col-sm-2"><b>通知内容</b></label>
                                                   <div class="col-lg-offset-2 col-lg-10">
-                                                      <textarea class="form-control ckeditor"  name="addUser.content" id="content" rows="10">${sessionScope.currentUser.content }</textarea>
+                                                      <textarea class="form-control ckeditor"  name="notice.content" id="content" rows="10">${notice.content }</textarea>
                                                   </div>
                                               </div>
                                          </div>

@@ -272,12 +272,12 @@
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
                                 
-                                  <form class="form-validate form-horizontal" method="post" action="">                                                         
+                                  <form class="form-validate form-horizontal" method="post" action="englishAgencyAction!addAgency">                                                         
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
 	                                          <label for="cname" class="control-label col-lg-2"><b>雅思机构名字</b><span class="required" style="color:red">*</span></label>
 	                                          <div class="col-lg-10">
-	                                              <input class="form-control" id="agencyName" name="name" style="width:300px" type="text"  required/>
+	                                              <input class="form-control" id="agencyName" name="agency.agencyName" style="width:300px" type="text"  required/>
 	                                          </div>
                                           </div>
                                       </div>
@@ -287,7 +287,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
 	                                          <label for="cemail" class="control-label col-lg-2"><b>合作时间</b><span class="required" style="color:red">*</span></label>
 	                                          <div class="col-lg-10">
-	                                              <sx:datetimepicker name="reserve1" id="reserve1"  displayFormat="yyyy-MM-dd" />
+	                                              <sx:datetimepicker name="agency.time" id="reserve1"  displayFormat="yyyy-MM-dd" />
 	                                        
                                           </div>
                                           </div>
@@ -297,7 +297,16 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>联系人</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="reserve2"  style="width:300px" name="reserve2" required/>
+                                              <input class="form-control"  type="text" id="reserve2"  style="width:300px" name="agency.cotactPerson" required/>
+                                          </div>
+                                          </div> 
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>职位<span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" id="position"  style="width:300px" name="agency.position" required />
                                           </div>
                                           </div> 
                                       </div>
@@ -306,7 +315,16 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>联系电话<span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="reserve3"  style="width:300px" name="reserve3"  onkeyup="value=value.replace(/[^\d]/g,'')" required />
+                                              <input class="form-control"  type="text" id="reserve3"  style="width:300px" name="agency.phone" required />
+                                          </div>
+                                          </div> 
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>邮件<span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" id="email"  style="width:300px" name="agency.email" required />
                                           </div>
                                           </div> 
                                       </div>

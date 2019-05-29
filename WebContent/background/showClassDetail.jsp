@@ -229,11 +229,11 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="internationalClassAction!updateClassInfor.action">
+                                  <form class="form-validate form-horizontal" method="post" action="internationClassAction!updateClassInfor">
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentClass.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateUser.classId" value="${currentClass.classId }"  type="hidden" required/>
                                           </div>
                                       </div>
                                      
@@ -242,7 +242,7 @@
                                         <div  style="margin-left:250px">
                                           <label for="cname" class="control-label col-lg-2">年级<span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.reserve1 " value="${sessionScope.currentClass.reserve1 }"  style="width:300px" type="text" required/>
+                                              <input class="form-control" name="currentClass.grade " value="${currentClass.grade}"  style="width:300px" type="text" required/>
                                               
                                    <%--              <select id="myYear" name="addClass.reserve1" value="${sessionScope.currentClass.reserve1 }" style="width:150px;height:35px;border-radius:5px;-webkit-border-radius:5px;-moz-border-radius :3px;">
                                                 
@@ -256,7 +256,7 @@
                                           <div  style="margin-left:250px">
                                           <label for="cname" class="control-label col-lg-2">专业<span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.reserve2" value="${sessionScope.currentClass.reserve2 }" type="text"  style="width:300px" required/>
+                                              <input class="form-control" name="currentClass.major" value="${currentClass.major}" type="text"  style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -266,7 +266,7 @@
                                          <div  style="margin-left:250px">
                                           <label for="cname" class="control-label col-lg-2">班级名称<span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.className"  type="text" value="${sessionScope.currentClass.className}"  style="width:300px" required/>
+                                              <input class="form-control" name="currentClass.className"  type="text" value="${currentClass.className}"  style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
