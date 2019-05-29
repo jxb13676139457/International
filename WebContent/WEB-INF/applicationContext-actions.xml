@@ -70,6 +70,9 @@
 		
 	</bean>
 	
-	
+	<!-- 文件下载的Action-->	
+	<bean id="DocDownloadAction" class="com.international.actions.college.DocDownloadAction" scope="prototype">
+		  					  							
+	</bean>
 	
 </beans>

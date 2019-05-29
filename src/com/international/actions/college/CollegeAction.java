@@ -123,8 +123,12 @@ public class CollegeAction extends ActionSupport {
 		m.put("searchCollege", search);
 		colleges=cd.queryAllCollege(search);
 		//查询到是空直接返回
-		if(colleges==null)
+		if(colleges==null) {
+			currentPage=0;
+			totalPage=0;
 			return SUCCESS;
+		}
+			
 		//System.out.println(search);
 		//计算总页数
 		if(colleges.size()%pageSize==0){

@@ -32,16 +32,28 @@ public class AgreementDao {
 			String hql3="type like '%"+value+"%'";
 			String hql4="title like '%"+value+"%'";
 			String hql5="fileName like '%"+value+"%'";
-			String hql6="savePath like '%"+value+"%'";
 			
 			//查询名字
 			String queryName="from College where "+hql1;
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
-			int v=list1.get(0).getCollegeId();
-			String hql7="coll like '%"+v+"%'";
+			//int v=list1.get(0).getCollegeId();
+			//String hql6="coll like '%"+v+"%'";
+			int v;
+			String hql6="";
+			for(int i=0;i<list1.size();i++) {
+				if(i==0) {
+					v=list1.get(i).getCollegeId();
+					hql6=hql6+" collegeId = '"+v+"'";
+				}
+				else {
+					v=list1.get(i).getCollegeId();
+					hql6=hql6+" or collegeId = '"+v+"'";
+				}
+				
+			}
 			
-			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" and "+hql6;
 			//获取所有数据
 			String queryString="from CollegeAgreement where "+str;
 			//创建查询
@@ -74,16 +86,28 @@ public class AgreementDao {
 			String hql3="type like '%"+value+"%'";
 			String hql4="title like '%"+value+"%'";
 			String hql5="fileName like '%"+value+"%'";
-			String hql6="savePath like '%"+value+"%'";
 			
 			//查询名字
 			String queryName="from College where "+hql1;
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
-			int v=list1.get(0).getCollegeId();
-			String hql7="coll like '%"+v+"%'";
-			System.out.println("caihuiz");
-			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6+" or "+hql7;
+			//int v=list1.get(0).getCollegeId();
+			//String hql7="coll like '%"+v+"%'";
+			int v;
+			String hql6="";
+			for(int i=0;i<list1.size();i++) {
+				if(i==0) {
+					v=list1.get(i).getCollegeId();
+					hql6=hql6+" collegeId = '"+v+"'";
+				}
+				else {
+					v=list1.get(i).getCollegeId();
+					hql6=hql6+" or collegeId = '"+v+"'";
+				}
+				
+			}
+			
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" and "+hql6;
 			//获取所有数据
 			String queryString="from CollegeAgreement where "+str;
 			//创建查询
@@ -160,8 +184,22 @@ public class AgreementDao {
 			String queryName="from College where collegeName="+"'"+h+"'";
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
-			int value=list1.get(0).getCollegeId();
-			String hql4=" and collegeId like '%"+value+"%'";
+			//int value=list1.get(0).getCollegeId();
+			//String hql4=" and collegeId like '%"+value+"%'";
+			int value;
+			String hql4="";
+			for(int i=0;i<list1.size();i++) {
+				if(i==0) {
+					value=list1.get(i).getCollegeId();
+					hql4=hql4+" and collegeId = '"+value+"'";
+				}
+				else {
+					value=list1.get(i).getCollegeId();
+					hql4=hql4+" or collegeId = '"+value+"'";
+				}
+				
+			}
+			
 			queryString=queryString +hql4;
 			//创建查询
 			Query query=session.createQuery(queryString);
@@ -202,5 +240,28 @@ public class AgreementDao {
 			session.close();
 		}
 		return num;
+	}
+	
+	/**
+	 *  更新协议
+	 * @return
+	 */
+	public boolean updateAgreement(CollegeAgreement c) {
+		Session session=null;
+		try{
+			session=sessionFactory.openSession();
+			//保存数据回数据库
+			Transaction trans=session.beginTransaction();
+			//调用保存更新方法
+			session.saveOrUpdate(c);
+			trans.commit();
+			return true;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}	
 	}
 }

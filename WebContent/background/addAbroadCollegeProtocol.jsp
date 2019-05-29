@@ -298,7 +298,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>签订的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addAgreement.time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="addAgreement.time" displayFormat="yyyy-MM-dd" />
                                           </div>
                                           </div>
                                       </div>
@@ -363,7 +363,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="utf-8"></script>
 
 
             <%

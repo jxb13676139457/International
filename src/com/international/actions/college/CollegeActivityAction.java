@@ -165,8 +165,12 @@ public class CollegeActivityAction extends ActionSupport{
 		m=ActionContext.getContext().getSession();
 		collegeActivities=ad.queryAllActivity(titles,activityTime,search);
 		//查询到是空直接返回
-		if(collegeActivities==null)
+		if(collegeActivities==null) {
+			//totalPage=0;
+			//currentPage=0;
 			return SUCCESS;
+		}
+			
 		//计算总页数
 		if(collegeActivities.size()%pageSize==0){
 			totalPage=collegeActivities.size()/pageSize;
@@ -277,15 +281,14 @@ public class CollegeActivityAction extends ActionSupport{
 		updateActivity.setColl(cd.queryByhql(hh).get(0));
 		//hql语句
 		String message="";
-		String hql1="coll = '"+updateActivity.getColl()+"'";
+		String hql1="coll = '"+updateActivity.getColl().getCollegeId()+"'";
 		String hql2="time = '"+updateActivity.getTime()+"'";
 		String hql3="type = '"+updateActivity.getType()+"'";
 		String hql4="content = '"+updateActivity.getContent()+"'";
 		String hql5="title like '%"+updateActivity.getTitle()+"%'";
 		String hql="from CollegeActivity where "+ hql1 +" and " +hql2  +" and " +hql3 +" and " +hql4+" and "+ hql5;
-		System.out.println("zzzzz");
+		System.out.println("agencyList = "+updateActivity);
 		activityList=ad.queryByhql(hql,collegeName);
-		System.out.println("ccccc");
 		if(activityList==null || activityList.size()==0) {
 			if(ad.updateActivity(updateActivity)) {
 				message="更新成功";
