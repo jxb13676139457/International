@@ -19,6 +19,21 @@
 		</property>
 	</bean>	
 	
+
+	<bean id="classesDao" class="com.international.dao.ClassesDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<bean id="noticeDao" class="com.international.dao.NoticeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+	<bean id="newsDao" class="com.international.dao.NewsDao">
+
 	<!-- 国际班学生的bean -->
 	<bean id="studentDao" class="com.international.dao.StudentDao">
 		<property name="sessionFactory">
@@ -28,17 +43,36 @@
 
 	<!-- 活动信息的bean -->
 	<bean id="activityDao" class="com.international.dao.ActivityDao">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
 	
+
+	<bean id="policyDao" class="com.international.dao.PolicyDao">
+    	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+
 	<!-- 协议信息的bean -->
 	<bean id="agreementDao" class="com.international.dao.AgreementDao">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+
+	
+	<bean id="agencyDao" class="com.international.dao.AgencyDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+	
+
+
 
 </beans>
 						

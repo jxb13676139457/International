@@ -277,16 +277,16 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="policyAction!searchInformationbyTime" method="post">
+                       <form class="navbar-form" action="policyAction!searchPolicy?pageNo=1" method="post">
 
-                               <input class="form-control" name="searchPolicyTime" placeholder="输入查找的关键字" type="text" required/>
+                               <input class="form-control" name="searchPolicy" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                             <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                             
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addPolicy.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="policyAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="policyAction?searchPolicy=&pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                         
                            <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportPolicyExcel?searchName=${searchPolicyTime}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -311,23 +311,21 @@
                                  <th>主题</th>
                                  <th>时间</th>
                                  <th>来源</th>
-                                 <th>作者</th>
                                  <th>下载政策</th>                       
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="policyList" var="policy" status="st">
                               <tr>
-                                 <td><s:property value="#user.title"/></td>                              
-                                 <td><s:property value="#user.time"/></td>       
-                                 <td><s:property value="#user.source"/></td>      
-                                 <td><s:property value="#user.author"/></td> 
+                                 <td><s:property value="#policy.title"/></td>                              
+                                 <td><s:property value="#policy.time"/></td>       
+                                 <td><s:property value="#policy.source"/></td>      
                                   <td><a href="downLoad.action?fileName=<s:property value="#user.name"/>">
                                   <s:property value="#user.name"/></a></td>             
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','policyAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'policyAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#policy.policyId"/>','policyAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#policy.policyId"/>', 'policyAction!deletePolicy?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -339,7 +337,7 @@
                      </div> 
          <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
 
                    <c:if test="${totalPage>0}">
                          [<a href="policyAction?pageNo=1">首页</a>]

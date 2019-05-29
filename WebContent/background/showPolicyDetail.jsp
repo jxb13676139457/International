@@ -252,12 +252,12 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="policyForm"  action="" enctype="multipart/form-data">
+                                  <form class="form-validate form-horizontal" method="post" id="policyForm"  action="policyAction!updatePolicyInfor" enctype="multipart/form-data">
                                      
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="policy.policyId" value="${policy.policyId }"  type="hidden" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -267,7 +267,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>政策法规主题</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="updateUser.title" value="${sessionScope.currentUser.title }" style="width:300px" required/>
+                                              <input class="form-control"  type="text" name="policy.title" value="${policy.title }" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -276,7 +276,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规时间</b></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" value="noticeTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="policy.time" value="policy.time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -285,25 +285,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>政策法规来源</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.source"  value="${sessionScope.currentUser.source }" style="width:300px" type="text" />
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                       <div class="form-group ">
-                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>政策法规作者</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.author" value="${sessionScope.currentUser.author }" style="width:300px" type="text" />
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                       <div class="form-group ">
-                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>政策法规名称</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.name" value="${sessionScope.currentUser.name }" style="width:300px" type="text" readonly/>
+                                              <input class="form-control" name="policy.source"  value="${policy.source }" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
@@ -315,20 +297,8 @@
                                               <s:file name="upload"></s:file>
                                           </div>
                                           </div>
-                                      </div>
-                                      
-                                       <div class="form-group ">
-                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>政策法规内容</b></label>
-                                          <div class="col-lg-10">
-                                              <textarea rows="10" cols="130" name="updateUser.content" style="width:300px">${sessionScope.currentUser.content }</textarea>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                      
-                                        
-                                      
+                                      </div>                                    
+                                                                                                                  
                                       <div class="form-group">
                                       <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">

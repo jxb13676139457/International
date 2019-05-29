@@ -260,7 +260,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                        <form class="navbar-form" action="internationalClassAction!searchClass" method="post">
+                        <form class="navbar-form" action="internationClassAction?pageNo=1" method="post">
                             <input class="form-control" name="searchClassName" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                              <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
@@ -268,7 +268,7 @@
                             <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addInternationalClass.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="internationalClassAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="internationClassAction?searchClassName=&pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                             
                                  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="importClassExcel?searchName=${searchClassName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -293,18 +293,20 @@
                                   <th>专业</th>                            
                                  <th>班级名称</th>
                                  <th>操作</th>
+                                 <th>索引</th>
                               </tr>
-                           <s:iterator value="classList" var="class" status="st">
+                           <s:iterator value="#session.classes" var="class" status="st">
                               <tr>        
-                                 <td><s:property value="#class.reserve1"/></td>
-                                 <td><s:property value="#class.reserve2"/></td>                       
+                                 <td><s:property value="#class.grade"/></td>
+                                 <td><s:property value="#class.major"/></td>                       
                                  <td><s:property value="#class.className"/></td>
                                  <td>
                                   <div class="btn-group">   
-                                       <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#class.id"/>','internationalClassAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>                         
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#class.id"/>','internationalClassAction!deleteClass?id=')"><i class="icon_trash_alt"></i></a>
+                                       <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#class.classId"/>','internationClassAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>                         
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#class.classId"/>','internationClassAction!deleteClass?id=')"><i class="icon_trash_alt"></i></a>
                                   </div>
                                   </td>
+                                  <td><s:property value="#class.classId"/></td>
                               </tr>
                               </s:iterator>                             
                            </tbody>
@@ -313,37 +315,36 @@
                   </div>
              
                	 <s:set name="status" value="#session.status"></s:set> 
-		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
-                     <c:if test="${totalPage>0}">
-                         [<a href="internationalClassAction?pageNo=1">首页</a>]
-                    
+		       <div  style="text-align:center">		
+		          <s:if test="1==1"> 
+                   <c:if test="${totalPage>0}">
+                         [<a href=" ">首页</a>]
+         
                          <c:if test="${currentPage>1}">
-                             [<a href="internationalClassAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="internationClassAction?pageNo=${currentPage-1}&searchClassName=${sessionScope.searchClassName}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="internationalClassAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="internationClassAction?pageNo=${currentPage+1}&searchClassName=${sessionScope.searchClassName}">下一页</a>]
                           </c:if>
          
-                         [<a href="internationalClassAction?pageNo=${totalPage}">尾页</a>]
+                         [<a href="internationClassAction?pageNo=${totalPage}&searchClassName=${sessionScope.searchClassName}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
-                     </c:if>
-                     
-                     </s:if>
+                      </c:if>
+                      </s:if>
                      
                      <s:else>
-                         [<a href="internationalClassAction!searchClass?pageNo=1 & temp=1">首页</a>]
+                         [<a href="internationClassAction!searchClass?pageNo=1 & temp=1">首页</a>]
                     
                          <c:if test="${currentPage>1}">
-                             [<a href="internationalClassAction!searchClass?pageNo=${currentPage-1} & temp=1">上一页</a>]
+                             [<a href="internationClassAction!searchClass?pageNo=${currentPage-1} & temp=1">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="internationalClassAction!searchClass?pageNo=${currentPage+1} & temp=1">下一页</a>]
+                            [<a href="internationClassAction!searchClass?pageNo=${currentPage+1} & temp=1">下一页</a>]
                           </c:if>
          
-                         [<a href="internationalClassAction!searchClass?pageNo=${totalPage} & temp=1">尾页</a>]
+                         [<a href="internationClassAction!searchClass?pageNo=${totalPage} & temp=1">尾页</a>]
                                                                                                      第${currentPage}页/共${totalPage}页
                      
                      

@@ -19,6 +19,37 @@
 		</property>
 	</bean>	
 	
+
+	<bean id="internationClassAction" class="com.international.actions.classes.InternationClassAction">
+		<property name="clsd">
+			<ref bean="classesDao"/>
+		</property>
+	</bean>	
+	
+	<bean id="noticeAction" class="com.international.actions.infomation.NoticeAction">
+		<property name="nd">
+			<ref bean="noticeDao"/>
+		</property>
+	</bean>
+	
+	<bean id="newsAction" class="com.international.actions.infomation.NewsAction">
+		<property name="nd">
+			<ref bean="newsDao"/>
+		</property>
+	</bean>
+	
+	<bean id="policyAction" class="com.international.actions.infomation.PolicyAction">
+		<property name="pd">
+			<ref bean="policyDao"/>
+		</property>
+	</bean>
+	
+	<bean id="englishAgencyAction" class="com.international.actions.ielts.AgencyAction">
+		<property name="ad">
+			<ref bean="agencyDao"/>
+		</property>
+	</bean>
+
 	<!-- 活动的bean -->
 	<bean id="collegeActivityAction" class="com.international.actions.college.CollegeActivityAction">
 		<property name="ad"><!-- 调用set方法给ad赋值，实例化 -->
@@ -74,5 +105,6 @@
 	<bean id="DocDownloadAction" class="com.international.actions.college.DocDownloadAction" scope="prototype">
 		  					  							
 	</bean>
+
 	
 </beans>
