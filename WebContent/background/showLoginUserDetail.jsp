@@ -35,46 +35,29 @@
     <![endif]-->
     
     		<script type="text/javascript">
-			
 			      function toSubmit(){
-                       
 			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/loginUserInformationAction!updateInfor",
-					    	    	
- 					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
-				    	  		      data:$("#loginUserForm").serialize(),
-					    	    	  dataType:"json",	
-					    	    	  async:false,
-					    	        
-					    	    	  success: function(data){
-			    	    	
-					    	    		  if(data!=null && data!=""){
-					    	    			
-					    	    			  alert(data);
-					    	    			  
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-
+				    	      {
+				    	    	  type:"post",
+				    	    	  url:"http://localhost:8080/InternationalSys/background/managerAction!editLoginUser",
+					    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+			    	  		      data:$("#loginUserForm").serialize(),
+				    	    	  dataType:"json",	
+				    	    	  async:false,
+				    	    	  success: function(data){
+				    	    		  if(data!=null && data!=""){
+				    	    			  alert(data);
+				    	    		  }
+				                   }
+				    	      }
+				    	  );
 			      }
 			</script>
-			
-       
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -95,7 +78,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.admin.getUserName()"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -104,7 +87,13 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                            	<script type="text/javascript">
+	                            	//用来跳转到退出系统的action
+	                        		function gotoExitAction(){
+	                        			location.href="exitAction";
+	                        		}
+                            	</script>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -121,13 +110,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -207,20 +194,24 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="javascript:gotoExitAction();"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                  <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -235,87 +226,75 @@
 				
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
-						<li><i class="icon_document_alt"></i>修改通知公告</li>
+						<li><i class="icon_document_alt"></i>修改操作员</li>
 					</ol>
 				</div>
 			</div>
 		  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="loginUserInformationAction"><b>返回上页</b></a></button>
+                            <a href="managerAction!showOperator"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                           <b>修改通知公告</b>
+                           <b>修改操作员</b>
                           </header>
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="loginUserForm" action="">
-                                     
-                                       <div class="form-group ">
+                                  <form class="form-validate form-horizontal" method="post" id="loginUserForm">
+                                        <%-- <div class="form-group ">
                                           <div class="col-lg-10">
                                               <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
                                           </div>
-                                      </div>
-                                                                        
-                                      
+                                        </div> --%>
                                         <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>用户名</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="updateUser.name" value="${sessionScope.currentUser.name }" style="width:300px" required/>
+                                              <input class="form-control" type="text" name="admin.adminId" value="${sessionScope.editAdmin.adminId }" style="width:300px" disabled />
                                           </div>
                                           </div>
                                       </div>
-                                                                           
-
-                                      
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>密码</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.password"  value="${sessionScope.currentUser.password }" style="width:300px" type="password" disabled />
+                                              <input class="form-control" name="admin.password" value="${sessionScope.editAdmin.password }" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
-                                      
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>真实名字</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.userName" value="${sessionScope.currentUser.userName }" style="width:300px" type="text" />
+                                              <input class="form-control" name="admin.userName" value="${sessionScope.editAdmin.userName }" style="width:300px" type="text" />
                                           </div>
                                           </div>
                                       </div>
-                                 <div class="form-group ">
+                                 	  <div class="form-group ">
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.reserve1" style="width:300px"  value="${sessionScope.currentUser.reserve1}" type="text"   required/>
+                                              <input class="form-control" name="admin.sex" value="${sessionScope.editAdmin.sex }" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
-                                     <div class="form-group ">
-                                           <div  style="margin-left:250px">
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px">
                                           <label for="cname" class="control-label col-lg-2">是否管理员<span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              
-                                              <select name="updateUser.status" style="width:250px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
-                                              
-                                              <option selected>否</option>
-                                               <option>是</option>
+                                              <select name="admin.type" value="${sessionScope.editAdmin.type }" style="width:250px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
+                                              	<option>否</option>
+                                                <option>是</option>
                                               </select>
                                           </div>
                                           </div>
                                       </div>
-                                      
-                                        
-                                      
                                       <div class="form-group">
                                       <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" onclick="toSubmit()"><b>更新</b> </button>
+                                              <button class="btn btn-primary" onclick="toSubmit()"><b>更新</b></button>
                                           </div>
                                           </div>
                                       </div>

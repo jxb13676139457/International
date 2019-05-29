@@ -45,7 +45,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeProtocolAction!addObject",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/collegeAgreementAction!addObject",
 					    	    	  /* data:{agencyName:agencyName,title:title,time:time,upload:upload,type:type}, */
 					    	    	  data: formData,  
 					    	    	  dataType:"json",	
@@ -257,7 +257,7 @@
 			</div>
 			
 			     <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="abroadCollegeProtocolAction"><b>返回上页</b></a></button>
+                            <a href="collegeAgreementAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -289,7 +289,7 @@
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>主题</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                             <input class="form-control" name="addUser.title" style="width:300px" type="text"  required/>                                             
+                                             <input class="form-control" name="addAgreement.title" style="width:300px" type="text"  required/>                                             
                                           </div>
                                           </div>
                                       </div>
@@ -298,7 +298,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>签订的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="addAgreement.time" displayFormat="yyyy-MM-dd" />
                                           </div>
                                           </div>
                                       </div>
@@ -318,7 +318,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>协议类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.type" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="addAgreement.type" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -363,7 +363,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="utf-8"></script>
 
 
             <%

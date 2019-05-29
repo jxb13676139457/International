@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.CollegeActivity" table="CollegeActivity">
+		<id name="activityId" column="activityId">
+			<generator class="native"></generator>
+		</id>
+		<property name="title" column="title"></property>
+		<property name="content" column="content"></property>
+		<property name="time" column="time"></property>
+		<property name="type" column="type"></property>
+		<property name="reserves1" column="reserves1"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
+		
+		<many-to-one name="coll" class="com.international.model.College" 
+                        cascade="save-update" column="collegeId" not-null="true" fetch="select" lazy="false">
+         
+         </many-to-one>
+	</class>
+</hibernate-mapping>

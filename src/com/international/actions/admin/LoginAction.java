@@ -10,7 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginAction extends ActionSupport {
 	private Admin admins;
 	UserDao ud;
-	
+	//int adminType;
 	public Admin getAdmins() {
 		return admins;
 	}
@@ -23,17 +23,27 @@ public class LoginAction extends ActionSupport {
 	public void setUd(UserDao ud) {
 		this.ud = ud;
 	}
+//	public int getAdminType() {
+//		return adminType;
+//	}
+//	public void setAdminType(int adminType) {
+//		this.adminType = adminType;
+//	}
 	
 	//登录
 	public String login(){
 		System.out.println("====="+admins.getAdminId()+","+admins.getPassword()+"=======");
-		
-		System.out.println("测试");
-		if(ud.checkLogin(admins)){
+		Admin admin = ud.checkLogin(admins);
+		if(admin!=null){
+			System.out.println(admin.getType());
+			//adminType=admin.getType();
 			Map session = ActionContext.getContext().getSession();
 			//登录用户存入session
-			session.put("admins",admins);
-			session.put("userName",admins.getUserName());
+			session.put("admin",admin);
+			session.put("userName",admin.getUserName());
+			//用来开放菜单项而用
+			session.put("adminType",admin.getType());
+			System.out.println(admin.getUserName());
 			addFieldError("loginTip","登陆成功");
 			return SUCCESS;
 		}else{

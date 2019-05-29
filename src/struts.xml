@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC
-    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
-    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
 <struts>
 	<!-- 指定action的配置转到Spring的配置文件-->
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="default" extends="struts-default">
-		<action name="loginAction" class="loginAction" method="login">
-			<result name="success">/background/addExam.jsp</result>
+		<!-- 后台登录的Action -->
+		<action name="loginAction" class="loginAction">
+			<result name="success">/background/index.jsp</result>
 			<result name="input">/background/login.jsp</result>
 		</action> 
 		
@@ -22,6 +23,7 @@
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
 		
+
 		<action name="internationClassAction" class="internationClassAction">
 			<result name="success">/background/internationalClassInfor.jsp</result>
 			<result name="deleteSuccess">/background/internationalClassInfor.jsp</result>
@@ -110,6 +112,87 @@
 			</result>
 			<result name="updateError">/background/englishAgencyInfor.jsp</result>
 		</action>
+
+		<!-- 活动的Action -->
+		<action name="collegeActivityAction" class="collegeActivityAction">
+			<result name="success">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="input">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="deleteSuccess">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="deleteError">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="lookSuccess">/background/showAbroadCollegeActivitiesDetail.jsp</result>
+			<result name="lookError">/background/showAbroadCollegeActivitiesDetail.jsp</result>
+		</action>
+		
+		<!-- 协议的Action -->
+		<action name="collegeAgreementAction" class="collegeAgreementAction">
+			<result name="success">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="input">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="deleteSuccess">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="deleteError">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="lookSuccess">/background/showAbroadCollegeProtocolDetail.jsp</result>
+			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
+			<!-- 配置上传的文件路径 -->
+			<param name="savePath">/upload</param>
+		</action>
+		
+		<!-- 学生模块的Action -->
+		<action name="internationalStudentAction" class="internationalStudentAction">
+		
+		</action>
+		
+		<!-- 修改管理员密码的Action -->
+		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
+			<result name="success">/background/login.jsp</result>
+			<result name="input">/background/profile.jsp</result>
+		</action>
+		
+		<!-- 超级管理员特有权限的Action -->
+		<action name="managerAction" class="managerAction">
+			<result name="success">/background/loginUserInfor.jsp</result>
+			<result name="input">/background/loginUserInfor.jsp</result>
+			<result name="detailSucc">/background/showLoginUserDetail.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">managerAction!showOperator</param>
+			</result>
+		</action>
+		<!-- 添加操作员 -->
+		<action name="addOperatorAction" class="addOperatorAction"></action>
+		
+		<!-- 学生模块的Action -->
+		<action name="internationalStudentAction" class="internationalStudentAction">
+			<result name="success">/background/studentsInfor.jsp</result>
+			<result name="input">/background/studentsInfor.jsp</result>
+		</action>
+		
+		<!-- 修改管理员密码的Action -->
+		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
+			<result name="success">/background/login.jsp</result>
+			<result name="input">/background/profile.jsp</result>
+		</action>
+		
+		<!-- 退出系统的Action -->
+		<action name="exitAction" class="exitAction">
+			<result name="success">/background/login.jsp</result>
+			<result name="input">/background/index.jsp</result>
+		</action>
+		
+		<!-- 文件下载Action -->
+    		
+      	<action name="downLoad" class="DocDownloadAction">
+			<result name="download" type="stream">
+				<!-- 调用action中返回流的方法 -->
+				<!-- 允许下载的文件类型：此处指定为所有的二进制文件类型 在tomacat的conf/web.xml中找exe对应的<mime-type> -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 对应Action中的属性：就是返回流的属性【其实就是getAttrInputStream()中的attrInputStream】 -->
+				<param name="inputName">attrInputStream</param>
+				<!-- 下载头，包括：浏览器显示的文件名 filename=${downFileName}这不是el表达式， el表达式仅能用于jsp，这是struts在配置文件中的取值符号 -->
+				<param name="contentDisposition">attachment;filename=${downFileName}</param>
+				<!-- 缓冲区大小设置 -->
+				<param name="bufferSize">1024</param>
+			</result>
+    	</action>
+
 		
 	</package>
+	
 </struts>

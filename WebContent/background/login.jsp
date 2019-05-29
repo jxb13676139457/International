@@ -48,10 +48,18 @@
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                 <input type="password" name="admins.password" class="form-control" placeholder="密码" required/>
             </div>
-          <!--   <label class="checkbox">
-                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-            </label>
-            --> 
+            <!-- 随机验证码 -->
+            <%-- <div class="input-group">
+                <input type="password" name="admins.password" class="form-control" placeholder="验证码" required/>
+                <script type="text/javascript">
+	                            	//用来跳转到退出系统的action
+	                        		function gotoVerifyCodeAction(){
+	                        			location.href="verifyCodeAction";
+	                        		}
+                </script>
+                <a hetf="javascript:gotoVerifyCodeAction();"><img alt="验证码" src=""></a>
+            </div> --%>
+        
             <button class="btn btn-primary btn-lg btn-block" type="submit">登录</button>
         </div>
       </form>

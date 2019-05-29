@@ -41,10 +41,16 @@
 				<value>com/international/model/Admin.hbm.xml</value>
 				<value>com/international/model/College.hbm.xml</value>
 				<value>com/international/model/InternationalClass.hbm.xml</value>
+
 				<value>com/international/model/Notice.hbm.xml</value>
 				<value>com/international/model/News.hbm.xml</value>
 				<value>com/international/model/Policy.hbm.xml</value>
 				<value>com/international/model/Agency.hbm.xml</value>
+
+				<value>com/international/model/InternationalStudent.hbm.xml</value>
+				<value>com/international/model/CollegeActivity.hbm.xml</value>
+				<value>com/international/model/CollegeAgreement.hbm.xml</value>
+
 			</list>
 		</property>
 	</bean>

@@ -1,26 +1,27 @@
 
-
-//ÖØÖÃ²Ù×÷Ô±µÄÃÜÂë
+//é‡ç½®æ“ä½œå‘˜çš„å¯†ç 
 function resetLoginUser(id){
 	
-	if(confirm("È·¶¨ÒªÖØÖÃ¸Ã²Ù×÷Ô±µÄÃÜÂëÂğ£¿")){
+	if(confirm("ç¡®å®šè¦é‡ç½®è¯¥æ“ä½œå‘˜çš„å¯†ç å—ï¼Ÿ")){
 		
 		location.href="adminUserAction!resetLoginUser?id=" + id;
 				
 	}
 }
 
-//É¾³ıµÄ¹ı³Ì
+
+//åˆ é™¤çš„è¿‡ç¨‹
 function deleteProcess(id, str){
 	
-	if(confirm("É¾³ı¿ÉÄÜ»áÉæ¼°¼¶ÁªÉ¾³ıÆäËûĞÅÏ¢£¬È·¶¨ÒªÉ¾³ıÂğ£¿")){
+	if(confirm("åˆ é™¤å¯èƒ½ä¼šæ¶‰åŠçº§è”åˆ é™¤å…¶ä»–ä¿¡æ¯ï¼Œç¡®å®šè¦åˆ é™¤å—ï¼Ÿ")){
 		
 		location.href=str+id;
 				
 	}
 }
 
-//²éÕÒ¹ı³Ì
+
+//æŸ¥æ‰¾è¿‡ç¨‹
 function searchProcess(id, str){
 			
 	location.href=str+id;
@@ -28,7 +29,8 @@ function searchProcess(id, str){
 }
 
 
-//¸ù¾İÑ§ºÅÀ´»ñÈ¡Ñ§ÉúµÄĞÅÏ¢
+
+//æ ¹æ®å­¦å·æ¥è·å–å­¦ç”Ÿçš„ä¿¡æ¯
  function getStudentInformation(){
     	  
     	  var studentNo= $("#studentNo").val();
@@ -71,7 +73,8 @@ function searchProcess(id, str){
       }
 
 
-//»ñÈ¡¹úÍâÔºĞ£µÄĞÅÏ¢
+
+//è·å–å›½å¤–é™¢æ ¡çš„ä¿¡æ¯
  function getCollegeInformation(){
     
 	 var temp=1;
@@ -79,7 +82,7 @@ function searchProcess(id, str){
    	      {
    	    	  
    	    	  type:"post",
-   	    	  url:"http://localhost:8080/Graduate/abroadCollegeAction!getCollegeInformation",
+   	    	  url:"http://localhost:8080/InternationalSys/background/collegeAction!getCollegeInformation",
    	    	  data:{},
    	    	  dataType:"json",			    	
    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -87,19 +90,20 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¹úÍâÔºĞ£--</option>';
+
+	    	    		 html=html +'<option selected>--è¯·é€‰æ‹©å›½å¤–é™¢æ ¡--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
 	                    	   for(var j=0; j<i; j++){
 	                    	
-	                    		 if(data[i].name==(data[j].name)){
+	                    		 if(data[i].collegeName==(data[j].collegeName)){
 	                    			 temp=0;
 	                    			 break;
 	                    		 }
 	                    	 }
 	                    	 if(temp==1){
-	                    		 html=html +'<option value=""+ data[i].name+"">'+data[i].name+'</option>';
+	                    		 html=html +'<option value=""+ data[i].collegeName+"">'+data[i].collegeName+'</option>';
 	                    	 }
 	                    	 temp=1;
 	                     }
@@ -120,7 +124,8 @@ function searchProcess(id, str){
    }
  
  
-//»ñÈ¡ÑÅË¼»ú¹¹µÄĞÅÏ¢
+
+//è·å–é›…æ€æœºæ„çš„ä¿¡æ¯
  function getAgencyInformation(){
     	  
 	 var temp=1;
@@ -138,7 +143,7 @@ function searchProcess(id, str){
    	    	  success: function(data){			
 
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ»ú¹¹--</option>';
+	    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
@@ -170,7 +175,8 @@ function searchProcess(id, str){
    	  );
    }
 
- //»ñÈ¡ÑÅË¼ÅàÑµµÄ¿ªÊ¼Ê±¼ä
+
+//è·å–é›…æ€åŸ¹è®­çš„å¼€å§‹æ—¶é—´
  function getStartTime(){
 	  
 	  
@@ -191,7 +197,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿ªÊ¼Ê±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½Ê¼Ê±ï¿½ï¿½--</option>';
                              
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -221,13 +227,14 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 
  }
  
  
- //»¢ÇğÑÅË¼ÅàÑµµÄ½áÊøÊ±¼ä
+
+ //è™ä¸˜é›…æ€åŸ¹è®­çš„ç»“æŸæ—¶é—´
  function getOutTime(){
 	  
 	  
@@ -250,7 +257,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ½áÊøÊ±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -280,14 +287,15 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 	  
 
  }
 
  
-//»ñÈ¡ÑÅË¼ÅàÑµµÄ¿ÎÊ±
+
+//è·å–é›…æ€åŸ¹è®­çš„è¯¾æ—¶
  function getCourseHours(){
 	  
 	  
@@ -310,7 +318,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿ÎÊ±--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Ê±--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -340,13 +348,14 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
 	  
 
  }
  
- //»ñÈ¡ÑÅË¼ÅàÑµµÄÑ§ÆÚ
+
+ //è·å–é›…æ€åŸ¹è®­çš„å­¦æœŸ
  function getSemester(){
 	  
 	  
@@ -372,7 +381,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡ÔñÑ§ÆÚ--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½Ñ§ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -402,12 +411,12 @@ function searchProcess(id, str){
 	    	  );
 	  }else{
 		  
-		  alert("ÇëÑ¡ÔñÒ»ÌõÊı¾İ!");
+		  alert("ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!");
 	  }
  }
 
 	  
-	  //»ñÈ¡Ä£Äâ¿¼ÊÔµÄÊ±¼ä
+ 	  //è·å–æ¨¡æ‹Ÿè€ƒè¯•çš„æ—¶é—´
 	  function getSimulationTime(){
 	 	  
 	 	  var temp=1;
@@ -430,7 +439,7 @@ function searchProcess(id, str){
 	 	    	    	  success: function(data){
 	 	    	    		  
 	 	    	    			 var html="";
-	 		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔÊ±¼ä--</option>';
+	 		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 	 		                     for(var i=0; i<data.length; i++){
 	 		                    	
@@ -462,7 +471,8 @@ function searchProcess(id, str){
 	  }
 
  
- //»ñÈ¡Ä£Äâ¿¼ÊÔµÄµØµã
+
+	//è·å–æ¨¡æ‹Ÿè€ƒè¯•çš„åœ°ç‚¹
  function getSimulationLocation(){
 	  
 	  var temp=1;
@@ -486,7 +496,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔµØµã--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ÔµØµï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -518,7 +528,8 @@ function searchProcess(id, str){
 
  
  
- //»ñÈ¡ÕıÊ½¿¼ÊÔµÄÊ±¼ä
+
+//è·å–æ­£å¼è€ƒè¯•çš„æ—¶é—´
  function getFormalTime(){
 	  
 	  var temp=1;
@@ -541,7 +552,7 @@ function searchProcess(id, str){
 	    	    	  success: function(data){
 	    	    		  
 	    	    			 var html="";
-		    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔÊ±¼ä--</option>';
+		    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½--</option>';
 
 		                     for(var i=0; i<data.length; i++){
 		                    	
@@ -573,7 +584,8 @@ function searchProcess(id, str){
  }
 
 
-//»ñÈ¡Ä£Äâ¿¼ÊÔµÄµØµã
+
+//è·å–æ¨¡æ‹Ÿè€ƒè¯•çš„åœ°ç‚¹
 function getFormalLocation(){
  
 
@@ -598,7 +610,7 @@ function getFormalLocation(){
    	    	  success: function(data){
    	    		  
    	    			 var html="";
-	    	    		 html=html +'<option selected>--ÇëÑ¡Ôñ¿¼ÊÔµØµã--</option>';
+	    	    		 html=html +'<option selected>--ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ÔµØµï¿½--</option>';
 
 	                     for(var i=0; i<data.length; i++){
 	                    	

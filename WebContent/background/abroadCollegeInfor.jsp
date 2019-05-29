@@ -259,8 +259,8 @@
                 
                      
                     <li>
-                       <form class="navbar-form" action="collegeAction" method="post">
-                            <input class="form-control" name="search" placeholder="输入查找的关键字" type="text" required/>
+                       <form class="navbar-form" action="collegeAction?pageNo=1" method="post">
+                            <input class="form-control" name="search" placeholder="输入查找的关键字" type="text" value="${sessionScope.searchCollege}" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                              <i class=" icon_search"></i>&nbsp;&nbsp;
                             <b>搜索</b></button>
@@ -268,7 +268,7 @@
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollege.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="collegeAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="collegeAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                         
                         <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAbroadCollegeExcel?searchName= ${searchAbroadName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -325,17 +325,17 @@
 		       <div  style="text-align:center">
 		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="collegeAction?pageNo=1">首页</a>]
+                         [<a href="collegeAction?pageNo=1&search=${sessionScope.searchCollege}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="collegeAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="collegeAction?pageNo=${currentPage-1}&search=${sessionScope.searchCollege}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="collegeAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="collegeAction?pageNo=${currentPage+1}&search=${sessionScope.searchCollege}">下一页</a>]
                           </c:if>
          
-                         [<a href="collegeAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="collegeAction?pageNo=${totalPage}&search=${sessionScope.searchCollege}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

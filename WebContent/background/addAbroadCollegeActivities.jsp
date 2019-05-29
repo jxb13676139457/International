@@ -54,32 +54,36 @@
 			      function toSubmit(){
 			    	  
 			    	  var collegeName= $("#college").find("option:selected").text();  	 
-			    	  var title=$(" input[ name='addUser.title' ] ").val();
+			    	  var title=$(" input[ name='addActivity.title' ] ").val();
 			    	  var time = dojo.widget.byId("time").getValue();
-			    	  var type=$(" input[ name='addUser.type' ]").val();
+			    	  var type=$(" input[ name='addActivity.type' ]").val();
 			    	  var content=$("#activityConent").val();
-		
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/abroadCollegeActivitiesAction!addObject",
-					    	    	  data:{collegeName:collegeName,title:title, time:time, type:type,content:content },
-					    	    	  dataType:"json",	
-					    	    	  async:false,
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		  if(data!=null){
-					    	    			  alert(data);
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
+					  var url1="http://localhost:8080/InternationalSys/background/collegeActivityAction!addObject?collegeName="+collegeName;
+
+			    	  $.ajax(		  
+				    	      {
+				    	    	  
+				    	    	  type:"post",
+				    	    	  url:url1,
+				    	    	
+					    	  		//注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+			    	  		      data:$("#collegeActivityForm").serialize(),
+				    	    	  dataType:"json",	
+				    	    	  async:false,
+				    	        
+				    	    	  success: function(data){
+		    	    	
+				    	    		  if(data!=null && data!=""){
+				    	    			
+				    	    			  alert(data);
+				    	    			  
+				    	    		  }
+				    	    		
+				                   }
+				  					    	  
+				    	      }
+				    	      			    	  
+				    	  );
 			    	  
 			    	  
 			    
@@ -269,7 +273,7 @@
 			</div>
 			
 				 <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                <a href="abroadCollegeActivitiesAction"><b>返回上页</b></a></button>
+                <a href="collegeActivitiesAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -286,7 +290,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>国外院校</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                             <!--  <input class="form-control" name="collegeName"  type="text"  required/> -->
+                                             
                                               <select id="college" name="collegeName" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"></select> 
                                           </div>
                                           </div>
@@ -296,7 +300,7 @@
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>活动主题</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="activityTitle" type="text" name="addUser.title" style="width:300px"  required/>
+                                              <input class="form-control" id="activityTitle" type="text" name="addActivity.title" style="width:300px"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -305,16 +309,16 @@
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>活动时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time" id="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="addActivity.time" id="time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>参加人数</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>活动类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="activityType" name="addUser.type"  type="text" style="width:300px"  required/>
+                                              <input class="form-control" id="activityType" name="addActivity.type"  type="text" style="width:300px"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -323,7 +327,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>活动内容</b></label>
                                           <div class="col-lg-10">
-                                              <textarea rows="10" cols="130" name="addUser.content" id="activityConent" style="width:300px"></textarea>
+                                              <textarea rows="10" cols="130" name="addActivity.content" id="activityConent" style="width:300px"></textarea>
                                           </div>
                                           </div>
                                       </div>
@@ -332,7 +336,8 @@
                                       <div class="form-group">
                                        <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" onclick="toSubmit()"><b>添加</b></button>
+                                             <button class="btn btn-primary" onclick="toSubmit()"><b>添加</b></button>
+                                             <!-- <button class="btn btn-primary" type="submit"><b>添加</b></button> -->
                                           </div>
                                           </div>
                                       </div>
@@ -363,7 +368,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-     <script src="js/js.js"  charset="gb2312"></script>
+     <script src="js/js.js"  charset="utf-8" type="text/javascript"></script>
     
 	
  

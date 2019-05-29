@@ -5,19 +5,21 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 				
-	
+	<!-- 登录的bean -->
 	<bean id="userDao" class="com.international.dao.UserDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
-		
+	
+	<!-- 国外院校的bean -->
 	<bean id="collegeDao" class="com.international.dao.CollegeDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
 	
+
 	<bean id="classesDao" class="com.international.dao.ClassesDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -31,16 +33,37 @@
 	</bean>	
 	
 	<bean id="newsDao" class="com.international.dao.NewsDao">
+
+	<!-- 国际班学生的bean -->
+	<bean id="studentDao" class="com.international.dao.StudentDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+
+	<!-- 活动信息的bean -->
+	<bean id="activityDao" class="com.international.dao.ActivityDao">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
 	
+
 	<bean id="policyDao" class="com.international.dao.PolicyDao">
+    	<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
+
+	<!-- 协议信息的bean -->
+	<bean id="agreementDao" class="com.international.dao.AgreementDao">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+
 	
 	<bean id="agencyDao" class="com.international.dao.AgencyDao">
 		<property name="sessionFactory">
@@ -48,5 +71,8 @@
 		</property>
 	</bean>	
 	
+
+
+
 </beans>
 						

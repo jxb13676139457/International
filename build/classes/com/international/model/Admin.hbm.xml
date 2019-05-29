@@ -5,10 +5,13 @@
 <hibernate-mapping>
 	<class name="com.international.model.Admin" table="Admin">
 		<id name="adminId" column="adminId">
-			<generator class="uuid"></generator>
+			<generator class="assigned"></generator>
 		</id>
 		<property name="userName" column="userName"></property>
 		<property name="password" column="password"></property>
 		<property name="sex" column="sex"></property>
+		<property name="type" column="type"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
 	</class>
 </hibernate-mapping>
