@@ -111,28 +111,28 @@ function searchProcess(id, str){
    	      {
    	    	  
    	    	  type:"post",
-   	    	  url:"http://localhost:8080/Graduate/trainingAction!getAgencyInformation",
+   	    	  url:"http://localhost:8080/InternationalSys/background/englishAgencyAction!getAgencyInformation",
    	    	  data:{},
    	    	  dataType:"json",			    	
    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
    	    	  async:true,
    	    	  traditional:true,
    	    	  success: function(data){			
-
+   	    		  		console.log(data);
 	    	    		 var html="";
-	    	    		 html=html +'<option selected>--��ѡ�����--</option>';
+	    	    		 html=html +'<option selected>--select agencies,please--</option>';
 	    	    		
 	                     for(var i=0; i<data.length; i++){
 	                    	
 	                    	   for(var j=0; j<i; j++){
 	                    	
-	                    		 if(data[i].name==(data[j].name)){
+	                    		 if(data[i].agencyName==(data[j].agencyName)){
 	                    			 temp=0;
 	                    			 break;
 	                    		 }
 	                    	 }
 	                    	 if(temp==1){
-	                    		 html=html +'<option value=""+ data[i].name+"">'+data[i].name+'</option>';
+	                    		 html=html +'<option value=""+ data[i].name+"">'+data[i].agencyName+'</option>';
 	                    	 }
 	                    	 temp=1;
 	                     }

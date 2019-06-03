@@ -67,7 +67,6 @@
 		</property>
 	</bean>	
 	
-
 	<bean id="policyDao" class="com.international.dao.PolicyDao">
     	<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -82,15 +81,17 @@
 		</property>
 	</bean>	
 
-	
 	<bean id="agencyDao" class="com.international.dao.AgencyDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
 	
-
-
+	<bean id="trainingDao" class="com.international.dao.TrainingDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
 
 </beans>
 						

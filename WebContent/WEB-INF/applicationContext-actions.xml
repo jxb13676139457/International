@@ -119,6 +119,15 @@
 	<bean id="DocDownloadAction" class="com.international.actions.college.DocDownloadAction" scope="prototype">
 		  					  							
 	</bean>
+	
+	<bean id="trainingAction" class="com.international.actions.ielts.TrainingAction">
+		<property name="td">
+			<ref bean="trainingDao"/>
+		</property>
+		<property name="ad">
+			<ref bean="agencyDao"/>
+		</property>
+	</bean>
 
 	
 </beans>

@@ -39,18 +39,15 @@
 			
 			      function toSubmit(){
 			    	  
-			    	  var agencyName= $("#agencyName").find("option:selected").text();
-			    	  var startTime = dojo.widget.byId("startTime").getValue();
-			    	  var outTime = dojo.widget.byId("outTime").getValue();
-			    	  var courseHours= $("#courseHours").find("option:selected").val();
-			    	  var semester = $("#semester").find("option:selected").val();
+			    	  var agencyName= $("#agencyName").find("option:selected").text();	    	
 
 			    		  $.ajax(		  
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/trainingAction!addObject",
-					    	    	  data:{agencyName:agencyName,startTime:startTime,outTime:outTime,courseHours:courseHours,semester:semester},
+					    	    	  url:"http://localhost:8080/InternationalSys/background/trainingAction!addTraining?agencyName="+agencyName,
+					    	    	  /* data:{agencyName:agencyName,startTime:startTime,endTime:endTime,courseHours:courseHours,semester:semester}, */
+					    	    	  data:$("#trainingForm").serialize(),
 					    	    	  dataType:"json",	
 					    	    	  async:false,
 					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -259,7 +256,7 @@
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
                                 
-                                  <form class="form-validate form-horizontal" method="post" action="">                                                         
+                                  <form id="trainingForm" class="form-validate form-horizontal" method="post" action="">                                                         
                                       
                             
                                       
@@ -272,11 +269,23 @@
                                           </div>
                                           </div>
                                       </div>
+                                      
+                                      
+                                      <%-- <div class="form-group ">
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>雅思机构 </b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" name="agencyName" style="width:300px" required/>
+                                          </div>
+                                          </div>
+                                      </div> --%>
+                                      
+                                      
                                       <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训开始的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker id="startTime" name="startTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker id="startTime" name="training.startTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -285,45 +294,29 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训结束的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker id="outTime" name="outTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker id="outTime" name="training.endTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
                                                                            
                                        <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学分</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>培训学时 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                                <select  id="courseHours" name="courseHours"  style="width:100px;height:30px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"  required>
-                                                    <option selected>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                    <option>9</option>
-                                                    <option>10</option>
-                                                    
-                                              </select>
+                                              <input class="form-control"  type="text" name="training.courseHours" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
                                                         
                                                         
                                      <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学期</b><span class="required" style="color:red">*</span></label>
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>培训费用 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                               <select id="semester" name="semester"  style="width:100px;height:30px"  required>
-                                                    <option selected>1</option>
-                                                    <option>2</option>
-
-                                              </select>
+                                              <input class="form-control"  type="text" name="training.courseFee" style="width:300px" required/>
                                           </div>
                                           </div>
-                                      </div>        
+                                      </div>
                                                                
                                       
                                       <div class="form-group">
@@ -363,7 +356,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-   <script src="js/js.js"  charset="gb2312"></script>
+   <script src="js/js.js"  charset="UTF-8"></script>
 
 
             <%

@@ -216,7 +216,21 @@
 				<param name="bufferSize">1024</param>
 			</result>
     	</action>
-		
+
+    	<action name="trainingAction" class="trainingAction">
+			<result name="success">/background/trainingInfor.jsp</result>
+			<result name="deleteError">/background/trainingInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">trainingAction</param>
+			</result>
+			<result name="lookSuccess">/background/showTrainingDetail.jsp</result>
+			<result name="lookError">/background/trainingInfor.jsp</result>
+			<result name="updateSuccess" type="redirectAction">
+				<param name="actionName">trainingAction</param>
+			</result>
+			<result name="updateError">/background/trainingInfor.jsp</result>
+		</action>
+
 	</package>
 	
 </struts>
