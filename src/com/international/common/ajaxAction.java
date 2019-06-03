@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 
 public class ajaxAction {
+	//转化为JSON格式的返回数据
 	public static void toJson(HttpServletResponse response, Object data) throws IOException{
 		Gson gson = new Gson();  
         String result = gson.toJson(data);  

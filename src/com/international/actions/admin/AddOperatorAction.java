@@ -51,7 +51,7 @@ public class AddOperatorAction extends ActionSupport{
 		if(count>0) {
 			System.out.println("添加成功");
 			message = "添加成功";
-			admins = ud.queryAdmins(loginUserName);
+			//admins = ud.queryAdmins(loginUserName);
 		}else{
 			System.out.println("添加失败");
 			message = "添加失败";

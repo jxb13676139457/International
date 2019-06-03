@@ -33,77 +33,54 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
     
+    <script type="text/javascript">
+     	//用来跳转到维护操作员模块的action
+		function gotoShowAction(){
+			location.href="managerAction!showOperator";
+		}
+		//用来跳转到退出系统的action
+   		function gotoExitAction(){
+   			location.href="exitAction";
+   		}
+  	</script>
     
-    	
 <%--     
             <%
 			     String s=(String)request.getAttribute("addStudentInfor");
 			     if(s!=null)
 			     {
 			 %>
-			 
 				 <script type="text/javascript" language="javascript">
-				 
 					alert("<%=s%>");
 				</script>
 			<%
 			     }
 			%> --%>
 			
-
-
-			
-								<!-- 添加学生-->
-			<script type="text/javascript" language="Javascript">
-			
+			<script type="text/javascript">
 			      function toSubmit(){
-			    	  	 
-			    	  var studentNo = $("#studentNo").val();
-			    	  var studentName= $("#studentName").val();
-			    	  var className = $("#className").val();
-			    	  var profession = $("#profession").val();
-			    	  var sex = $("#sex").val();
-			    	  var outTime = dojo.widget.byId("outTime").getValue();
-			    	  var college = $("#college").val();
-			    	  var replaceCourse = $("#replaceCourse").val();
-			    	  var replaceCredit = $("#replaceCredit").val();
-			    	  	
-			    	
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/exchangeStudentAction!addStudent",
-					    	    	  data:{studentNo:studentNo,studentName:studentName,className:className,profession:profession,sex:sex,
-					    	    		  outTime:outTime,college:college,replaceCourse:replaceCourse,replaceCredit:replaceCredit},
-					    	    	  dataType:"json",			
-					    	    	  async:false,
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		  if(data!=null){
-					    	    			  alert(data);
-					    	    		  }
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-			    	  
-			    	  
-			    
+		    		  $.ajax(		  
+			    	      {
+			    	    	  type:"post",
+			    	    	  url:"http://localhost:8080/InternationalSys/background/exchangeStudentAction!addExchangeStudent",
+				    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+		    	  		      data:$("#addExStuForm").serialize(),
+			    	    	  dataType:"json",	
+			    	    	  async:false,
+			    	    	  success: function(data){
+			    	    		  if(data!=null && data!=""){
+			    	    			  alert(data);
+			    	    		  }
+			                   }
+			    	      }
+			    	  );
 			      }
 			</script>
-			
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-       
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -124,7 +101,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -133,7 +110,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="exitAction"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -150,13 +127,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -165,9 +140,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
                   </li>
@@ -236,20 +211,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                   
+                  <!-- 动态开放此菜单项-->
+				  <c:choose>
+					<c:when test="${ sessionScope.adminType eq '是'}">
+						<li class="sub-menu">
+	                      <a href="javascript:;" class="">
+	                          <i class="icon_document_alt"></i>
+	                          <span>操作员信息</span>
+	                          <span class="menu-arrow arrow_carrot-right"></span>
+	                      </a>
+	                      <ul class="sub">
+	                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+	                      </ul>
+	                    </li>    
+					</c:when>
+				</c:choose>  
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -263,13 +243,13 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>添加交换学生</li>
 					</ol>
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="exchangeStudentAction"><b>返回上页</b></a></button>
+                            <a href="exchangeStudentAction!showStudent"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -280,13 +260,12 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                
-                                  <form class="form-validate form-horizontal" method="post" action="">                                                         
+                                  <form class="form-validate form-horizontal" id="addExStuForm" method="post" action="">                                                         
                                       <div class="form-group ">
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><d>学号</d><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.studentNo"  id="studentNo" onblur="getStudentInformation()" 
+                                              <input class="form-control" name="exchangeStudent.studentNo"  id="studentNo"
                                             	  onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
                                               type="text" style="width:300px" required/>
                                           </div>
@@ -294,84 +273,71 @@
                                       </div>
                                       
                                       <div class="form-group ">
-                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="studentName" name="addUser.studentName" style="width:300px" required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                          
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text"  id="className" name="addUser.classNo" style="width:300px" required/>
-                                          </div>
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cemail" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control"  type="text" id="studentName" name="exchangeStudent.studentName" style="width:300px" required/>
+	                                          </div>
                                           </div>
                                       </div>
-                                      
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="profession" name="addUser.profession" style="width:300px" required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
+                          			  
+                          			  <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                           <%--     <select name="addUser.sex"  id="sex" style="width:100px;height:30px" style="width:300px" required>
                                                     <option selected>男</option>
                                                     <option>女</option>
-
                                               </select> --%>
-                                              <input class="form-control" id="sex" type="text" name="addUser.sex" style="width:300px"  required/>
+                                              <input class="form-control" id="sex" type="text" name="exchangeStudent.sex" style="width:300px"  required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                          
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control"  type="text"  id="className" name="exchangeStudent.className" style="width:300px" required/>
+	                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" id="profession" name="exchangeStudent.major" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
                                       
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>出国的时间</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                               <sx:datetimepicker name="addUser.outTime" id="outTime" displayFormat="yyyy-MM-dd"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>出国的大学</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="college" name="addUser.college" style="width:300px" required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                       
-                               <%--          <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>替换的课程</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="replaceCourse" name="addUser.replaceCourse" style="width:300px" required/>
-                                          </div>
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cemail" class="control-label col-lg-2"><b>交换出国开始时间</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                               <sx:datetimepicker name="exchangeStudent.startTime" id="startTime" displayFormat="yyyy-MM-dd"/>
+	                                          </div>
                                           </div>
                                       </div>
                                       
-                                       
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>替换的学分</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" id="replaceCredit"  type="text" style="width:300px" name="addUser.replaceCredit" 
-                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
-                                               required/>
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cemail" class="control-label col-lg-2"><b>交换出国结束时间</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                               <sx:datetimepicker name="exchangeStudent.endTime" id="endTime" displayFormat="yyyy-MM-dd"/>
+	                                          </div>
                                           </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cemail" class="control-label col-lg-2"><b>出国的大学</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control"  type="text" id="college" name="exchangeStudent.exchangeCollege" style="width:300px" required/>
+	                                          </div>
                                           </div>
-                                      </div> --%>
+                                      </div>
                                       
                                       <div class="form-group">
                                          <div  style="margin-left:550px;margin-top:-10px">

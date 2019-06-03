@@ -23,7 +23,6 @@
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
 		
-
 		<action name="internationClassAction" class="internationClassAction">
 			<result name="success">/background/internationalClassInfor.jsp</result>
 			<result name="deleteSuccess">/background/internationalClassInfor.jsp</result>
@@ -39,7 +38,6 @@
 			</result>
 			<result name="addError">/background/internationalClassInfor.jsp</result>
 		</action> 
-		
 		
 		<action name="noticeAction" class="noticeAction">
 			<result name="success">/background/noticeInfor.jsp</result>
@@ -135,11 +133,6 @@
 			<param name="savePath">/upload</param>
 		</action>
 		
-		<!-- 学生模块的Action -->
-		<action name="internationalStudentAction" class="internationalStudentAction">
-		
-		</action>
-		
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
@@ -158,10 +151,43 @@
 		<!-- 添加操作员 -->
 		<action name="addOperatorAction" class="addOperatorAction"></action>
 		
-		<!-- 学生模块的Action -->
+		<!-- 国际班学生模块的Action -->
 		<action name="internationalStudentAction" class="internationalStudentAction">
 			<result name="success">/background/studentsInfor.jsp</result>
 			<result name="input">/background/studentsInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">internationalStudentAction!showStudent</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">internationalStudentAction!showStudent</param>
+			</result>
+			<result name="detailSucc">/background/showStudentDetail.jsp</result>
+		</action>
+		
+		<!-- 出国学生模块的Action -->
+		<action name="overseasStudentAction" class="overseasStudentAction">
+			<result name="success">/background/overseasStudentInfor.jsp</result>
+			<result name="input">/background/overseasStudentInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">overseasStudentAction!showStudent</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">overseasStudentAction!showStudent</param>
+			</result>
+			<result name="detailSucc">/background/showOverStudentDetail.jsp</result>
+		</action>
+		
+		<!-- 交换生模块的Action -->
+		<action name="exchangeStudentAction" class="exchangeStudentAction">
+			<result name="success">/background/exchangeStudentInfor.jsp</result>
+			<result name="input">/background/exchangeStudentInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">exchangeStudentAction!showStudent</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">exchangeStudentAction!showStudent</param>
+			</result>
+			<result name="detailSucc">/background/showExchangeStudentDetail.jsp</result>
 		</action>
 		
 		<!-- 修改管理员密码的Action -->
@@ -177,7 +203,6 @@
 		</action>
 		
 		<!-- 文件下载Action -->
-    		
       	<action name="downLoad" class="DocDownloadAction">
 			<result name="download" type="stream">
 				<!-- 调用action中返回流的方法 -->
@@ -191,7 +216,6 @@
 				<param name="bufferSize">1024</param>
 			</result>
     	</action>
-
 		
 	</package>
 	

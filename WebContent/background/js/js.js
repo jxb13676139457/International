@@ -28,59 +28,47 @@ function searchProcess(id, str){
 				
 }
 
-
-
-//根据学号来获取学生的信息
+//根据学号来获取学生的信息  (添加出国学生用到)
  function getStudentInformation(){
-    	  
-    	  var studentNo= $("#studentNo").val();
-
-    	  if(studentNo!=null){
-    		
-    		  $.ajax(			    		
-		    	      {
-		    	    	  
-		    	    	  type:"post",
-		    	    	  url:"http://localhost:8080/Graduate/overseasStudentAction!getStudentInformation",
-		    	    	  data:{studentNo:studentNo},
-		    	    	  dataType:"json",			    	
-		    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-		    	    	  traditional:true,
-		    	    	  success: function(data){			
-		    	    		  
-			    	    	$("#studentName").val(data.studentName);
-			    	     	$("#className").val(data.reserve1); 
-			    	    	$("#sex").val(data.reserve2); 
-			    	    	$("#profession").val(data.profession);
-			    	    	$("#grade").val(data.grade);
-		                   },
-		                   
-		                   error: function(data){
-		                	   
-		                	   $("#studentName").val("");
-				    	    	$("#className").val("");
-				    	    	$("#profession").val("");
-				    	      	$("#profession").val("");
-				    	    	$("#grade").val("");
-		                   }
-
-		    	    	  }			    	      
-		    	  
-		    	  );
- 
-    	  }
-    
-      }
-
-
+	  var studentId= $("#studentNo").val();
+	  console.log(studentId);
+	  if(studentId!=null){
+		  $.ajax(			    		
+    	      {
+    	    	  type:"post",
+    	    	  url:"http://localhost:8080/InternationalSys/background/overseasStudentAction!getStudentInformation",
+    	    	  data:{"studentId":studentId},
+    	    	  dataType:"json",			    	
+    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+    	    	  traditional:true,
+    	    	  success: function(data){			
+    	    		    console.log("测试自动获取成功");
+    	    		    console.log(data);
+    	    		    var arr = data.split(",");
+    	    		    console.log(arr);
+		    	    	$("#studentName").val(arr[0]);
+		    	     	$("#className").val(arr[1]); 
+		    	    	$("#sex").val(arr[2]); 
+		    	    	$("#profession").val(arr[3]);
+                   },
+                   error: function(autoStudentName,autoClassName,autoMajor,autoSex){
+                	    console.log("测试自动获取失败");
+                	    $("#studentName").val("");
+		    	    	$("#className").val("");
+		    	    	$("#sex").val("");
+		    	      	$("#major").val("");
+		    	    	$("#grade").val("");
+                   }
+    	        }			    	      
+	       );
+	  }
+}
 
 //获取国外院校的信息
  function getCollegeInformation(){
-    
 	 var temp=1;
 	 $.ajax(			    		
    	      {
-   	    	  
    	    	  type:"post",
    	    	  url:"http://localhost:8080/InternationalSys/background/collegeAction!getCollegeInformation",
    	    	  data:{},
@@ -88,38 +76,27 @@ function searchProcess(id, str){
    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
    	    	  traditional:true,
    	    	  success: function(data){			
-
-	    	    		 var html="";
-
-	    	    		 html=html +'<option selected>--请选择国外院校--</option>';
-	    	    		
-	                     for(var i=0; i<data.length; i++){
-	                    	
-	                    	   for(var j=0; j<i; j++){
-	                    	
-	                    		 if(data[i].collegeName==(data[j].collegeName)){
-	                    			 temp=0;
-	                    			 break;
-	                    		 }
-	                    	 }
-	                    	 if(temp==1){
-	                    		 html=html +'<option value=""+ data[i].collegeName+"">'+data[i].collegeName+'</option>';
-	                    	 }
-	                    	 temp=1;
-	                     }
-	                     	
-	                     $('#college').html(html);
-   	    	
+    	    		 var html="";
+    	    		 html=html +'<option selected>--请选择国外院校--</option>';
+                     for(var i=0; i<data.length; i++){
+                    	   for(var j=0; j<i; j++){
+                    		 if(data[i].collegeName==(data[j].collegeName)){
+                    			 temp=0;
+                    			 break;
+                    		 }
+                    	 }
+                    	 if(temp==1){
+                    		 html=html +'<option value=""+ data[i].collegeName+"">'+data[i].collegeName+'</option>';
+                    	 }
+                    	 temp=1;
+                     }
+                     $('#college').html(html);
                   },
-                  
                   error: function(data){
-               	   
                		 var html="";
 	    				 $('#college').html(html);
                   }
-
    	    	  }			    	      
-   	  
    	  );
    }
  

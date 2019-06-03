@@ -178,7 +178,7 @@ public class UserDao {
 		try{
 			session = sessionFactory.openSession();
 			Transaction tran = session.beginTransaction();
-			//根据id获取Admin对象
+			//根据id获取Admin对象 
 			Admin admin = (Admin)session.get(Admin.class,adminId);
 			System.out.println(admin);
 			session.delete(admin);

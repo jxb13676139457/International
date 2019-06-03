@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.OverseasStudent" table="Overseas">
+		<id name="studentId" column="studentId">
+			<!-- 非自增主键生成策略 -->
+			<generator class="assigned"></generator>
+		</id>
+		<property name="studentName" column="studentName"></property>
+		<property name="sex" column="sex"></property>
+		<property name="outTime" column="outTime"></property>
+		<property name="outMajor" column="outMajor"></property>
+		<property name="inDegree" column="inDegree"></property>
+		<property name="outDegree" column="outDegree"></property>
+		<property name="inSchoolarship" column="inSchoolarship"></property>
+		<property name="inAmount" column="inAmount"></property>
+		<property name="outSchoolarship" column="outSchoolarship"></property>
+		<property name="outAmount" column="outAmount"></property>
+		<property name="currency" column="currency"></property>
+		<property name="subsidy" column="subsidy"></property>
+		
+		<!-- 单向n->1关联，外键，由OverseasStudent指向College -->
+		<many-to-one name="college" class="com.international.model.College" 
+		lazy="false" fetch="join" column="collegeId" />
+		<!-- 单向n->1关联，外键，由OverseasStudent指向InternationalClass -->
+		<many-to-one name="classes" class="com.international.model.InternationalClass" 
+		lazy="false" fetch="join" column="classId" />
+		
+	</class>
+</hibernate-mapping>

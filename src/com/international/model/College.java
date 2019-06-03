@@ -1,6 +1,7 @@
 package com.international.model;
 
 import java.util.Date;
+import java.util.Set;
 
 public class College implements java.io.Serializable {
 	
@@ -17,6 +18,8 @@ public class College implements java.io.Serializable {
 	String position;		//联系人职位
 	String phone;			//联系电话
 	String email;			//电子邮件
+	
+	private Set<OverseasStudent> overseasStudents;  //关联的出国学生对象
 	
 	String reserves1;		//备用字段
 	String reserves2;
@@ -137,6 +140,14 @@ public class College implements java.io.Serializable {
 
 	public void setReserves3(String reserves3) {
 		this.reserves3 = reserves3;
+	}
+
+	public Set<OverseasStudent> getOverseasStudents() {
+		return overseasStudents;
+	}
+
+	public void setOverseasStudents(Set<OverseasStudent> overseasStudents) {
+		this.overseasStudents = overseasStudents;
 	}
 	
 }

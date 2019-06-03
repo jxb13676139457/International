@@ -189,7 +189,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalStudentAction!showOperator">维护国际学生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
                            <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
                             <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
@@ -313,11 +313,11 @@
                           <%--  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                           <a href="exportLoginUserExcel?searchName=${loginUserName }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button> --%>
 
-                        <button type="button" class="btn btn-default" style="width:120px;height:30px" onclick="tijiao()">
+                        <!-- <button type="button" class="btn btn-default" style="width:120px;height:30px" onclick="tijiao()">
                           <b><i class="icon_plus_alt2"></i>&nbsp;&nbsp;授予管理员</b></button>
                            
                         <button type="button" class="btn btn-default" style="width:120px;height:30px" onclick="toReset()">
-                          <b><i class="icon_close_alt2"></i>&nbsp;&nbsp;解除管理员</b></button>
+                          <b><i class="icon_close_alt2"></i>&nbsp;&nbsp;解除管理员</b></button> -->
                       </form>
                         
                     </li>                    
@@ -334,7 +334,7 @@
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr style="background-color:#ededed">
-                                 <th>&nbsp;</th>
+                                <!--  <th>&nbsp;</th> -->
                                  <th>用户名</th>
                                  <th>真实名字</th>
                                  <th>性别</th>
@@ -344,9 +344,9 @@
                            
                            <s:iterator value="admins" var="admin" status="st">
                               <tr>               
-                                 <td id="name" style="width:10px">
+                                 <%-- <td id="name" style="width:10px">
                                  <input type="checkbox" name="checkbox" id="checkbox" value="<s:property value="#admin.id"/>"/>
-                                 </td>                
+                                 </td>   --%>              
                                  <td id="adminId"><s:property value="#admin.adminId"/></td>
                                  <td id="username"><s:property value="#admin.userName"/></td>
                                  <td id="sex"><s:property value="#admin.sex"/></td>
@@ -364,23 +364,23 @@
                                  </s:else> --%>
                                  
                                  <td>
-                                   <script type="text/javascript">
+                                   <script type="text/javascript" charset="UTF-8">
                                        		//删除指定id的管理员
-                                       		function deleteProcess(adminId){
+                                       		function deleteOperator(adminId){
                                        			if(confirm("你确定要删除该操作员吗？")){
                                        				location.href="managerAction!deleteLoginUser?adminId="+adminId;
                                        			}
                                        		}
                                        		//修改指定id的管理员
-                                       		function editProcess(adminId){
+                                       		function editOperator(adminId){
                                        			location.href="managerAction!queryLoginUser?adminId="+adminId;
                                        		}
                                    </script> 
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                     <a class="btn btn-default" href="javascript:editProcess('<s:property value="#admin.adminId"/>')"><i class="icon_pencil"></i></a>
+                                     <a class="btn btn-default" href="javascript:editOperator('<s:property value="#admin.adminId"/>')"><i class="icon_pencil"></i></a>
                                        <%-- <a class="btn btn-default" href="javascript:resetLoginUser('<s:property value="#loginUser.id"/>')"><i class="icon_like_alt"></i></a> --%>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#admin.adminId"/>')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteOperator('<s:property value="#admin.adminId"/>')"><i class="icon_trash_alt"></i></a>
                                   </div>
                                   </td>
                               </tr>

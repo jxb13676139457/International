@@ -33,67 +33,75 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
     
-    	
-        
-<%--             <%
-			     String s=(String)request.getAttribute("addStudentInfor");
-			     if(s!=null)
-			     {
-			 %>
-			 
-				 <script type="text/javascript" language="javascript">
-				 
-					alert("<%=s%>");
-				</script>
-			<%
-			     }
-			%> --%>
-			
+    <!-- javascripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+    <!-- jquery validate js -->
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 
+    <!-- custom form validation script for this page-->
+    <script src="js/form-validation-script.js"></script>
+    <!--custome script for all page-->
+    <script src="js/scripts.js"></script>    
+    <script src="js/js.js"  charset="UTF-8"></script>
 			
-							<!-- 添加学生-->
-			<script type="text/javascript" language="Javascript">
+	<script type="text/javascript">
+     	//用来跳转到维护操作员模块的action
+		function gotoShowAction(){
+			location.href="managerAction!showOperator";
+		}
+		//用来跳转到退出系统的action
+   		function gotoExitAction(){
+   			location.href="exitAction";
+   		}
+  	</script>
 			
-			      function toSubmit(){
-			    	  	 
-			    	  var studentNo = $("#studentNo").val();
-			    	  var studentName= $("#studentName").val();
-			    	  var className = $("#className").val();
-			    	  var profession = $("#profession").val();
-			    	  var sex = $("#sex").val();
-			    	  var outTime = dojo.widget.byId("outTime").getValue();
-			    	  var college = $("#college").val();
-			    	  var replaceCourse = $("#replaceCourse").val();
-			    	  var replaceCredit = $("#replaceCredit").val();
-			    	  var type = $("#type").val();	  	
-			    
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/overseasStudentAction!addStudent",
-					    	    	  data:{studentNo:studentNo,studentName:studentName,className:className,profession:profession,sex:sex,
-					    	    		  outTime:outTime,college:college,replaceCourse:replaceCourse,replaceCredit:replaceCredit,type:type},
-					    	    	  dataType:"json",		
-					    	    	  async:false,
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		  if(data!=null){
-					    	    			  alert(data);
-					    	    		  }
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-			    	  
-			    	  
-			    
-			      }
-			</script>
-			
+	<!-- 添加学生-->
+	<script type="text/javascript" language="javascript">
+	      function onSubmit(){
+	    	  var studentId = $("#studentNo").val();
+	    	  var studentName= $("#studentName").val();
+	    	  var className = $("#className").val();
+	    	  var major = $("#profession").val();
+	    	  var sex = $("#sex").val();
+	    	  var outMajor = $("#outMajor").val();
+	    	  var inDegree = $("#inDegree").val();
+	    	  var outDegree = $("#outDegree").val();
+	    	  var inSchoolarship = $("#inSchoolarship").val();
+	    	  var inAmount = $("#inAmount").val();
+	    	  var outSchoolarship = $("#outSchoolarship").val();
+	    	  var outAmount = $("#outAmount").val();
+	    	  var currency = $("#currency").val();
+	    	  var outTime = dojo.widget.byId("outTime").getValue();
+	    	  var collegeName = $("#college").val();
+	    	  var type = $("#type").val();
+	    	  var subsidy = $("#subsidy").val();
+	    	  alert("测试:"+studentId+","+studentName+","+className+","+major+","
+	    			  +sex+","+outMajor+","+inDegree+","+outDegree+","
+	    			  +inSchoolarship+","+inAmount+","+outSchoolarship+","+outAmount+","
+	    			  +currency+","+outTime+","+collegeName+","+type+","+subsidy);
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/overseasStudentAction!addOveaStudent?newClassName="
+	    	    			  +className+"&newCollegeName="+collegeName+"&studentId="+studentId,
+	    	    	  data:$("#studentForm").serialize(),
+	    	    	  dataType:"json",		
+	    	    	  async:false,
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){
+	    	    		  if(data!=null){
+	    	    			  alert(data);
+	    	    		  }
+	                  }
+	    	      }
+	    	  );
+	      }
+	</script>
   </head>
 
   <body>
@@ -121,7 +129,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -130,7 +138,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="exitAction"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -147,13 +155,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -162,9 +168,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
                   </li>
@@ -233,20 +239,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                  <!-- 动态开放此菜单项-->
+				  <c:choose>
+					<c:when test="${ sessionScope.adminType eq '是'}">
+						<li class="sub-menu">
+	                      <a href="javascript:;" class="">
+	                          <i class="icon_document_alt"></i>
+	                          <span>操作员信息</span>
+	                          <span class="menu-arrow arrow_carrot-right"></span>
+	                      </a>
+	                      <ul class="sub">
+	                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+	                      </ul>
+	                    </li>    
+					</c:when>
+				</c:choose>  
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -260,13 +271,13 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>添加出国学生</li>
 					</ol>
 				</div>
 			</div>
 			 <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                <a href="overseasStudentAction"><b>返回上页</b></a></button>
+                <a href="overseasStudentAction!showStudent"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -277,25 +288,22 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                
-                                  <form class="form-validate form-horizontal" method="post" action="">                                                         
+                                  <form class="form-validate form-horizontal" id="studentForm" method="post" action="">                                                         
                                       <div class="form-group ">
-                                         <div  style="margin-left:250px;margin-top:-10px">
+                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="studentNo" name="addUser.studentNo"  type="text" style="width:300px"  
-                                              
-                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
+                                              <input class="form-control" id="studentNo" name="oversea.studentId"  type="text" style="width:300px"  
+                                               onkeyup="value=value.replace(/[^\d]/g,'')" placeholder="只能输入数字"
                                                onblur="getStudentInformation()" required/>
                                           </div>
                                           </div>
                                       </div>
-                                      
                                       <div class="form-group ">
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="studentName" type="text" name="addUser.studentName"  style="width:300px"  required/>
+                                              <input class="form-control" id="studentName" type="text" name="oversea.studentName"  style="width:300px"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -304,7 +312,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="className" name="addUser.classNo" style="width:300px"  required/>
+                                              <input class="form-control"  type="text" id="className" name="className" style="width:300px"  required/>
                                             
                                           </div>
                                           </div>
@@ -314,7 +322,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="profession" type="text" name="addUser.profession" style="width:300px"  required/>
+                                              <input class="form-control" id="profession" type="text" name="major" style="width:300px"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -326,9 +334,80 @@
                   <%--                             <select name="addUser.sex"  id="sex" style="width:100px;height:30px" style="width:300px"   required>
                                                     <option selected>男</option>
                                                     <option>女</option>
-
                                               </select> --%>
-                                              <input class="form-control" id="sex" type="text" name="addUser.sex" style="width:300px"  required/>
+                                              <input class="form-control" id="sex" type="text" name="oversea.sex" style="width:300px"  required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>出国院校就读专业</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outMajor" name="oversea.outMajor" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的本校学位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inDegree" name="oversea.inDegree" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的外校学位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outDegree" name="oversea.outDegree" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的本校奖学金</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inSchoolarship" name="oversea.inSchoolarship" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>本校奖学金金额</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inAmount" name="oversea.inAmount" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的外校奖学金</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outSchoolarship" name="oversea.outSchoolarship" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>外校奖学金金额</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outAmount" name="oversea.outAmount" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>外校币种</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="currency" name="oversea.currency" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -337,62 +416,46 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>出国的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.outTime" id="outTime"  displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="oversea.outTime" id="outTime"  displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                         <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>出国的大学</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cemail" class="control-label col-lg-2"><b>出国的院校</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" id="college" name="addUser.college" style="width:300px"   required/>
+                                              <input class="form-control"  type="text" id="college" name="collegeName" style="width:300px"   required/>
                                           </div>
                                           </div>
                                       </div>
-                                       
-                          <%--               <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>替换的课程</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" style="width:300px" id="replaceCourse"  name="addUser.replaceCourse"  required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                       
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>替换的学分</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text"  style="width:300px" id="replaceCredit" name="addUser.replaceCredit" 
-                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
-                                               required/>
-                                              
-                                          </div>
-                                          </div>
-                                      </div>
-                                       --%>
                                        
                                         <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>出国的类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  id ="type" type="text" style="width:300px"  name="addUser.type"  required/>
+                                              <input class="form-control"  id ="type" type="text" style="width:300px"  name="type"  required/>
                                           </div>
                                           </div>
                                       </div>
+                                      
+                                       <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>出国津贴(RMB)</b></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="subsidy" name="oversea.subsidy" style="width:300px" type="text"/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
                                       <div class="form-group">
                                        <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary"  onclick="toSubmit()">添加</button>
+                                              <button class="btn btn-primary" onclick="onSubmit()">添加</button>
                                           </div>
                                       </div>
                                   </form>
-                                   
-                                                      
                               </div>
-
                           </div>
                       </section>
                   </div>
@@ -403,22 +466,6 @@
       <!--main content end-->
   </section>
   <!-- container section end -->
-
-    <!-- javascripts -->
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- nice scroll -->
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-    <!-- jquery validate js -->
-    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
-
-    <!-- custom form validation script for this page-->
-    <script src="js/form-validation-script.js"></script>
-    <!--custome script for all page-->
-    <script src="js/scripts.js"></script>    
-    <script src="js/js.js"  charset="gb2312"></script>
-
 
   </body>
 </html>

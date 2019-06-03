@@ -33,14 +33,32 @@
 	</bean>	
 	
 	<bean id="newsDao" class="com.international.dao.NewsDao">
-
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
 	<!-- 国际班学生的bean -->
 	<bean id="studentDao" class="com.international.dao.StudentDao">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
-
+	
+	<!-- 出国学生的bean -->
+	<bean id="overseasStuDao" class="com.international.dao.OverseasStuDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 交换生的bean -->
+	<bean id="exchangeStuDao" class="com.international.dao.ExchangeStuDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
 	<!-- 活动信息的bean -->
 	<bean id="activityDao" class="com.international.dao.ActivityDao">
 
