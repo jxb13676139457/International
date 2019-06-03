@@ -226,4 +226,73 @@ public class TrainingAction extends ActionSupport {
 		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
 	
+	
+	/**
+	 *  删除通知信息
+	 */
+	public String deleteTraingingInfo() {
+
+		System.out.println("要删除的id:" + id);
+		if(td.deleteTraining(id))
+			return "deleteSuccess";
+		else
+			return "deleteError";
+	}
+	
+	
+	public String searchObjectById() {
+		System.out.println("id = "+id);
+		
+		training = td.getTrainingInforById(id);
+		if(training!=null) {
+			System.out.println("training对象信息 = "+training);
+			System.out.println("training对象ID = "+training.getTraningId());
+			System.out.println("training对象CourseHours = "+training.getCourseHours());
+			System.out.println("training对象StartTime = "+training.getStartTime());
+			System.out.println("training对象EndTime = "+training.getEndTime());
+			System.out.println("training对象CourseFee = "+training.getCourseFee());
+			
+			return "lookSuccess";
+		}
+		return "lookError";
+	}
+	
+	
+	
+	public String updateTrainingInfor(){
+		System.out.println("要更新的Id = "+id);
+		System.out.println("training对象Id = "+training.getTraningId());
+		System.out.println("training对象AgencyName = "+training.getAgencies().getAgencyName());
+		System.out.println("training对象CourseHours = "+training.getCourseHours());
+		System.out.println("training对象StartTime() = "+training.getStartTime());
+		System.out.println("training对象endTime = "+training.getEndTime());
+		System.out.println("training对象courseFee = "+training.getCourseFee());
+		
+		training.setStartTime(training.getStartTime().substring(0,10));
+		training.setEndTime(training.getEndTime().substring(0, 10));
+		//查询collegeId
+		String hh="from Training where agencyName='"+agencyName+"'";
+		training.setAgencies(ad.queryAgenciesByHql(agencyName).get(0));
+		System.out.println("training.setAgencies - > AgencyName = "+training.getAgencies().getAgencyName());
+		//hql语句
+		String message="";
+		String hql1 = "courseHours = '"+training.getCourseHours()+"'";
+		String hql2 = "startTime = '"+training.getStartTime()+"'";
+		String hql3 = "endTime = '"+training.getEndTime()+"'";
+		String hql4 = "courseFee = '"+training.getCourseFee()+"'";
+		String hql = "from Training where "+hql1+" and "+hql2+" and "+hql3+" and "+hql4;
+		
+		trainingList = td.queryByHql(hql, agencyName);
+		if(trainingList==null || trainingList.size()==0) {
+			if(td.updateTraining(id,training)) {
+				return "updateSuccess";
+			}
+			else {
+				return "updateError";
+			}
+		}
+		else {
+			return "updateError";
+		}
+	}
 }

@@ -163,6 +163,74 @@ public class TrainingDao {
 		return num;
 	}
 
+	public boolean deleteTraining(int trainingId) {
+		Session session=null;
+		try{
+			System.out.println("trainingId = "+trainingId);
+			session=sessionFactory.openSession();
+			//根据id获取要删除的用户
+			Training classes=(Training)session.get(Training.class, trainingId);
+			Transaction trans=session.beginTransaction();
+			session.delete(classes);//删除数据
+			trans.commit();
+			return true;			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
+
+	public Training getTrainingInforById(int id) {
+		System.out.println("getTrainingInforById方法打印trainingId = "+id);
+		Session session=null;	
+		Training interNotice=null;
+		try{	
+			session=sessionFactory.openSession();	
+			String hql="from Training where id=?";			
+			Query query =session.createQuery(hql);		
+			query.setParameter(0, id);
+			List<Training> list=query.list();			 
+			if(list!=null && list.size()>0){
+				interNotice=list.get(0);				
+				return interNotice;
+			}else{				
+				return null;
+			}	
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}finally{        	
+        	session.close();
+        }	
+	}
+
+	public boolean updateTraining(int id, Training training) {
+		Session session=null;
+		try{
+			session=sessionFactory.openSession();
+			Training oldTraining=(Training)session.get(Training.class, id);
+			System.out.println("updateTraining方法中的Id = "+id);
+			oldTraining.setAgencies(training.getAgencies());
+			oldTraining.setStartTime(training.getStartTime());
+			oldTraining.setEndTime(training.getEndTime());
+			oldTraining.setCourseFee(training.getCourseFee());
+			oldTraining.setCourseHours(training.getCourseHours());
+			System.out.println("updateTraining方法中的Id = "+oldTraining.getAgencies().getAgencyId());
+			Transaction trans=session.beginTransaction();
+			session.update(oldTraining);
+			trans.commit();
+			return true;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{
+			session.close();
+		}	
+	}
+
 	
 	
 }
