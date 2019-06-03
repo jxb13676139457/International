@@ -191,6 +191,12 @@
 				<param name="bufferSize">1024</param>
 			</result>
     	</action>
+    	
+    	
+    	<action name="trainingAction" class="trainingAction">
+			<result name="success">/background/trainingInfor.jsp</result>
+			
+		</action>
 
 		
 	</package>

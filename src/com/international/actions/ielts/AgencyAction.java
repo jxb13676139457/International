@@ -1,8 +1,13 @@
 package com.international.actions.ielts;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.international.common.ajaxAction;
 import com.international.dao.AgencyDao;
 import com.international.model.Agency;
 import com.opensymphony.xwork2.ActionContext;
@@ -146,7 +151,6 @@ public class AgencyAction extends ActionSupport {
 	 */
 	public String addAgency() {
 		System.out.println("addAgency方法被调用了");
-		System.out.println("agency对象AgencyId = "+agency.getAgencyId());
 		System.out.println("agency对象agencyName = "+agency.getAgencyName());
 		System.out.println("agency对象Time = "+agency.getTime());
 		System.out.println("agency对象cotactPerson = "+agency.getCotactPerson());
@@ -215,4 +219,11 @@ public class AgencyAction extends ActionSupport {
 			return "updateError";
 
     }
+	
+	
+	public void getAgencyInformation() throws IOException{
+		List<Agency> agencyList = new ArrayList<Agency>();
+		agencyList = ad.queryAllAgency();
+		ajaxAction.toJson(ServletActionContext.getResponse(),agencyList);
+	}
 }

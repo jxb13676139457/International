@@ -1,5 +1,7 @@
 package com.international.dao;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,6 +12,7 @@ import org.hibernate.Transaction;
 import com.international.model.Agency;
 import com.international.model.News;
 import com.international.model.Policy;
+import com.opensymphony.xwork2.ActionContext;
 
 public class AgencyDao {
 
@@ -170,5 +173,31 @@ public class AgencyDao {
 		}	
 	}
 	
+	/*查询符合条件的机构*/
+	public List<Agency> queryAgenciesByHql(String agencyName) {
+		System.out.println("agencyName = "+agencyName);
+		System.out.println("queryAgencyByHql被调用");
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			String queryString = "from Agency where agencyName='"+agencyName+"'";
+			System.out.println("queryString = "+queryString);
+			//创建查询
+			Query query=session.createQuery(queryString);
+			//执行查询获得的结果,list中的每一个元素代表一个College的对象
+			List list=query.list();//list集合包含College表里所有数据
+			if(list.size()>0)
+				return list;
+			else{
+				return null;
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
+
 	
 }
