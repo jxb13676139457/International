@@ -132,7 +132,7 @@
                           <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
                           <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
-                          <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   

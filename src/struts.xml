@@ -190,6 +190,19 @@
 			<result name="detailSucc">/background/showExchangeStudentDetail.jsp</result>
 		</action>
 		
+		<!-- 学生夏令营活动的Action -->
+		<action name="studentActivityAction" class="studentActivityAction">
+			<result name="success">/background/studentActivitiesInfor.jsp</result>
+			<result name="input">/background/studentActivitiesInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">studentActivityAction!showStuActivity</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">studentActivityAction!showStuActivity</param>
+			</result>
+			<result name="detailSucc">/background/showStudentActivitiesDetail.jsp</result>
+		</action>
+		
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>

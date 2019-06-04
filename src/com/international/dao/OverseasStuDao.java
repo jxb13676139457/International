@@ -166,7 +166,7 @@ public class OverseasStuDao {
 		}
 	}
 	
-	//根据出国学生班级名称查找班级对象  
+	//根据出国学生出国院校名称查找班级对象  
 	public College queryByCollegeName(String collegeName){
 		System.out.println("出国学生的出国院校："+collegeName);
 		Session session = null;

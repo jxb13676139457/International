@@ -79,8 +79,17 @@
 			<%
 			     }
 			%>
-
 			
+		<script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	    </script>
   </head>
 
   <body>
@@ -109,7 +118,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -118,7 +127,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -135,13 +144,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -150,10 +157,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
-                             <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
+                             <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   
@@ -221,20 +228,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                 
+                   <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -247,7 +259,7 @@
 		  <div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
-								<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+								<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="fa fa-table"></i>维护学生交流活动信息</li>
 					</ol>
 				</div>
@@ -257,20 +269,18 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="studentActivitiesAction!searchInformationbyName" method="post">
-                            <input class="form-control" name="activityName" placeholder="输入查找的学号" type="text" required/>
+                       <form class="navbar-form" action="studentActivityAction!showStuActivity" method="post">
+                            <input class="form-control" name="loginUserName" placeholder="输入查找的学号" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;
                             <b>搜索</b></button>
-                            
-                               <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="addStudentActivities.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
-                              <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="studentActivitiesAction">
-                             <i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
-                        
-                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportStudentActivitiesExcel?searchName=${activityName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
-                       
+                            <button type="button" class="btn btn-default" style="width:80px;height:30px">
+                            	<a href="addStudentActivities.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
+                            <button type="button" class="btn btn-default" style="width:120px;height:30px">
+                            	<a href="studentActivityAction!showStuActivity">
+                             	<i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                        	<button type="button" class="btn btn-default" style="width:80px;height:30px">
+                            	<a href="exportStudentActivitiesExcel?searchName=${activityName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
+                            </button>
                         </form>
                     </li>                    
                 </ul>
@@ -283,48 +293,56 @@
               <div class="row">
                   <div class="col-lg-12">
                       <section class="panel">
-                     
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr style="background-color:#ededed">           
-                                  <th>学号</th>                    
-                                 <th>学生姓名</th>
-                                 <th>班级</th>
-                                 <th>专业</th>
-                                  <th>性别</th>
-                                 <th>国外院校</th>
+                                 <th>学号</th>                    
+                                 <th>姓名</th>
                                  <th>活动主题</th>
-                                 <th>活动时间</th>
-                                                        
+                                 <th>举办活动的合作国外院校</th>
+                                 <th>开始时间</th>
+                                 <th>结束时间</th>
+                                 <th>活动费用</th>
+                                 <th>费用币种</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="StudentList" var="student" status="st">
+                           <s:iterator value="studentActivites" var="activity" status="st">
                               <tr>
-                              <td><s:property value="#student.interStudent.studentNo"/></td>
-                                 <td><s:property value="#student.interStudent.studentName"/></td>
-                                 <td><s:property value="#student.interStudent.interClass.className"/></td>
-                                 <td><s:property value="#student.interStudent.profession"/></td>
-                                 <td><s:property value="#student.interStudent.reserve2"/></td>
-                                 <td><s:property value="#student.college.name"/></td>
-                                 <td><s:property value="#student.title"/></td>
-                                 <td><s:property value="#student.time"/></td>                         
+                              <td><s:property value="#activity.studentId"/></td>
+                                 <td><s:property value="#activity.studentName"/></td>
+                                 <td><s:property value="#activity.activityName"/></td>
+                                 <td><s:property value="#activity.college.collegeName"/></td>
+                                 <td><s:property value="#activity.startTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#activity.endTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#activity.Fee"/></td>
+                                 <td><s:property value="#activity.Currency"/></td>                         
                                  <td>
-                                  <div class="btn-group">
-                                     <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#student.id"/>','studentActivitiesAction!searchStudentActivitiesById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#student.id"/>', 'studentActivitiesAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
-                            
-                                  </div>
+                                 	<script type="text/javascript" charset="UTF-8">
+                                       		//删除指定id的学生交流活动
+                                       		function deleteStudent(activityId){
+                                       			if(confirm("你确定要删除该活动吗？")){
+                                       				location.href="studentActivityAction!deleteStudentActivity?activityId="+activityId;
+                                       			}
+                                       		}
+                                       		//修改指定id的学生交流活动
+                                       		function editStudent(activityId){
+                                       			location.href="studentActivityAction!queryStuActivity?activityId="+activityId;
+                                       		}
+                                  	</script> 
+	                                  <div class="btn-group">
+	                                      <a class="btn btn-default" href="javascript:editStudent('<s:property value="#activity.activityId"/>')"><i class="icon_pencil"></i></a>
+	                                      <a class="btn btn-default" href="javascript:deleteStudent('<s:property value="#activity.activityId"/>')"><i class="icon_trash_alt"></i></a>
+	                                  </div>
                                   </td>
-                              </tr>
+                              	</tr>
                               </s:iterator>                             
                            </tbody>
                         </table>
                          </section>
                      </div> 
-             <s:set name="status" value="#session.status"></s:set> 
+            <%--  <s:set name="status" value="#session.status"></s:set>  --%>
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <%-- <s:if test="#status==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="studentActivitiesAction?pageNo=1">首页</a>]
          
@@ -357,10 +375,24 @@
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       
-                      </s:else>
+                      </s:else> --%>
+                      
+                      <!-- 分页 -->
+			  		[<a href="studentActivityAction!showStuActivity?pageNo=1">首页</a>]
+						<c:choose>
+							<c:when test="${currentPage>1}">
+								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage-1}">上一页</a>]
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${currentPage<totalPage}">
+								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage+1}">下一页</a>]
+							</c:when>
+						</c:choose>
+					[<a href="studentActivityAction!showStuActivity?pageNo=${totalPage}">尾页</a>]
+					第${currentPage}页/共${totalPage}页
+					
                   </div>
-                     
-                
               </div>
               <!-- page end-->
           </section>
@@ -376,7 +408,7 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="UTF-8"></script>
   
 			
   </body>
