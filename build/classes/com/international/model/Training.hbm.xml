@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.Training" table="Training">
+		<id name="traningId" column="traningId">
+			<generator class="native"></generator>
+		</id>
+		<property name="courseHours" column="courseHours"></property>
+		<property name="startTime" column="startTime"></property>
+		<property name="endTime" column="endTime"></property>
+		<property name="courseFee" column="courseFee"></property>
+		
+		<many-to-one name="agencies" class="com.international.model.Agency" 
+                        cascade="save-update" column="agencyId" not-null="false" fetch="select" lazy="false">
+         
+         </many-to-one>
+	</class>
+</hibernate-mapping>

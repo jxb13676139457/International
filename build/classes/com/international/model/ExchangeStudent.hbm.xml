@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.ExchangeStudent" table="ExchangeStudent">
+		<id name="id" column="id">
+			<!-- 自增主键生成策略 -->
+			<generator class="native"></generator>
+		</id>
+		<property name="studentNo" column="studentNo"></property>
+		<property name="studentName" column="studentName"></property>
+		<property name="sex" column="sex"></property>
+		<property name="className" column="className"></property>
+		<property name="major" column="major"></property>
+		<property name="startTime" column="startTime"></property>
+		<property name="endTime" column="endTime"></property>
+		<property name="exchangeCollege" column="exchangeCollege"></property>
+		<property name="reserves1" column="reserves1"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
+	</class>
+</hibernate-mapping>

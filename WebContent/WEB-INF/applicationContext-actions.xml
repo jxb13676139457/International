@@ -49,6 +49,20 @@
 			<ref bean="agencyDao"/>
 		</property>
 	</bean>
+	
+	<!-- 考试的bean -->
+	<bean id="examAction" class="com.international.actions.ielts.ExamAction">
+		<property name="exd">
+			<ref bean="examDao"/>
+		</property>
+	</bean>
+
+	<!-- 机构协议的bean -->
+	<bean id="agencyAgreementAction" class="com.international.actions.ielts.AgencyAgreementAction">
+		<property name="aad">
+			<ref bean="agencyAgreementDao"/>
+		</property>
+	</bean>
 
 	<!-- 活动的bean -->
 	<bean id="collegeActivityAction" class="com.international.actions.college.CollegeActivityAction">

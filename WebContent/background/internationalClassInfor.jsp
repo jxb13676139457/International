@@ -166,7 +166,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalClassAction">维护班级信息</a></li>
+                          <li><a class="" href="internationClassAction">维护班级信息</a></li>
                       </ul>
                   </li>
                   
@@ -293,7 +293,6 @@
                                   <th>专业</th>                            
                                  <th>班级名称</th>
                                  <th>操作</th>
-                                 <th>索引</th>
                               </tr>
                            <s:iterator value="#session.classes" var="class" status="st">
                               <tr>        
@@ -306,7 +305,6 @@
                                       <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#class.classId"/>','internationClassAction!deleteClass?id=')"><i class="icon_trash_alt"></i></a>
                                   </div>
                                   </td>
-                                  <td><s:property value="#class.classId"/></td>
                               </tr>
                               </s:iterator>                             
                            </tbody>

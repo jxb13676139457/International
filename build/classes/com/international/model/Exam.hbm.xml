@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.Exam" table="Exam">
+		<id name="examId" column="examId">
+			<generator class="native"></generator>
+		</id>
+		<property name="location" column="location"></property>
+		<property name="time" column="time"></property>
+		<property name="type" column="type"></property>
+		<property name="examType" column="examType"></property>
+		<property name="reserves1" column="reserves1"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
+		
+		<many-to-one name="agen" class="com.international.model.Agency" 
+                        cascade="save-update" column="agencyId" not-null="false" fetch="select" lazy="false">
+         </many-to-one>
+	</class>
+</hibernate-mapping>
