@@ -91,6 +91,20 @@
 		</property>
 	</bean>
 	
+	<!-- 出国学生的bean -->
+	<bean id="overseasStudentAction" class="com.international.actions.student.OverseasStudentAction">
+		<property name="osd">
+			<ref bean="overseasStuDao"/>
+		</property>
+	</bean>
+	
+	<!-- 交换生的bean -->
+	<bean id="exchangeStudentAction" class="com.international.actions.student.ExchangeStudentAction">
+		<property name="esd">
+			<ref bean="exchangeStuDao"/>
+		</property>
+	</bean>
+	
 	<!-- 修改管理员信息的bean -->
 	<bean id="updateInfoAction" class="com.international.actions.admin.UpdateInfoAction" scope="prototype">
 		<property name="ud">
@@ -118,6 +132,15 @@
 	<!-- 文件下载的bean-->	
 	<bean id="DocDownloadAction" class="com.international.actions.college.DocDownloadAction" scope="prototype">
 		  					  							
+	</bean>
+	
+	<bean id="trainingAction" class="com.international.actions.ielts.TrainingAction">
+		<property name="td">
+			<ref bean="trainingDao"/>
+		</property>
+		<property name="ad">
+			<ref bean="agencyDao"/>
+		</property>
 	</bean>
 
 	

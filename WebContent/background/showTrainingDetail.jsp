@@ -215,7 +215,7 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="trainingAction!updateInfor.action">
+                                  <form class="form-validate form-horizontal" method="post" action="trainingAction!updateTrainingInfor">
                                      
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
@@ -229,7 +229,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                               <label for="cname" class="control-label col-lg-2"><b>雅思机构</b><span class="required" style="color:red">*</span></label>
                                              <div class="col-lg-10">
-                                              <input class="form-control" name="agencyName" value="${sessionScope.currentUser.agency.name }" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="agencyName" value="${training.agencies.agencyName }" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -240,7 +240,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训开始的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                           <sx:datetimepicker name="updateUser.startTime" displayFormat="yyyy-MM-dd" value="startTime"/>
+                                           <sx:datetimepicker name="training.startTime" value="training.startTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -250,45 +250,27 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训结束的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.outTime" displayFormat="yyyy-MM-dd" value="outTime"/>
+                                              <sx:datetimepicker name="training.endTime" value="training.endTime" displayFormat="yyyy-MM-dd"/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                         
+                                     <div class="form-group ">
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>培训学时 </b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control"  type="text" name="training.courseHours" value="${training.courseHours }" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                          
                                       <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学分</b><span class="required" style="color:red">*</span></label>
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cemail" class="control-label col-lg-2"><b>培训费用 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                                  <select name="updateUser.courseHours"  style="width:100px;height:30px" value="${sessionScope.currentUser.courseHours}" required>   
-                                                  <option selected>${sessionScope.currentUser.courseHours}</option>                                                
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                    <option>9</option>
-                                                    <option>10</option>
-                                                    
-                                              </select>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                         
-                                      <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的分期</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                               <select name="updateUser.semester"  style="width:100px;height:30px" value="${sessionScope.currentUser.semester}" required>
-                                                   <option selected>${sessionScope.currentUser.semester}</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-
-                                              </select>
+                                              <input class="form-control"  type="text" name="training.courseFee" value="${training.courseFee }" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>

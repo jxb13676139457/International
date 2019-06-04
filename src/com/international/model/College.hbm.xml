@@ -20,5 +20,11 @@
 		<property name="reserves1" column="reserves1"></property>
 		<property name="reserves2" column="reserves2"></property>
 		<property name="reserves3" column="reserves3"></property>
+		
+		<!-- 关联的出国学生对象 -->
+		<set name="overseasStudents" cascade="all" table="Overseas" inverse="true">
+			<key column="collegeId" not-null="true"></key>
+			<one-to-many class="com.international.model.OverseasStudent"/>
+		</set>
 	</class>
 </hibernate-mapping>

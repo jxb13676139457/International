@@ -151,7 +151,6 @@ public class AgencyAction extends ActionSupport {
 	 */
 	public String addAgency() {
 		System.out.println("addAgency方法被调用了");
-		System.out.println("agency对象AgencyId = "+agency.getAgencyId());
 		System.out.println("agency对象agencyName = "+agency.getAgencyName());
 		System.out.println("agency对象Time = "+agency.getTime());
 		System.out.println("agency对象cotactPerson = "+agency.getCotactPerson());
@@ -220,13 +219,14 @@ public class AgencyAction extends ActionSupport {
 			return "updateError";
 
     }
+
 	/**
 	 *  获取国际院校信息到select列表中
 	 * @return
 	 */
 	public void getAgencyInformation() throws IOException{
-		List<Agency> agencyList= new ArrayList<Agency>();
-		agencyList=ad.queryAllAgency();
+		List<Agency> agencyList = new ArrayList<Agency>();
+		agencyList = ad.queryAllAgency();
 		ajaxAction.toJson(ServletActionContext.getResponse(),agencyList);
 	}
 }

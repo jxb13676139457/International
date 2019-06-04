@@ -3,7 +3,6 @@ package com.international.model;
 import java.util.Set;
 
 public class InternationalClass {
-
 	private int classId;
 	private String className;
 	private String grade;
@@ -12,7 +11,7 @@ public class InternationalClass {
 	private String reserves2;
 	private String reserves3;
 	
-	private Set<InternationalStudent> interStudents;  //关联的对象
+	private Set<InternationalStudent> interStudents;  //关联的国际班学生对象
 	
 	public Set<InternationalStudent> getInterStudents() {
 		return interStudents;

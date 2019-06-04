@@ -32,13 +32,42 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	</script>
+    
+    <script type="text/javascript">
+	      function toSubmit(){
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/overseasStudentAction!editStudent",
+		    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:$("#studentForm").serialize(),
+	    	    	  dataType:"json",	
+	    	    	  async:false,
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+	    	  );
+	      }
+	</script>
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-       
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -47,9 +76,7 @@
             <!--logo start-->
     <!--      <img src="img/logo3.png" style="width:100px;height:50px" class="col-sm-4" > -->
               <a href="index.jsp" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
-             
             <!--logo end-->              
- 
                 <ul>
                     <!-- alert notification end-->
                     <!-- user login dropdown start-->
@@ -59,7 +86,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -68,7 +95,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -85,13 +112,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -100,8 +125,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
                             <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
@@ -171,20 +196,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                    <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -198,13 +228,13 @@
 				<div class="col-lg-12">
 				
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>修改出国学生信息</li>
 					</ol>
 				</div>
 			</div>
 				  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="overseasStudentAction"><b>返回上页</b></a></button>
+                            <a href="overseasStudentAction!showStudent"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -215,21 +245,17 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="overseasStudentAction!updateStudentInfor.action">
-                                     
-                                       <div class="form-group ">
-                                       
+                                  <form class="form-validate form-horizontal" id="studentForm" method="post">
+                                    <%--    <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.id" value="${sessionScope.overStudent.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateStudent.id" value="${sessionScope.editOverStudent.id }"  type="hidden" required/>
                                           </div>
-                                      </div>
-                                     
-                                     
+                                      </div> --%>
                                       <div class="form-group ">
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.studentNo" value="${sessionScope.overStudent.studentNo }" 
+                                              <input class="form-control" name="oversea.studentId" value="${sessionScope.editOverseasStudent.studentId }" 
                                                onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
                                               style="width:300px"  type="text" required/>
                                           </div>
@@ -240,7 +266,7 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.studentName" value="${sessionScope.overStudent.studentName }" style="width:300px"  type="text"  required/>
+                                              <input class="form-control" name="oversea.studentName" value="${sessionScope.editOverseasStudent.studentName }" style="width:300px"  type="text"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -249,7 +275,7 @@
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="updateStudent.classNo" style="width:300px"   value="${sessionScope.overStudent.classNo }"
+                                              <input class="form-control"  type="text" name="className" style="width:300px"   value="${sessionScope.editOverseasStudent.classes.className }"
                                               minlength="6" required/>
                                           </div>
                                           </div>
@@ -259,68 +285,124 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.profession"  style="width:300px"  value="${sessionScope.overStudent.profession}"
+                                              <input class="form-control" name="major"  style="width:300px"  value="${sessionScope.editOverseasStudent.classes.major}"
                                              type="text"  required/>
                                           </div>
                                           </div>
                                       </div>
                                       
-                                                                                                                
-                                        <div class="form-group ">
+                                      <div class="form-group ">
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.sex" style="width:300px"   value="${sessionScope.overStudent.sex}" type="text"   required/>
+                                              <input class="form-control" name="oversea.sex" style="width:300px"   value="${sessionScope.editOverseasStudent.sex}" type="text"   required/>
                                           </div>
                                           </div>
                                       </div>
-                                        
-                                         
+                                      
+                                      <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>出国院校就读专业</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="oversea.outMajor" style="width:300px"   value="${sessionScope.editOverseasStudent.outMajor}" type="text"   required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的本校学位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inDegree" name="oversea.inDegree" value="${sessionScope.editOverseasStudent.inDegree}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的外校学位</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outDegree" name="oversea.outDegree" value="${sessionScope.editOverseasStudent.outDegree}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的本校奖学金</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inSchoolarship" name="oversea.inSchoolarship" value="${sessionScope.editOverseasStudent.inSchoolarship}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>本校奖学金金额</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="inAmount" name="oversea.inAmount" value="${sessionScope.editOverseasStudent.inAmount}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>获得的外校奖学金</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outSchoolarship" name="oversea.outSchoolarship" value="${sessionScope.editOverseasStudent.outSchoolarship}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>外校奖学金金额</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="outAmount" name="oversea.outAmount" value="${sessionScope.editOverseasStudent.outAmount}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                       <div class="form-group ">
+                                            <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>外校币种</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" id="currency" name="oversea.currency" value="${sessionScope.editOverseasStudent.currency}" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                          
                                         <div class="form-group ">
                                             <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>出国的时间</b></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>出国时间</b></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateStudent.outTime"  value="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="oversea.outTime"  value="" displayFormat="yyyy-MM-dd"/>
                                            </div>
                                           </div>
                                       </div>
-                             
                                       
                                           <div class="form-group ">
                                               <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>出国的大学</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.college" style="width:300px"  value="${sessionScope.overStudent.college}"  type="text"/>
-                                          </div>
+                                              <label for="cname" class="control-label col-lg-2"><b>出国的院校</b></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control" name="collegeName" style="width:300px"  value="${sessionScope.editOverseasStudent.college.collegeName}"  type="text"/>
+	                                          </div>
                                           </div>
                                       </div>
                                       
-                                   <%--        <div class="form-group ">
-                                              <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>替换的课程</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.replaceCourse" style="width:300px"  value="${sessionScope.overStudent.replaceCourse}"  type="text"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                          <div class="form-group ">
-                                              <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>替换的学分</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.replaceCredit" style="width:300px" 
-                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
-                                               value="${sessionScope.overStudent.replaceCredit}"  type="text"/>
-                                          </div>
-                                          </div>
-                                      </div> --%>
-                                      
-                                              
-                                          <div class="form-group ">
-                                              <div  style="margin-left:250px;margin-top:-10px">
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>类型</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.type" style="width:300px"  value="${sessionScope.overStudent.type}"  type="text"/>
+                                              <input class="form-control" name="type" style="width:300px"  value="${sessionScope.editOverseasStudent.college.type}"  type="text"/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>出国津贴(RMB)</b></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="oversea.subsidy" style="width:300px"  value="${sessionScope.editOverseasStudent.subsidy}"  type="text"/>
                                           </div>
                                           </div>
                                       </div>
@@ -328,7 +410,7 @@
                                       <div class="form-group">
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit">更新</button>
+                                              <button class="btn btn-primary" onclick="toSubmit()">更新</button>
                                           </div>
                                           </div>
                                       </div>

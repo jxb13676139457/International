@@ -209,10 +209,10 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="trainingAction!searchInformationbyTime" method="post">
+                       <form class="navbar-form" action="trainingAction!searchTraining" method="post">
                          
-                           <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd"/>至
-                           <sx:datetimepicker name="outTime" displayFormat="yyyy-MM-dd"/>
+                           <sx:datetimepicker name="searchStartTime" displayFormat="yyyy-MM-dd"/>至
+                           <sx:datetimepicker name="searchEndTime" displayFormat="yyyy-MM-dd"/>
                          
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                              <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
@@ -221,7 +221,7 @@
                             <a href="addTraining.jsp">
                              <i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="trainingAction"><i class="icon_menu"></i>&nbsp;&nbsp;
+                            <a href="trainingAction?searchStartTime=&searchEndTime="><i class="icon_menu"></i>&nbsp;&nbsp;
                             <b>显示全部</b></a></button>                       
                              
                            <button type="button" class="btn btn-default" style="width:80px;height:30px">
@@ -247,21 +247,21 @@
                                  <th>培训开始的时间</th>
                                  <th>培训结束的时间</th>
                                  <th>培训的课时</th>
-                                 <th>培训的学期</th>
+                                 <th>培训的费用</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="trainingList" var="training" status="st">
                               <tr>
-                                 <td><s:property value="#user.agency.name"/></td>
-                                 <td><s:property value="#user.startTime"/></td>
-                                 <td><s:property value="#user.outTime"/></td>
-                                 <td><s:property value="#user.courseHours"/></td>
-                                 <td><s:property value="#user.semester"/></td>
+                                 <td><s:property value="#training.agencies.agencyName"/></td>
+                                 <td><s:property value="#training.startTime"/></td>
+                                 <td><s:property value="#training.endTime"/></td>
+                                 <td><s:property value="#training.courseHours"/></td>
+                                 <td><s:property value="#training.courseFee"/></td>
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','trainingAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'trainingAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#training.traningId"/>','trainingAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#training.traningId"/>', 'trainingAction!deleteTraingingInfo?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -274,7 +274,7 @@
                      
          <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="trainingAction?pageNo=1">首页</a>]
          

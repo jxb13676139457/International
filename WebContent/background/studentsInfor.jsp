@@ -274,9 +274,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalStudentAction!showOperator">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
                   </li>
@@ -414,13 +414,13 @@
                 </li>
                         
 	               <li style="margin-top:10px">
-	                   <form class="navbar-form" action="internationalStudentAction!showOperator" method="post" enctype="multipart/form-data">
+	                   <form class="navbar-form" action="internationalStudentAction!showStudent" method="post" enctype="multipart/form-data">
 	                        <input class="form-control" name="loginUserName" placeholder="输入查找的关键字" type="text" required/>
 	                        <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
 	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
 	                        	<a href="addStudent.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
 	                        <button type="button" class="btn btn-default" style="width:120px;height:30px">
-	                        <a href="internationalStudentAction!showOperator"><i class="icon_menu"></i>&nbsp;&nbsp;
+	                        <a href="internationalStudentAction!showStudent"><i class="icon_menu"></i>&nbsp;&nbsp;
 	                        <b>显示全部</b></a></button>
 	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
 	                        	<a href="exportInterStudentExcel?searchName=${studentInformation}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -487,21 +487,32 @@
                                  <th>状态</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="students" var="student" status="st">
+                           <s:iterator value="interStudents" var="student" status="st">
                               <tr>
                                  <td><s:property value="#student.classes.grade"/></td>
-                                 <td><s:property value="#student.studentNo"/></td>
+                                 <td><s:property value="#student.studentId"/></td>
                                  <td><s:property value="#student.password"/></td>
                                  <td><s:property value="#student.studentName"/></td>
-                                    <td><s:property value="#student.reserve2"/></td>
-                                 <td><s:property value="#student.interClass.className"/></td>
-                                 <td><s:property value="#student.profession"/></td>
+                                 <td><s:property value="#student.sex"/></td>
+                                 <td><s:property value="#student.classes.className"/></td>
+                                 <td><s:property value="#student.classes.major"/></td>
                                  <td><s:property value="#student.status"/></td>
                                  <td>
+                                 <script type="text/javascript" charset="UTF-8">
+                                       		//删除指定id的学生
+                                       		function deleteStudent(studentId){
+                                       			if(confirm("你确定要删除该学生吗？")){
+                                       				location.href="internationalStudentAction!deleteInterStudent?studentId="+studentId;
+                                       			}
+                                       		}
+                                       		//修改指定id的学生
+                                       		function editStudent(studentId){
+                                       			location.href="internationalStudentAction!queryStudent?studentId="+studentId;
+                                       		}
+                                  </script> 
                                   <div class="btn-group">
-                                     <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#student.id"/>','studentInformationAction!searchStudentById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#student.id"/>', 'studentInformationAction!deleteStudent?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:editStudent('<s:property value="#student.studentId"/>')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteStudent('<s:property value="#student.studentId"/>')"><i class="icon_trash_alt"></i></a>
                                   </div>
                                   </td>
                               </tr>
@@ -510,9 +521,9 @@
                         </table>
                          </section>
                      </div> 
-      		 <s:set name="status" value="#session.status"></s:set> 
+      		<%--  <s:set name="status" value="#session.status"></s:set>  --%>
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		         <%--  <s:if test="#status==1"> 
                       <c:if test="${totalPage>0}">
                          [<a href="studentInformationAction?pageNo=1">首页</a>]
                          <c:if test="${currentPage>1}">
@@ -543,7 +554,22 @@
                                                                                                   第${currentPage}页/共${totalPage}页
                    </c:if>
                    
-                   </s:else>
+                   </s:else> --%>
+                   
+                   <!-- 分页 -->
+			  		[<a href="internationalStudentAction!showStudent?pageNo=1">首页</a>]
+						<c:choose>
+							<c:when test="${currentPage>1}">
+								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage-1}">上一页</a>]
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${currentPage<totalPage}">
+								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage+1}">下一页</a>]
+							</c:when>
+						</c:choose>
+					[<a href="internationalStudentAction!showStudent?pageNo=${totalPage}">尾页</a>]
+					第${currentPage}页/共${totalPage}页
                 </div>
               </div>
               <!-- page end-->
@@ -560,6 +586,6 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="UTF-8"></script>
   </body>
 </html>

@@ -32,14 +32,41 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+     	//用来跳转到维护操作员模块的action
+		function gotoShowAction(){
+			location.href="managerAction!showOperator";
+		}
+		//用来跳转到退出系统的action
+   		function gotoExitAction(){
+   			location.href="exitAction";
+   		}
+	</script>
+	<script type="text/javascript">
+      function toSubmit(){
+   		  $.ajax(		  
+    	      {
+	   	    	  type:"post",
+	   	    	  url:"http://localhost:8080/InternationalSys/background/exchangeStudentAction!editStudent",
+	    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+	  	  		      data:$("#studentForm").serialize(),
+	   	    	  dataType:"json",	
+	   	    	  async:false,
+	   	    	  success: function(data){
+	   	    		  if(data!=null && data!=""){
+	   	    			  alert(data);
+	   	    		  }
+	              }
+    	      }
+    	  );
+      }
+	</script>
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -60,7 +87,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -69,7 +96,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="exitAction"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -86,7 +113,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
@@ -101,9 +128,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
                   </li>
@@ -172,20 +199,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                 <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -199,13 +231,13 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>修改交换学生信息</li>
 					</ol>
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="exchangeStudentAction"><b>返回上页</b></a></button>
+                            <a href="exchangeStudentAction!showStudent"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -216,20 +248,18 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="exchangeStudentAction!updateStudentInfor.action">
-                                     
-                                       <div class="form-group ">
+                                  <form class="form-validate form-horizontal" method="post" id="studentForm">
+                                      <%--  <div class="form-group ">
                                           <div class="col-lg-10">
                                               <input class="form-control" name="updateStudent.id" value="${sessionScope.overStudent.id }"  type="hidden" required/>
                                           </div>
-                                      </div>
-                                     
+                                      </div> --%>
                                      
                                       <div class="form-group ">
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.studentNo" value="${sessionScope.overStudent.studentNo }" 
+                                              <input class="form-control" name="exchangeStudent.studentNo" value="${sessionScope.editExStudent.studentNo }" 
                                                onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
                                                type="text" style="width:300px"required/>
                                           </div>
@@ -240,87 +270,71 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.studentName" value="${sessionScope.overStudent.studentName }" type="text"  style="width:300px" required/>
+                                              <input class="form-control" name="exchangeStudent.studentName" value="${sessionScope.editExStudent.studentName }" type="text"  style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                       <div class="form-group ">
-                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="updateStudent.classNo"  value="${sessionScope.overStudent.classNo }" style="width:300px"
-                                             required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                                                           
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.profession"  value="${sessionScope.overStudent.profession}" style="width:300px"
-                                             type="text"  required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                                                                                                
-                                        <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.sex"  value="${sessionScope.overStudent.sex}" type="text"  style="width:300px" required/>
-                                          </div>
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cname" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control" name="exchangeStudent.sex"  value="${sessionScope.editExStudent.sex}" type="text"  style="width:300px" required/>
+	                                          </div>
                                           </div>
                                       </div>
                                         
-                                         
-                                        <div class="form-group ">
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+                                          	  <label for="cemail" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control"  type="text" name="exchangeStudent.className"  value="${sessionScope.editExStudent.className }" style="width:300px"
+	                                             required/>
+	                                          </div>
+                                          </div>
+                                      </div>
+                                                                           
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+                                          	  <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control" name="exchangeStudent.major"  value="${sessionScope.editExStudent.major}" style="width:300px"
+	                                             type="text"  required/>
+	                                          </div>
+                                          </div>
+                                      </div>
+                                              
+                                      <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>出国的时间</b></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>交换出国开始时间</b></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateStudent.outTime"  value="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="exchangeStudent.startTime"  value="time" displayFormat="yyyy-MM-dd"/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                                                                                        
+                                      <div class="form-group ">
+                                           <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>交换出国结束时间</b></label>
+                                          <div class="col-lg-10">
+                                              <sx:datetimepicker name="exchangeStudent.endTime" value="time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
                              
-                                      
-                                          <div class="form-group ">
-                                             <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>出国的大学</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.college" value="${sessionScope.overStudent.college}"  style="width:300px" type="text"/>
-                                          </div>
-                                          </div>
+                                      <div class="form-group ">
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                      	  <label for="cname" class="control-label col-lg-2"><b>出国的院校</b></label>
+	                                      <div class="col-lg-10">
+	                                          <input class="form-control" name="exchangeStudent.exchangeCollege" value="${sessionScope.editExStudent.exchangeCollege}"  style="width:300px" type="text"/>
+	                                      </div>
+                                      	</div>
                                       </div>
-                                      
-                            <%--               <div class="form-group ">
-                                             <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>替换的课程</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.replaceCourse" value="${sessionScope.overStudent.replaceCourse}"  style="width:300px" type="text"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                          <div class="form-group ">
-                                             <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>替换的学分</b></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="updateStudent.replaceCredit" value="${sessionScope.overStudent.replaceCredit}" 
-                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
-                                              style="width:300px"  type="text"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                       --%>
-
                                       
                                       <div class="form-group">
                                          <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit"><b>更新</b> </button>
+                                              <button class="btn btn-primary" onclick="toSubmit()"><b>更新</b></button>
                                           </div>
                                           </div>
                                       </div>

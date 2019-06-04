@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
   <head>
@@ -31,203 +32,147 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
     
-<%--          <!-- 判断有没有重复名字的管理员-->
-            <%
-			     String s=(String)request.getAttribute("addStudentInfor");
-			     if(s!=null)
-			     {
-			 %>
-			 
-				 <script type="text/javascript" language="javascript">
-				 
-					alert("<%=s%>");
-				</script>
-			<%
-			     }
-			%> --%>
-    
+    	<script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	    </script>
+	    
        <!-- 自动生成时间的js -->
-    			   <script language="javascript" type="text/javascript"> 
-						window.onload=function(){ 
-						//设置年份的选择 
-						var myDate= new Date(); 
-						var startYear=myDate.getFullYear()-5;//起始年份 
-						var endYear=myDate.getFullYear()+10;//结束年份 
-						var obj=document.getElementById('myYear');
-						
-						for (var i=startYear;i<=endYear;i++) 
-						{ 
-						obj.options.add(new Option(i,i)); 
-						}  
-					}
-			</script> 
+    	<script language="javascript" type="text/javascript"> 
+			window.onload=function(){ 
+				//设置年份的选择 
+				var myDate= new Date(); 
+				var startYear=myDate.getFullYear()-5;//起始年份 
+				var endYear=myDate.getFullYear()+10;//结束年份 
+				var obj=document.getElementById('myYear');
+				for (var i=startYear;i<=endYear;i++) 
+				{ 
+					obj.options.add(new Option(i,i)); 
+				}  
+			}
+		</script> 
 			
 		<!-- 根据年级来获取专业的信息 -->
-			<script type="text/javascript">
+		<script type="text/javascript">
+	      function profession(){
+	    	  var temp=1;
+	    	  var grade= $("#myYear").find("option:selected").val();
+	    	  if(grade!=null){
+	    		  $.ajax(			    		
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/internationalStudentAction!getProfessionInformation",
+	    	    	  data:{grade:grade},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){			
+	    	    		 var html="";
+	    	    		 html=html +'<option selected>--请选择专业--</option>';
+	                     for(var i=0; i<data.length; i++){
+                    	   for(var j=0; j<i; j++){
+                    		 if(data[i].major==(data[j].major)){
+                    			 temp=0;
+                    			 break;
+                    	   	 }
+                    	   }
+                    	   if(temp==1){
+                    		 html=html +'<option value=""+ data[i].major+"">'+data[i].major+'</option>';
+                    	   }
+                    	   temp=1;
+	                     }
+	                     $('#pro').html(html);
+	                   },
+	                   error: function(data){
+                		 var html="";
+   	    				 $('#pro').html(html);
+	                   }
+	    	    	}			    	      
+	    	  	);
+	    	  }else{
+	    		  alert("请选择一条数据!");
+	    	  }
+	      }
+		</script>
 			
-			      function profession(){
-			    	  
-			    	  
-			    	  var temp=1;
-			    	  var grade= $("#myYear").find("option:selected").val();
-		    	  
-			    	  if(grade!=null){
-			    		
-			    		  $.ajax(			    		
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getProfessionInformation",
-					    	    	  data:{grade:grade},
-					    	    	  dataType:"json",			    	
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){			
-	
-						    	    		 var html="";
-						    	    		 html=html +'<option selected>--请选择专业--</option>';
+		<!-- 根据年级和专业来获取班级的信息 -->
+		<script type="text/javascript">
+	      function getClassInformation(){
+	    	  var grade= $("#myYear").find("option:selected").val();
+	    	  var major=$("#pro").find("option:selected").text();
+	    	  //alert("major"+major);
+	    	  if(major!=null){
+	    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/internationalStudentAction!getclassInfromation",
+	    	    	  data:{major:major,grade:grade},
+	    	    	  dataType:"json",			    	
+	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	    	  traditional:true,
+	    	    	  success: function(data){
+	    	    		 var html="";
+	    	    		 html=html +'<option>--请选择班级--</option>';
+	                     for(var i=0; i<data.length; i++){
+	                    		 html=html +'<option value=""+ data[i].className+"">'+data[i].className+'</option>';
+	                     }
+	                     $('#cla').html(html);
+	                   },   
+	                   error: function(data){
+	                		 var html="";
+	                		 $('#cla').html(html);
+	                   }
+	    	      }
+		    	);
+	    	  }else{
+	    		  alert("请选择一条数据!");
+	    	  }
+	      }
+		</script> 
 			
-						                     for(var i=0; i<data.length; i++){
-						                    	
-						                    	   for(var j=0; j<i; j++){
-						                    				 
-						                    		 if(data[i].reserve2==(data[j].reserve2)){
-						                    			 temp=0;
-						                    			 break;
-						                    		 }
-						                    	 }
-						                    	 if(temp==1){
-						                    		 html=html +'<option value=""+ data[i].reserve2+"">'+data[i].reserve2+'</option>';
-						                    	 }
-						                    	 temp=1;
-						                     }
-						                     
-						                     $('#pro').html(html);
-					    	    	
-					                   },
-					                   
-					                   error: function(data){
-					                	   
-					                		 var html="";
-				    	    				 $('#pro').html(html);
-					                   }
-		  
-					    	    	  }			    	      
-					    	  
-					    	  );
-			    	  }else{
-			    		  
-			    		  alert("请选择一条数据!");
-			    	  }
-			    	  
-			    
-			      }
-			</script>
-			
-			
-				<!-- 根据年级来获取班级的信息 -->
-			<script type="text/javascript">
-			
-			      function getClassInformation(){
-			    	  
-			    	  var grade= $("#myYear").find("option:selected").val();
-			    	  var profession=$("#pro").find("option:selected").text();
-			    	  			    	   
-			    	  if(profession!=null){
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!getclassInfromation",
-					    	    	  data:{profession:profession,grade:grade},
-					    	    	  dataType:"json",			    	
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		 var html="";
-					    	    		 
-					    	    		 html=html +'<option>--请选择班级--</option>';
-					                     for(var i=0; i<data.length; i++){
-					                    	                                   
-					                    		 html=html +'<option value=""+ data[i].className+"">'+data[i].className+'</option>';
-					                    	
-					                     }
-					                     
-					                     $('#cla').html(html);
-					                   },   
-					                   error: function(data){
-					                	   
-					                		 var html="";
-					                		 $('#cla').html(html);
-					                   }
-		  
-					    
-					    	    	  
-					    	    	  
-					    	      }
-					    	      
-					    	  
-					    	  );
-			    	  }else{
-			    		  
-			    		  alert("请选择一条数据!");
-			    	  }
-			    	  
-			    
-			      }
-			</script> 
-			
-						<!-- 添加学生-->
-			<script type="text/javascript">
-			
-			      function toSubmit(){
-			    	  
-			    	  var grade= $("#myYear").find("option:selected").val();
-			    	  var studentNo = $("#studentNo").val();
-			    	  var password = $("#password").val();
-			    	  var studentName = $("#studentName").val();
-			    	  var className =$("#cla").find("option:selected").text();
-			    	  var status2= $("#status").val();
-			    	  var profession=$("#pro").find("option:selected").text();
-			    	  var sex=$("#sex").val();
-			    	  			    				    	
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!addStudent",
-					    	    	  data:{profession:profession,grade:grade,studentNo:studentNo,password:password,studentName:studentName,className:className,status2:status2,sex:sex},
-					    	    	  dataType:"json",		
-					    	    	  async:false,
-					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-					    	    	  traditional:true,
-					    	    	  success: function(data){
-					    	    		  
-					    	    		  if(data!=null){
-					    	    			  alert(data);
-					    	    		  }
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-			    	  
-			    	  
-			    
-			      }
-			</script>
+		<!-- 添加学生-->
+		<script type="text/javascript">
+		      function toSubmit(){
+		    	  var grade= $("#myYear").find("option:selected").val();
+		    	  var studentId = $("#studentNo").val();
+		    	  var password = $("#password").val();
+		    	  var studentName = $("#studentName").val();
+		    	  var className =$("#cla").find("option:selected").text();
+		    	  var status= $("#status").val();
+		    	  var major=$("#pro").find("option:selected").text();
+		    	  var sex=$("#sex").val();
+		    	  //alert("测试:"+grade+","+studentId+","+password+","+studentName+","+className+","+status+","+sex+","+major);
+	    		  $.ajax(		  
+		    	      {
+		    	    	  type:"post",
+		    	    	  url:"http://localhost:8080/InternationalSys/background/internationalStudentAction!addInterStudent?newClassName="+className+"&grade="+grade+"&major="+major+"&studentId="+studentId,
+		    	    	  data:$("#studentForm").serialize(),
+		    	    	  dataType:"json",		
+		    	    	  async:false,
+		    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+		    	    	  traditional:true,
+		    	    	  success: function(data){
+		    	    		  if(data!=null){
+		    	    			  alert(data);
+		    	    		  }
+		                   }
+		    	      }
+		    	  );
+		      }
+		</script>
   </head>
 
   <body>
   <!-- container section start -->
   
-  
-  <s:action name="internationalClassAction!getAllInfromations"  executeResult="true"></s:action>
+  <%-- <s:action name="internationClassAction"  executeResult="true"></s:action> --%>
   <section id="container" class="">
-     
-      
-       
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -236,7 +181,6 @@
             <!--logo start-->
     <!--      <img src="img/logo3.png" style="width:100px;height:50px" class="col-sm-4" > -->
               <a href="index.jsp" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
-             
             <!--logo end-->              
  
                 <ul>
@@ -248,7 +192,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -274,7 +218,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
@@ -289,8 +233,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
                             <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
                              <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
                       </ul>
@@ -360,20 +304,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+	            <!-- 动态开放此菜单项-->
+				<c:choose>
+					<c:when test="${ sessionScope.adminType eq '是'}">
+						<li class="sub-menu">
+	                      <a href="javascript:;" class="">
+	                          <i class="icon_document_alt"></i>
+	                          <span>操作员信息</span>
+	                          <span class="menu-arrow arrow_carrot-right"></span>
+	                      </a>
+	                      <ul class="sub">
+	                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+	                      </ul>
+	                    </li>    
+					</c:when>
+				</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -387,14 +336,14 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>添加学生</li>
 					</ol>
 				</div>
 			</div>
 			
 				 <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                <a href="studentInformationAction?status=1"><b>返回上页</b></a></button>
+                <a href="internationalStudentAction!showStudent"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -405,30 +354,30 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="">
+                                  <form class="form-validate form-horizontal" id="studentForm" method="post">
                                       <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
+                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>年级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                               <!-- <input class="form-control" name="addUser.grade"  type="text" style="width:300px" required/> -->
-                                         <select id="myYear" name="addUser.grade" 
-                                         style="width:150px;height:35px;border-radius:3px;-webkit-border-radius:5px;-moz-border-radius :3px;"
-                                         onchange="profession()">
-                                            <option selected>--请选择年级--</option>
-                                         </select> 
+	                                         <select id="myYear" name="grade" 
+		                                         style="width:150px;height:35px;border-radius:3px;-webkit-border-radius:5px;-moz-border-radius :3px;"
+		                                         onchange="profession()">
+	                                            <option selected>--请选择年级--</option>
+                                         	</select> 
                                           </div>
-                                          </div>
+                                        </div>
                                       </div>
                                       
                                         <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">                                      
-                                          <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" id="studentNo" name="addUser.studentNo"  type="text" style="width:300px"
+                                          <div  style="margin-left:250px;margin-top:-10px">                                      
+                                          	<label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
+                                          	<div class="col-lg-10">
+                                              <input class="form-control" id="studentNo" name="interStudent.studentId"  type="text" style="width:300px"
                                               onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
                                                required/>
-                                          </div>
-                                          <!-- 正则表达式 -->
+                                          	</div>
+                                           <!-- 正则表达式 -->
                                           </div>
                                       </div>
                                       
@@ -436,7 +385,7 @@
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>密码 </b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  id="password" type="text" name="addUser.password"  value="888888" style="width:300px" minlength="6" required/>
+                                              <input class="form-control"  id="password" type="text" name="interStudent.password"  value="888888" style="width:300px" minlength="6" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -445,7 +394,7 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" id="studentName" name="addUser.studentName"  type="text" style="width:300px"  required/>
+                                              <input class="form-control" id="studentName" name="interStudent.studentName"  type="text" style="width:300px"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -454,7 +403,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <select id="pro" name="addUser.profession" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
+                                              <select id="pro" name="major" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
                                                 onchange="getClassInformation()">                               
                                
                                             </select>
@@ -466,11 +415,7 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                           <!--    <input class="form-control" name="className"  type="text" style="width:300px" required/>
-                                 -->
-                                                <select id="cla" name="className" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">                           
-                                            
-                                            </select>
+                                                <select id="cla" name="newClassName" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"></select>                      
                                           </div>
                                           </div>
                                       </div>
@@ -478,7 +423,7 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cemail" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <select name="addUser.reserve2"  id="sex"  style="width:90px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"  required>
+                                              <select name="interStudent.sex"  id="sex"  style="width:90px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"  required>
                                                     <option selected>男</option>
                                                     <option>女</option>
 
@@ -486,14 +431,13 @@
                                           </div>
                                           </div>
                                       </div>
-                                                       
                                          
                                         <div class="form-group ">
                                             <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>备注</b></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>状态</b></label>
                                           <div class="col-lg-10">
                                               <!-- <input class="form-control" id="status" name="addUser.status" style="width:300px"  type="text"/> -->
-                                                <select name="addUser.status"  id="status" style="width:90px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;" >
+                                                <select name="interStudent.status"  id="status" style="width:90px;height:30px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;" >
                                                     <option selected>在班</option>
                                                     <option>已出国</option>
                                                     <option>已转班</option>

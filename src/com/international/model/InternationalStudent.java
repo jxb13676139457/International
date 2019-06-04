@@ -1,17 +1,16 @@
 package com.international.model;
 
 public class InternationalStudent {
-
 	private String studentId;
 	private String studentName;
 	private String sex;
 	private String password; 
 	private String status;
-	//private int classId;
 	private String reserves1;
 	private String reserves2;
 	private String reserves3;
 	
+	private int classId;
 	private InternationalClass classes;		//定义InternationalClass类的classes对象
 
 	public String getStudentId() {
@@ -44,12 +43,6 @@ public class InternationalStudent {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-//	public int getClassId() {
-//		return classId;
-//	}
-//	public void setClassId(int classId) {
-//		this.classId = classId;
-//	}
 	public String getReserves1() {
 		return reserves1;
 	}
@@ -74,5 +67,10 @@ public class InternationalStudent {
 	public void setClasses(InternationalClass classes) {
 		this.classes = classes;
 	}
-	
+	public int getClassId() {
+		return classId;
+	}
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
 }

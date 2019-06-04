@@ -34,25 +34,35 @@
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
     
-    		<script type="text/javascript">
-			      function toSubmit(){
-			    		  $.ajax(		  
-				    	      {
-				    	    	  type:"post",
-				    	    	  url:"http://localhost:8080/InternationalSys/background/managerAction!editLoginUser",
-					    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
-			    	  		      data:$("#loginUserForm").serialize(),
-				    	    	  dataType:"json",	
-				    	    	  async:false,
-				    	    	  success: function(data){
-				    	    		  if(data!=null && data!=""){
-				    	    			  alert(data);
-				    	    		  }
-				                   }
-				    	      }
-				    	  );
-			      }
-			</script>
+    <script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	</script>
+  	<script type="text/javascript">
+	      function toSubmit(){
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/managerAction!editLoginUser",
+		    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:$("#loginUserForm").serialize(),
+	    	    	  dataType:"json",	
+	    	    	  async:false,
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+	    	  );
+	      }
+	</script>
   </head>
 
   <body>
@@ -197,7 +207,7 @@
                           <li><a class="" href="javascript:gotoExitAction();"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  <!-- 动态开放此菜单项-->
+                   <!-- 动态开放此菜单项-->
 					<c:choose>
 						<c:when test="${ sessionScope.adminType eq '是'}">
 							<li class="sub-menu">
@@ -207,7 +217,7 @@
 		                          <span class="menu-arrow arrow_carrot-right"></span>
 		                      </a>
 		                      <ul class="sub">
-		                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
 		                      </ul>
 		                    </li>    
 						</c:when>
@@ -276,15 +286,15 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>性别</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="admin.sex" value="${sessionScope.editAdmin.sex }" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="admin.sex" value="${sessionScope.editAdmin.sex }" style="width:300px" type="text" disabled required/>
                                           </div>
                                           </div>
                                       </div>
                                       <div class="form-group ">
                                           <div  style="margin-left:250px">
-                                          <label for="cname" class="control-label col-lg-2">是否管理员<span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>是否管理员</b></label>
                                           <div class="col-lg-10">
-                                              <select name="admin.type" value="${sessionScope.editAdmin.type }" style="width:250px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
+                                              <select name="admin.type" style="width:250px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
                                               	<option>否</option>
                                                 <option>是</option>
                                               </select>
