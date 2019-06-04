@@ -280,7 +280,7 @@
                             [<a href="agencyAgreementAction?pageNo=${currentPage+1}&search=${search}">下一页</a>]
                           </c:if>
          
-                         [<a href="agencyAgreementAction?pageNo=${totalPage}&search=${search}">尾页</a>]	
+                         [<a href="agencyAgreementAction?pageNo=${totalPage}&search=${sear">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       
