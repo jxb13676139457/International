@@ -104,7 +104,7 @@ public class StudentActivityAction extends ActionSupport{
 	public String showStuActivity(){
 		//查询所有数据存于集合对象中
 		studentActivites = sad.queryStuActivities(loginUserName);
-		System.out.println("查询全部的："+studentActivites);
+		//System.out.println("查询全部的："+studentActivites);
 		if(studentActivites!=null) {
 			if(studentActivites.size()%pageSize==0){
 				totalPage = studentActivites.size()/pageSize; 
@@ -118,7 +118,7 @@ public class StudentActivityAction extends ActionSupport{
 			}
 			//分页，根据当前页查询要在该页上显示的4条数据
 			studentActivites = sad.queryByPage(loginUserName,pageNo,pageSize);
-			System.out.println(studentActivites);
+			//System.out.println(studentActivites);
 			//设置当前页
 			currentPage = pageNo;
 			if(studentActivites!=null){

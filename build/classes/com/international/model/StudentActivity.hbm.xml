@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.StudentActivity" table="StudentActivity">
+		<id name="activityId" column="activityId">
+			<!-- 自增主键生成策略 -->
+			<generator class="native"></generator>
+		</id>
+		<property name="studentId" column="studentId"></property>
+		<property name="studentName" column="studentName"></property>
+		<property name="activityName" column="activityName"></property>
+		<property name="startTime" column="startTime"></property>
+		<property name="endTime" column="endTime"></property>
+		<property name="fee" column="Fee"></property>
+		<property name="currency" column="Currency"></property>
+		<property name="activityContent" column="activityContent"></property>
+		
+		<!-- 单向n->1关联，外键，由ExchangeStudent指向College -->
+		<many-to-one name="college" class="com.international.model.College"
+		lazy="false" fetch="join" column="collegeId"/>
+	</class>
+</hibernate-mapping>

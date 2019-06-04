@@ -61,14 +61,14 @@
 			<!-- 添加学生活动-->
 			<script type="text/javascript">
 			      function toSubmit(){
-			    	  console.log("测试有无执行此方法");
+			    	  //console.log("测试有无执行此方法");
 			    	  var collegeName= $("#collegeName").val();
 			    	  var studentId = $("#studentNo").val();
 			    	  var startTime = dojo.widget.byId("startTime").getValue();
 			    	  var endTime = dojo.widget.byId("endTime").getValue();
 			    	  var activityName = $("#activityName").val();
 			    	  var content = $("#content").val();
-			    	  alert("测试："+collegeName+","+studentId+","+startTime+","+endTime+","+activityName+","+content);
+			    	  //alert("测试："+collegeName+","+studentId+","+startTime+","+endTime+","+activityName+","+content);
 		    		  $.ajax(		  
 			    	      {
 			    	    	  type:"post",
