@@ -1,8 +1,13 @@
 package com.international.actions.ielts;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.international.common.ajaxAction;
 import com.international.dao.AgencyDao;
 import com.international.model.Agency;
 import com.opensymphony.xwork2.ActionContext;
@@ -215,4 +220,13 @@ public class AgencyAction extends ActionSupport {
 			return "updateError";
 
     }
+	/**
+	 *  获取国际院校信息到select列表中
+	 * @return
+	 */
+	public void getAgencyInformation() throws IOException{
+		List<Agency> agencyList= new ArrayList<Agency>();
+		agencyList=ad.queryAllAgency();
+		ajaxAction.toJson(ServletActionContext.getResponse(),agencyList);
+	}
 }

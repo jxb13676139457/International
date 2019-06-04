@@ -209,15 +209,15 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                     <form class="navbar-form" action="agencyProtocolAction!searchInformation" method="post">
-                            <input class="form-control" name="agencyProtocolName" placeholder="输入查找的机构" type="text" required/>
+                     <form class="navbar-form" action="agencyAgreementAction" method="post">
+                            <input class="form-control" name="search" placeholder="输入查找的机构" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
                             <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                              
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAgencyProtocol.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="agencyProtocolAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="agencyAgreementAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                            
                         <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAgencyProtocolExcel?searchName= ${agencyProtocolName} "><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -245,18 +245,18 @@
                                  <th>下载协议</th>	             
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="agencyAgreements" var="user" status="st">
                               <tr>
-                                   <td><s:property value="#user.agency.name"/></td>
+                                   <td><s:property value="#user.agen.agencyName"/></td>
                                     <td><s:property value="#user.title"/></td>
                                  <td><s:property value="#user.time"/></td>
                                  <td><s:property value="#user.type"/></td>                          
-                                 <td><a href="downLoad.action?fileName=<s:property value="#user.name"/>"><s:property value="#user.name"/></a></td>
+                                 <td><a href="downLoad.action?fileName=<s:property value="#user.fileName"/>"><s:property value="#user.fileName"/></a></td>
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','agencyProtocolAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'agencyProtocolAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.agreementId"/>','agencyAgreementAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.agreementId"/>', 'agencyAgreementAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -268,19 +268,19 @@
                      </div> 
              <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="agencyProtocolAction?pageNo=1">首页</a>]
+                         [<a href="agencyAgreementAction?pageNo=1&search=${search}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="agencyProtocolAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="agencyAgreementAction?pageNo=${currentPage-1}&search=${search}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="agencyProtocolAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="agencyAgreementAction?pageNo=${currentPage+1}&search=${search}">下一页</a>]
                           </c:if>
          
-                         [<a href="agencyProtocolAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="agencyAgreementAction?pageNo=${totalPage}&search=${search}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       

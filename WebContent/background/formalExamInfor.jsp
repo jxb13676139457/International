@@ -210,17 +210,17 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="formalExamAction!searchInformationbyTime" method="post">
+                       <form class="navbar-form" action="examAction" method="post">
                           <div style="color:#000000">
-                          <label>请输入正式考试时间：</label>
-                           <sx:datetimepicker name="searchFormalTime" displayFormat="yyyy-MM-dd"/>
+                          <label>请输入考试时间：</label>
+                           <sx:datetimepicker name="ExamTime" displayFormat="yyyy-MM-dd" value="ExamTime"/>
                          
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><b>搜索</b></button>
                          
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addFormalExam.jsp"><b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="formalExamAction"><b>显示全部</b></a></button>
+                            <a href="examAction?ExamTime="><b>显示全部</b></a></button>
                             
                              
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
@@ -243,28 +243,24 @@
                            <tbody>
                               <tr style="background-color:#ededed">
                                    <th>雅思机构</th>
-                                 <th>培训开始的时间</th>
-                                 <th>培训结束的时间</th>
-                                 <th>培训的课时</th>
-                                 <th>培训的学期</th>
-                                 <th>正式考试的时间</th>
-                                 <th>正式考试的地点</th>
+                                 <th>考试时间</th>
+                                 <th>考试地点</th>
+                                 <th>考试类型</th>
+                                 
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="ListExam" var="ListExam" status="st">
                               <tr>
-                                <td><s:property value="#user.train.agency.name"/></td>
-                                 <td><s:property value="#user.train.startTime"/></td>
-                                 <td><s:property value="#user.train.outTime"/></td>
-                                 <td><s:property value="#user.train.courseHours"/></td>
-                                 <td><s:property value="#user.train.semester"/></td>
-                                 <td><s:property value="#user.time"/></td>
-                                 <td><s:property value="#user.location"/></td>
+                                <td><s:property value="#ListExam.agen.agencyName"/></td>
+                                 <td><s:property value="#ListExam.time"/></td>
+                                 <td><s:property value="#ListExam.location"/></td>
+                                 <td><s:property value="#ListExam.examType"/></td>
+                     
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','formalExamAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'formalExamAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#ListExam.examId"/>','examAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#ListExam.examId"/>', 'examAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -276,19 +272,19 @@
                      </div> 
        <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="formalExamAction?pageNo=1">首页</a>]
+                         [<a href="examAction?pageNo=1&ExamTime=${ExamTime}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="formalExamAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="examAction?pageNo=${currentPage-1}&ExamTime=${ExamTime}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="formalExamAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="examAction?pageNo=${currentPage+1}&ExamTime=${ExamTime}">下一页</a>]
                           </c:if>
          
-                         [<a href="formalExamAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="examAction?pageNo=${totalPage}&ExamTime=${ExamTime}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

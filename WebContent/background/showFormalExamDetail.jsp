@@ -32,6 +32,37 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+			
+			      function toSubmit(){
+			    	  		    	
+			    	  //var agencyName= $("#agencyName").val();   	  
+			    	  
+			    	  
+			    		  $.ajax(		  
+					    	      {
+					    	    	  
+					    	    	  type:"post",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/examAction!updateInfor",
+					    	    	  //data:{agencyName:agencyName,startTime:startTime,outTime:outTime,courseHours2:courseHours2,semester:semester,formalTime:formalTime,location:location},
+					    	    	  data:$("#UpdateExamForm").serialize(),
+					    	    	  async:false,
+					    	    	  dataType:"json",			    	
+					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+					    	    	  traditional:true,
+					    	    	  success: function(data){
+					    	    	
+					    	    		  alert(data);
+					    	    	  }
+					    	      }
+
+					    	  );
+			    	  
+			    
+			      }
+			</script>
+			
   </head>
 
   <body>
@@ -205,7 +236,7 @@
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="formalExamAction"><b>返回上页</b></a></button>
+                            <a href="examAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -216,12 +247,12 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="formalExamAction!updateInfor.action">
+                                  <form class="form-validate form-horizontal" id="UpdateExamForm" method="post" action="">
                                      
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateExam.examId" value="${sessionScope.currExam.examId }"  type="hidden" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -231,61 +262,19 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                               <label for="cname" class="control-label col-lg-2"><b>雅思机构</b><span class="required" style="color:red">*</span></label>
                                              <div class="col-lg-10">
-                                              <input class="form-control" name="agencyName" value="${sessionScope.currentUser.train.agency.name }" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="agencyName" value="${sessionScope.currExam.agen.agencyName }" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
-                                     
+           
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训开始的时间</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>考试类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                           <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd" value="startTime"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                         
-                                      <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训结束的时间</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <sx:datetimepicker name="outTime" displayFormat="yyyy-MM-dd" value="outTime"/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                         
-                                      <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学分</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                                  <select name="courseHours"  style="width:100px;height:30px" value="courseHours" required>                                                   
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                    <option>9</option>
-                                                    <option>10</option>
-                                                    
-                                              </select>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                         
-                                      <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学期</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                               <select name="semester"  style="width:100px;height:30px" value="semester" required>
+                                               <select name="updateExam.examType"  style="width:100px;height:30px" value="${sessionScope.currExam.examType}" required>
                                                    
-                                                    <option>1</option>
-                                                    <option>2</option>
+                                                    <option>模拟考试</option>
+                                                    <option>正式考试</option>
 
                                               </select>
                                           </div>
@@ -294,18 +283,18 @@
                                       
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>正式考试的时间</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>考试的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" displayFormat="yyyy-MM-dd" value="formalTime"/>
+                                              <sx:datetimepicker name="updateExam.time" displayFormat="yyyy-MM-dd" value="ExamTime"/>
                                           </div>
                                           </div>
                                       </div>
                                       
                                         <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>正式考试的地址</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>考试的地点</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.location" style="width:300px" type="text" value="${sessionScope.currentUser.location}"  required/>
+                                              <input class="form-control" name="updateExam.location" style="width:300px" type="text" value="${sessionScope.currExam.location}"  required/>
                                           </div>
                                           </div>
                                       </div>
@@ -313,7 +302,7 @@
                                       <div class="form-group">
                                       <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit"><b>更新</b> </button>
+                                              <button class="btn btn-primary" onclick="toSubmit()"><b>更新</b> </button>
                                           </div>
                                           </div>
                                       </div>
