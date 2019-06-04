@@ -19,7 +19,7 @@ public class TrainingAction extends ActionSupport {
 	private String agencyName;
 	private TrainingDao td;
 	private AgencyDao ad;
-	private List trainingList;
+	private List<Training> trainingList;
 	private Training training;
 	Map m;
 	private String searchStartTime="";
@@ -132,6 +132,10 @@ public class TrainingAction extends ActionSupport {
 		}
 		//根据当前页查询要在该页上显示的数据
 		trainingList=td.queryTraining(searchStartTime,searchEndTime,pageNo,pageSize);
+		for(int i=0;i<trainingList.size();i++) {
+			trainingList.get(i).setStartTime(trainingList.get(i).getStartTime().substring(0, 10));
+			trainingList.get(i).setEndTime(trainingList.get(i).getEndTime().substring(0, 10));
+		}
 		//System.out.println("id = "+classes.get(0).getClassId());
 		//设置当前页
 		currentPage=pageNo;

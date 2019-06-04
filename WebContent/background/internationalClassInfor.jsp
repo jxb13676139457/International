@@ -293,7 +293,6 @@
                                   <th>专业</th>                            
                                  <th>班级名称</th>
                                  <th>操作</th>
-                                 <th>索引</th>
                               </tr>
                            <s:iterator value="#session.classes" var="class" status="st">
                               <tr>        
@@ -306,7 +305,6 @@
                                       <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#class.classId"/>','internationClassAction!deleteClass?id=')"><i class="icon_trash_alt"></i></a>
                                   </div>
                                   </td>
-                                  <td><s:property value="#class.classId"/></td>
                               </tr>
                               </s:iterator>                             
                            </tbody>

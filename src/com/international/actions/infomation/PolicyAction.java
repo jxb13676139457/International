@@ -128,6 +128,9 @@ public class PolicyAction extends ActionSupport {
 		}
 		//根据当前页查询要在该页上显示的数据
 		policyList=pd.queryPolicy(searchPolicy,pageNo,pageSize);
+		for(int i=0;i<policyList.size();i++) {
+			policyList.get(i).setTime(policyList.get(i).getTime().substring(0, 10));
+		}
 		//System.out.println("id = "+classes.get(0).getClassId());
 		//设置当前页
 		currentPage=pageNo;

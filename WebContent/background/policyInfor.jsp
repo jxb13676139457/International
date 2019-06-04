@@ -319,8 +319,8 @@
                                  <td><s:property value="#policy.title"/></td>                              
                                  <td><s:property value="#policy.time"/></td>       
                                  <td><s:property value="#policy.source"/></td>      
-                                  <td><a href="downLoad.action?fileName=<s:property value="#user.name"/>">
-                                  <s:property value="#user.name"/></a></td>             
+                                  <td><a href="downLoad.action?fileName=<s:property value="#policy.fileName"/>">
+                                  <s:property value="#policy.fileName"/></a></td>             
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 

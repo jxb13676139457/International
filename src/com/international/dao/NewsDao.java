@@ -56,7 +56,7 @@ public class NewsDao {
 		try {
 			//hql语句
 			session=sessionFactory.openSession();
-			String hql1 = "time like '%"+value+"%'";
+			String hql1 = "convert(varchar,time,120) like '%"+value+"%'";
 			
 			String str = hql1;
 			//获取所有数据
