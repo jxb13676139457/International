@@ -93,6 +93,11 @@ public class NoticeAction extends ActionSupport{
 		System.out.println(searchNoticeTime);
 		//计算总页数
 		System.out.println("notices = "+notices);
+		if(notices==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(notices.size()%pageSize==0){
 			totalPage=notices.size()/pageSize;
 		}else{

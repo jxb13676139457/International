@@ -94,6 +94,11 @@ public class NewsAction extends ActionSupport{
 		System.out.println("searchNews = "+searchNews);
 		//计算总页数
 		System.out.println("newsList = "+newsList);
+		if(newsList==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(newsList.size()%pageSize==0){
 			totalPage=newsList.size()/pageSize;
 		}else{

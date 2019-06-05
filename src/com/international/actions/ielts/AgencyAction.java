@@ -97,6 +97,11 @@ public class AgencyAction extends ActionSupport {
 		System.out.println("searchAgency = "+searchAgency);
 		//计算总页数
 		System.out.println("newsList = "+agencyList);
+		if(agencyList==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(agencyList.size()%pageSize==0){
 			totalPage=agencyList.size()/pageSize;
 		}else{

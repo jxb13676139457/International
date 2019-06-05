@@ -210,14 +210,31 @@ public class TrainingDao {
 		Session session=null;
 		try{
 			session=sessionFactory.openSession();
+			//保存数据回数据库
+			Transaction trans=session.beginTransaction();
+			//调用保存更新方法
+			session.saveOrUpdate(training);
+			trans.commit();
+			return true;
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}	
+		/*Session session=null;
+		try{
+			session=sessionFactory.openSession();
 			Training oldTraining=(Training)session.get(Training.class, id);
 			System.out.println("updateTraining方法中的Id = "+id);
+			System.out.println("oldTraining对象种的Id = "+training.getTraningId());
 			oldTraining.setAgencies(training.getAgencies());
 			oldTraining.setStartTime(training.getStartTime());
 			oldTraining.setEndTime(training.getEndTime());
 			oldTraining.setCourseFee(training.getCourseFee());
 			oldTraining.setCourseHours(training.getCourseHours());
-			System.out.println("updateTraining方法中的Id = "+oldTraining.getAgencies().getAgencyId());
+			System.out.println("oldTraining.getAgencies().getAgencyId()中的Id = "+oldTraining.getAgencies().getAgencyId());
 			Transaction trans=session.beginTransaction();
 			session.update(oldTraining);
 			trans.commit();
@@ -229,6 +246,7 @@ public class TrainingDao {
 		}finally{
 			session.close();
 		}	
+		*/
 	}
 
 	

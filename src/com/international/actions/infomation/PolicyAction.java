@@ -116,6 +116,11 @@ public class PolicyAction extends ActionSupport {
 		System.out.println(searchPolicy);
 		//计算总页数
 		System.out.println("policyList = "+policyList);
+		if(policyList==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(policyList.size()%pageSize==0){
 			totalPage=policyList.size()/pageSize;
 		}else{

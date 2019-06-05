@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="com.international.model.Training" table="Training">
-		<id name="traningId" column="traningId">
+		<id name="traningId" column="trainingId">
 			<generator class="native"></generator>
 		</id>
 		<property name="courseHours" column="courseHours"></property>
