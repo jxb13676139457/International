@@ -58,12 +58,16 @@
     </style>
   </head>
 
-	<script type="text/javascript">
+<%-- 	<script type="text/javascript">
      	//用来跳转到维护操作员模块的action
 		function gotoShowAction(){
 			location.href="managerAction!showOperator";
 		}
-    </script>
+		//用来跳转到退出系统的action
+		function gotoExitAction(){
+			location.href="exitAction";
+		}
+    </script> --%>
         
   <body>
   <!-- container section start -->
@@ -95,13 +99,7 @@
                              <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                          </li>
                          <li>
-                         	<script type="text/javascript">
-	                            	//用来跳转到退出系统的action
-	                        		function gotoExitAction(){
-	                        			location.href="exitAction";
-	                        		}
-                            </script>
-                             <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
+                             <a href="exitAction"><i class="icon_key_alt"></i>退出登录</a>
                          </li>
                      </ul>
                  </li>
@@ -157,7 +155,7 @@
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
                           <li><a class="" href="trainingAction">维护雅思培训计划信息</a></li>     
                           <li><a class="" href="simulationExamAction">维护考试信息</a></li>     
-                          <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划信息</a></li>  
+                          <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划</a></li>  
                           <li><a class="" href="participateSimulationExamAction">维护参与考试信息</a></li>  
                           <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
@@ -197,7 +195,7 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="javascript:gotoExitAction();"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   <!-- 动态开放此菜单项-->
@@ -210,7 +208,7 @@
 		                          <span class="menu-arrow arrow_carrot-right"></span>
 		                      </a>
 		                      <ul class="sub">
-		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                          <li><a class="" href="managerAction!showOperator">维护操作员信息</a></li>                          
 		                      </ul>
 		                    </li>    
 						</c:when>
@@ -224,50 +222,45 @@
       <!--主体内容标题部分-->
       <section id="main-content">
           <section class="wrapper">            
-              <!--overview start-->
-			  <div class="row">
+             <!--overview start-->
+			 <div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="#"><b>首页</b></a></li>					  	
 					</ol>
 				</div>
-			</div>
+			 </div>
               
-               <div class="main_top_location">
+             <div class="main_top_location">
 	             <p style="text-align:center;font-size:24px;font-weight:bold"><b>新闻中心</b></p><hr>
 	         </div>
 			     
-	       <div class="main-body_list">
-	          <ul>
-	           <s:iterator value="newsList" var="user" status="st">
-	             <li>
-	                 <div style="float:left">
+	         <div class="main-body_list">
+		          <ul>
+		           <s:iterator value="newsList" var="user" status="st">
+		             <li>
+		                 <div style="float:left">
 	                        <a href="<s:property value="#user.newsUrl"/>">
-                                 <b> <s:property value="#user.title"/></b></a>
- 	                 </div>
-	                 <span  style="float:right"> <b><s:property value="#user.time"/></b></span>
-	             </li>
-	             
-	           </s:iterator>
-	       
-	          </ul>
-		  </div>
+	                        <b><s:property value="#user.title"/></b></a>
+	 	                 </div>
+		                 <span  style="float:right"> <b><s:property value="#user.time"/></b></span>
+		             </li>
+		           </s:iterator>
+		          </ul>
+		  	 </div>
           </section>
       </section>
       
       <section>
-  <!--       	     <div class="footer">
+<!--   <div class="footer">
 	 		  <div style="text-align:center;margin-top:50px; background-color:#104E8B; font-size:30px;color:white;" >
 	 		     Copyright ©北京理工大学珠海学院-国际交流合作处-All Rights Reserved.
 	 		 </div>
 	   </div>	 -->
       </section>
-      
     </section>
-
-              
   <!-- container section start -->
-
+  
     <!-- javascripts -->
     <script src="js/jquery.js"></script>
 	<script src="js/jquery-ui-1.10.4.min.js"></script>
