@@ -113,5 +113,11 @@
 		</property>
 	</bean>
 	
+	<!-- 学生参与雅思培训计划的bean -->
+	<bean id="attendTrainingDao" class="com.international.dao.AttendTrainingDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 </beans>
 						

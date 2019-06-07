@@ -150,5 +150,10 @@
 		</property>
 	</bean>
 
-	
+	<!-- 学生参与雅思培训计划的bean -->
+	<bean id="attendTrainingAction" class="com.international.actions.ielts.AttendTrainingAction">
+		<property name="atd">
+			<ref bean="attendTrainingDao"/>
+		</property>
+	</bean>
 </beans>

@@ -155,12 +155,10 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
-                          <li><a class="" href="trainingAction">维护雅思培训信息</a></li>     
-                          <li><a class="" href="simulationExamAction">维护模拟考试信息</a></li>     
-                          <li><a class="" href="formalExamAction">维护正式考试信息</a></li>   
-                          <li><a class="" href="participateTrainingAction">维护参与培训计划信息</a></li>  
-                          <li><a class="" href="participateSimulationExamAction">维护参与模拟考试信息</a></li>  
-                          <li><a class="" href="participateFormalExamAction">维护参与正式考试信息</a></li>  
+                          <li><a class="" href="trainingAction">维护雅思培训计划信息</a></li>     
+                          <li><a class="" href="simulationExamAction">维护考试信息</a></li>     
+                          <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划信息</a></li>  
+                          <li><a class="" href="participateSimulationExamAction">维护参与考试信息</a></li>  
                           <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
