@@ -176,7 +176,7 @@ public class AgencyDao {
 	/*查询符合条件的机构*/
 	public List<Agency> queryAgenciesByHql(String agencyName) {
 		System.out.println("agencyName = "+agencyName);
-		System.out.println("queryAgencyByHql被调用");
+		System.out.println("queryAgencyByHql被调用---设置关联表数据");
 		Session session=null;
 		try {
 			session=sessionFactory.openSession();
