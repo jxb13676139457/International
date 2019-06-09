@@ -165,12 +165,6 @@
 			<param name="savePath">/upload/agencyAgreement</param>
 		</action>
 		
-		<!-- 学生模块的Action -->
-		<action name="internationalStudentAction" class="internationalStudentAction">
-		
-		</action>
-		
-
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
@@ -228,6 +222,19 @@
 			<result name="detailSucc">/background/showExchangeStudentDetail.jsp</result>
 		</action>
 		
+		<!-- 学生夏令营活动的Action -->
+		<action name="studentActivityAction" class="studentActivityAction">
+			<result name="success">/background/studentActivitiesInfor.jsp</result>
+			<result name="input">/background/studentActivitiesInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">studentActivityAction!showStuActivity</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">studentActivityAction!showStuActivity</param>
+			</result>
+			<result name="detailSucc">/background/showStudentActivitiesDetail.jsp</result>
+		</action>
+		
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
@@ -267,6 +274,19 @@
 				<param name="actionName">trainingAction</param>
 			</result>
 			<result name="updateError">/background/trainingInfor.jsp</result>
+		</action>
+		
+		<!-- 学生参与雅思培训计划的Action -->
+		<action name="attendTrainingAction" class="attendTrainingAction">
+			<result name="success">/background/participateTrainingInfor.jsp</result>
+			<result name="input">/background/participateTrainingInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">attendTrainingAction!showAttend</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">attendTrainingAction!showAttend</param>
+			</result>
+			<result name="detailSucc">/background/showParticipateTrainingDetail.jsp</result>
 		</action>
 
 	</package>

@@ -183,7 +183,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalClassAction">维护班级信息</a></li>
+                          <li><a class="" href="internationClassAction">维护班级信息</a></li>
                       </ul>
                   </li>
                   
@@ -313,7 +313,6 @@
                                  <th>通知作者</th>
                                                         
                                  <th>操作</th>
-                                 <th>索引</th>
                               </tr>
                            <s:iterator value="#session.notices" var="notice" status="st">
                               <tr>
@@ -329,7 +328,6 @@
                             
                                   </div>
                                   </td>
-                                  <td><s:property value="#notice.noticeId"/></td>  
                               </tr>
                               </s:iterator>                             
                            </tbody>

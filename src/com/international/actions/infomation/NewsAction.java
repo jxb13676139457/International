@@ -94,6 +94,11 @@ public class NewsAction extends ActionSupport{
 		System.out.println("searchNews = "+searchNews);
 		//计算总页数
 		System.out.println("newsList = "+newsList);
+		if(newsList==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(newsList.size()%pageSize==0){
 			totalPage=newsList.size()/pageSize;
 		}else{
@@ -106,6 +111,9 @@ public class NewsAction extends ActionSupport{
 		}
 		//根据当前页查询要在该页上显示的数据
 		newsList=nd.queryNews(searchNews,pageNo,pageSize);
+		for(int i=0;i<newsList.size();i++) {
+			newsList.get(i).setTime(newsList.get(i).getTime().substring(0, 10));
+		}
 		//System.out.println("id = "+classes.get(0).getClassId());
 		//设置当前页
 		currentPage=pageNo;

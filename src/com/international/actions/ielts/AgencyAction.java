@@ -97,6 +97,11 @@ public class AgencyAction extends ActionSupport {
 		System.out.println("searchAgency = "+searchAgency);
 		//计算总页数
 		System.out.println("newsList = "+agencyList);
+		if(agencyList==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(agencyList.size()%pageSize==0){
 			totalPage=agencyList.size()/pageSize;
 		}else{
@@ -109,6 +114,9 @@ public class AgencyAction extends ActionSupport {
 		}
 		//根据当前页查询要在该页上显示的数据
 		agencyList=ad.queryAgency(searchAgency,pageNo,pageSize);
+		for(int i=0;i<agencyList.size();i++) {
+			agencyList.get(i).setTime(agencyList.get(i).getTime().substring(0, 10));
+		}
 		//System.out.println("id = "+classes.get(0).getClassId());
 		//设置当前页
 		currentPage=pageNo;
@@ -139,6 +147,7 @@ public class AgencyAction extends ActionSupport {
 		//根据当前页查询要在该页上显示的数据
 		System.out.println("searchAgency = "+searchAgency);
 		agencyList=ad.queryAgency(searchAgency,pageNo,pageSize);
+		
 		//设置当前页
 		currentPage=pageNo;
 		m.put("agencyList", agencyList);

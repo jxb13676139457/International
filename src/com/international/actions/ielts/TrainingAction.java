@@ -19,7 +19,7 @@ public class TrainingAction extends ActionSupport {
 	private String agencyName;
 	private TrainingDao td;
 	private AgencyDao ad;
-	private List trainingList;
+	private List<Training> trainingList;
 	private Training training;
 	Map m;
 	private String searchStartTime="";
@@ -120,21 +120,28 @@ public class TrainingAction extends ActionSupport {
 		System.out.println("searchEndTime = "+searchEndTime);
 		//计算总页数
 		System.out.println("trainingList = "+trainingList);
-		if(trainingList.size()%pageSize==0){
-			totalPage=trainingList.size()/pageSize;
-		}else{
-			totalPage=trainingList.size()/pageSize+1;
+		if(trainingList!=null) {
+			if(trainingList.size()%pageSize==0){
+				totalPage=trainingList.size()/pageSize;
+			}else{
+				totalPage=trainingList.size()/pageSize+1;
+			}
+			if(pageNo<=0){
+				pageNo=1;
+			}else if(pageNo>totalPage){
+				pageNo=totalPage;
+			}
+		
+			//根据当前页查询要在该页上显示的数据
+			trainingList=td.queryTraining(searchStartTime,searchEndTime,pageNo,pageSize);
+			for(int i=0;i<trainingList.size();i++) {
+				trainingList.get(i).setStartTime(trainingList.get(i).getStartTime().substring(0, 10));
+				trainingList.get(i).setEndTime(trainingList.get(i).getEndTime().substring(0, 10));
+			}
+			//System.out.println("id = "+classes.get(0).getClassId());
+			//设置当前页
+			currentPage=pageNo;
 		}
-		if(pageNo<=0){
-			pageNo=1;
-		}else if(pageNo>totalPage){
-			pageNo=totalPage;
-		}
-		//根据当前页查询要在该页上显示的数据
-		trainingList=td.queryTraining(searchStartTime,searchEndTime,pageNo,pageSize);
-		//System.out.println("id = "+classes.get(0).getClassId());
-		//设置当前页
-		currentPage=pageNo;
 		m.put("trainingList", trainingList);
 		System.out.println("trainingList = "+trainingList);
 		
@@ -246,7 +253,7 @@ public class TrainingAction extends ActionSupport {
 		training = td.getTrainingInforById(id);
 		if(training!=null) {
 			System.out.println("training对象信息 = "+training);
-			System.out.println("training对象ID = "+training.getTraningId());
+			System.out.println("training对象ID = "+training.getTrainingId());
 			System.out.println("training对象CourseHours = "+training.getCourseHours());
 			System.out.println("training对象StartTime = "+training.getStartTime());
 			System.out.println("training对象EndTime = "+training.getEndTime());
@@ -261,7 +268,7 @@ public class TrainingAction extends ActionSupport {
 	
 	public String updateTrainingInfor(){
 		System.out.println("要更新的Id = "+id);
-		System.out.println("training对象Id = "+training.getTraningId());
+		System.out.println("training对象Id = "+training.getTrainingId());
 		System.out.println("training对象AgencyName = "+training.getAgencies().getAgencyName());
 		System.out.println("training对象CourseHours = "+training.getCourseHours());
 		System.out.println("training对象StartTime() = "+training.getStartTime());

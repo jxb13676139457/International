@@ -158,7 +158,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalClassAction">维护班级信息</a></li>
+                          <li><a class="" href="internationClassAction">维护班级信息</a></li>
                       </ul>
                   </li>
                   

@@ -20,6 +20,7 @@ public class College implements java.io.Serializable {
 	String email;			//电子邮件
 	
 	private Set<OverseasStudent> overseasStudents;  //关联的出国学生对象
+	private Set<StudentActivity> studentActivity;   //关联的学生夏令营活动对象
 	
 	String reserves1;		//备用字段
 	String reserves2;
@@ -148,6 +149,14 @@ public class College implements java.io.Serializable {
 
 	public void setOverseasStudents(Set<OverseasStudent> overseasStudents) {
 		this.overseasStudents = overseasStudents;
+	}
+
+	public Set<StudentActivity> getStudentActivity() {
+		return studentActivity;
+	}
+
+	public void setStudentActivity(Set<StudentActivity> studentActivity) {
+		this.studentActivity = studentActivity;
 	}
 	
 }

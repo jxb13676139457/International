@@ -31,7 +31,17 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
-  
+    
+  	<script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	</script>
 			
   </head>
 
@@ -39,8 +49,6 @@
   
   <!-- container section start -->
   <section id="container" class="">
-     
-      
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -61,7 +69,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -70,7 +78,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -87,13 +95,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -102,10 +108,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
-                             <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
+                             <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   
@@ -116,7 +122,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalClassAction">维护班级信息</a></li>
+                          <li><a class="" href="internationClassAction">维护班级信息</a></li>
                       </ul>
                   </li>
                   
@@ -129,15 +135,12 @@
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
                            <li><a class="" href="trainingAction">维护雅思培训信息</a></li>     
-                            <li><a class="" href="simulationExamAction">维护模拟考试信息</a></li>     
-                             <li><a class="" href="formalExamAction">维护正式考试信息</a></li>   
-                             <li><a class="" href="participateTrainingAction">维护参与培训计划信息</a></li>  
-                              <li><a class="" href="participateSimulationExamAction">维护参与模拟考试信息</a></li>  
-                               <li><a class="" href="participateFormalExamAction">维护参与正式考试信息</a></li>  
+                            <li><a class="" href="simulationExamAction">维护考试信息</a></li>     
+                             <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划信息</a></li>  
+                              <li><a class="" href="participateSimulationExamAction">维护参与考试信息</a></li>  
                                <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
-
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -173,20 +176,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                     <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -199,7 +207,7 @@
 		  <div class="row">
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
-								<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+								<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="fa fa-table"></i>维护参与培训计划的信息</li>
 					</ol>
 				</div>
@@ -209,22 +217,18 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                     <form class="navbar-form" action="participateTrainingAction!searchInformation" method="post">
-                            <input class="form-control" name="participateStudentNo" placeholder="输入查找的学号" type="text" required/>
+                     <form class="navbar-form" action="attendTrainingAction!showAttend" method="post">
+                            <input class="form-control" name="loginUserName" placeholder="输入查找的学号或姓名" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px">
-                            <i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
-                             
-                               <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="addParticipateTraining.jsp">
-                               <i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
-                              <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="participateTrainingAction">
-                             <i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
-                             
-                             
+                            	<i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                             <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportParticipateTrainingExcel?searchName=${participateStudentNo }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
-                      </div>
+                            	<a href="addParticipateTraining.jsp">
+                               	<i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
+                            <button type="button" class="btn btn-default" style="width:120px;height:30px">
+                            	<a href="attendTrainingAction!showAttend">
+                             	<i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <button type="button" class="btn btn-default" style="width:80px;height:30px">
+                            	<a href="exportParticipateTrainingExcel?searchName=${participateStudentNo }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
                         </form>
                     </li>                    
                 </ul>
@@ -243,31 +247,43 @@
                               <tr style="background-color:#ededed">
                                  <th>学号</th>
                                  <th>姓名</th>
-                                 <th>专业</th>
                                  <th>班级</th>
+                                 <th>专业</th>
                                  <th>培训的机构</th>
-                                 <th>培训开始的时间</th>
-                                 <th>培训结束的时间</th>
-                                 <th>培训的学分</th>
-                                 <th>培训的学期</th>
+                                 <th>培训开始时间</th>
+                                 <th>培训结束时间</th>
+                                 <th>培训课时</th>
+                                 <th>培训费用</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="attendTrainings" var="attend" status="st">
                               <tr>
-                                  <td><s:property value="#user.student.studentNo"/></td>
-                                  <td><s:property value="#user.student.studentName"/></td>
-                                     <td><s:property value="#user.student.profession"/></td>
-                                 <td><s:property value="#user.student.interClass.className"/></td>
-                                 <td><s:property value="#user.train.agency.name"/></td>
-                                 <td><s:property value="#user.train.startTime"/></td>
-                                 <td><s:property value="#user.train.outTime"/></td>
-                                 <td><s:property value="#user.train.courseHours"/></td>
-                                 <td><s:property value="#user.train.semester"/></td>
+                                 <td><s:property value="#attend.interStudent.studentId"/></td>
+                                 <td><s:property value="#attend.interStudent.studentName"/></td>
+                                 <td><s:property value="#attend.interStudent.classes.className"/></td>
+                                 <td><s:property value="#attend.interStudent.classes.major"/></td>
+                                 <td><s:property value="#attend.training.agencies.agencyName"/></td>
+                                 <td><s:property value="#attend.training.startTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#attend.training.endTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#attend.training.courseHours"/></td>
+                                 <td><s:property value="#attend.training.courseFee"/></td>
                                  <td>
+                                 	<script type="text/javascript" charset="UTF-8">
+                                       		//删除指定id的学生参与培训计划的记录
+                                       		function deleteStudent(attendId){
+                                       			if(confirm("你确定要删除该学生参与培训计划的记录吗？")){
+                                       				location.href="attendTrainingAction!deleteAttendTraining?attendId="+attendId;
+                                       			}
+                                       		}
+                                       		/* //修改指定id的学生参与培训计划的记录  修改不符合需求逻辑所以不做
+                                       		function editStudent(attendId){
+                                       			location.href="attendTrainingAction!queryAttendTraining?attendId="+attendId;
+                                       		} */
+                                  	</script> 
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','participateTrainingAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'participateTrainingAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <%-- <a class="btn btn-default" href="javascript:editStudent('<s:property value="#attend.attendId"/>')"><i class="icon_pencil"></i></a> --%>
+                                      <a class="btn btn-default" href="javascript:deleteStudent('<s:property value="#attend.attendId"/>')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -278,9 +294,9 @@
                          </section>
                      </div> 
                      
-       		 <s:set name="status" value="#session.status"></s:set> 
-		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+       		<%--  <s:set name="status" value="#session.status"></s:set>  --%>
+		        <div  style="text-align:center">
+		           <%--  <s:if test="#status==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="participateTrainingAction?pageNo=1">首页</a>]
          
@@ -311,10 +327,23 @@
                          [<a href="participateTrainingAction!searchInformation?pageNo=${totalPage} & temp=1">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
-                      </s:else>
+                      </s:else> --%>
+                      
+                      <!-- 分页 -->
+			  		[<a href="attendTrainingAction!showAttend?pageNo=1">首页</a>]
+						<c:choose>
+							<c:when test="${currentPage>1}">
+								[<a href="attendTrainingAction!showAttend?pageNo=${currentPage-1}">上一页</a>]
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${currentPage<totalPage}">
+								[<a href="attendTrainingAction!showAttend?pageNo=${currentPage+1}">下一页</a>]
+							</c:when>
+						</c:choose>
+					[<a href="attendTrainingAction!showAttend?pageNo=${totalPage}">尾页</a>]
+					第${currentPage}页/共${totalPage}页
                   </div>
-                     
-                
               </div>
               
        <!-- page end-->

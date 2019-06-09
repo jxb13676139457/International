@@ -105,6 +105,11 @@ public class InternationClassAction extends ActionSupport{
 		classes=clsd.queryAllClass();
 		System.out.println(searchClassName);
 		//计算总页数
+		if(classes==null) {
+			currentPage=0;
+			totalPage=0;
+			return SUCCESS;
+		}
 		if(classes.size()%pageSize==0){
 			totalPage=classes.size()/pageSize;
 		}else{

@@ -32,14 +32,42 @@
       <script src="js/respond.min.js"></script>
       <script src="js/lte-ie7.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+	     	//用来跳转到维护操作员模块的action
+			function gotoShowAction(){
+				location.href="managerAction!showOperator";
+			}
+			//用来跳转到退出系统的action
+    		function gotoExitAction(){
+    			location.href="exitAction";
+    		}
+	</script>
+	
+    <script type="text/javascript">
+	      function toSubmit(){
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/attendTraining!editAttendTraining",
+		    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:$("#attendForm").serialize(),
+	    	    	  dataType:"json",	
+	    	    	  async:false,
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+	    	  );
+	      }
+	</script>
   </head>
 
   <body>
   <!-- container section start -->
   <section id="container" class="">
-     
-      
-       
       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
@@ -60,7 +88,7 @@
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                              <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
+                            <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
                             <p class="caret"></p>
                         </a>
                         <ul class="dropdown-menu extended logout">
@@ -69,7 +97,7 @@
                                 <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
                             </li>
                             <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
+                                <a href="javascript:gotoExitAction();"><i class="icon_key_alt"></i>退出登录</a>
                             </li>
                         </ul>
                     </li>
@@ -86,13 +114,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
                    <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -101,10 +127,10 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
-                             <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                           <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                            <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
+                             <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   
@@ -115,7 +141,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="internationalClassAction">维护班级信息</a></li>
+                          <li><a class="" href="internationClassAction">维护班级信息</a></li>
                       </ul>
                   </li>
                   
@@ -128,11 +154,9 @@
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
                            <li><a class="" href="trainingAction">维护雅思培训信息</a></li>     
-                            <li><a class="" href="simulationExamAction">维护模拟考试信息</a></li>     
-                             <li><a class="" href="formalExamAction">维护正式考试信息</a></li>   
-                             <li><a class="" href="participateTrainingAction">维护参与培训计划信息</a></li>  
-                              <li><a class="" href="participateSimulationExamAction">维护参与模拟考试信息</a></li>  
-                               <li><a class="" href="participateFormalExamAction">维护参与正式考试信息</a></li>  
+                            <li><a class="" href="simulationExamAction">维护考试信息</a></li>     
+                             <li><a class="" href="attendTrainingAction!showAttend">维护参与培训计划信息</a></li>  
+                              <li><a class="" href="participateSimulationExamAction">维护参与考试信息</a></li>  
                                <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
@@ -172,20 +196,25 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                 <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="javascript:gotoShowAction();">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -199,13 +228,13 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
 						<li><i class="icon_document_alt"></i>修改参与培训计划信息</li>
 					</ol>
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="trainingAction"><b>返回上页</b></a></button>
+                            <a href="attendTrainingAction!showAttend"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -216,76 +245,63 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" action="participateTrainingAction!updateInfor.action">
-                                     
+                                  <form class="form-validate form-horizontal" method="post" id="attendForm">
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateUser.id" value="${sessionScope.editAttendTraining.attendId }"  type="hidden" required/>
+                                          </div>
+                                       </div>
+                                      
+                                      <div class="form-group ">
+                                          <div  style="margin-left:250px;margin-top:-10px">
+	                                          <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
+	                                          <div class="col-lg-10">
+	                                              <input class="form-control" name="studentNo" value="${sessionScope.editAttendTraining.interStudent.studentId }"  style="width:300px"  type="text" required/>
+	                                          </div>
                                           </div>
                                       </div>
-                                      
-                                    <div class="form-group ">
-                                               <div  style="margin-left:250px;margin-top:-10px">
-		                                          <label for="cname" class="control-label col-lg-2"><b>年级</b><span class="required" style="color:red">*</span></label>
-		                                          <div class="col-lg-10">
-		                                              <input class="form-control" name="grade" value="${sessionScope.currentUser.student.grade }" style="width:300px"  type="text" required/>
-		                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                      
-                                             <div class="form-group ">
-                                                 <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="studentNo" value="${sessionScope.currentUser.student.studentNo }"  style="width:300px"  type="text" required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                      
                                       
                                            <div class="form-group ">
                                                <div  style="margin-left:250px;margin-top:-10px">
 		                                          <label for="cname" class="control-label col-lg-2"><b>姓名</b><span class="required" style="color:red">*</span></label>
 		                                          <div class="col-lg-10">
-		                                              <input class="form-control" name="studentName" value="${sessionScope.currentUser.student.studentName }" style="width:300px"  type="text" required/>
+		                                              <input class="form-control" name="studentName" value="${sessionScope.editAttendTraining.interStudent.studentName }" style="width:300px"  type="text" required/>
 		                                          </div>
                                           </div>
                                       </div>
                                       
-                              <div class="form-group ">
-                                  <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <input class="form-control" name="profession" value="${sessionScope.currentUser.student.profession }" style="width:300px"  type="text" required/>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                              <div class="form-group ">
-                                  <div  style="margin-left:250px;margin-top:-10px">
+                                      <div class="form-group ">
+                                  		<div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="className" value="${sessionScope.currentUser.student.interClass.className }" style="width:300px"  type="text" required/>
+                                              <input class="form-control" name="className" value="${sessionScope.editAttendTraining.interStudent.classes.className }" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
-                            
                                       
-                                    <div class="form-group ">
+                              		  <div class="form-group ">
+                                  		<div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>专业</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="profession" value="${sessionScope.editAttendTraining.interStudent.classes.major }" style="width:300px"  type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>雅思机构</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="agencyName"  value="${sessionScope.currentUser.train.agency.name }" style="width:300px"  type="text" required/>
+                                              <input class="form-control" name="agencyName"  value="${sessionScope.editAttendTraining.training.agencies.agencyName }" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
+                                      
                                       <div class="form-group ">
                                           <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训开始的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd" value="startTime"/>
+                                              <sx:datetimepicker name="attendTraining.training.startTime" displayFormat="yyyy-MM-dd" value="time"/>
                                           </div>
                                           </div>
                                       </div>
@@ -294,51 +310,33 @@
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>培训结束的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="outTime" displayFormat="yyyy-MM-dd"  value="outTime"/>
+                                              <sx:datetimepicker name="attendTraining.training.endTime" displayFormat="yyyy-MM-dd"  value="time"/>
                                           </div>
                                           </div>
                                       </div>
-                                                                           
-                                       <div class="form-group ">
-                                           <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学分</b><span class="required" style="color:red">*</span></label>
+                                      
+                                      <div class="form-group ">
+                                  		<div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>培训课时</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                                <select name="courseHours"  style="width:100px;height:30px" value="courseHours"  required>
-                                                    <option selected>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
-                                                    <option>6</option>
-                                                    <option>7</option>
-                                                    <option>8</option>
-                                                    <option>9</option>
-                                                    <option>10</option>
-                                                    
-                                              </select>
+                                              <input class="form-control" name="profession" value="${sessionScope.editAttendTraining.training.courseHours }" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
                                       </div>
-                                                        
-                                                        
-                                     <div class="form-group ">
-                                         <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学期</b><span class="required" style="color:red">*</span></label>
+                                      
+                                      <div class="form-group ">
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>培训费用</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                               <select name="semester"  style="width:100px;height:30px"  value="semester"  required>
-                                                    <option selected>1</option>
-                                                    <option>2</option>
-
-                                              </select>
+                                              <input class="form-control" name="agencyName"  value="${sessionScope.editAttendTraining.training.courseFee }" style="width:300px"  type="text" required/>
                                           </div>
                                           </div>
-                                      </div>        
-                                                              
+                                      </div>                  
                                                                        
                                       <div class="form-group">
                                           <div  style="margin-left:550px;margin-top:-10px">
                                           <div class="col-lg-offset-2 col-lg-10">
-                                              <button class="btn btn-primary" type="submit"><b>更新</b> </button>
+                                              <button class="btn btn-primary" onclick="toSubmit()"><b>更新</b> </button>
                                           </div>
                                           </div>
                                       </div>

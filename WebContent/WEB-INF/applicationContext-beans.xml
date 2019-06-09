@@ -59,6 +59,13 @@
 		</property>
 	</bean>
 	
+	<!-- 学生夏令营活动的bean -->
+	<bean id="stuActivityDao" class="com.international.dao.StuActivityDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
 	<!-- 活动信息的bean -->
 	<bean id="activityDao" class="com.international.dao.ActivityDao">
 		<property name="sessionFactory">
@@ -113,5 +120,11 @@
 		</property>
 	</bean>
 	
+	<!-- 学生参与雅思培训计划的bean -->
+	<bean id="attendTrainingDao" class="com.international.dao.AttendTrainingDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 </beans>
 						

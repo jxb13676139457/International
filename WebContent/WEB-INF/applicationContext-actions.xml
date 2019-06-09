@@ -112,6 +112,13 @@
 		</property>
 	</bean>
 	
+	<!-- 学生夏令营活动的bean -->
+	<bean id="studentActivityAction" class="com.international.actions.student.StudentActivityAction">
+		<property name="sad">
+			<ref bean="stuActivityDao"/>
+		</property>
+	</bean>
+	
 	<!-- 修改管理员信息的bean -->
 	<bean id="updateInfoAction" class="com.international.actions.admin.UpdateInfoAction" scope="prototype">
 		<property name="ud">
@@ -150,5 +157,10 @@
 		</property>
 	</bean>
 
-	
+	<!-- 学生参与雅思培训计划的bean -->
+	<bean id="attendTrainingAction" class="com.international.actions.ielts.AttendTrainingAction">
+		<property name="atd">
+			<ref bean="attendTrainingDao"/>
+		</property>
+	</bean>
 </beans>

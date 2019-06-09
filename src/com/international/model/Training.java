@@ -2,21 +2,23 @@ package com.international.model;
 
 public class Training {
 
-	private int traningId;
+	private int trainingId;
 	private int courseHours;
 	private String startTime;
 	private String endTime;
 	private int courseFee;
-	private Agency agencies;		//雅思培训和雅思机构为多对一的关系
+	private Agency agencies;		//雅思培训计划和雅思机构为多对一的关系
+	private AttendTraining attendTraining;   //雅思培训计划和参与雅思培训计划为多对一的关系
 	
 	private String reserves1;
 	private String reserves2;
 	private String reserves3;
-	public int getTraningId() {
-		return traningId;
+
+	public int getTrainingId() {
+		return trainingId;
 	}
-	public void setTraningId(int traningId) {
-		this.traningId = traningId;
+	public void setTrainingId(int trainingId) {
+		this.trainingId = trainingId;
 	}
 	public int getCourseHours() {
 		return courseHours;
@@ -47,6 +49,12 @@ public class Training {
 	}
 	public void setAgencies(Agency agencies) {
 		this.agencies = agencies;
+	}
+	public AttendTraining getAttendTraining() {
+		return attendTraining;
+	}
+	public void setAttendTraining(AttendTraining attendTraining) {
+		this.attendTraining = attendTraining;
 	}
 	public String getReserves1() {
 		return reserves1;

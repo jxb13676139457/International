@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.AttendTraining" table="AttendTraining">
+		<id name="attendId" column="attendId">
+			<!-- 自增主键生成策略 -->
+			<generator class="native"></generator>
+		</id>
+		
+		<!-- 单向n->1关联，外键，由AttendTraining指向InternationalStudent -->
+		<many-to-one name="interStudent" class="com.international.model.InternationalStudent" 
+		lazy="false" fetch="join" column="studentId" />
+		<!-- 单向n->1关联，外键，由AttendTraining指向Training -->
+		<many-to-one name="training" class="com.international.model.Training" 
+		lazy="false" fetch="join" column="trainingId" />
+	</class>
+</hibernate-mapping>
