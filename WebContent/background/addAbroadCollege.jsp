@@ -262,7 +262,7 @@
 			</div>
 			
 			     <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="abroadCollegeAction"><b>返回上页</b></a></button>
+                            <a href="collegeAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">

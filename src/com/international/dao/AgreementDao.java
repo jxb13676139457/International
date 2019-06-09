@@ -129,7 +129,7 @@ public class AgreementDao {
 	}
 	
 	/**
-	 *  删除活动信息
+	 *  删除协议信息
 	 * @return
 	 */
 	public boolean deleteAgreement(int agreementId) {
@@ -153,7 +153,7 @@ public class AgreementDao {
 	}
 	
 	/**
-	 *  根据id查询活动信息
+	 *  根据id查询协议信息
 	 * @return
 	 */
 	public CollegeAgreement getCollegeAgreementInforById(int agreementId) {
@@ -171,6 +171,7 @@ public class AgreementDao {
 			session.close();//关闭Session
 		}
 	}
+	
 	/**
 	 *  查询符合条件的协议
 	 * @return

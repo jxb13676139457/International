@@ -119,8 +119,8 @@ public class ExamDao {
 			session=sessionFactory.openSession();
 			//创建查询
 			Query query=session.createQuery(queryString);
-			//执行查询获得的结果,list中的每一个元素代表一个College的对象
-			List list=query.list();//list集合包含College表里所有数据
+			//执行查询获得的结果,list中的每一个元素代表一个Exam的对象
+			List list=query.list();//list集合包含Exam表里所有数据
 			if(list.size()>0)
 				return list;
 			else{
@@ -144,8 +144,8 @@ public class ExamDao {
 			session=sessionFactory.openSession();
 			//创建查询
 			Query query=session.createQuery(queryString);
-			//执行查询获得的结果,list中的每一个元素代表一个College的对象
-			List list=query.list();//list集合包含College表里所有数据
+			//执行查询获得的结果,list中的每一个元素代表一个Agency的对象
+			List list=query.list();//list集合包含Agency表里所有数据
 			if(list.size()>0)
 				return list;
 			else{

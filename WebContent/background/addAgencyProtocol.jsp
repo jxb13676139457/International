@@ -44,7 +44,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/agencyProtocolAction!addObject",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/agencyAgreementAction!addObject",
 					    	    	  /* data:{agencyName:agencyName,title:title,time:time,upload:upload,type:type}, */
 					    	    	  data: formData,  
 					    	    	  dataType:"json",	
@@ -250,7 +250,7 @@
 			</div>
 			
 			     <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="agencyProtocolAction"><b>返回上页</b></a></button>
+                            <a href="agencyAgreementAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -283,7 +283,7 @@
                                               <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>主题</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                             <input class="form-control" id="title" name="addUser.title"  type="text" style="width:300px" required/>                                             
+                                             <input class="form-control" id="title" name="addAgreement.title"  type="text" style="width:300px" required/>                                             
                                           </div>
                                           </div>
                                       </div>
@@ -292,7 +292,7 @@
                                                    <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>签订的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="addUser.time" id="time" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="addAgreement.time" id="time" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -310,13 +310,14 @@
                                             <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>协议的类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                                <select name="addUser.type"  id="type" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"required>
+                                                <!--<select name="addAgreement.type"  id="type" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"required>
                                                     <option selected>宣讲</option>
                                                     <option>翻译</option>
                                                     <option>其他类型</option>
                                                  
                                                     
-                                              </select>
+                                              </select>-->
+                                              <input class="form-control" id="type" name="addAgreement.type"  type="text" style="width:300px" required/>
                                           </div>
                                           </div>
                                       </div>

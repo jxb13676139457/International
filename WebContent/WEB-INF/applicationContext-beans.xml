@@ -92,6 +92,13 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+	
+	<!-- 成绩的bean -->
+	<bean id="scoreDao" class="com.international.dao.ScoreDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
 
 	<bean id="trainingDao" class="com.international.dao.TrainingDao">
 		<property name="sessionFactory">

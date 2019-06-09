@@ -43,7 +43,7 @@
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/agencyProtocolAction!updateInfor",
+					    	    	  url:"http://localhost:8080/InternationalSys/background/agencyAgreementAction!updateInfor",
 					    	    	  data: formData,  
 /* 					    	  		注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
 //					    	  		data:$('#formid').serialize(); */
@@ -242,7 +242,7 @@
 				</div>
 			</div>
 			  <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="agencyProtocolAction"><b>返回上页</b></a></button>
+                            <a href="agencyAgreementAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -257,7 +257,7 @@
                                      
                                        <div class="form-group ">
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.id" value="${sessionScope.currentUser.id }"  type="hidden" required/>
+                                              <input class="form-control" name="updateAgreement.agreementId" value="${sessionScope.currAgreement.agreementId }"  type="hidden" required/>
                                           </div>
                                       </div>
                                       
@@ -266,7 +266,7 @@
                                               <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>雅思机构</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="agencyName" value="${sessionScope.currentUser.agency.name }" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="agencyName" value="${sessionScope.currAgreement.agen.agencyName }" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -275,7 +275,7 @@
                                                 <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>主题</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                             <input class="form-control" name="updateUser.title" value="${sessionScope.currentUser.title }" style="width:300px" type="text"  required/>                                             
+                                             <input class="form-control" name="updateAgreement.title" value="${sessionScope.currAgreement.title }" style="width:300px" type="text"  required/>                                             
                                           </div>
                                           </div>
                                       </div>
@@ -284,7 +284,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>签订的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <sx:datetimepicker name="updateUser.time" value="protocolTime" displayFormat="yyyy-MM-dd"/>
+                                              <sx:datetimepicker name="updateAgreement.time" value="agencyTime" displayFormat="yyyy-MM-dd"/>
                                           </div>
                                           </div>
                                       </div>
@@ -293,7 +293,7 @@
                                      <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>协议名字</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="updateUser.name" value="${sessionScope.currentUser.name }" style="width:300px" type="text" readonly/>
+                                              <input class="form-control" name="updateAgreement.fileName" value="${sessionScope.currAgreement.fileName }" style="width:300px" type="text" readonly/>
                                           </div>
                                           </div>
                                       </div>
@@ -312,13 +312,14 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>协议的类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                                <select name="updateUser.type" value="protocolType" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;" required>
+                                                <!--<select name="updateAgreement.type" value="agencyType" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;" required>
                                                     <option>宣讲</option>
                                                     <option>翻译</option>
                                                     <option>其他类型</option>
                                                  
                                                     
-                                              </select>
+                                              </select>-->
+                                              <input class="form-control" name="updateAgreement.type" value="${sessionScope.currAgreement.type }" style="width:300px" type="text"  required/>   
                                           </div>
                                           </div>
                                       </div>

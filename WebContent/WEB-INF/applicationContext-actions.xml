@@ -56,6 +56,13 @@
 			<ref bean="examDao"/>
 		</property>
 	</bean>
+	
+	<!-- 成绩的bean -->
+	<bean id="scoreAction" class="com.international.actions.ielts.ScoreAction">
+		<property name="scd">
+			<ref bean="scoreDao"/>
+		</property>
+	</bean>
 
 	<!-- 机构协议的bean -->
 	<bean id="agencyAgreementAction" class="com.international.actions.ielts.AgencyAgreementAction">

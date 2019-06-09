@@ -165,7 +165,7 @@ function searchProcess(id, str){
 	    	      {
 	    	    	  
 	    	    	  type:"post",
-	    	    	  url:"http://localhost:8080/Graduate/simulationExamAction!getStartTimeInformation",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!getStartTimeInformation",
 	    	    	  data:{agencyName:agencyName},
 	    	    	  async:false,
 	    	    	  dataType:"json",			    	
@@ -620,3 +620,148 @@ function getFormalLocation(){
 	  
 	  
 }
+
+//根据学号来获取学生的信息  (添加成绩用到)
+function getStudentInformation1(){
+	  var studentId= $("#studentNo").val();
+	  console.log(studentId);
+	  if(studentId!=null){
+		  $.ajax(			    		
+   	      {
+   	    	  type:"post",
+   	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!getStudentInformation",
+   	    	  data:{"studentId":studentId},
+   	    	  dataType:"json",			    	
+   	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+   	    	  traditional:true,
+   	    	  success: function(data){			
+   	    		    console.log("测试自动获取成功");
+   	    		    console.log(data);
+   	    		    var arr = data.split(",");
+   	    		    console.log(arr);
+		    	    	$("#studentName").val(arr[0]);
+		    	     	$("#className").val(arr[1]); 
+		    	    	$("#grade").val(arr[2]); 
+		    	    	$("#profession").val(arr[3]);
+                  },
+                  error: function(autoStudentName,autoClassName,autoMajor,autoGrade){
+               	    console.log("测试自动获取失败");
+               	    $("#studentName").val("");
+		    	    	$("#className").val("");
+		    	    	$("#grade").val("");
+		    	    	$("#profession").val("");
+                  }
+   	        }			    	      
+	       );
+	  }
+}
+//获取考试时间(添加成绩时用到)
+  function togetTime(){
+ 	  
+ 	  
+ 	  var temp=1;
+ 	  var agencyName= $("#agencyName").find("option:selected").text();   	  
+ 	  
+ 	  if(agencyName!=null ){
+ 		  $.ajax(		  
+ 	    	      {
+ 	    	    	  
+ 	    	    	  type:"post",
+ 	    	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!getStartTimeInformation",
+ 	    	    	  data:{agencyName:agencyName},
+ 	    	    	  async:false,
+ 	    	    	  dataType:"json",			    	
+ 	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+ 	    	    	  traditional:true,
+ 	    	    	  success: function(data){
+ 	    	    		  
+ 	    	    			 var html="";
+ 		    	    		 html=html +'<option selected>--选择考试时间--</option>';
+ 		    	    		 console.log(data);
+ 		                     for(var i=0; i<data.length; i++){
+ 		                    	
+ 		                    	   for(var j=0; j<i; j++){
+ 		                    				 
+ 		                    		 if(data[i].time==(data[j].time)){
+ 		                    			 temp=0;
+ 		                    			 break;
+ 		                    		 }
+ 		                    	 }
+ 		                    	 if(temp==1){
+ 		                    		 html=html +'<option value=""+ data[i].time+"">'+data[i].time+'</option>';
+ 		                    	 }
+ 		                    	 temp=1;
+ 		                     }
+ 		                     
+ 	                     $('#startTime').html(html);
+ 	                   },   
+ 	                   error: function(data){
+ 	                	   
+ 	                		 var html="";
+ 	                		 $('#startTime').html(html);
+ 	                   }   	  
+ 	    	    	  
+ 	    	      }
+
+ 	    	  );
+ 	  }else{
+ 		  
+ 		  alert("��ѡ��һ������!");
+ 	  }
+   
+  }
+  
+//获取考试的地点(添加成绩用到)
+  function getLocation(){
+   
+
+   var temp=1;
+   var agencyName= $("#agencyName").find("option:selected").text();   	  
+   var startTime= $("#startTime").find("option:selected").text();
+
+  	  $.ajax(		  
+     	      {
+     	    	  
+     	    	  type:"post",
+     	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!getLocation",
+     	    	  data:{agencyName:agencyName,startTime:startTime},
+     	    	  async:false,
+     	    	  dataType:"json",			    	
+     	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+     	    	  traditional:true,
+     	    	  success: function(data){
+     	    		  
+     	    			 var html="";
+  	    	    		 html=html +'<option selected>--请选择考试地点--</option>';
+
+  	                     for(var i=0; i<data.length; i++){
+  	                    	
+  	                    	   for(var j=0; j<i; j++){
+  	                    				 
+  	                    		 if(data[i].location==(data[j].location)){
+  	                    			 temp=0;
+  	                    			 break;
+  	                    		 }
+  	                    	 }
+  	                    	 if(temp==1){
+  	                    		 html=html +'<option value=""+ data[i].location+"">'+data[i].location+'</option>';
+  	                    	 }
+  	                    	 temp=1;
+  	                     }
+  	                     
+                      $('#location').html(html);
+                    },   
+                    error: function(data){
+                 	   
+                 		 var html="";
+                 		 $('#location').html(html);
+                    }   	  
+     	    	  
+     	      }
+
+     	  );
+  	  
+  	  
+  	  
+  	  
+  }

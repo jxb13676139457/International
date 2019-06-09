@@ -41,28 +41,29 @@
 			    	  
 			    	  var grade =$("#grade").val();
 			    	  var studentNo =$("#studentNo").val();			    	
-			    	  var className =$("#className").val();		    	
-			    	  var profession =$("#profession").val();			    	 
+			    	  /* var className =$("#className").val();		    	
+			    	  var profession =$("#profession").val(); */			    	 
 			    	  var agencyName= $("#agencyName").find("option:selected").text();			    	 
 			    	  var startTime= $("#startTime").find("option:selected").text();
-			    	  var outTime= $("#outTime").find("option:selected").text();			    	
-			    	  var courseHours2= $("#courseHours").find("option:selected").text();			    	
+			    	  var examType= $("#examType").find("option:selected").text();			    	
+			    	  /* var courseHours2= $("#courseHours").find("option:selected").text();			    	
 			    	  var semester = $("#semester").find("option:selected").text();
-			    	  var formalTime = $("#formalTime").find("option:selected").text();
+			    	  var formalTime = $("#formalTime").find("option:selected").text(); */
 			    	  var location = $("#location").find("option:selected").text();
-			    	  var listening =$("#listening").val();	
+			    	  /* var listening =$("#listening").val();	
 			    	  var oral =$("#oral").val();	
 			    	  var reading =$("#reading").val();	
-			    	  var writing =$("#writing").val();	
+			    	  var writing =$("#writing").val();	 */
 
 			    		  $.ajax(		  
 					    	      {
 					    	    	  
 					    	    	  type:"post",
-					    	    	  url:"http://localhost:8080/Graduate/participateFormalExamAction!addObject",
-					    	    	  data:{grade:grade,profession:profession,studentNo:studentNo,className:className,agencyName:agencyName,startTime:startTime,
+					    	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!addObject?startTime="+startTime+"&location="+location+"&examType="+examType+"&studentId="+studentNo+"&agencyName="+agencyName,
+					    	    	  /* data:{grade:grade,profession:profession,studentNo:studentNo,className:className,agencyName:agencyName,startTime:startTime,
 					    	    		  outTime:outTime,courseHours2:courseHours2,semester:semester,formalTime:formalTime,location:location,listening:listening,
-					    	    		  oral:oral,reading:reading,writing:writing},
+					    	    		  oral:oral,reading:reading,writing:writing}, */
+					    	    		  data:$("#ScoreForm").serialize(),
 					    	    	  dataType:"json",	
 					    	    	  async:false,
 					    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
@@ -259,7 +260,7 @@
 			</div>
 			
 			     <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="participateFormalExamAction">返回上页</a></button>
+                            <a href="scoreAction">返回上页</a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">
@@ -271,13 +272,13 @@
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
                                 
-                                  <form class="form-validate form-horizontal" method="post" action="">                                                         
+                                  <form class="form-validate form-horizontal" method="post" id="ScoreForm" action="">                                                         
                                       
                                           <div class="form-group ">
                                            <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                               <input class="form-control" name="studentNo"  id="studentNo"   onblur="getStudentInformation()" style="width:300px" type="text" required/>
+                                               <input class="form-control" name="studentNo"  id="studentNo"   onblur="getStudentInformation1()" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -326,76 +327,39 @@
                                           <label for="cname" class="control-label col-lg-2"><b>雅思机构</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                                <select id="agencyName" name="agencyName" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-		                                              onchange="getStartTime()">
-		                                              </select>
-                                          </div>
-                                          </div>
-                                      </div>
-                                         <div class="form-group ">
-                                      <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训开始的时间</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                        <%--       <sx:datetimepicker name="startTime" displayFormat="yyyy-MM-dd"/> --%>
-                                               <select id="startTime" name="startTime" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-                                          onchange="getOutTime()"></select>
-                                          </div>
-                                          </div>
-                                      </div>
-                                      
-                                       <div class="form-group ">
-                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训结束的时间</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                             <%--  <sx:datetimepicker name="outTime" displayFormat="yyyy-MM-dd"/> --%>
-                                                 <select id="outTime" name="outTime" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px"
-                                                onchange="getCourseHours()"></select>
-                                          </div>
-                                          </div>
-                                      </div>
-                                                                           
-                                       <div class="form-group ">
-                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学分</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                      
-                                              
-                                               <select id="courseHours" name="courseHours" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
+                                               onchange="togetTime()">
                                                
-                                               onchange="getSemester()">
-                                               
+		                                       </select>
+                                          </div>
+                                          </div>
+                                      </div>
+                                         
+                                       <div class="form-group ">
+                                         <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>考试类型</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">  
+                                               <select id="examType" name="examType" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
+                                               		<option value="正式考试">正式考试</option>
+                                                    <option value="模拟考试" selected>模拟考试</option>
                                                </select>
                                           </div>
                                           </div>
                                       </div>
-                                                        
-                                                        
-                                     <div class="form-group ">
-                                     <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>培训的学期</b><span class="required" style="color:red">*</span></label>
-                                          <div class="col-lg-10">
-                                              <select id="semester" name="semester" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-                                                onchange="getFormalTime()">
-                                                
-                                                </select>
-                                          </div>
-                                          </div>
-                                      </div>        
-                                                  
-                                      
+                                         
                                        <div class="form-group ">
                                        <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>正式考试的时间</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>考试的时间</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <select id="formalTime" name="formalTime" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
-                                              onchange="getFormalLocation()">
-                                              </select>
+                                              <!--<sx:datetimepicker name="startTime" id="startTime"  displayFormat="yyyy-MM-dd"/>-->
+                                              <select id="startTime" name="startTime" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"
+                                          onchange="getLocation()"></select>
                                           </div>
                                           </div>
                                       </div>
                                                  
                                       <div class="form-group ">
                                       <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><b>正式考试的地点</b><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>考试的地点</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                             <select id="location" name="location" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"></select>
                                           </div>
@@ -406,7 +370,7 @@
                                     <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>听力分数</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.listening" id="listening" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="addScore.listening" id="listening" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -415,7 +379,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>口语分数</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.oral" id="oral" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="addScore.oral" id="oral" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -424,7 +388,7 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>阅读分数</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.reading" id="reading" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="addScore.reading" id="reading" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -433,7 +397,16 @@
                                         <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>写作分数</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="addUser.writing"  id="writing" style="width:300px" type="text" required/>
+                                              <input class="form-control" name="addScore.writing"  id="writing" style="width:300px" type="text" required/>
+                                          </div>
+                                          </div>
+                                      </div>
+                                      
+                                      <div class="form-group ">
+                                        <div  style="margin-left:250px;margin-top:-10px">
+                                          <label for="cname" class="control-label col-lg-2"><b>总分</b><span class="required" style="color:red">*</span></label>
+                                          <div class="col-lg-10">
+                                              <input class="form-control" name="addScore.score"  id="writing" style="width:300px" type="text" required/>
                                           </div>
                                           </div>
                                       </div>

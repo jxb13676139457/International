@@ -53,6 +53,7 @@
 				<value>com/international/model/CollegeActivity.hbm.xml</value>
 				<value>com/international/model/CollegeAgreement.hbm.xml</value>
 				<value>com/international/model/ExchangeStudent.hbm.xml</value>
+				<value>com/international/model/Score.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
