@@ -12,6 +12,7 @@ public class InternationalStudent {
 	
 	private int classId;
 	private InternationalClass classes;		//定义InternationalClass类的classes对象
+	private AttendTraining attendTraining;   //定义AttendTraining类的attendTraining对象
 
 	public String getStudentId() {
 		return studentId;
@@ -66,6 +67,12 @@ public class InternationalStudent {
 	}
 	public void setClasses(InternationalClass classes) {
 		this.classes = classes;
+	}
+	public AttendTraining getAttendTraining() {
+		return attendTraining;
+	}
+	public void setAttendTraining(AttendTraining attendTraining) {
+		this.attendTraining = attendTraining;
 	}
 	public int getClassId() {
 		return classId;

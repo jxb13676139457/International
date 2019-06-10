@@ -99,6 +99,13 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
+	
+	<!-- 成绩的bean -->
+	<bean id="scoreDao" class="com.international.dao.ScoreDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>	
 
 	<bean id="trainingDao" class="com.international.dao.TrainingDao">
 		<property name="sessionFactory">
@@ -113,5 +120,11 @@
 		</property>
 	</bean>
 	
+	<!-- 学生参与雅思培训计划的bean -->
+	<bean id="attendTrainingDao" class="com.international.dao.AttendTrainingDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 </beans>
 						

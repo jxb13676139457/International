@@ -116,30 +116,29 @@
       <!--header end-->
 
       <!--sidebar start-->
+             <!--侧边菜单栏-->
       <aside>
           <div id="sidebar"  class="nav-collapse " >
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_table"></i>
                           <span>学生信息</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
-                             <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                          <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                          <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
+                          <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   
@@ -154,7 +153,7 @@
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>雅思信息</span>
@@ -162,16 +161,13 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
-                           <li><a class="" href="trainingAction">维护雅思培训信息</a></li>     
-                            <li><a class="" href="simulationExamAction">维护模拟考试信息</a></li>     
-                             <li><a class="" href="formalExamAction">维护正式考试信息</a></li>   
-                             <li><a class="" href="participateTrainingAction">维护参与培训计划信息</a></li>  
-                              <li><a class="" href="participateSimulationExamAction">维护参与模拟考试信息</a></li>  
-                               <li><a class="" href="participateFormalExamAction">维护参与正式考试信息</a></li>  
-                               <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
+                          <li><a class="" href="trainingAction">维护雅思培训计划信息</a></li>     
+                          <li><a class="" href="examAction">维护考试信息</a></li>     
+                          <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划</a></li>  
+                          <li><a class="" href="scoreAction">维护参与考试信息</a></li>  
+                          <li><a class="" href="agencyAgreementAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
-
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -180,13 +176,13 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="abroadCollegeAction">维护国外院校信息</a></li>     
-                          <li><a class="" href="abroadCollegeActivitiesAction">维护活动信息</a></li>  
-                          <li><a class="" href="abroadCollegeProtocolAction">维护协议信息</a></li>                         
+                          <li><a class="" href="collegeAction">维护国外院校信息</a></li>     
+                          <li><a class="" href="collegeActivityAction">维护活动信息</a></li>  
+                          <li><a class="" href="collegeAgreementAction">维护协议信息</a></li>                         
                       </ul>
                   </li>                                                                         
                   
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_piechart"></i>
                           <span>发布信息</span>
@@ -207,20 +203,24 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                  <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="managerAction!showOperator">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -244,14 +244,14 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                     <form class="navbar-form" action="participateFormalExamAction!searchInformation" method="post">
-                            <input class="form-control" name="formalStudentNo" placeholder="输入查找的学号" type="text" required/>
+                     <form class="navbar-form" action="scoreExamAction" method="post">
+                            <input class="form-control" name="search" placeholder="输入查找的学号" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                              
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addParticipateFormalExam.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="participateFormalExamAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="scoreAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                              
                          <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportParticipateFormalExamExcel?searchName=${formalStudentNo }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
@@ -306,8 +306,8 @@
                           <table class="table table-striped table-advance table-hover">
                            <tbody>
                               <tr style="background-color:#ededed">
-                                 <th>培训的机构</th>
-                                 <th>正式考试的时间</th>
+                                 <th>考试类型</th>
+                                 <th>考试的时间</th>
                                  <th>学号</th>
                                  <th>姓名</th>
                                  <th>班级</th>
@@ -319,14 +319,14 @@
                                  <th>总分数</th>
                                  <th>操作</th>
                               </tr>
-                           <s:iterator value="UserList" var="user" status="st">
+                           <s:iterator value="ListScore" var="user" status="st">
                               <tr>
-                                   <td><s:property value="#user.formal.train.agency.name"/></td>
-                                 <td><s:property value="#user.formal.time"/></td>
+                                   <td><s:property value="#user.exm.examType"/></td>
+                                 <td><s:property value="#user.exm.time"/></td>
                                  
-                                  <td><s:property value="#user.student.studentNo"/></td>
-                                  <td><s:property value="#user.student.studentName"/></td>
-                                 <td><s:property value="#user.student.interClass.className"/></td>                          
+                                  <td><s:property value="#user.interStu.studentId"/></td>
+                                  <td><s:property value="#user.interStu.studentName"/></td>
+                                 <td><s:property value="#user.interStu.classes.className"/></td>                          
                                   <td><s:property value="#user.listening"/></td>
                                  <td><s:property value="#user.oral"/></td>
                                  <td><s:property value="#user.reading"/></td>
@@ -335,8 +335,8 @@
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.id"/>','participateFormalExamAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.id"/>', 'participateFormalExamAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#user.scoreId"/>','scoreAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#user.scoreId"/>', 'scoreAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
@@ -348,19 +348,19 @@
                      </div> 
            <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="participateFormalExamAction?pageNo=1">首页</a>]
+                         [<a href="scoreAction?pageNo=1&search=${search}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="participateFormalExamAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="scoreAction?pageNo=${currentPage-1}&search=${search}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="participateFormalExamAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="scoreAction?pageNo=${currentPage+1}&search=${search}">下一页</a>]
                           </c:if>
          
-                         [<a href="participateFormalExamAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="scoreAction?pageNo=${totalPage}&search=${search}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       </s:if>

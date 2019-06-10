@@ -130,7 +130,7 @@
 			<result name="lookSuccess">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
-			<param name="savePath">/upload</param>
+			<param name="savePath">/upload/collegeAgreement</param>
 		</action>
 		
 		<!-- 考试的Action -->
@@ -143,22 +143,28 @@
 			<result name="lookError">/background/showFormalExamDetail.jsp</result>
 		</action>
 		
+		<!-- 成绩的Action -->
+		<action name="scoreAction" class="scoreAction">
+			<result name="success">/background/participateFormalExamInfor.jsp</result>
+			<result name="input">/background/participateFormalExamInfor.jsp</result>
+			<result name="deleteSuccess">/background/participateFormalExamInfor.jsp</result>
+			<result name="deleteError">/background/participateFormalExamInfor.jsp</result>
+			<result name="lookSuccess">/background/showParticipateFormalExamDetail.jsp</result>
+			<result name="lookError">/background/showParticipateFormalExamDetail.jsp</result>
+		</action>
+		
 		<!-- 机构协议的Action -->
 		<action name="agencyAgreementAction" class="agencyAgreementAction">
 			<result name="success">/background/agencyProtocolInfor.jsp</result>
 			<result name="input">/background/agencyProtocolInfor.jsp</result>
 			<result name="deleteSuccess">/background/agencyProtocolInfor.jsp</result>
 			<result name="deleteError">/background/agencyProtocolInfor.jsp</result>
-			<result name="lookSuccess">/background/showFormalExamDetail.jsp</result>
-			<result name="lookError">/background/showFormalExamDetail.jsp</result>
+			<result name="lookSuccess">/background/showAgencyProtocolDetail.jsp</result>
+			<result name="lookError">/background/showAgencyProtocolDetail.jsp</result>
+			<!-- 配置上传的文件路径 -->
+			<param name="savePath">/upload/agencyAgreement</param>
 		</action>
 		
-		<!-- 学生模块的Action -->
-		<action name="internationalStudentAction" class="internationalStudentAction">
-		
-		</action>
-		
-
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
@@ -268,6 +274,19 @@
 				<param name="actionName">trainingAction</param>
 			</result>
 			<result name="updateError">/background/trainingInfor.jsp</result>
+		</action>
+		
+		<!-- 学生参与雅思培训计划的Action -->
+		<action name="attendTrainingAction" class="attendTrainingAction">
+			<result name="success">/background/participateTrainingInfor.jsp</result>
+			<result name="input">/background/participateTrainingInfor.jsp</result>
+			<result name="delSucc" type="redirectAction">
+				<param name="actionName">attendTrainingAction!showAttend</param>
+			</result>
+			<result name="delFail" type="redirectAction">
+				<param name="actionName">attendTrainingAction!showAttend</param>
+			</result>
+			<result name="detailSucc">/background/showParticipateTrainingDetail.jsp</result>
 		</action>
 
 	</package>

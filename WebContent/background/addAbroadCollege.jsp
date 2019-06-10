@@ -137,30 +137,29 @@
       <!--header end-->
 
       <!--sidebar start-->
+            <!--侧边菜单栏-->
       <aside>
           <div id="sidebar"  class="nav-collapse " >
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="beforeInformation.jsp">
+                      <a class="" href="index.jsp">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
                   </li>
-                  		      
-             
                                
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_table"></i>
                           <span>学生信息</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="studentInformationAction">维护国际学生信息</a></li>
-                           <li><a class="" href="overseasStudentAction">维护出国生信息</a></li>
-                            <li><a class="" href="exchangeStudentAction">维护交换生信息</a></li>
-                             <li><a class="" href="studentActivitiesAction">维护学生活动信息</a></li>
+                          <li><a class="" href="internationalStudentAction!showStudent">维护国际学生信息</a></li>
+                          <li><a class="" href="overseasStudentAction!showStudent">维护出国生信息</a></li>
+                          <li><a class="" href="exchangeStudentAction!showStudent">维护交换生信息</a></li>
+                          <li><a class="" href="studentActivityAction!showStuActivity">维护学生活动信息</a></li>
                       </ul>
                   </li>
                   
@@ -175,7 +174,7 @@
                       </ul>
                   </li>
                   
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
                           <span>雅思信息</span>
@@ -183,16 +182,13 @@
                       </a>
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
-                           <li><a class="" href="trainingAction">维护雅思培训信息</a></li>     
-                            <li><a class="" href="simulationExamAction">维护模拟考试信息</a></li>     
-                             <li><a class="" href="formalExamAction">维护正式考试信息</a></li>   
-                             <li><a class="" href="participateTrainingAction">维护参与培训计划信息</a></li>  
-                              <li><a class="" href="participateSimulationExamAction">维护参与模拟考试信息</a></li>  
-                               <li><a class="" href="participateFormalExamAction">维护参与正式考试信息</a></li>  
-                               <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
+                          <li><a class="" href="trainingAction">维护雅思培训计划信息</a></li>     
+                          <li><a class="" href="examAction">维护考试信息</a></li>     
+                          <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划</a></li>  
+                          <li><a class="" href="scoreAction">维护参与考试信息</a></li>  
+                          <li><a class="" href="agencyAgreementAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
-
                   
                   <li class="sub-menu">
                       <a href="javascript:;" class="">
@@ -201,13 +197,13 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="abroadCollegeAction">维护国外院校信息</a></li>     
-                          <li><a class="" href="abroadCollegeActivitiesAction">维护活动信息</a></li>  
-                          <li><a class="" href="abroadCollegeProtocolAction">维护协议信息</a></li>                         
+                          <li><a class="" href="collegeAction">维护国外院校信息</a></li>     
+                          <li><a class="" href="collegeActivityAction">维护活动信息</a></li>  
+                          <li><a class="" href="collegeAgreementAction">维护协议信息</a></li>                         
                       </ul>
                   </li>                                                                         
                   
-                   <li class="sub-menu">
+                  <li class="sub-menu">
                       <a href="javascript:;" class="">
                           <i class="icon_piechart"></i>
                           <span>发布信息</span>
@@ -228,20 +224,24 @@
                       </a>
                       <ul class="sub">                          
                           <li><a class="" href="profile.jsp">维护个人信息</a></li>
-                          <li><a class="" href="login.html"><span>退出登录</span></a></li>
+                          <li><a class="" href="exitAction"><span>退出登录</span></a></li>
                       </ul>
                   </li>
-                  
-                   <li class="sub-menu">
-                      <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
-                          <span>操作员信息</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-                      <ul class="sub">
-                          <li><a class="" href="loginUserInformationAction?status=1">维护操作员信息</a></li>                          
-                      </ul>
-                  </li>    
+                  <!-- 动态开放此菜单项-->
+					<c:choose>
+						<c:when test="${ sessionScope.adminType eq '是'}">
+							<li class="sub-menu">
+		                      <a href="javascript:;" class="">
+		                          <i class="icon_document_alt"></i>
+		                          <span>操作员信息</span>
+		                          <span class="menu-arrow arrow_carrot-right"></span>
+		                      </a>
+		                      <ul class="sub">
+		                          <li><a class="" href="managerAction!showOperator">维护操作员信息</a></li>                          
+		                      </ul>
+		                    </li>    
+						</c:when>
+					</c:choose>
               </ul>
               <!-- sidebar menu end-->
           </div>
@@ -262,7 +262,7 @@
 			</div>
 			
 			     <button type="button" class="btn btn-information" style="width:100px;height:30px;font-size:15px">
-                            <a href="abroadCollegeAction"><b>返回上页</b></a></button>
+                            <a href="collegeAction"><b>返回上页</b></a></button>
               <!-- Form validations -->              
               <div class="row">
                   <div class="col-lg-12">

@@ -251,7 +251,7 @@ public class CollegeAgreementAction extends ActionSupport{
 	}
 	
 	/**
-	 *  删除活动信息
+	 *  删除协议信息
 	 * @return
 	 */
 	public String deleteObject() {
@@ -286,7 +286,7 @@ public class CollegeAgreementAction extends ActionSupport{
 	}
 	
 	/**
-	 *  修改活动信息
+	 *  修改协议信息
 	 * @return
 	 */
 	public void updateInfor() throws IOException{

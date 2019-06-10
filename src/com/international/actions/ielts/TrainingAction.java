@@ -253,7 +253,7 @@ public class TrainingAction extends ActionSupport {
 		training = td.getTrainingInforById(id);
 		if(training!=null) {
 			System.out.println("training对象信息 = "+training);
-			System.out.println("training对象ID = "+training.getTraningId());
+			System.out.println("training对象ID = "+training.getTrainingId());
 			System.out.println("training对象CourseHours = "+training.getCourseHours());
 			System.out.println("training对象StartTime = "+training.getStartTime());
 			System.out.println("training对象EndTime = "+training.getEndTime());
@@ -268,7 +268,7 @@ public class TrainingAction extends ActionSupport {
 	
 	public String updateTrainingInfor(){
 		System.out.println("要更新的Id = "+id);
-		System.out.println("training对象Id = "+training.getTraningId());
+		System.out.println("training对象Id = "+training.getTrainingId());
 		System.out.println("training对象AgencyName = "+training.getAgencies().getAgencyName());
 		System.out.println("training对象CourseHours = "+training.getCourseHours());
 		System.out.println("training对象StartTime() = "+training.getStartTime());

@@ -251,7 +251,7 @@ public class ExamAction extends ActionSupport{
 	}
 	
 	/**
-	 *  修改活动信息
+	 *  修改考试信息
 	 * @return
 	 */
 	public void updateInfor() throws IOException{
