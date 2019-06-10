@@ -270,7 +270,7 @@
                           <div class="panel-body">
                               <div class="form">
                                 <label  style="color:red">${ sessionScope.addUserError}</label>
-                                  <form class="form-validate form-horizontal" method="post" id="noticeForm"  action="noticeAction!updateNewsInfor">
+                                  <form class="form-validate form-horizontal" method="post" id="noticeForm"  action="noticeAction!addNotice">
                                                                         
                                       <div class="form-group ">
                                       <div  style="margin-top:-10px">
