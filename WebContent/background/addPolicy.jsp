@@ -89,43 +89,40 @@
   <section id="container" class="">
      
        
-      <header class="header dark-bg">
+       <header class="header dark-bg">
             <div class="toggle-nav">
                 <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
             </div>
-
             <!--logo start-->
     <!--      <img src="img/logo3.png" style="width:100px;height:50px" class="col-sm-4" > -->
               <a href="index.jsp" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
-             
             <!--logo end-->              
  
-                <ul>
-                    <!-- alert notification end-->
-                    <!-- user login dropdown start-->
-                    <li class="dropdown pull-right " style="margin-top:10px">
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="profile-ava">
-                                <img alt="" src="img/avatar1_small.jpg">
-                            </span>
-                             <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
-                            <span  style="color:white; font-size:20px"><s:property value="#session.adminUser.userName"/></span>
-                            <p class="caret"></p>
-                        </a>
-                        <ul class="dropdown-menu extended logout">
-                            <div class="log-arrow-up"></div>
-                            <li class="eborder-top">
-                                <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
-                            </li>
-                            <li>
-                                <a href="login.jsp"><i class="icon_key_alt"></i>退出登录</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- user login dropdown end -->
-                </ul>
-                <!-- notificatoin dropdown end-->
-            </div>
+             <ul>
+                 <!-- alert notification end-->
+                 <!-- user login dropdown start-->
+                 <li class="dropdown pull-right " style="margin-top:10px">
+                     <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                         <span class="profile-ava">
+                             <img alt="" src="img/avatar1_small.jpg">
+                         </span>
+                          <!-- <s:textfield name="userInfo.name"  disabled="true"></s:textfield> -->
+                         <span  style="color:white; font-size:20px"><s:property value="#session.userName"/></span>
+                         <p class="caret"></p>
+                     </a>
+                     <ul class="dropdown-menu extended logout">
+                         <div class="log-arrow-up"></div>
+                         <li class="eborder-top">
+                             <a href="profile.jsp"><i class="icon_profile"></i>个人信息</a>
+                         </li>
+                         <li>
+                             <a href="exitAction"><i class="icon_key_alt"></i>退出登录</a>
+                         </li>
+                     </ul>
+                 </li>
+                 <!-- user login dropdown end -->
+             </ul>
+             <!-- notificatoin dropdown end-->
       </header>      
       <!--header end-->
 
