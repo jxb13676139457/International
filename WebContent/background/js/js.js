@@ -220,60 +220,6 @@ function getTrainingInformation(){
    }
 
 
-//获取雅思培训的开始时间2
- function getStartTime2(){
-	  
-	  
-	  var temp=1;
-	  var agencyName= $("#agencyName").find("option:selected").text();   	  
-	  
-	  if(agencyName!=null || startTime!=null){
-		  $.ajax(		  
-	    	      {
-	    	    	  
-	    	    	  type:"post",
-	    	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!getStartTimeInformation",
-	    	    	  data:{agencyName:agencyName},
-	    	    	  async:false,
-	    	    	  dataType:"json",			    	
-	    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
-	    	    	  traditional:true,
-	    	    	  success: function(data){
-	    	    		  
-	    	    			 var html="";
-		    	    		 html=html +'<option selected>--��ѡ��ʼʱ��--</option>';
-                             
-		                     for(var i=0; i<data.length; i++){
-		                    	
-		                    	   for(var j=0; j<i; j++){
-		                    				 
-		                    		 if(data[i].startTime==(data[j].startTime)){
-		                    			 temp=0;
-		                    			 break;
-		                    		 }
-		                    	 }
-		                    	 if(temp==1){
-		                    		 html=html +'<option value=""+ data[i].startTime+"">'+data[i].startTime+'</option>';
-		                    	 }
-		                    	 temp=1;
-		                     }
-		                     
-	                     $('#startTime').html(html);
-	                   },   
-	                   error: function(data){
-	                	   
-	                		 var html="";
-	                		 $('#startTime').html(html);
-	                   }   	  
-	    	    	  
-	    	      }
-	  );
-	  }else{
-		  alert("��ѡ��һ������!");
-	  }
- }
- 
- 
 
  //获取雅思培训的结束时间
  function getOutTime(){

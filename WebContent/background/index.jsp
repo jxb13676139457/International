@@ -154,10 +154,10 @@
                       <ul class="sub">
                           <li><a class="" href="englishAgencyAction">维护雅思机构信息</a></li> 
                           <li><a class="" href="trainingAction">维护雅思培训计划信息</a></li>     
-                          <li><a class="" href="simulationExamAction">维护考试信息</a></li>     
+                          <li><a class="" href="examAction">维护考试信息</a></li>     
                           <li><a class="" href="attendTrainingAction!showAttend">维护学生参与培训计划</a></li>  
-                          <li><a class="" href="participateSimulationExamAction">维护参与考试信息</a></li>  
-                          <li><a class="" href="agencyProtocolAction">维护雅思协议信息</a></li>                    
+                          <li><a class="" href="scoreAction">维护参与考试信息</a></li>  
+                          <li><a class="" href="agencyAgreementAction">维护雅思协议信息</a></li>                    
                       </ul>
                   </li>  
                   
@@ -168,9 +168,9 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
                       <ul class="sub">
-                          <li><a class="" href="abroadCollegeAction">维护国外院校信息</a></li>     
-                          <li><a class="" href="abroadCollegeActivitiesAction">维护活动信息</a></li>  
-                          <li><a class="" href="abroadCollegeProtocolAction">维护协议信息</a></li>                         
+                          <li><a class="" href="collegeAction">维护国外院校信息</a></li>     
+                          <li><a class="" href="collegeActivityAction">维护活动信息</a></li>  
+                          <li><a class="" href="collegeAgreementAction">维护协议信息</a></li>                         
                       </ul>
                   </li>                                                                         
                   
