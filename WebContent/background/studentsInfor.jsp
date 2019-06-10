@@ -376,11 +376,10 @@
 				</div>
 			</div>
 			<div class="row" style="margin:5px">
-			      <div class="nav search-row" id="top_menu">
+			    <div class="nav search-row" id="top_menu">
                 <!--  search form start -->
                 <ul class="nav top-menu">            
-                             
-                 <li>
+              <%--    <li>
                     <form class="navbar-form" action="studentInformationAction!searchStudentGFCS" method="post">
                           <label><b>年级</b>&nbsp;</label>
                           <select id="myYear" name="grade" 
@@ -406,7 +405,7 @@
                            </select>
                          <button type="submit" onclick="serachToji()" class="btn btn-default" style="width:120px;height:30px;margin-top:-3px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>查询统计</b></button>
                      </form>
-                </li>
+                </li> --%>
                         
 	               <li style="margin-top:10px">
 	                   <form class="navbar-form" action="internationalStudentAction!showStudent" method="post" enctype="multipart/form-data">
