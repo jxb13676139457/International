@@ -154,7 +154,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="index.jsp">
+                      <a class="" href="indexAction">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>

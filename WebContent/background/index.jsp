@@ -236,14 +236,15 @@
 	         </div>
 			     
 	         <div class="main-body_list">
+	         
 		          <ul>
-		           <s:iterator value="newsList" var="user" status="st">
+		           <s:iterator value="newsList" var="news" status="st">
 		             <li>
 		                 <div style="float:left">
-	                        <a href="<s:property value="#user.newsUrl"/>">
-	                        <b><s:property value="#user.title"/></b></a>
+	                        <a href="<s:property value="#news.newsUrl"/>">
+	                        <b><s:property value="#news.title"/></b></a>
 	 	                 </div>
-		                 <span  style="float:right"> <b><s:property value="#user.time"/></b></span>
+		                 <span  style="float:right"> <b><s:property value="#news.time"/></b></span>
 		             </li>
 		           </s:iterator>
 		          </ul>

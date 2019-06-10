@@ -9,7 +9,10 @@
 	<package name="default" extends="struts-default">
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction">
-			<result name="success">/background/index.jsp</result>
+			<!-- <result name="success">/background/index.jsp</result> -->
+			<result name="success" type="redirectAction">
+				<param name="actionName">indexAction</param>
+			</result>
 			<result name="input">/background/login.jsp</result>
 		</action> 
 		
@@ -72,6 +75,10 @@
 				<param name="actionName">newsAction</param>
 			</result>
 			<result name="updateError">/background/newsInfor.jsp</result>
+		</action> 
+		
+		<action name="indexAction" class="indexAction">
+			<result name="success">/background/index.jsp</result>
 		</action> 
 		
 		<action name="policyAction" class="policyAction">
