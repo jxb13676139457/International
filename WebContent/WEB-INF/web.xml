@@ -41,4 +41,8 @@
     <welcome-file>/background/login.jsp</welcome-file>
   </welcome-file-list>
   
+  <session-config>
+	<session-timeout>25</session-timeout>
+  </session-config>
+  
 </web-app>

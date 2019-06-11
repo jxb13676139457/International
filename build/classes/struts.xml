@@ -7,6 +7,12 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
 	<package name="default" extends="struts-default">
+	
+		<!-- 定义用户自定义拦截器 -->
+		<interceptors>
+			<interceptor name="logInterceptor" class="com.international.interceptor.LoginInterceptor"/>
+		</interceptors>
+		
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction">
 			<!-- <result name="success">/background/index.jsp</result> -->
@@ -28,6 +34,9 @@
 			</result>
 			<result name="lookSuccess">/background/showAbroadCollegeDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action> 
 		
 		<action name="internationClassAction" class="internationClassAction">
@@ -44,6 +53,9 @@
 				<param name="actionName">internationClassAction</param>
 			</result>
 			<result name="addError">/background/internationalClassInfor.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action> 
 		
 		<action name="noticeAction" class="noticeAction">
@@ -61,6 +73,9 @@
 			<result name="updateError">/background/noticeInfor.jsp</result>
 			<result name="lookSuccess">/background/showNoticeDetail.jsp</result>
 			<result name="lookError">/background/noticeInfor.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action> 
 		
 		<action name="newsAction" class="newsAction">
@@ -79,9 +94,14 @@
 				<param name="actionName">newsAction</param>
 			</result>
 			<result name="updateError">/background/newsInfor.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action> 
 		
 		<action name="indexAction" class="indexAction">
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
 			<result name="success">/background/index.jsp</result>
 		</action> 
 		
@@ -102,6 +122,9 @@
 			</result>
 			<result name="updateError">/background/policyInfor.jsp</result>
 			<param name="savePath">/upload</param>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<action name="englishAgencyAction" class="englishAgencyAction">
@@ -120,6 +143,9 @@
 				<param name="actionName">englishAgencyAction</param>
 			</result>
 			<result name="updateError">/background/englishAgencyInfor.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 
 		<!-- 活动的Action -->
@@ -134,6 +160,9 @@
 			</result>
 			<result name="lookSuccess">/background/showAbroadCollegeActivitiesDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeActivitiesDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 协议的Action -->
@@ -150,6 +179,9 @@
 			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
 			<param name="savePath">/upload/collegeAgreement</param>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 考试的Action -->
@@ -164,6 +196,9 @@
 			</result>
 			<result name="lookSuccess">/background/showFormalExamDetail.jsp</result>
 			<result name="lookError">/background/showFormalExamDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 成绩的Action -->
@@ -178,6 +213,9 @@
 			</result>
 			<result name="lookSuccess">/background/showParticipateFormalExamDetail.jsp</result>
 			<result name="lookError">/background/showParticipateFormalExamDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 机构协议的Action -->
@@ -194,12 +232,18 @@
 			<result name="lookError">/background/showAgencyProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
 			<param name="savePath">/upload/agencyAgreement</param>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
 			<result name="input">/background/profile.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 超级管理员特有权限的Action -->
@@ -210,6 +254,9 @@
 			<result name="delSucc" type="redirectAction">
 				<param name="actionName">managerAction!showOperator</param>
 			</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		<!-- 添加操作员 -->
 		<action name="addOperatorAction" class="addOperatorAction"></action>
@@ -225,6 +272,9 @@
 				<param name="actionName">internationalStudentAction!showStudent</param>
 			</result>
 			<result name="detailSucc">/background/showStudentDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 出国学生模块的Action -->
@@ -238,6 +288,9 @@
 				<param name="actionName">overseasStudentAction!showStudent</param>
 			</result>
 			<result name="detailSucc">/background/showOverStudentDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 交换生模块的Action -->
@@ -251,6 +304,9 @@
 				<param name="actionName">exchangeStudentAction!showStudent</param>
 			</result>
 			<result name="detailSucc">/background/showExchangeStudentDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 学生夏令营活动的Action -->
@@ -264,18 +320,27 @@
 				<param name="actionName">studentActivityAction!showStuActivity</param>
 			</result>
 			<result name="detailSucc">/background/showStudentActivitiesDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 修改管理员密码的Action -->
 		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
 			<result name="success">/background/login.jsp</result>
 			<result name="input">/background/profile.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 退出系统的Action -->
 		<action name="exitAction" class="exitAction">
 			<result name="success">/background/login.jsp</result>
 			<result name="input">/background/index.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 文件下载Action -->
@@ -291,6 +356,9 @@
 				<!-- 缓冲区大小设置 -->
 				<param name="bufferSize">1024</param>
 			</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
     	</action>
 
     	<action name="trainingAction" class="trainingAction">
@@ -305,6 +373,9 @@
 				<param name="actionName">trainingAction</param>
 			</result>
 			<result name="updateError">/background/trainingInfor.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 		
 		<!-- 学生参与雅思培训计划的Action -->
@@ -318,6 +389,9 @@
 				<param name="actionName">attendTrainingAction!showAttend</param>
 			</result>
 			<result name="detailSucc">/background/showParticipateTrainingDetail.jsp</result>
+			<interceptor-ref name="logInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="login">/background/login.jsp</result>
 		</action>
 
 	</package>
