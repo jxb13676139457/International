@@ -90,12 +90,7 @@
 			      }
 			</script>
 			 
-		     <style>  
-           #logo{
-            width: 40px;//重置大小，最终图片大小确定
-            transform:scale(2);//设置缩放比例
-        }
-        </style>	
+		
 		
     
     
@@ -145,7 +140,7 @@
       <!--header end-->
 
       <!--sidebar start-->
-             <!--侧边菜单栏-->
+      <!--侧边菜单栏-->
       <aside>
           <div id="sidebar"  class="nav-collapse " >
               <!-- sidebar menu start-->
@@ -363,9 +358,9 @@
 
     <!-- custom form validation script for this page-->
     <script src="js/form-validation-script.js"></script>
-    <!--custome script for all page-->
-    <script src="js/scripts.js"></script>    
-     <script src="js/js.js"  charset="utf-8" type="text/javascript"></script>
+    <!--custome script for all page-->  
+     <script src="js/scripts.js"></script>  
+     <script src="js/js.js"  charset="utf-8"></script>
     
 	
  

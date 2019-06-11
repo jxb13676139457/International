@@ -17,8 +17,12 @@
 		<action name="collegeAction" class="collegeAction">
 			<result name="success">/background/abroadCollegeInfor.jsp</result>
 			<result name="input">/background/abroadCollegeInfor.jsp</result>
-			<result name="deleteSuccess">/background/abroadCollegeInfor.jsp</result>
-			<result name="deleteError">/background/abroadCollegeInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">collegeAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">collegeAction</param>
+			</result>
 			<result name="lookSuccess">/background/showAbroadCollegeDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeDetail.jsp</result>
 		</action> 
@@ -115,8 +119,12 @@
 		<action name="collegeActivityAction" class="collegeActivityAction">
 			<result name="success">/background/abroadCollegeActivitiesInfor.jsp</result>
 			<result name="input">/background/abroadCollegeActivitiesInfor.jsp</result>
-			<result name="deleteSuccess">/background/abroadCollegeActivitiesInfor.jsp</result>
-			<result name="deleteError">/background/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">collegeActivityAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">collegeActivityAction</param>
+			</result>
 			<result name="lookSuccess">/background/showAbroadCollegeActivitiesDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeActivitiesDetail.jsp</result>
 		</action>
@@ -125,8 +133,12 @@
 		<action name="collegeAgreementAction" class="collegeAgreementAction">
 			<result name="success">/background/abroadCollegeProtocolInfor.jsp</result>
 			<result name="input">/background/abroadCollegeProtocolInfor.jsp</result>
-			<result name="deleteSuccess">/background/abroadCollegeProtocolInfor.jsp</result>
-			<result name="deleteError">/background/abroadCollegeProtocolInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">collegeAgreementAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">collegeAgreementAction</param>
+			</result>
 			<result name="lookSuccess">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
@@ -137,8 +149,12 @@
 		<action name="examAction" class="examAction">
 			<result name="success">/background/formalExamInfor.jsp</result>
 			<result name="input">/background/formalExamInfor.jsp</result>
-			<result name="deleteSuccess">/background/formalExamInfor.jsp</result>
-			<result name="deleteError">/background/formalExamInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">examAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">examAction</param>
+			</result>
 			<result name="lookSuccess">/background/showFormalExamDetail.jsp</result>
 			<result name="lookError">/background/showFormalExamDetail.jsp</result>
 		</action>
@@ -147,8 +163,12 @@
 		<action name="scoreAction" class="scoreAction">
 			<result name="success">/background/participateFormalExamInfor.jsp</result>
 			<result name="input">/background/participateFormalExamInfor.jsp</result>
-			<result name="deleteSuccess">/background/participateFormalExamInfor.jsp</result>
-			<result name="deleteError">/background/participateFormalExamInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">scoreAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">scoreAction</param>
+			</result>
 			<result name="lookSuccess">/background/showParticipateFormalExamDetail.jsp</result>
 			<result name="lookError">/background/showParticipateFormalExamDetail.jsp</result>
 		</action>
@@ -157,8 +177,12 @@
 		<action name="agencyAgreementAction" class="agencyAgreementAction">
 			<result name="success">/background/agencyProtocolInfor.jsp</result>
 			<result name="input">/background/agencyProtocolInfor.jsp</result>
-			<result name="deleteSuccess">/background/agencyProtocolInfor.jsp</result>
-			<result name="deleteError">/background/agencyProtocolInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">agencyAgreementAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">agencyAgreementAction</param>
+			</result>
 			<result name="lookSuccess">/background/showAgencyProtocolDetail.jsp</result>
 			<result name="lookError">/background/showAgencyProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
