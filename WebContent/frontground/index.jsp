@@ -62,7 +62,7 @@
          span{
          
          
-            float:right;
+            //float:right;
          }
    
    </style>
@@ -95,7 +95,7 @@
 			
 		
 				<div class="top_info">
-					<p style="margin-right:280px">
+					<p style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
                        <s:set name="name" value="#session.name"></s:set> 
 		             	 <s:if test="#name != null"> 
@@ -153,8 +153,14 @@
 					      
 		             	  </s:if>
 		             	   <s:else> 
-		             	   <a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
-		             	   
+								<span style="display:block; margin-top:2px;">
+									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
+								</span>
+		             	   		<style>
+		             	   			.btn-default{
+		             	   				background-color:rgb(51,51,51);
+		             	   			}
+		             	   		</style>
 		             	   </s:else>
 		     
 		               </p>
@@ -253,6 +259,9 @@
 			                    		<style>
 			                    			.change{
 			                    				width:200px;
+			                    			}
+			                    			.change span{
+			                    				margin-left:35px;
 			                    			}
 			                    		</style>
 			                    	</s:else>
