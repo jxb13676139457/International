@@ -87,7 +87,7 @@
             </div>
             <!--logo start-->
     <!--      <img src="img/logo3.png" style="width:100px;height:50px" class="col-sm-4" > -->
-              <a href="index.jsp" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
+              <a href="indexAction" class="logo"><span style="font-size:25px;color:white"><img src="img/logo3.png" id="logo" ><b>国际合作交流后端管理系统</b></span></a>
             <!--logo end-->              
  
              <ul>
@@ -125,7 +125,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="index.jsp">
+                      <a class="" href="indexAction">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
@@ -237,7 +237,7 @@
 				<div class="col-lg-12">
 					
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="indexAction">首页</a></li>
 						<li><i class="icon_document_alt"></i><b>添加操作员</b></li>
 					</ol>
 				</div>
