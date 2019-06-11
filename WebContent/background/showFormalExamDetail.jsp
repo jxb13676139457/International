@@ -228,7 +228,7 @@
 				
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
-						<li><i class="icon_document_alt"></i>修改正式考试的信息</li>
+						<li><i class="icon_document_alt"></i>修改考试的信息</li>
 					</ol>
 				</div>
 			</div>
@@ -239,7 +239,7 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                            <b>修改正式考试的信息</b>
+                            <b>修改考试的信息</b>
                           </header>
                           <div class="panel-body">
                               <div class="form">

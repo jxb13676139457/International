@@ -407,7 +407,7 @@
     <!-- custom form validation script for this page-->
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
-    <script src="js/scripts.js"></script>    
+    <script src="js/scripts.js" charset="utf-8"></script>    
 
 
 

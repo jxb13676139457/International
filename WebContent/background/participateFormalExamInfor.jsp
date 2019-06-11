@@ -232,7 +232,7 @@
 		
 					<ol class="breadcrumb">
 								<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
-						<li><i class="fa fa-table"></i>维护学生参与正式考试的信息</li>
+						<li><i class="fa fa-table"></i>维护学生参与考试的信息</li>
 					</ol>
 				</div>
 			</div>
@@ -241,7 +241,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                     <form class="navbar-form" action="scoreExamAction" method="post">
+                     <form class="navbar-form" action="scoreAction" method="post">
                             <input class="form-control" name="search" placeholder="输入查找的学号" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                              
