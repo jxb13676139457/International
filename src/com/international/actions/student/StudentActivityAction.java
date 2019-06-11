@@ -140,7 +140,7 @@ public class StudentActivityAction extends ActionSupport{
 	
 	//删除学生活动信息
 	public String deleteStudentActivity() {
-		if(sad.delStuActivity(id)) {
+		if(sad.delStuActivity(activityId)) {
 			System.out.println("删除成功");
 			return "delSucc";
 		}else {

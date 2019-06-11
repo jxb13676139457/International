@@ -292,7 +292,7 @@
                         </form>
                         </li>  
                         
-                        <li style="margin-top:10px;margin-left:20px">
+                        <li style="margin-left:20px">
                         
                                  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollegeActivities.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
@@ -408,7 +408,7 @@
     <script src="js/jquery.nicescroll.js" type="text/javascript"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="utf-8"></script>
   
   
 			

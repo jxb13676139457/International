@@ -33,7 +33,7 @@ public class ScoreAction extends ActionSupport{
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage=0; //当前页
 	private int totalPage=0; //总页数
-	String search;		//搜索学号
+	String search="";		//搜索学号
 	String agencyName;	//存储机构
 	String startTime;	//存储考试时间
 	String location;	//存储位置

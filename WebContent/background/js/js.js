@@ -110,8 +110,10 @@ function getTrainingInformation(){
    	    	  data:{},
    	    	  dataType:"json",			    	
    	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+   	    	  async:true,
    	    	  traditional:true,
-   	    	  success: function(data){			
+   	    	  success: function(data){
+   	    		  	 console.log(data);
     	    		 var html="";
     	    		 html=html +'<option selected>--请选择国外院校--</option>';
                      for(var i=0; i<data.length; i++){
@@ -122,13 +124,14 @@ function getTrainingInformation(){
                     		 }
                     	 }
                     	 if(temp==1){
-                    		 html=html +'<option value=""+ data[i].collegeName+"">'+data[i].collegeName+'</option>';
+                    		 html=html +'<option value=""+ data[i].name+"">'+data[i].collegeName+'</option>';
                     	 }
                     	 temp=1;
                      }
                      $('#college').html(html);
                   },
                   error: function(data){
+                	  console.log(data);
                		 var html="";
 	    				 $('#college').html(html);
                   }

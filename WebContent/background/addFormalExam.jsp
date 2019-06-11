@@ -240,7 +240,7 @@
 					
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
-						<li><i class="icon_document_alt"></i>添加正式考试信息</li>
+						<li><i class="icon_document_alt"></i>添加考试信息</li>
 					</ol>
 				</div>
 			</div>
@@ -252,7 +252,7 @@
                   <div class="col-lg-12">
                       <section class="panel">
                           <header class="panel-heading">
-                             <b>添加正式考试信息</b>
+                             <b>添加考试信息</b>
                           </header>
                           <div class="panel-body" >
                               <div class="form">
@@ -352,7 +352,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="utf-8"></script>
 
 
 <%--       
