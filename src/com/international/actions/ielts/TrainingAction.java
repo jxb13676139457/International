@@ -30,7 +30,6 @@ public class TrainingAction extends ActionSupport {
 	private int currentPage=0; //当前页
 	private int totalPage=0; //总页数
 	
-	
 	public AgencyDao getAd() {
 		return ad;
 	}
@@ -79,6 +78,7 @@ public class TrainingAction extends ActionSupport {
 	public void setSearchEndTime(String searchEndTime) {
 		this.searchEndTime = searchEndTime;
 	}
+
 	public int getId() {
 		return id;
 	}

@@ -45,28 +45,19 @@ public class LogFilter implements Filter {
 		HttpSession session = httpRequest.getSession();
 		String UserName=(String) session.getAttribute("userName");
 		String a=httpRequest.getRequestURI();
-		if(UserName==null || UserName.equals("")){
-			((HttpServletResponse)response).sendRedirect("../login.jsp");
-			System.out.println("用户名为空");
-			
-			
-		}
-		else if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")){
+		System.out.println("url = "+a);
+		if(a.equals("/InternationalSys/background/login.jsp")) {
+			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")) {
+				System.out.println("正常跳转");
+				chain.doFilter(request, response);
+			}
 			chain.doFilter(request, response);
-			System.out.println("正常跳转");
+		}else if(UserName==null || UserName.equals("")){
+			((HttpServletResponse)response).sendRedirect("login.jsp");
+			System.out.println("用户名为空");				
 		}
 		
-		/*HttpServletRequest httpRequest = (HttpServletRequest)request;
-		HttpSession session = httpRequest.getSession();
-		String UserName=(String) session.getAttribute("userName");
-		if(UserName==null || UserName.equals("")){
-			((HttpServletResponse)response).sendRedirect("../login.jsp");
-			System.out.println("用户名为空");
-		}
-		else{
-			chain.doFilter(request, response);
-			System.out.println("正常跳转");
-		}*/
+		
 	}
 
 	/**

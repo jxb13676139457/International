@@ -246,6 +246,7 @@
                                  <th>培训的课时</th>
                                  <th>培训的费用</th>
                                  <th>操作</th>
+                                 <th>索引</th>
                               </tr>
                            <s:iterator value="trainingList" var="training" status="st">
                               <tr>
@@ -257,11 +258,12 @@
                                  <td>
                                   <div class="btn-group">
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
-                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#training.traningId"/>','trainingAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
-                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#training.traningId"/>', 'trainingAction!deleteTraingingInfo?id=')"><i class="icon_trash_alt"></i></a>
+                                      <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#training.trainingId"/>','trainingAction!searchObjectById?id=')"><i class="icon_pencil"></i></a>
+                                      <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#training.trainingId"/>', 'trainingAction!deleteTraingingInfo?id=')"><i class="icon_trash_alt"></i></a>
                             
                                   </div>
                                   </td>
+                                  <td><s:property value="#training.trainingId"/></td>
                               </tr>
                               </s:iterator>                             
                            </tbody>

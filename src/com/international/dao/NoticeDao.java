@@ -84,7 +84,7 @@ public class NoticeDao {
 			//hql语句
 			session=sessionFactory.openSession();
 			/*String hql1 = "title like '%"+value+"%'";*/
-			String hql2 = "time like '%"+value+"%'";
+			String hql2 = "convert(varchar,time,120) like '%"+value+"%'";
 			/*String hql3 = "content like '%"+value+"%'";
 			String hql4 = "source like '%"+value+"%'";
 			String hql5 = "author like '%"+value+"%'";*/
