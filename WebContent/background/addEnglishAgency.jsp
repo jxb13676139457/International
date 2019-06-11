@@ -138,7 +138,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu">                
                   <li class="active">
-                      <a class="" href="index.jsp">
+                      <a class="" href="indexAction">
                           <i class="icon_house_alt"></i>
                           <span>首页</span>
                       </a>
@@ -250,7 +250,7 @@
 				<div class="col-lg-12">
 				
 					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="beforeInformation.jsp">首页</a></li>
+						<li><i class="fa fa-home"></i><a href="indexAction">首页</a></li>
 						<li><i class="icon_document_alt"></i>添加雅思机构</li>
 					</ol>
 				</div>
