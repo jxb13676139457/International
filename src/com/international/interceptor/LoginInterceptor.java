@@ -25,24 +25,9 @@ public class LoginInterceptor extends AbstractInterceptor {
 		}else{ 
 			ActionContext ac=ai.getInvocationContext();
 			ac.put("errorMessage","用户未登录，请先登录。");
+			System.out.println("用户session过期，被转发到登录界面");
 			return "login"; 
 		}	
 	}
-	
-	/*public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("------:进来拦截器了！--1");
-        //获取session
-        HttpSession session = request.getSession(true);
-        //判断用户ID是否存在，不存在就跳转到登录界面
-        if(session.getAttribute("userName") == null){
-            System.out.println("------:跳转到login页面！");
-            response.sendRedirect(request.getContextPath()+"/login");
-            return false;
-        }else{
-            session.setAttribute("userName", session.getAttribute("userName"));
-            return true;
-        }
-    }*/
-
 
 }

@@ -284,9 +284,8 @@
                             <a href="addPolicy.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
                             <a href="policyAction?searchPolicy=&pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
-                        
-                           <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportPolicyExcel?searchName=${searchPolicyTime}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+                           <%-- <button type="button" class="btn btn-default" style="width:80px;height:30px">
+                            <a href="exportPolicyExcel?searchName=${searchPolicyTime}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button> --%>
                         
                         </form>
                     </li>                    
