@@ -47,7 +47,7 @@ public class LogFilter implements Filter {
 		String a=httpRequest.getRequestURI();
 		System.out.println("url = "+a);
 		if(a.equals("/InternationalSys/background/login.jsp")) {
-			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg")) {
+			if(a.contains(".css") || a.contains(".js") || a.contains(".png")|| a.contains(".jpg") || a.contains(".eot") || a.contains(".svg") || a.contains(".woff")) {
 				System.out.println("正常跳转1");
 				chain.doFilter(request, response);
 			}
