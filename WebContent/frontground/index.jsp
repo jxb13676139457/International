@@ -104,7 +104,7 @@
                                  
 		             	          <li class="dropdown" id="accountmenu">
 		             	          
-		             	          <s:if test='#session.loginUser.reserve2=="男"'>
+		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
 				             	  </b></a>
@@ -130,7 +130,7 @@
 						  
 							     <li class="dropdown" id="accountmenu">
 							       	 
-					                    <s:if test='#session.loginUser.reserve1=="男"'>
+					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
 				             	  </b></a>

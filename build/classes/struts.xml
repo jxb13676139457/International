@@ -393,7 +393,15 @@
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
 		</action>
-
+		
+		<!-- 前台登录的Action -->
+		<action name="userAction" class="userAction">
+			<result name="success">/frontground/index.jsp</result>
+			<result name="input">/frontground/index.jsp</result>
+			<result name="fault">/frontground/index.jsp</result>
+			<result name="student">/frontground/index.jsp</result>
+    		<result name="other">/frontground/index.jsp</result>
+		</action>
 	</package>
 	
 </struts>

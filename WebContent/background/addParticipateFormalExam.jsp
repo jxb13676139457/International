@@ -445,7 +445,7 @@
     <script src="js/form-validation-script.js"></script>
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>    
-    <script src="js/js.js"  charset="gb2312"></script>
+    <script src="js/js.js"  charset="utf-8"></script>
 
 
             <%

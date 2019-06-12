@@ -169,4 +169,11 @@
 			<ref bean="attendTrainingDao"/>
 		</property>
 	</bean>
+	
+	<!-- 前台登录的bean -->
+	<bean id="userAction" class="com.international.frontground.actions.user.UserAction" scope="prototype">
+		<property name="ud"><!-- 调用set方法给ud赋值，实例化 -->
+			<ref bean="userDao"/>
+		</property>
+	</bean>	
 </beans>

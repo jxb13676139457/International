@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.international.model.Admin;
+import com.international.model.InternationalStudent;
 import com.opensymphony.xwork2.ActionContext;
 
 public class UserDao {
@@ -231,4 +232,66 @@ public class UserDao {
 		}
 	}
 	
+	//前台登录验证
+	public boolean validLogin(String queryString){
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			//创建查询
+			Query query=session.createQuery(queryString);
+			List list=query.list();
+			if(list.size()>0)
+				return true;
+			else{
+				return false;
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
+	
+	//前台学生获取登录信息
+		public List<InternationalStudent> studentLogin(String queryString){
+			Session session=null;
+			try {
+				session=sessionFactory.openSession();
+				//创建查询
+				Query query=session.createQuery(queryString);
+				List list=query.list();
+				if(list.size()>0)
+					return list;
+				else{
+					return null;
+					}
+			}catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}finally{//关闭session
+				session.close();//关闭Session
+			}
+		}
+		
+		//前台其他获取登录信息
+				public List<Admin> otherLogin(String queryString){
+					Session session=null;
+					try {
+						session=sessionFactory.openSession();
+						//创建查询
+						Query query=session.createQuery(queryString);
+						List list=query.list();
+						if(list.size()>0)
+							return list;
+						else{
+							return null;
+							}
+					}catch (Exception e) {
+						e.printStackTrace();
+						return null;
+					}finally{//关闭session
+						session.close();//关闭Session
+					}
+				}
 }

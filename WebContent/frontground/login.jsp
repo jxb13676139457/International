@@ -94,7 +94,7 @@
 
 		<script type="text/javascript">
 		function test(){
-		document.forms[0].action="loginAction!login";
+		document.forms[0].action="userAction";
 		document.forms[0].submit();
 		}
 		</script>
