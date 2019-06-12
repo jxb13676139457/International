@@ -151,6 +151,7 @@ public class PolicyDao {
 			oldPolicy.setTitle(newPolicy.getTitle());;
 			oldPolicy.setTime(newPolicy.getTime());
 			oldPolicy.setSource(newPolicy.getSource());
+			oldPolicy.setFileName(newPolicy.getFileName());
 
 			Transaction trans=session.beginTransaction();
 			session.update(oldPolicy);

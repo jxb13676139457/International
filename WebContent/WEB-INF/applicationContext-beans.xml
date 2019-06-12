@@ -12,6 +12,13 @@
 		</property>
 	</bean>
 	
+	<!-- 导入Excel的bean -->
+	<!-- <bean id="importExcelDao" class="com.international.dao.ImportExcelDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean> -->
+	
 	<!-- 国外院校的bean -->
 	<bean id="collegeDao" class="com.international.dao.CollegeDao">
 		<property name="sessionFactory">
@@ -91,7 +98,6 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
-	
 
 	<!-- 考试的bean -->
 	<bean id="examDao" class="com.international.dao.ExamDao">

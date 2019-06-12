@@ -17,7 +17,7 @@ public class College implements java.io.Serializable {
 	String contactPerson;	//联系人
 	String position;		//联系人职位
 	String phone;			//联系电话
-	String email;			//电子邮件
+	String email;			//电子邮箱
 	
 	private Set<OverseasStudent> overseasStudents;  //关联的出国学生对象
 	private Set<StudentActivity> studentActivity;   //关联的学生夏令营活动对象
