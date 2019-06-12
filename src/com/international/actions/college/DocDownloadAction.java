@@ -31,7 +31,7 @@ public class DocDownloadAction extends ActionSupport{
 	}
 	//返回文件流的方法
     public InputStream getAttrInputStream(){
-    	
+    	System.out.println(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName));
         return ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName);
     }
     public String execute() throws Exception {

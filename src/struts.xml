@@ -178,7 +178,7 @@
 			<result name="lookSuccess">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<result name="lookError">/background/showAbroadCollegeProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
-			<param name="savePath">/upload/collegeAgreement</param>
+			<param name="savePath">/upload</param>
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
@@ -231,7 +231,7 @@
 			<result name="lookSuccess">/background/showAgencyProtocolDetail.jsp</result>
 			<result name="lookError">/background/showAgencyProtocolDetail.jsp</result>
 			<!-- 配置上传的文件路径 -->
-			<param name="savePath">/upload/agencyAgreement</param>
+			<param name="savePath">/upload</param>
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
