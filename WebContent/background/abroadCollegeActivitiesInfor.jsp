@@ -300,7 +300,7 @@
                             <a href="collegeActivityAction?search=&titles=&activityTime="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                      
                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportAbroadCollegeActivitiesExcel?searchName=${searchCollegeName}">
+                            <a href="excelAction!exportCollegeActivity">
                               <i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
                        
                         </li>                
@@ -330,7 +330,7 @@
                                  <th>国外院校</th>
                                  <th>活动主题</th>
                                  <th>活动时间</th>
-                                 <th>参加人数</th>
+                                 <th>交流活动类型</th>
                                                         
                                  <th>操作</th>
                               </tr>

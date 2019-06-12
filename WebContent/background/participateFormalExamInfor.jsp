@@ -251,7 +251,7 @@
                             <a href="scoreAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                              
                          <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportParticipateFormalExamExcel?searchName=${formalStudentNo }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
+                            <a href="excelAction!exportScore"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                             </button>
                         
                          <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">

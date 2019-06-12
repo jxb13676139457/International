@@ -41,12 +41,13 @@ public class AttendTrainingDao {
 			//a.classId=b.classId and     a.agencyId=b.agencyId and
 			String hql1 = "studentId in (select studentId from InternationalStudent where studentId like '%"
 					+value+"%' or studentName like '%"+value+"%')";
-			String hql2 = "trainingId in (select trainingId from Training where startTime='"+value+"' or endTime ='"+value+"' or courseHours like '%"+value+
-					"%' or courseFee like '%"+value+"%')";
+			//String hql2 = "trainingId in (select trainingId from Training where startTime='"+value+"' or endTime ='"+value+"' or courseHours like '%"+value+
+					//"%' or courseFee like '%"+value+"%')";
 			//System.out.println("hql1:"+hql1);
 			//System.out.println("hql2:"+hql2);
 			//拼接hql语句
-			hql = "from AttendTraining where "+ hql1 +" or "+ hql2;
+			//hql = "from AttendTraining where "+ hql1 +" or "+ hql2;
+			hql = "from AttendTraining where "+ hql1;
 			//System.out.println("拼接的hql:"+hql);
 			Query query = session.createQuery(hql);
 			List list = query.list();
@@ -73,12 +74,13 @@ public class AttendTrainingDao {
 			//以下是根据子查询来实现多表搜索
 			String hql1 = "studentId in (select studentId from InternationalStudent where studentId like '%"
 					+value+"%' or studentName like '%"+value+"%')";
-			String hql2 = "trainingId in (select trainingId from Training where startTime='"+value+"' or endTime ='"+value+"' or courseHours like '%"+value+
-					"%' or courseFee like '%"+value+"%')";
+			//String hql2 = "trainingId in (select trainingId from Training where startTime='"+value+"' or endTime ='"+value+"' or courseHours like '%"+value+
+					//"%' or courseFee like '%"+value+"%')";
 			//System.out.println("hql1:"+hql1);
 			//System.out.println("hql2:"+hql2);
 			//拼接hql语句
-			hql = "from AttendTraining where "+ hql1 +" or "+ hql2;
+			//hql = "from AttendTraining where "+ hql1 +" or "+ hql2;
+			hql = "from AttendTraining where "+ hql1;
 			//System.out.println("拼接的hql:"+hql);
 			Query query = session.createQuery(hql);
 			query.setFirstResult((pageNo-1)*pageSize);

@@ -217,7 +217,7 @@ public class InternationalStudentAction extends ActionSupport {
 	
 	//根据年级和专业获取班级信息
 	public void getclassInfromation() throws IOException{
-		List<InternationalClass>  classList=new ArrayList<InternationalClass>();
+		List<InternationalClass> classList = new ArrayList<InternationalClass>();
 		//System.out.println("测试有无进入此action，hql语句：");
 		classList = sd.queryByMajor(grade,major);
 		if(classList!=null && classList.size()>0){

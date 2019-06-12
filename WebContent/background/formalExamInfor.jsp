@@ -221,7 +221,7 @@
                             
                              
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportFormalExamExcel?searchName=${searchFormalTime}"><b>导出</b></a></button>
+                            <a href="excelAction!exportExam"><b>导出</b></a></button>
                         </div>
                         </form>
                     </li>                    

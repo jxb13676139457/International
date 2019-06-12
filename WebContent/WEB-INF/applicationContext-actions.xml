@@ -12,6 +12,40 @@
 		</property>
 	</bean>	
 	
+	<!-- 导入导出的bean -->
+	<bean id="excelAction" class="com.international.common.ExcelAction">
+		<property name="sd">
+			<ref bean="studentDao"/>
+		</property>
+		<property name="osd">
+			<ref bean="overseasStuDao"/>
+		</property>
+		<property name="cd">
+			<ref bean="collegeDao"/>
+		</property>
+		<property name="ad">
+			<ref bean="activityDao"/>
+		</property>
+		<property name="ed">
+			<ref bean="examDao"/>
+		</property>
+		<property name="scoredao">
+			<ref bean="scoreDao"/>
+		</property>
+		<property name="esd">
+			<ref bean="exchangeStuDao"/>
+		</property>
+		<property name="sad">
+			<ref bean="stuActivityDao"/>
+		</property>
+		<property name="classDao">
+			<ref bean="classesDao"/>
+		</property>
+		<!-- <property name="ied">
+			<ref bean="importExcelDao"/>
+		</property> -->
+	</bean>
+	
 	<!-- 国外院校的bean -->
 	<bean id="collegeAction" class="com.international.actions.college.CollegeAction">
 		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
