@@ -117,12 +117,37 @@
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
 				             
 							    
 		             	     </s:if>
+		             	     
+		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
+			           
+                              
+						  
+							     <li class="dropdown" id="accountmenu">
+							       	 
+					                    <s:if test='#session.loginUser3.sex=="男"'>
+					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
+				             	  </b></a>
+				             	  </s:if>
+				             	  <s:else>
+				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp;   <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
+				             	  </b></a>
+				             	  </s:else>
+					                    <ul class="dropdown-menu">
+					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
+												<li class="divider"></li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
+					                    </ul>
+					                </li>
+				          
+		             	     </s:elseif>
 		             	     
 		             	     <s:else>
 			           
@@ -143,7 +168,7 @@
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
 				          

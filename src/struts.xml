@@ -408,6 +408,7 @@
 			<result name="fault">/frontground/login.jsp</result>
 			<result name="student">/frontground/index.jsp</result>
     		<result name="other">/frontground/index.jsp</result>
+    		<result name="exitlogin">/frontground/index.jsp</result>
 		</action>
 	</package>
 	
