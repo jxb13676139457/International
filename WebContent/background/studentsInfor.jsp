@@ -91,6 +91,10 @@
     		function gotoExitAction(){
     			location.href="exitAction";
     		}
+			//导入导出Excel
+			function exportExcel(){
+				location.href="ExcelAction!exportExcel";
+			}
 	    </script>
   <body>
   
@@ -193,12 +197,14 @@
 	</script>
 			
 	<script type="text/javascript">
+			  //上传Excel文件
 		      function toSubmit(){
+				  //var excelName = $("#file-zh").val();
 		    	  var formData = new FormData($("#studentExcel")[0]);  // 要求使用的html对象
 	    		  $.ajax({
 	    	    	  type:"post",
-	    	    	  url:"http://localhost:8080/Graduate/studentInformationAction!importExcel",
-		    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+	    	    	  url:"http://localhost:8080/InternationalSys/background/excelAction!importExchangeStudentExcel",
+		    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
     	  		      data:formData,
 	    	    	  dataType:"json",	
 	    	    	  async:false,			    
@@ -417,13 +423,11 @@
 	                        <a href="internationalStudentAction!showStudent"><i class="icon_menu"></i>&nbsp;&nbsp;
 	                        <b>显示全部</b></a></button>
 	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
-	                        	<a href="exportInterStudentExcel?searchName=${studentInformation}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
-	                        <!--   <button type="button" class="btn btn-default" style="width:80px;height:30px">
-	                        <a href=studentInformationAction!importExcel><i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b></a></button> -->
+	                        	<a href="excelAction!exportInterStudent"><i class="icon_download"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+	                        <!-- <button type="button" class="btn btn-default" style="width:80px;height:30px"> -->
 	                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
-								<i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b>
+								<i class="icon_upload"></i>&nbsp;&nbsp;<b>导入</b>
 							</button>
-							<a class="btn btn-default" href="downLoad.action?fileName=国际班学生信息模板.xls" style="width:140px;height:30px">	<i class="icon_download"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a>	
 	                    </form>
 	              </li>
                 </ul>
@@ -431,7 +435,7 @@
               </div>
 			</div>
 			
-			<!-- 模态框（Modal） -->
+			<!-- 模态框（Modal）弹出层 -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
@@ -445,10 +449,9 @@
 						</div>
 						<div class="modal-body">
 						   <form enctype="multipart/form-data" id="studentExcel" method="post">
-				                 <input id="file-zh" name="upload" type="file"
-				                    multiple>	
-				                    <br/><br/>
-				                	<b><a class="btn btn-primary" href="downLoad.action?fileName=国际班学生信息模板.xls">下载国际班学生信息模板</a></b>	
+				                 <input id="file-zh" name="upload" type="file" multiple >	
+				                 <br/><br/>
+				                	<!-- <b><a class="btn btn-primary" href="downLoad.action?fileName=国际班学生信息模板.xls">下载国际班学生信息模板</a></b>	 -->
 				            </form>
 						</div>
 						<div class="modal-footer">

@@ -6,6 +6,7 @@
 	<!-- 指定action的配置转到Spring的配置文件-->
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.multipart.saveDir" value="/tmp"/>
+	
 	<package name="default" extends="struts-default">
 	
 		<!-- 定义用户自定义拦截器 -->
@@ -21,6 +22,12 @@
 			</result>
 			<result name="input">/background/login.jsp</result>
 		</action> 
+		
+		<!-- 导入导出Excel的Action -->
+		<action name="excelAction" class="excelAction">
+			
+		</action>
+		
 		
 		<!-- 国外院校的Action -->
 		<action name="collegeAction" class="collegeAction">

@@ -1,5 +1,7 @@
 package com.international.model;
 
+import java.util.Date;
+
 public class Training {
 
 	private int trainingId;
@@ -26,6 +28,7 @@ public class Training {
 	public void setCourseHours(int courseHours) {
 		this.courseHours = courseHours;
 	}
+	
 	public String getStartTime() {
 		return startTime;
 	}
@@ -74,6 +77,4 @@ public class Training {
 	public void setReserves3(String reserves3) {
 		this.reserves3 = reserves3;
 	}
-	
-	
 }

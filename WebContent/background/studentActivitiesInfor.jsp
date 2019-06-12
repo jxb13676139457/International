@@ -273,7 +273,7 @@
                             	<a href="studentActivityAction!showStuActivity">
                              	<i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                         	<button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            	<a href="exportStudentActivitiesExcel?searchName=${activityName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
+                            	<a href="excelAction!exportStudentActivity"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                             </button>
                         </form>
                     </li>                    
