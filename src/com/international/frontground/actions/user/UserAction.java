@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import com.international.dao.UserDao;
 import com.international.model.Admin;
 import com.international.model.InternationalStudent;
+import com.international.model.Teacher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 public class UserAction extends ActionSupport{
@@ -67,7 +68,7 @@ public class UserAction extends ActionSupport{
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String hql=null;
 		String loginResult=null;//返回的actionResult来判断是学生登录还是老师或领导登录
-		
+		String hql2=null; 
 		System.out.println("名字："+ name +" psw: " + password + " type: " + type);
 		
         try{
@@ -87,10 +88,11 @@ public class UserAction extends ActionSupport{
 			} else if (type.equals("other")) {
 				// 如果是教师或者是领导的话就执行这条
 				hql = "from Admin where adminId='"+name+"' and password='"+password+"'";
+				hql2="from Teacher where teacherId='"+name+"' and password='"+password+"'";
 				loginResult = "other";
 			}
 			// 验证登录的账号和密码
-			if (ud.validLogin(hql)) {
+			if (ud.validLogin(hql)||ud.validLogin(hql2)) {
 				
 				if (loginResult.equals("student") && loginResult != null) {
 					List<InternationalStudent> list = new ArrayList<InternationalStudent>();
@@ -102,8 +104,9 @@ public class UserAction extends ActionSupport{
 					if (list != null && list.size() > 0) {
 						loginStudent = list.get(0);
 						session.put("loginUser", loginStudent);
-						if(session.get("loginUser2")!=null){
+						if(session.get("loginUser2")!=null||session.get("loginUser3")!=null){
                 			session.put("loginUser2" ,null);
+                			session.put("loginUser3" ,null);
                 		}
 						//session.put("loginIn" ,loginStudent);
 					}
@@ -119,8 +122,26 @@ public class UserAction extends ActionSupport{
                 		session.put("loginUser2" ,login2);
                 		if(session.get("loginUser")!=null){
                 			session.put("loginUser" ,null);
+                			session.put("loginUser3" ,null);
                 		}
                 		//session.put("loginIn" ,login2);
+                	}
+                	else {
+                		Teacher login3=new Teacher();
+                    	List<Teacher> list3=new ArrayList<Teacher>();
+                    	String str3="teacherId= '"+ name+"'";
+                     	String str4="password= '"+ password+"'";
+                    	String strx="from Teacher where  "+ str3 + " and " + str4;
+                    	list3=ud.teacherLogin(strx);
+                    	if(list3!=null && list3.size()>0){
+                    		login3=list3.get(0);
+                    		session.put("loginUser3" ,login3);
+                    		if(session.get("loginUser")!=null){
+                    			session.put("loginUser" ,null);
+                    			session.put("loginUser2" ,null);
+                    		}
+                    		//session.put("loginIn" ,login2);
+                    	}
                 	}
                 }
 				//存储登录者的信息进session,显示在界面的右上角
@@ -133,9 +154,16 @@ public class UserAction extends ActionSupport{
 			}
 		}else{
 			loginResult="fault";
-			System.out.println("xxxxxxxx");
 			this.addFieldError("userFault", "用户类型不能为空");
 		}
 		return loginResult;
 	}
+	//前台退出
+		public String exitFront() {
+			System.out.println("开始清除session");
+			Map session = ActionContext.getContext().getSession();
+			session.clear();
+			System.out.println("清除session成功");
+			return "exitlogin";
+		}
 }

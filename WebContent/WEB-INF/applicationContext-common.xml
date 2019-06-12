@@ -56,6 +56,7 @@
 				<value>com/international/model/Score.hbm.xml</value>
 				<value>com/international/model/StudentActivity.hbm.xml</value>
 				<value>com/international/model/AttendTraining.hbm.xml</value>
+				<value>com/international/model/Teacher.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
