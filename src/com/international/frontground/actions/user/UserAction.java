@@ -82,11 +82,11 @@ public class UserAction extends ActionSupport{
 		if (type != null && type != "") {
 			if (type.equals("student")) {
 				// 如果是学生的话就执行这条语句
-				hql = "from InternationalStudent where studentId="+name+" and password="+password;
+				hql = "from InternationalStudent where studentId='"+name+"' and password='"+password+"'";
 				loginResult = "student";
 			} else if (type.equals("other")) {
 				// 如果是教师或者是领导的话就执行这条
-				hql = "from Admin where adminId="+name+" and password="+password;
+				hql = "from Admin where adminId='"+name+"' and password='"+password+"'";
 				loginResult = "other";
 			}
 			// 验证登录的账号和密码
@@ -133,6 +133,7 @@ public class UserAction extends ActionSupport{
 			}
 		}else{
 			loginResult="fault";
+			System.out.println("xxxxxxxx");
 			this.addFieldError("userFault", "用户类型不能为空");
 		}
 		return loginResult;

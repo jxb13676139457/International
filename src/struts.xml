@@ -398,7 +398,7 @@
 		<action name="userAction" class="userAction">
 			<result name="success">/frontground/index.jsp</result>
 			<result name="input">/frontground/index.jsp</result>
-			<result name="fault">/frontground/index.jsp</result>
+			<result name="fault">/frontground/login.jsp</result>
 			<result name="student">/frontground/index.jsp</result>
     		<result name="other">/frontground/index.jsp</result>
 		</action>

@@ -97,7 +97,7 @@
 				<div class="top_info">
 					<p style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
-                       <s:set name="name" value="#session.name"></s:set> 
+                       <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
 		             	     <s:if test="#studentName != null"> 
 		             	       
