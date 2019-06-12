@@ -248,6 +248,21 @@ public class PolicyAction extends ActionSupport {
 		System.out.println("policy对象fileName = "+policy.getFileName());
 		policy.setTime((policy.getTime().substring(0, 10)));
 		System.out.println("要更新的id:" + id);
+		String path=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +this.uploadFileName);
+		System.out.println("*********"+path+"*********");
+		File target= new File(path);
+				
+		policy.setFileName(this.uploadFileName);
+		try{
+	            FileUtils.copyFile(upload, target);
+	    }catch (Exception e) {
+	            e.printStackTrace();
+	    }				
+	     try{
+	    	 upload.delete();
+	     }catch (Exception e) {
+	         e.printStackTrace();
+	     }		
 		if(pd.updatePolicyByID(id, policy))
 			return "updateSuccess";
 		else
