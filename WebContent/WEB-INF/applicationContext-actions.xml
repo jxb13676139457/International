@@ -210,4 +210,31 @@
 			<ref bean="userDao"/>
 		</property>
 	</bean>	
+	
+	<bean id="priorNewsAction" class="com.international.frontground.actions.information.priorNewsAction" scope="prototype">
+		<property name="nd">
+			<ref bean="newsDao"/>
+		</property>
+	</bean>	
+	
+	<bean id="priorNoticeAction" class="com.international.frontground.actions.information.priorNoticeAction" scope="prototype">
+		<property name="nd">
+			<ref bean="noticeDao"/>
+		</property>
+	</bean>	
+	
+	<bean id="priorPolicyAction" class="com.international.frontground.actions.information.priorPolicyAction" scope="prototype">
+		<property name="pd">
+			<ref bean="policyDao"/>
+		</property>
+	</bean>	
+	
+	<bean id="priorAbroadCollegeAction" class="com.international.frontground.actions.information.priorAbroadCollegeAction">
+		<property name="agd"><!-- 调用set方法给agd赋值，实例化 -->
+			<ref bean="agreementDao"/>
+		</property>
+		<property name="cd"><!-- 调用set方法给cd赋值，实例化 -->
+			<ref bean="collegeDao"/>
+		</property>
+	</bean>
 </beans>

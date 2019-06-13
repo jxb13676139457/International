@@ -14,6 +14,8 @@
 			<interceptor name="logInterceptor" class="com.international.interceptor.LoginInterceptor"/>
 		</interceptors>
 		
+		
+		
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction">
 			<!-- <result name="success">/background/index.jsp</result> -->
@@ -409,6 +411,22 @@
 			<result name="student">/frontground/index.jsp</result>
     		<result name="other">/frontground/index.jsp</result>
 		</action>
+		
+		<action name="priorNewsAction" class="priorNewsAction">
+			<result name="success">/frontground/newsCenter.jsp</result>			
+		</action> 
+
+		<action name="priorNoticeAction" class="priorNoticeAction">
+			<result name="success">/frontground/informCenter.jsp</result>			
+		</action> 
+		
+		<action name="priorPolicyAction" class="priorPolicyAction">
+			<result name="success">/frontground/policiesCenter.jsp</result>			
+		</action> 
+		
+		<action name="priorAbroadCollegeAction" class="priorAbroadCollegeAction">
+			<result name="success">/frontground/abroadCollegeProtocolInfor.jsp</result>			
+		</action> 
 	</package>
 	
 </struts>
