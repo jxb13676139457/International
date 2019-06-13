@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.international.model.Teacher" table="Teacher">
+		<id name="teacherId" column="teacherId">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="teacherName" column="teacherName"></property>
+		<property name="password" column="password"></property>
+		<property name="sex" column="sex"></property>
+		<property name="reserves1" column="reserves1"></property>
+		<property name="reserves2" column="reserves2"></property>
+		<property name="reserves3" column="reserves3"></property>
+	</class>
+</hibernate-mapping>
