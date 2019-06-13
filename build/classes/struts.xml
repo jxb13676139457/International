@@ -25,9 +25,11 @@
 		
 		<!-- 导入导出Excel的Action -->
 		<action name="excelAction" class="excelAction">
-			
+			 <!-- <result name="uploadExcelSuccess">/background/exchangeStudentInfor.jsp</result>    
+             <result name="error">/background/exchangeStudentInfor.jsp</result> 
+             //允许上传的文件类型，这个是2007EXCEL，即XLSX后缀   
+             <param name="allowedTypes">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream</param> -->  
 		</action>
-		
 		
 		<!-- 国外院校的Action -->
 		<action name="collegeAction" class="collegeAction">
@@ -314,6 +316,7 @@
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
+            
 		</action>
 		
 		<!-- 学生夏令营活动的Action -->

@@ -13,7 +13,7 @@
 	</bean>	
 	
 	<!-- 导入导出的bean -->
-	<bean id="excelAction" class="com.international.common.ExcelAction">
+	<bean id="excelAction" class="com.international.common.ExcelAction" scope="prototype">
 		<property name="sd">
 			<ref bean="studentDao"/>
 		</property>

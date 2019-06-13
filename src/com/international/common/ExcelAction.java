@@ -1,9 +1,13 @@
 package com.international.common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +23,14 @@ import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.international.dao.ActivityDao;
 import com.international.dao.AgencyDao;
@@ -56,9 +67,14 @@ public class ExcelAction extends ActionSupport {
 	private static final long serialVersionUID = 1821670445298887284L;
 	
 	private File excelFile;
+	private MultipartFile file;
 	private String excelName;
-	//private String savePath;
+	private String result;
+	private String savePath;
+	private String allowedTypes;
+	private String uploadContentType;
 	private List<InternationalStudent> interStudentList = new ArrayList<InternationalStudent>();
+	private List<ExchangeStudent> exStudentList = new ArrayList<ExchangeStudent>();
 	
 	StudentDao sd;
 	OverseasStuDao osd;
@@ -75,6 +91,24 @@ public class ExcelAction extends ActionSupport {
 	AgencyDao agencydao;
 	ImportExcelDao ied;
 	
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+	public String getAllowedTypes() {
+		return allowedTypes;
+	}
+	public void setAllowedTypes(String allowedTypes) {
+		this.allowedTypes = allowedTypes;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
 	public AgencyDao getAgencydao() {
 		return agencydao;
 	}
@@ -144,8 +178,20 @@ public class ExcelAction extends ActionSupport {
 	public List<InternationalStudent> getInterStudentList() {
 		return interStudentList;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public void setInterStudentList(List<InternationalStudent> interStudentList) {
 		this.interStudentList = interStudentList;
+	}
+	public List<ExchangeStudent> getExStudentList() {
+		return exStudentList;
+	}
+	public void setExStudentList(List<ExchangeStudent> exStudentList) {
+		this.exStudentList = exStudentList;
 	}
 	public String getExcelName() {
 		return excelName;
@@ -177,6 +223,13 @@ public class ExcelAction extends ActionSupport {
 	public void setScoredao(ScoreDao scoredao) {
 		this.scoredao = scoredao;
 	}
+	public String getSavePath() {
+        return savePath = ServletActionContext.getServletContext().getRealPath(
+                "/uploadExcel");
+    }
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
+    }
 
 	private HSSFWorkbook workbook;
 	private HSSFCell cell = null;  //Excel的列 
@@ -191,9 +244,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -271,18 +324,47 @@ public class ExcelAction extends ActionSupport {
 		return null; 
 	} 
 	
-	//导入出国学生Excel数据     (此功能失败中)
+	//导入交换生Excel数据     
 	public void importExchangeStudentExcel() throws IOException{
-		System.out.println("从前台传过来的excelName:"+excelName);
-		String message = "";
-		//导入
-		if(ied.importExStudentExcel(excelFile)) {
-			message = "导入成功";
-		}else {
-			message = "导入失败";
+		System.out.println("测试进入此导入action");
+		System.out.println("前台传过来的file："+file);
+		try {
+			List<ExchangeStudent> exStudent = ImportUtil.readExcel(file);
+			for(int i=0;i<exStudent.size();i++) {
+				if(esd.addExStudent(exStudent.get(i))) {
+					System.out.println("插入第"+i+"条交换生数据");
+				};
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
+	
+	//上传excel文件
+	public String Fileupload(){
+        String realPath = ServletActionContext.getServletContext().getRealPath(this.getSavePath()+"\\"+this.excelName);
+        System.out.println(realPath);
+        System.out.println(allowedTypes);
+        System.out.println(uploadContentType);
+		//定义目标对象文件，保存文件
+        File newExcel = new File(realPath);
+        if(newExcel!=null) {
+        	try {
+                FileUtils.copyFile(excelFile, newExcel);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 删除临时文件
+            excelFile.delete();
+            return "uploadExcelSuccess";
+        }else {
+        	System.out.println("没有上传文件");
+        	return "error";
+        }
+        
+    
+    }
 		
 	//导入国际班学生数据   (此功能未完成)
 	public void importInterStudentExcel() throws Exception{
@@ -297,6 +379,8 @@ public class ExcelAction extends ActionSupport {
 //		return "import";
 	}
 	
+	//导出培训机构
+	
 //	@SuppressWarnings("deprecation")
 //	public String getSavePath() {
 //		return ServletActionContext.getRequest().getRealPath(savePath)+"\\"+this.excelFile;
@@ -310,9 +394,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -388,9 +472,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -486,9 +570,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -559,9 +643,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -651,9 +735,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -724,9 +808,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -792,9 +876,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -860,9 +944,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -959,9 +1043,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -1047,9 +1131,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -1145,9 +1229,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -1209,9 +1293,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 

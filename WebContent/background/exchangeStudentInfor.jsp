@@ -85,6 +85,30 @@
 			function gotoShowAction(){
 				location.href="managerAction!showOperator";
 			}
+	     	//上传excel文件
+			function ajax(url){
+				var file=document.getElementById('file').files[0];
+				if(file==undefined){
+					alert('请选择文件');
+					return 
+				}
+				var data = new FormData();
+				data.append("file", file);
+				$.ajax({
+					type: 'post',
+					url: url,
+					data: data,
+					cache: false,
+					processData: false,
+					contentType: false,
+					success: function (data) {
+						alert(data.msg);
+					}, 
+					error: function () {
+						alert("上传失败");
+						},
+				});
+			}
     	</script>
   </head>
 
@@ -270,6 +294,11 @@
                              	<a href="excelAction!exportExchangeSudent"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                              </button>
                         </form>
+                        
+                        <%-- <form method="post" id="uploadForm">
+                        	<input type="file" id="file" name="file"/>
+                         	<input type="button" onclick="ajax('${pageContext.request.contextPath}/background/excelAction!Fileupload')" value="开始上传">
+                        </form> --%>
                     </li>                    
                 </ul>
                 <!--  search form end -->                
