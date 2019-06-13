@@ -362,14 +362,19 @@
 	         </div>
 	      </div>
 	         
+
+	       <div class="main-body_list">
+	              <form action="priorAbroadCollegeAction" method="post">
+
 	       <!-- <div class="main-body_list">
 	              <form action="priorAbroadCollegeAction!searchAbroadCollegeProtocol" method="post">
+
                  
-                  <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
+                  <input type="text" style="border-width:2px;width:200px;heigth:30px" name="search"  placeholder="请输入关键字">
 			    <button type="submit" class="btn btn-default" style="border-width:2px;width:80px;heigth:30px">搜索</button>
 			     
 			          <button type="button" class="btn btn-default" style="width:100px;height:33px">
-                            <a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1">显示全部</b>
+                            <a href="priorAbroadCollegeAction">显示全部</b>
                             </a></button>
                             
 			     <s:if test='#session.type=="other"'>
@@ -387,18 +392,16 @@
 							<th> <b>国外院校</b> </th>
 							<th> <b>协议主题</b> </th>
 				            <th> <b>时间</b> </th>
-				            <th> <b>协议名称</b> </th>
 				            <th> <b>类型</b> </th>
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="#session.pricollAgreement" var="user" status="st">
+					  <s:iterator value="collegeAgreements" var="collegeAgreements" status="st">
 						<tr>
-							<td> <s:property value="#user.coll.collegeName"/></td>
-							<td> <s:property value="#user.title"/></td>
-							<td> <s:property value="#user.time"/></td>
-							<td> <s:property value="#user.fileName"/></td>
-							<td> <s:property value="#user.type"/></td>
+							<td> <s:property value="#collegeAgreements.coll.collegeName"/></td>
+							<td> <s:property value="#collegeAgreements.title"/></td>
+							<td> <s:property value="#collegeAgreements.time"/></td>
+							<td> <s:property value="#collegeAgreements.type"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

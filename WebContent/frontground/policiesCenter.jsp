@@ -371,15 +371,15 @@
 	       <div class="main-body_list">
 	             <ul>
 	             
-		           <s:iterator value="UserList" var="user" status="st">
+		           <s:iterator value="policyList" var="policy" status="st">
 		             <li>
 		                 <div style="float:left">
-		                      <a href="priorPolicyAction!getInformationByTitle.action?title=<s:property value="#user.title"/>&time=<s:property value="#user.time"/>">
-                              <b style="font-size:20px"> <s:property value="#user.title"/></b></a>
+		                      <a href="priorPolicyAction!getInformationByTitle.action?title=<s:property value="#policy.title"/>&time=<s:property value="#policy.time"/>">
+                              <b style="font-size:20px"> <s:property value="#policy.title"/></b></a>
 	 	                 </div>
 		                   
  	                 <div style="float:right">
- 	                 <span style="margin-right:150px"><b><s:property value="#user.time"/></b></span>
+ 	                 <span style="margin-right:150px"><b><s:property value="#policy.time"/></b></span>
 	                </div>
 		             </li>
 		             

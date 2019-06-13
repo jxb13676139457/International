@@ -44,6 +44,9 @@ public class ActivityDao {
 			String queryName="from College where "+hql3;
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
+			if(list1.isEmpty()) {
+				return null;
+			}
 			//int value=0;
 			//int value=list1.get(0).getCollegeId();
 			//String hql4="coll like '%"+value+"%'";
