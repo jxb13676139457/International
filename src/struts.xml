@@ -430,6 +430,18 @@
 			<result name="otherfor">/frontground/participateFormalExamInfor.jsp</result>
 			<result name="studentfor">/frontground/studentEnglishAgencyInfor.jsp</result>
 		</action>
+		
+		<!-- 前台other查询学生的Action -->
+		<action name="priorStudentAction" class="priorStudentAction">
+			<result name="interStudentSucc">/frontground/internationStudentInfor.jsp</result>
+			<result name="interStudentFail">/frontground/internationStudentInfor.jsp</result>
+			<result name="exStudentSucc">/frontground/exchangeStudentInfor.jsp</result>
+			<result name="exStudentFail">/frontground/exchangeStudentInfor.jsp</result>
+			<result name="overseasSucc">/frontground/overseasStudentInfor.jsp</result>
+			<result name="overseasFail">/frontground/overseasStudentInfor.jsp</result>
+			<result name="activitySucc">/frontground/studentActivitiesInfor.jsp</result>
+			<result name="activityFail">/frontground/studentActivitiesInfor.jsp</result>
+		</action>
 	</package>
 	
 </struts>

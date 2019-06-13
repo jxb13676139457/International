@@ -110,7 +110,6 @@
 		
 				<div class="top_info">
 					<p style="margin-right:200px">
-					
                   <s:set name="name" value="#session.loginUser.name"></s:set> 
 		             	 <s:if test="#name != null"> 
 		             	 <li class="dropdown"><a href="#" id="login" class="dropdown-toggle" data-toggle="dropdown" style="font-size:20px"><p class="glyphicon glyphicon-user"></p><b>欢迎：<s:property value="#session.name" /> <b class="caret"></b></b></a>
@@ -123,8 +122,7 @@
 					      
 		             	  </s:if>
 		             	   <s:else> 
-		             	   <a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
-		             	   
+		             	   		<a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
 		             	   </s:else>
 
 					</p>		

@@ -75,7 +75,6 @@ public class UserAction extends ActionSupport{
 			//类型转换，防止中文乱码
         	type = new String(type.getBytes("ISO8859-1"),"UTF-8");
 		}catch(Exception e){
-			
 			e.printStackTrace();
 		}
 		
@@ -108,7 +107,6 @@ public class UserAction extends ActionSupport{
                 			session.put("loginUser2" ,null);
                 			session.put("loginUser3" ,null);
                 		}
-						//session.put("loginIn" ,loginStudent);
 					}
 				}else{
 					Admin login2=new Admin();
@@ -120,11 +118,10 @@ public class UserAction extends ActionSupport{
                 	if(list!=null && list.size()>0){
                 		login2=list.get(0);
                 		session.put("loginUser2" ,login2);
-                		if(session.get("loginUser")!=null){
+                		if(session.get("loginUser")!=null||session.get("loginUser3")!=null){
                 			session.put("loginUser" ,null);
                 			session.put("loginUser3" ,null);
                 		}
-                		//session.put("loginIn" ,login2);
                 	}
                 	else {
                 		Teacher login3=new Teacher();
@@ -136,11 +133,10 @@ public class UserAction extends ActionSupport{
                     	if(list3!=null && list3.size()>0){
                     		login3=list3.get(0);
                     		session.put("loginUser3" ,login3);
-                    		if(session.get("loginUser")!=null){
+                    		if(session.get("loginUser")!=null||session.get("loginUser2")!=null){
                     			session.put("loginUser" ,null);
                     			session.put("loginUser2" ,null);
                     		}
-                    		//session.put("loginIn" ,login2);
                     	}
                 	}
                 }
@@ -158,12 +154,14 @@ public class UserAction extends ActionSupport{
 		}
 		return loginResult;
 	}
+	
 	//前台退出
-		public String exitFront() {
-			System.out.println("开始清除session");
-			Map session = ActionContext.getContext().getSession();
-			session.clear();
-			System.out.println("清除session成功");
-			return "exitlogin";
-		}
+	public String exitFront() {
+		System.out.println("开始清除session");
+		Map session = ActionContext.getContext().getSession();
+		session.clear();
+		System.out.println("清除session成功");
+		return "exitlogin";
+	}
+	
 }

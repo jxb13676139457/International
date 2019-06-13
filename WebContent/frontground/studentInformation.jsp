@@ -365,7 +365,7 @@
 	         
 	       <div class="main-body_list">
 	        <div class="row">
-		        <div class="col-xs-3" id="myScrollspy" style="background-color:	#EBEBEB">
+		        <!-- <div class="col-xs-3" id="myScrollspy" style="background-color:	#EBEBEB">
 		            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
 		                <li><a href="#section-1"><b>基本信息</b></a></li>
 		                <li><a href="#section-2"><b>出国信息</b></a></li>
@@ -373,9 +373,8 @@
 		                <li><a href="#section-4"><b>活动信息</b></a></li>
 		                <li><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 		            </ul>
-		        </div>
+		        </div> -->
 	        
-	       
 	       <div class="col-xs-9">
             <h3 id="section-1">基本信息</h3>
               <div class="table-responsive">

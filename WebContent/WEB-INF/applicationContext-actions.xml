@@ -236,4 +236,11 @@
 			<ref bean="priExamDao"/>
 		</property>
 	</bean>	
+	
+	<!-- 前台老师查询学生的bean -->
+	<bean id="priorStudentAction" class="com.international.frontground.actions.student.PriorStudentAction">
+		<property name="psd">
+			<ref bean="priStudentDao"/>
+		</property>
+	</bean>
 </beans>
