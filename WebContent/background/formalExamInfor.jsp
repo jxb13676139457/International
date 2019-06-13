@@ -198,7 +198,7 @@
 
 					<ol class="breadcrumb">
 								<li><i class="fa fa-home"></i><a href="indexAction">首页</a></li>
-						<li><i class="fa fa-table"></i>维护正式考试信息</li>
+						<li><i class="fa fa-table"></i>维护考试信息</li>
 					</ol>
 				</div>
 			</div>
@@ -218,7 +218,6 @@
                             <a href="addFormalExam.jsp"><b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="examAction?ExamTime="><b>显示全部</b></a></button>
-                            
                              
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="excelAction!exportExam"><b>导出</b></a></button>

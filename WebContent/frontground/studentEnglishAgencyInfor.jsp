@@ -367,13 +367,13 @@
 	         
 	       <div class="main-body_list">
 	         <div class="row">
-		        <div class="col-xs-3" id="myScrollspy"  style="background-color:#EBEBEB">
+		       <!--  <div class="col-xs-3" id="myScrollspy"  style="background-color:#EBEBEB">
 		            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
 		                <li><a href="#section-1"><b>雅思培训信息</b></a></li>
 		                <li><a href="#section-2"><b>模拟考试信息</b></a></li>
 		                <li><a href="#section-3"><b>正式考试信息</b></a></li>
 		            </ul>
-		        </div>
+		        </div>--> 
 	        
 	       
 	       <div class="col-xs-9">
@@ -388,19 +388,19 @@
 				            <th>雅思机构</th>
 				            <th>培训开始时间</th>
 				            <th>培训结束时间</th>
-				            <th>培训学期</th>
+				            <th>培训学时</th>
 						</tr>
 					</thead>
 					<tbody>
-						  <s:iterator value="trainList" var="user" status="st">
+						  <s:iterator value="#session.pritrain" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
-							<td> <s:property value="#user.id.className"/></td>
-							<td> <s:property value="#user.id.agencyName"/></td>
-							<td> <s:property value="#user.id.startTime"/></td>
-							<td> <s:property value="#user.id.outTime"/></td>
-							<td> <s:property value="#user.id.semester"/></td>
+							<td> <s:property value="#user.interStudent.studentId"/></td>
+							<td> <s:property value="#user.interStudent.studentName"/></td>
+							<td> <s:property value="#user.interStudent.classes.className"/></td>
+							<td> <s:property value="#user.training.agencies.agencyName"/></td>
+							<td> <s:property value="#user.training.startTime"/></td>
+							<td> <s:property value="#user.training.endTime"/></td>
+							<td> <s:property value="#user.training.courseHours"/></td>
 						</tr>
 						</s:iterator>
 						
@@ -432,23 +432,23 @@
 						</tr>
 					</thead>
 					<tbody>
-					 <s:iterator value="simulationList" var="user" status="st">
+					 <s:iterator value="#session.priexmscore" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
+							<td> <s:property value="#user.interStu.studentId"/></td>
+							<td> <s:property value="#user.interStu.studentName"/></td>
 					<!--  		<td> <s:property value="#user.id.className"/></td>-->
-							<td> <s:property value="#user.id.agencyName"/></td>
+							<td> <s:property value="#user.exm.agen.agencyName"/></td>
 					<%-- 		<td> <s:property value="#user.id.startTime"/></td>
 							<td> <s:property value="#user.id.outTime"/></td>
 							<td> <s:property value="#user.id.semester"/></td>
 							 --%>
-							 	<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.location"/></td>
-							<td> <s:property value="#user.id.listening"/></td>
-							<td> <s:property value="#user.id.oral"/></td>
-							<td> <s:property value="#user.id.reading"/></td>
-							<td> <s:property value="#user.id.writing"/></td>
-							<td> <s:property value="#user.id.score"/></td>
+							 	<td> <s:property value="#user.exm.time"/></td>
+							<td> <s:property value="#user.exm.location"/></td>
+							<td> <s:property value="#user.listening"/></td>
+							<td> <s:property value="#user.oral"/></td>
+							<td> <s:property value="#user.reading"/></td>
+							<td> <s:property value="#user.writing"/></td>
+							<td> <s:property value="#user.score"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
@@ -479,22 +479,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						  <s:iterator value="formalList" var="user" status="st">
+						  <s:iterator value="#session.priforscore" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
+							<td> <s:property value="#user.interStu.studentId"/></td>
+							<td> <s:property value="#user.interStu.studentName"/></td>
 					
-							<td> <s:property value="#user.id.agencyName"/></td>
+							<td> <s:property value="#user.exm.agen.agencyName"/></td>
 						<%-- 	<td> <s:property value="#user.id.startTime"/></td>
 							<td> <s:property value="#user.id.outTime"/></td>
 							<td> <s:property value="#user.id.semester"/></td> --%>
-							<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.location"/></td>
-							<td> <s:property value="#user.id.listening"/></td>
-							<td> <s:property value="#user.id.oral"/></td>
-							<td> <s:property value="#user.id.reading"/></td>
-							<td> <s:property value="#user.id.writing"/></td>
-							<td> <s:property value="#user.id.score"/></td>
+							<td> <s:property value="#user.exm.time"/></td>
+							<td> <s:property value="#user.exm.location"/></td>
+							<td> <s:property value="#user.listening"/></td>
+							<td> <s:property value="#user.oral"/></td>
+							<td> <s:property value="#user.reading"/></td>
+							<td> <s:property value="#user.writing"/></td>
+							<td> <s:property value="#user.score"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

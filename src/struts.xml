@@ -27,9 +27,11 @@
 		
 		<!-- 导入导出Excel的Action -->
 		<action name="excelAction" class="excelAction">
-			
+			 <!-- <result name="uploadExcelSuccess">/background/exchangeStudentInfor.jsp</result>    
+             <result name="error">/background/exchangeStudentInfor.jsp</result> 
+             //允许上传的文件类型，这个是2007EXCEL，即XLSX后缀   
+             <param name="allowedTypes">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream</param> -->  
 		</action>
-		
 		
 		<!-- 国外院校的Action -->
 		<action name="collegeAction" class="collegeAction">
@@ -316,6 +318,7 @@
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
+            
 		</action>
 		
 		<!-- 学生夏令营活动的Action -->
@@ -410,6 +413,24 @@
 			<result name="fault">/frontground/login.jsp</result>
 			<result name="student">/frontground/index.jsp</result>
     		<result name="other">/frontground/index.jsp</result>
+    		<result name="exitlogin">/frontground/index.jsp</result>
+		</action>
+		
+		<!-- 前台国外院校的Action -->
+		<action name="priorCollegeAction" class="priorCollegeAction">
+			<result name="success">/frontground/abroadCollegeInformation.jsp</result>
+			<result name="input">/frontground/abroadCollegeInformation.jsp</result>
+			<result name="activity">/frontground/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="agreement">/frontground/abroadCollegeProtocolInfor.jsp</result>
+		</action>
+		
+		<!-- 前台雅思考试信息的Action -->
+		<action name="priorExamAction" class="priorExamAction">
+			<result name="success">/frontground/participateSimulationExamInform.jsp</result>
+			<result name="input">/frontground/index.jsp</result>
+			<result name="othersearch">/frontground/participateSimulationExamInform.jsp</result>
+			<result name="otherfor">/frontground/participateFormalExamInfor.jsp</result>
+			<result name="studentfor">/frontground/studentEnglishAgencyInfor.jsp</result>
 		</action>
 		
 		<action name="priorNewsAction" class="priorNewsAction">

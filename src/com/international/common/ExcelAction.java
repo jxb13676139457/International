@@ -1,9 +1,13 @@
 package com.international.common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,9 +23,18 @@ import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.international.dao.ActivityDao;
+import com.international.dao.AgencyDao;
+import com.international.dao.AttendTrainingDao;
 import com.international.dao.ClassesDao;
 import com.international.dao.CollegeDao;
 import com.international.dao.ExamDao;
@@ -31,6 +44,11 @@ import com.international.dao.OverseasStuDao;
 import com.international.dao.ScoreDao;
 import com.international.dao.StuActivityDao;
 import com.international.dao.StudentDao;
+import com.international.dao.TrainingDao;
+import com.international.dao.UserDao;
+import com.international.model.Admin;
+import com.international.model.Agency;
+import com.international.model.AttendTraining;
 import com.international.model.College;
 import com.international.model.CollegeActivity;
 import com.international.model.Exam;
@@ -40,6 +58,7 @@ import com.international.model.InternationalStudent;
 import com.international.model.OverseasStudent;
 import com.international.model.Score;
 import com.international.model.StudentActivity;
+import com.international.model.Training;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -48,9 +67,14 @@ public class ExcelAction extends ActionSupport {
 	private static final long serialVersionUID = 1821670445298887284L;
 	
 	private File excelFile;
+	private MultipartFile file;
 	private String excelName;
-	//private String savePath;
+	private String result;
+	private String savePath;
+	private String allowedTypes;
+	private String uploadContentType;
 	private List<InternationalStudent> interStudentList = new ArrayList<InternationalStudent>();
+	private List<ExchangeStudent> exStudentList = new ArrayList<ExchangeStudent>();
 	
 	StudentDao sd;
 	OverseasStuDao osd;
@@ -61,8 +85,54 @@ public class ExcelAction extends ActionSupport {
 	ExamDao ed;
 	ScoreDao scoredao;
 	ClassesDao classDao;
+	UserDao ud;
+	AttendTrainingDao atd;
+	TrainingDao td;
+	AgencyDao agencydao;
 	ImportExcelDao ied;
 	
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
+	public String getAllowedTypes() {
+		return allowedTypes;
+	}
+	public void setAllowedTypes(String allowedTypes) {
+		this.allowedTypes = allowedTypes;
+	}
+	public String getResult() {
+		return result;
+	}
+	public void setResult(String result) {
+		this.result = result;
+	}
+	public AgencyDao getAgencydao() {
+		return agencydao;
+	}
+	public void setAgencydao(AgencyDao agencydao) {
+		this.agencydao = agencydao;
+	}
+	public TrainingDao getTd() {
+		return td;
+	}
+	public void setTd(TrainingDao td) {
+		this.td = td;
+	}
+	public AttendTrainingDao getAtd() {
+		return atd;
+	}
+	public void setAtd(AttendTrainingDao atd) {
+		this.atd = atd;
+	}
+	public UserDao getUd() {
+		return ud;
+	}
+	public void setUd(UserDao ud) {
+		this.ud = ud;
+	}
 	public ClassesDao getClassDao() {
 		return classDao;
 	}
@@ -108,8 +178,20 @@ public class ExcelAction extends ActionSupport {
 	public List<InternationalStudent> getInterStudentList() {
 		return interStudentList;
 	}
+	public MultipartFile getFile() {
+		return file;
+	}
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 	public void setInterStudentList(List<InternationalStudent> interStudentList) {
 		this.interStudentList = interStudentList;
+	}
+	public List<ExchangeStudent> getExStudentList() {
+		return exStudentList;
+	}
+	public void setExStudentList(List<ExchangeStudent> exStudentList) {
+		this.exStudentList = exStudentList;
 	}
 	public String getExcelName() {
 		return excelName;
@@ -141,7 +223,13 @@ public class ExcelAction extends ActionSupport {
 	public void setScoredao(ScoreDao scoredao) {
 		this.scoredao = scoredao;
 	}
-
+	public String getSavePath() {
+        return savePath = ServletActionContext.getServletContext().getRealPath(
+                "/uploadExcel");
+    }
+    public void setSavePath(String savePath) {
+        this.savePath = savePath;
+    }
 
 	private HSSFWorkbook workbook;
 	private HSSFCell cell = null;  //Excel的列 
@@ -156,9 +244,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -236,19 +324,47 @@ public class ExcelAction extends ActionSupport {
 		return null; 
 	} 
 	
-	
-	//导入出国学生Excel数据     (此功能失败中)
+	//导入交换生Excel数据     
 	public void importExchangeStudentExcel() throws IOException{
-		System.out.println("从前台传过来的excelName:"+excelName);
-		String message = "";
-		//导入
-		if(ied.importExStudentExcel(excelFile)) {
-			message = "导入成功";
-		}else {
-			message = "导入失败";
+		System.out.println("测试进入此导入action");
+		System.out.println("前台传过来的file："+file);
+		try {
+			List<ExchangeStudent> exStudent = ImportUtil.readExcel(file);
+			for(int i=0;i<exStudent.size();i++) {
+				if(esd.addExStudent(exStudent.get(i))) {
+					System.out.println("插入第"+i+"条交换生数据");
+				};
+				
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		ajaxAction.toJson(ServletActionContext.getResponse(),message);
 	}
+	
+	//上传excel文件
+	public String Fileupload(){
+        String realPath = ServletActionContext.getServletContext().getRealPath(this.getSavePath()+"\\"+this.excelName);
+        System.out.println(realPath);
+        System.out.println(allowedTypes);
+        System.out.println(uploadContentType);
+		//定义目标对象文件，保存文件
+        File newExcel = new File(realPath);
+        if(newExcel!=null) {
+        	try {
+                FileUtils.copyFile(excelFile, newExcel);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            // 删除临时文件
+            excelFile.delete();
+            return "uploadExcelSuccess";
+        }else {
+        	System.out.println("没有上传文件");
+        	return "error";
+        }
+        
+    
+    }
 		
 	//导入国际班学生数据   (此功能未完成)
 	public void importInterStudentExcel() throws Exception{
@@ -263,10 +379,90 @@ public class ExcelAction extends ActionSupport {
 //		return "import";
 	}
 	
+	//导出培训机构
+	
 //	@SuppressWarnings("deprecation")
 //	public String getSavePath() {
 //		return ServletActionContext.getRequest().getRealPath(savePath)+"\\"+this.excelFile;
 //	}
+	
+	//导出合作的雅思培训机构
+	public String exportAgency() throws Exception{
+		//获取雅思培训机构对象
+		List<Agency> agencyList = agencydao.queryAllAgency();
+		String []tableHeader={"培训机构","合作时间","联系人","职位","联系电话","电子邮箱"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			//根据是否取出数据，设置header信息 
+			if(agencyList.size() < 1 ){ 
+				header.setCenter("查无资料"); 
+			}else{ 
+				header.setCenter("培训机构表"); 
+				row = sheet.createRow(0); 
+				row.setHeight((short)400);
+				//表头
+				for(int k = 0;k < cellNumber;k++){
+					cell = row.createCell((short) k);//创建第0行第k列 
+					cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+					sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+					font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+					font.setFontHeight((short)350); //设置单元字体高度 
+					style1.setFont(font);//设置字体风格 
+					cell.setCellStyle(style1); 
+				} 
+				// 给Excel填充数据                         
+				for(int i = 0 ;i < agencyList.size() ;i++){    
+					//获取InternationalStudent对象
+					Agency agency1 = (Agency)agencyList.get(i); 
+				    row = sheet.createRow((short) (i + 1));//创建第i+1行 
+				    row.setHeight((short)400);//设置行高 
+				    
+				    if(agency1.getAgencyName() != null){ 
+					    cell = row.createCell((short) 0);//创建第i+1行第0列 
+					    cell.setCellValue(agency1.getAgencyName());//设置第i+1行第0列的值 
+					    cell.setCellStyle(style);//设置风格 
+				    } 
+				    if(agency1.getTime() != null){ 
+					    cell = row.createCell((short) 1); //创建第i+1行第1列 
+					    cell.setCellValue(agency1.getTime().substring(0,10));//设置第i+1行第1列的值 
+					    cell.setCellStyle(style); //设置风格 
+				    } 
+				    if(agency1.getCotactPerson() != null){ 
+					    cell = row.createCell((short) 2); 
+					    cell.setCellValue(agency1.getCotactPerson()); 
+					    cell.setCellStyle(style); 
+				    } 
+				    if(agency1.getPosition()!= null){ 
+					    cell = row.createCell((short) 3); 
+					    cell.setCellValue(agency1.getPosition()); 
+					    cell.setCellStyle(style); 
+				    } 
+				    if(agency1.getPhone()!= null){ 
+					    cell = row.createCell((short) 4); 
+					    cell.setCellValue(agency1.getPhone()); 
+					    cell.setCellStyle(style); 
+				    }
+				    if(agency1.getEmail()!= null){ 
+					    cell = row.createCell((short) 5); 
+					    cell.setCellValue(agency1.getEmail()); 
+					    cell.setCellStyle(style); 
+				    }
+				} 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("合作培训机构表.xls");
+		return null; 
+	}
 	
 	//导出国外院校
 	public String exportCollege() throws Exception{
@@ -276,9 +472,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -366,6 +562,243 @@ public class ExcelAction extends ActionSupport {
 		return null; 
 	}
 	
+	//导出后台操作员
+	public String exportOperator() throws Exception{
+		//获取后台管理员对象
+		List<Admin> adminList = ud.queryAdmins("");
+		String []tableHeader={"操作员ID","名字","性别","密码","是否管理员"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			//根据是否取出数据，设置header信息 
+			if(adminList.size() < 1 ){ 
+				header.setCenter("查无资料"); 
+			}else{ 
+				header.setCenter("后台操作员表"); 
+				row = sheet.createRow(0); 
+				row.setHeight((short)400);
+				//表头
+				for(int k = 0;k < cellNumber;k++){
+					cell = row.createCell((short) k);//创建第0行第k列 
+					cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+					sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+					font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+					font.setFontHeight((short)350); //设置单元字体高度 
+					style1.setFont(font);//设置字体风格 
+					cell.setCellStyle(style1); 
+				} 
+				// 给Excel填充数据                         
+				for(int i = 0 ;i < adminList.size() ;i++){    
+					//获取admin对象
+					Admin admin1 = (Admin)adminList.get(i); 
+				    row = sheet.createRow((short) (i + 1));//创建第i+1行 
+				    row.setHeight((short)400);//设置行高 
+				    
+				    if(admin1.getAdminId() != null){ 
+					    cell = row.createCell((short) 0);//创建第i+1行第0列 
+					    cell.setCellValue(admin1.getAdminId());//设置第i+1行第0列的值 
+					    cell.setCellStyle(style);//设置风格 
+				    } 
+				    if(admin1.getUserName() != null){ 
+					    cell = row.createCell((short) 1); //创建第i+1行第1列 
+					    cell.setCellValue(admin1.getUserName());//设置第i+1行第1列的值 
+					    cell.setCellStyle(style); //设置风格 
+				    } 
+				    if(admin1.getSex() != null){ 
+					    cell = row.createCell((short) 2); 
+					    cell.setCellValue(admin1.getSex()); 
+					    cell.setCellStyle(style); 
+				    } 
+				    if(admin1.getPassword()!= null){ 
+					    cell = row.createCell((short) 3); 
+					    cell.setCellValue(admin1.getPassword()); 
+					    cell.setCellStyle(style); 
+				    }
+				    if(admin1.getType()!= null){ 
+					    cell = row.createCell((short) 4); 
+					    cell.setCellValue(admin1.getType()); 
+					    cell.setCellStyle(style); 
+				    }
+				} 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("后台操作员表.xls");
+		return null; 
+	}
+	
+	//导出学生参与培训计划
+	public String exportAttendTraining() throws Exception{
+		//获取学生参与培训计划对象
+		List<AttendTraining> attendList = atd.queryAttends("");
+		String []tableHeader={"学号","姓名","班级","专业","培训机构","培训开始时间","培训结束时间","培训课时","培训费用"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			//根据是否取出数据，设置header信息 
+			if(attendList.size() < 1 ){ 
+				header.setCenter("查无资料"); 
+			}else{ 
+				header.setCenter("学生参与培训计划表"); 
+				row = sheet.createRow(0); 
+				row.setHeight((short)400);
+				//表头
+				for(int k = 0;k < cellNumber;k++){
+					cell = row.createCell((short) k);//创建第0行第k列 
+					cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+					sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+					font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+					font.setFontHeight((short)350); //设置单元字体高度 
+					style1.setFont(font);//设置字体风格 
+					cell.setCellStyle(style1); 
+				} 
+				// 给Excel填充数据                         
+				for(int i = 0 ;i < attendList.size() ;i++){    
+					//获取admin对象
+					AttendTraining attend1 = (AttendTraining)attendList.get(i); 
+				    row = sheet.createRow((short) (i + 1));//创建第i+1行 
+				    row.setHeight((short)400);//设置行高 
+				    
+				    if(attend1.getInterStudent().getStudentId() != null){ 
+					    cell = row.createCell((short) 0);//创建第i+1行第0列 
+					    cell.setCellValue(attend1.getInterStudent().getStudentId());//设置第i+1行第0列的值 
+					    cell.setCellStyle(style);//设置风格 
+				    } 
+				    if(attend1.getInterStudent().getStudentName() != null){ 
+					    cell = row.createCell((short) 1); //创建第i+1行第1列 
+					    cell.setCellValue(attend1.getInterStudent().getStudentName());//设置第i+1行第1列的值 
+					    cell.setCellStyle(style); //设置风格 
+				    } 
+				    if(attend1.getInterStudent().getClasses().getClassName() != null){ 
+					    cell = row.createCell((short) 2); 
+					    cell.setCellValue(attend1.getInterStudent().getClasses().getClassName()); 
+					    cell.setCellStyle(style); 
+				    } 
+				    if(attend1.getInterStudent().getClasses().getMajor()!= null){ 
+					    cell = row.createCell((short) 3); 
+					    cell.setCellValue(attend1.getInterStudent().getClasses().getMajor()); 
+					    cell.setCellStyle(style); 
+				    }
+				    if(attend1.getTraining().getAgencies().getAgencyName()!= null){ 
+					    cell = row.createCell((short) 4); 
+					    cell.setCellValue(attend1.getTraining().getAgencies().getAgencyName()); 
+					    cell.setCellStyle(style); 
+				    }
+				    if(attend1.getTraining().getStartTime()!= null){ 
+					    cell = row.createCell((short) 5); 
+					    cell.setCellValue(attend1.getTraining().getStartTime().substring(0,10)); 
+					    cell.setCellStyle(style); 
+				    }
+				    if(attend1.getTraining().getEndTime()!= null){ 
+					    cell = row.createCell((short) 6); 
+					    cell.setCellValue(attend1.getTraining().getEndTime().substring(0,10)); 
+					    cell.setCellStyle(style); 
+				    }
+				    
+				    cell = row.createCell((short) 7); 
+				    cell.setCellValue(attend1.getTraining().getCourseHours()); 
+				    cell.setCellStyle(style); 
+				   
+				    cell = row.createCell((short) 8); 
+				    cell.setCellValue(attend1.getTraining().getCourseFee()); 
+				    cell.setCellStyle(style); 
+			    
+				} 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("学生参与培训计划表.xls");
+		return null; 
+	}
+	
+	//导出雅思培训计划
+	public String exportTraining() throws Exception{
+		//获取培训计划对象
+		List<Training> trainingList = td.queryAllTraining();
+		String []tableHeader={"培训机构","培训开始时间","培训结束时间","培训课时","培训费用"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			//根据是否取出数据，设置header信息 
+			if(trainingList.size() < 1 ){ 
+				header.setCenter("查无资料"); 
+			}else{ 
+				header.setCenter("培训计划表"); 
+				row = sheet.createRow(0); 
+				row.setHeight((short)400);
+				//表头
+				for(int k = 0;k < cellNumber;k++){
+					cell = row.createCell((short) k);//创建第0行第k列 
+					cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+					sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+					font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+					font.setFontHeight((short)350); //设置单元字体高度 
+					style1.setFont(font);//设置字体风格 
+					cell.setCellStyle(style1); 
+				} 
+				// 给Excel填充数据                         
+				for(int i = 0 ;i < trainingList.size() ;i++){    
+					//获取training对象
+					Training training1 = (Training)trainingList.get(i); 
+				    row = sheet.createRow((short) (i + 1));//创建第i+1行 
+				    row.setHeight((short)400);//设置行高 
+				    
+				    if(training1.getAgencies().getAgencyName() != null){ 
+					    cell = row.createCell((short) 0);//创建第i+1行第0列 
+					    cell.setCellValue(training1.getAgencies().getAgencyName());//设置第i+1行第0列的值 
+					    cell.setCellStyle(style);//设置风格 
+				    } 
+				    if(training1.getStartTime() != null){ 
+					    cell = row.createCell((short) 1); //创建第i+1行第1列 
+					    cell.setCellValue(training1.getStartTime().substring(0,10));//设置第i+1行第1列的值 
+					    cell.setCellStyle(style); //设置风格 
+				    } 
+				    if(training1.getEndTime() != null){ 
+					    cell = row.createCell((short) 2); 
+					    cell.setCellValue(training1.getEndTime().substring(0,10)); 
+					    cell.setCellStyle(style); 
+				    } 
+				    
+				    cell = row.createCell((short) 3); 
+				    cell.setCellValue(training1.getCourseHours()); 
+				    cell.setCellStyle(style); 
+				   
+				    cell = row.createCell((short) 4); 
+				    cell.setCellValue(training1.getCourseFee()); 
+				    cell.setCellStyle(style); 
+			    
+				} 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("培训计划表.xls");
+		return null; 
+	}
+	
 	//导出国外院校交流活动  
 	public String exportCollegeActivity() throws Exception{
 		//获取国外院校交流活动对象
@@ -375,9 +808,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -443,9 +876,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -503,7 +936,7 @@ public class ExcelAction extends ActionSupport {
 		return null; 
 	}
 	
-	//导出参与考试信息(成绩单)   有bug！！！
+	//导出学生参与考试信息(成绩单)   
 	public String exportScore() throws Exception{
 		//获取考试信息对象
 		List<Score> scoreist = scoredao.queryAllScore("");
@@ -511,9 +944,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -610,9 +1043,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -698,9 +1131,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -796,9 +1229,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 
@@ -860,9 +1293,9 @@ public class ExcelAction extends ActionSupport {
 		short cellNumber=(short)tableHeader.length;//表的列数 
 		workbook = new HSSFWorkbook(); //创建一个Excel 
 		style = workbook.createCellStyle(); //设置表头的类型 
-		style.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style.setAlignment(HorizontalAlignment.CENTER); 
 		style1 = workbook.createCellStyle(); //设置数据类型 
-		style1.setAlignment(HSSFCellStyle.ALIGN_CENTER); 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
 		HSSFFont font = workbook.createFont(); //设置字体 
 		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
 		HSSFHeader header = sheet.getHeader();//设置sheet的头 

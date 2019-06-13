@@ -217,9 +217,8 @@
                             <a href="addAbroadCollegeProtocol.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
                             <a href="collegeAgreementAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
-                            
-                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportAbroadCollegeProtocolExcel?searchName=${protocolCollegeName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+                       <%--  <button type="button" class="btn btn-default" style="width:80px;height:30px">
+                            <a href="exportAbroadCollegeProtocolExcel?searchName=${protocolCollegeName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button> --%>
                         </div>
                         </form>
                     </li>                    
@@ -256,7 +255,6 @@
                                      <!-- <a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a> --> 
                                       <a class="btn btn-default" href="javascript:searchProcess('<s:property value="#collegeAgreements.agreementId"/>','collegeAgreementAction!searchObjectById?id=')"><i class="icon_pencil "></i></a>
                                       <a class="btn btn-default" href="javascript:deleteProcess('<s:property value="#collegeAgreements.agreementId"/>', 'collegeAgreementAction!deleteObject?id=')"><i class="icon_trash_alt"></i></a>
-                            
                                   </div>
                                   </td>
                               </tr>

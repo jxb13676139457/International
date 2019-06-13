@@ -13,7 +13,7 @@
 	</bean>	
 	
 	<!-- 导入导出的bean -->
-	<bean id="excelAction" class="com.international.common.ExcelAction">
+	<bean id="excelAction" class="com.international.common.ExcelAction" scope="prototype">
 		<property name="sd">
 			<ref bean="studentDao"/>
 		</property>
@@ -40,6 +40,18 @@
 		</property>
 		<property name="classDao">
 			<ref bean="classesDao"/>
+		</property>
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+		<property name="atd">
+			<ref bean="attendTrainingDao"/>
+		</property>
+		<property name="td">
+			<ref bean="trainingDao"/>
+		</property>
+		<property name="agencydao">
+			<ref bean="agencyDao"/>
 		</property>
 		<!-- <property name="ied">
 			<ref bean="importExcelDao"/>
@@ -211,6 +223,7 @@
 		</property>
 	</bean>	
 	
+
 	<bean id="priorNewsAction" class="com.international.frontground.actions.information.priorNewsAction" scope="prototype">
 		<property name="nd">
 			<ref bean="newsDao"/>
@@ -237,4 +250,19 @@
 			<ref bean="collegeDao"/>
 		</property>
 	</bean>
+
+	<!-- 前台国外院校的bean -->
+	<bean id="priorCollegeAction" class="com.international.frontground.actions.college.PriorCollegeAction" scope="prototype">
+		<property name="pcd"><!-- 调用set方法给pcd赋值，实例化 -->
+			<ref bean="priCollegeDao"/>
+		</property>
+	</bean>	
+	
+	<!-- 前台模拟考试的bean -->
+	<bean id="priorExamAction" class="com.international.frontground.actions.ielts.PriorExamAction" scope="prototype">
+		<property name="ped"><!-- 调用set方法给ped赋值，实例化 -->
+			<ref bean="priExamDao"/>
+		</property>
+	</bean>	
+
 </beans>

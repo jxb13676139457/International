@@ -327,11 +327,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryAgreement"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"> <b>国外院校协议</b> </a></h5>
+				            <h5><a href="priorCollegeAction!exqueryAgreement"> <b>国外院校协议</b> </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -362,8 +362,13 @@
 	         </div>
 	      </div>
 	         
+
 	       <div class="main-body_list">
 	              <form action="priorAbroadCollegeAction" method="post">
+
+	       <!-- <div class="main-body_list">
+	              <form action="priorAbroadCollegeAction!searchAbroadCollegeProtocol" method="post">
+
                  
                   <input type="text" style="border-width:2px;width:200px;heigth:30px" name="search"  placeholder="请输入关键字">
 			    <button type="submit" class="btn btn-default" style="border-width:2px;width:80px;heigth:30px">搜索</button>
@@ -377,7 +382,7 @@
                             <a href="priorDownloadExcelAction!exportAbroadCollegeProtocolExcel?searchName=${searchInformation }">导出</a></button>
                	</s:if>
               </form>
-            </div>
+            </div> -->
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">

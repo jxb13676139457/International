@@ -39,7 +39,7 @@
 
 <!-- jquery -->
    <script src="js/jquery-3.2.1.min.js"></script>
- <script src="js/bootstrap.min.js"></script>
+ 	<script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="js/jquery.carouFredSel-6.1.0-packed.js" type="text/javascript"></script>
 <script src="js/jquery.tipsy.js" type="text/javascript"></script>
@@ -301,11 +301,11 @@
 				   <div class="service_wrapper">
 				     <div class="four columns">
 					    <div class="image_shadow">
-					      <a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
+					      <a href="priorCollegeAction"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
 						</div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b> </a></h5>
+				            <h5><a href="priorCollegeAction"><b>国外院校信息</b> </a></h5>
 						  
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -363,7 +363,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	<!--       <div class="main-body_list">
 	         
               <form action="priorAbroadCollegeAction!searchAbroadCollegeInfor" method="post">
                  
@@ -378,9 +378,9 @@
                             <a href="exportAbroadCollegeExcel?searchName= ${searchInformation }"><b>导出</b></a></button>
                	</s:if>
                	    
-              </form>
-            </div>
-            <hr>
+              </form> 
+            </div>-->
+            <hr> 
 	       <div class="main-body_list">
 	           <div class="table-responsive">
 				<table class="table table-striped" style="width:1050px">
@@ -393,12 +393,12 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="abroadList" var="user" status="st">
+					  <s:iterator value="#session.pricollege" var="pricollege" status="st">
 						<tr>
-							<td> <s:property value="#user.name"/></td>
-							<td> <s:property value="#user.time"/></td>
-							<td> <s:property value="#user.type"/></td>
-							<td> <s:property value="#user.status"/></td>
+							<td> <s:property value="#pricollege.collegeName"/></td>
+							<td> <s:property value="#pricollege.startTime"/></td>
+							<td> <s:property value="#pricollege.type"/></td>
+							<td> <s:property value="#pricollege.status"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
@@ -406,7 +406,7 @@
 		  </div>
 		<s:set name="status" value="#session.status"></s:set> 
 		   <div  style="text-align:center">
-		       <s:if test="#status==1"> 
+		       <s:if test="#1==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="priorAbroadCollegeAction!getAbroadCollegeInfor?pageNo=1"><b>首页</b></a>]
          
