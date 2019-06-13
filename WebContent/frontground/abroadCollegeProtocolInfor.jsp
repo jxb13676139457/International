@@ -327,11 +327,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryAgreement"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"> <b>国外院校协议</b> </a></h5>
+				            <h5><a href="priorCollegeAction!exqueryAgreement"> <b>国外院校协议</b> </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -362,7 +362,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	       <!-- <div class="main-body_list">
 	              <form action="priorAbroadCollegeAction!searchAbroadCollegeProtocol" method="post">
                  
                   <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
@@ -377,7 +377,7 @@
                             <a href="priorDownloadExcelAction!exportAbroadCollegeProtocolExcel?searchName=${searchInformation }">导出</a></button>
                	</s:if>
               </form>
-            </div>
+            </div> -->
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
@@ -392,13 +392,13 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="protocolList" var="user" status="st">
+					  <s:iterator value="#session.pricollAgreement" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.name"/></td>
-							<td> <s:property value="#user.id.title"/></td>
-							<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.ProtocolName"/></td>
-							<td> <s:property value="#user.id.type"/></td>
+							<td> <s:property value="#user.coll.collegeName"/></td>
+							<td> <s:property value="#user.title"/></td>
+							<td> <s:property value="#user.time"/></td>
+							<td> <s:property value="#user.fileName"/></td>
+							<td> <s:property value="#user.type"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
