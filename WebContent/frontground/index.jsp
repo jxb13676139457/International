@@ -251,12 +251,13 @@
 									<li><a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
 							
 									</li>
+									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
 				                        <li><a href="priorStudentInformationAction!getOneStudnetInformation" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
-                                        <li><a href="priorEnglishAgencyAction!getOneStudnetInformation" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
+                                        <li><a href="priorExamAction!studentAgencySearch" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>
-			                    	
+			                    	<!-- 如果是老师或其他 -->
 			                    	<s:else>
 			                    		<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">学生信息</b></span></a>
 											<ul>
@@ -273,8 +274,8 @@
 											<ul>
 												<li><a href="priorEnglishAgencyAction?status=1"><b>雅思机构协议信息</b></a></li>
 												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateSimulationExamInfor?status=1"><b>雅思模拟考试信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateFormalExamViewInfor?status=1"><b>雅思正式考试信息</b></a></li>
+												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
+												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
 								
 											</ul>
 								         </li>

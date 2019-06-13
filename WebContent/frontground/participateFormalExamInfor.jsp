@@ -362,7 +362,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	      <!--  <div class="main-body_list">
 	         
               
               <form action="priorEnglishAgencyAction!searchParticipateFormalExamInfor" method="post">
@@ -379,7 +379,7 @@
                	</s:if>
 	
               </form>
-            </div>
+            </div> -->
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
@@ -405,24 +405,24 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="formalList" var="user" status="st">
+					  <s:iterator value="#session.priforscore" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
+							<td> <s:property value="#user.interStu.studentId"/></td>
+							<td> <s:property value="#user.interStu.studentName"/></td>
 							<%-- <td> <s:property value="#user.id.className"/></td> --%>
 						<%-- 	<td> <s:property value="#user.id.agencyName"/></td>
 							<td> <s:property value="#user.id.startTime"/></td>
 							<td> <s:property value="#user.id.outTime"/></td>
 						    <td> <s:property value="#user.id.courseHours"/></td>
 							<td> <s:property value="#user.id.semester"/></td> --%>
-							<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.location"/></td>
+							<td> <s:property value="#user.exm.time"/></td>
+							<td> <s:property value="#user.exm.location"/></td>
 							
-							<td> <s:property value="#user.id.listening"/></td>
-							<td> <s:property value="#user.id.oral"/></td>
-							<td> <s:property value="#user.id.reading"/></td>
-							<td> <s:property value="#user.id.writing"/></td>
-							<td> <s:property value="#user.id.score"/></td>
+							<td> <s:property value="#user.listening"/></td>
+							<td> <s:property value="#user.oral"/></td>
+							<td> <s:property value="#user.reading"/></td>
+							<td> <s:property value="#user.writing"/></td>
+							<td> <s:property value="#user.score"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

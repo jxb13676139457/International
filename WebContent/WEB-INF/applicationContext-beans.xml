@@ -132,5 +132,19 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
+	
+	<!-- 前台国外院校的bean -->
+	<bean id="priCollegeDao" class="com.international.frontground.dao.PriCollegeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 前台考试的bean -->
+	<bean id="priExamDao" class="com.international.frontground.dao.PriExamDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 </beans>
 						

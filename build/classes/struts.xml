@@ -413,6 +413,23 @@
     		<result name="other">/frontground/index.jsp</result>
     		<result name="exitlogin">/frontground/index.jsp</result>
 		</action>
+		
+		<!-- 前台国外院校的Action -->
+		<action name="priorCollegeAction" class="priorCollegeAction">
+			<result name="success">/frontground/abroadCollegeInformation.jsp</result>
+			<result name="input">/frontground/abroadCollegeInformation.jsp</result>
+			<result name="activity">/frontground/abroadCollegeActivitiesInfor.jsp</result>
+			<result name="agreement">/frontground/abroadCollegeProtocolInfor.jsp</result>
+		</action>
+		
+		<!-- 前台雅思考试信息的Action -->
+		<action name="priorExamAction" class="priorExamAction">
+			<result name="success">/frontground/participateSimulationExamInform.jsp</result>
+			<result name="input">/frontground/index.jsp</result>
+			<result name="othersearch">/frontground/participateSimulationExamInform.jsp</result>
+			<result name="otherfor">/frontground/participateFormalExamInfor.jsp</result>
+			<result name="studentfor">/frontground/studentEnglishAgencyInfor.jsp</result>
+		</action>
 	</package>
 	
 </struts>
