@@ -36,7 +36,6 @@ public class AgreementDao {
 			//查询名字
 			String queryName="from College where "+hql1;
 			Query query1=session.createQuery(queryName);
-
 			List<College> list1=query1.list();
 			System.out.println(list1);
 			if(list1.isEmpty()) {
