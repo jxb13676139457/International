@@ -36,7 +36,12 @@ public class AgreementDao {
 			//查询名字
 			String queryName="from College where "+hql1;
 			Query query1=session.createQuery(queryName);
+
 			List<College> list1=query1.list();
+			System.out.println(list1);
+			if(list1.isEmpty()) {
+				return null;
+			}
 			//int v=list1.get(0).getCollegeId();
 			//String hql6="coll like '%"+v+"%'";
 			int v;
@@ -53,7 +58,7 @@ public class AgreementDao {
 				
 			}
 			
-			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" and "+hql6;
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6;
 			//获取所有数据
 			String queryString="from CollegeAgreement where "+str;
 			//创建查询
@@ -107,7 +112,7 @@ public class AgreementDao {
 				
 			}
 			
-			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" and "+hql6;
+			String str=hql2+" or "+hql3+" or "+hql4+" or "+hql5+" or "+hql6;
 			//获取所有数据
 			String queryString="from CollegeAgreement where "+str;
 			//创建查询

@@ -209,14 +209,14 @@
                 <ul class="nav top-menu">                    
                     <li>
                      <form class="navbar-form" action="collegeAgreementAction" method="post">
-                            <input class="form-control" name="search" placeholder="输入查找的国外学院" type="text" required/>
+                            <input class="form-control" name="search" placeholder="输入查找的国外学院" type="text" value="${search}" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;
                             <b>搜索</b></button>
                              
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addAbroadCollegeProtocol.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="collegeAgreementAction"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="collegeAgreementAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                        <%--  <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="exportAbroadCollegeProtocolExcel?searchName=${protocolCollegeName}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button> --%>
                         </div>
