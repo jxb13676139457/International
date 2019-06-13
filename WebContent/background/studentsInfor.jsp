@@ -425,10 +425,8 @@
 	                        <button type="button" class="btn btn-default" style="width:80px;height:30px">
 	                        	<a href="excelAction!exportInterStudent"><i class="icon_download"></i>&nbsp;&nbsp;<b>导出</b></a></button>
 	                        <!-- <button type="button" class="btn btn-default" style="width:80px;height:30px"> -->
-	                        <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
-								<i class="icon_upload"></i>&nbsp;&nbsp;<b>导入</b>
-							</button>
 	                    </form>
+	                    
 	              </li>
                 </ul>
                 <!--  search form end -->                

@@ -14,6 +14,8 @@
 			<interceptor name="logInterceptor" class="com.international.interceptor.LoginInterceptor"/>
 		</interceptors>
 		
+		
+		
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction">
 			<!-- <result name="success">/background/index.jsp</result> -->
@@ -25,9 +27,11 @@
 		
 		<!-- 导入导出Excel的Action -->
 		<action name="excelAction" class="excelAction">
-			
+			 <!-- <result name="uploadExcelSuccess">/background/exchangeStudentInfor.jsp</result>    
+             <result name="error">/background/exchangeStudentInfor.jsp</result> 
+             //允许上传的文件类型，这个是2007EXCEL，即XLSX后缀   
+             <param name="allowedTypes">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream</param> -->  
 		</action>
-		
 		
 		<!-- 国外院校的Action -->
 		<action name="collegeAction" class="collegeAction">
@@ -314,6 +318,7 @@
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
 			<result name="login">/background/login.jsp</result>
+            
 		</action>
 		
 		<!-- 学生夏令营活动的Action -->
@@ -427,6 +432,22 @@
 			<result name="otherfor">/frontground/participateFormalExamInfor.jsp</result>
 			<result name="studentfor">/frontground/studentEnglishAgencyInfor.jsp</result>
 		</action>
+		
+		<action name="priorNewsAction" class="priorNewsAction">
+			<result name="success">/frontground/newsCenter.jsp</result>			
+		</action> 
+
+		<action name="priorNoticeAction" class="priorNoticeAction">
+			<result name="success">/frontground/informCenter.jsp</result>			
+		</action> 
+		
+		<action name="priorPolicyAction" class="priorPolicyAction">
+			<result name="success">/frontground/policiesCenter.jsp</result>			
+		</action> 
+		
+		<action name="priorAbroadCollegeAction" class="priorAbroadCollegeAction">
+			<result name="success">/frontground/abroadCollegeProtocolInfor.jsp</result>			
+		</action> 
 	</package>
 	
 </struts>
