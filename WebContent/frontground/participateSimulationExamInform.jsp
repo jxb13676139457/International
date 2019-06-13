@@ -228,14 +228,14 @@
 								
 									</ul>
 								</li>
-
+								<!-- 如果是学生 -->
 								 <s:if test='#name !=null'>
 				                    <s:if test='#session.type=="student"'>
 				                        <li><a href="priorStudentInformationAction!getOneStudnetInformation" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
                                         <li><a href="priorEnglishAgencyAction!getOneStudnetInformation" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>
-			                    	
+			                    	<!-- 如果是老师或其他 -->
 			                    	<s:else>
 			                    		<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">学生信息</b></span></a>
 											<ul>
@@ -252,7 +252,7 @@
 											<ul>
 												<li><a href="priorEnglishAgencyAction?status=1"><b>雅思机构协议信息</b></a></li>
 												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateSimulationExamInfor?status=1"><b>雅思模拟考试信息</b></a></li>
+												<li><a href="simulationExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorEnglishAgencyAction!getParticipateFormalExamViewInfor?status=1"><b>雅思正式考试信息</b></a></li>
 								
 											</ul>
@@ -362,7 +362,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	       <!-- <div class="main-body_list">
 	         
                 <form action="priorEnglishAgencyAction!searchParticipateSimulationExamInfor" method="post">
                  
@@ -376,7 +376,7 @@
                             <a href="priorDownloadExcelAction!exportParticipateSimulationExamExcel?searchName=${searchInformation } ">导出</a></button>
                	</s:if>
               </form>
-            </div>
+            </div> -->
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
@@ -402,24 +402,24 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="simulationList" var="user" status="st">
+					  <s:iterator value="#session.prisimscore" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
+							<td> <s:property value="#user.interStu.studentId"/></td>
+							<td> <s:property value="#user.interStu.studentName"/></td>
 					<%-- 		<td> <s:property value="#user.id.className"/></td> --%>
 					<%-- 		<td> <s:property value="#user.id.agencyName"/></td>
 							<td> <s:property value="#user.id.startTime"/></td>
 							<td> <s:property value="#user.id.outTime"/></td>
 						    <td> <s:property value="#user.id.courseHours"/></td>
 							<td> <s:property value="#user.id.semester"/></td> --%>
-							<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.location"/></td>
+							<td> <s:property value="#user.exm.time"/></td>
+							<td> <s:property value="#user.exm.location"/></td>
 							
-							<td> <s:property value="#user.id.listening"/></td>
-							<td> <s:property value="#user.id.oral"/></td>
-							<td> <s:property value="#user.id.reading"/></td>
-							<td> <s:property value="#user.id.writing"/></td>
-							<td> <s:property value="#user.id.score"/></td>
+							<td> <s:property value="#user.listening"/></td>
+							<td> <s:property value="#user.oral"/></td>
+							<td> <s:property value="#user.reading"/></td>
+							<td> <s:property value="#user.writing"/></td>
+							<td> <s:property value="#user.score"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

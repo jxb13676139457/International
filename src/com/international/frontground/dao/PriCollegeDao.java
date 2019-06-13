@@ -44,44 +44,44 @@ public class PriCollegeDao {
 	}
 	
 	//查询院校活动信息
-		public List<CollegeActivity> queryCollegeActivity(String queryString){
-			Session session=null;
-			try {
-				session=sessionFactory.openSession();
-				//创建查询
-				Query query=session.createQuery(queryString);
-				List list=query.list();
-				if(list.size()>0)
-					return list;
-				else{
-					return null;
-					}
-			}catch (Exception e) {
-				e.printStackTrace();
+	public List<CollegeActivity> queryCollegeActivity(String queryString){
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			//创建查询
+			Query query=session.createQuery(queryString);
+			List list=query.list();
+			if(list.size()>0)
+				return list;
+			else{
 				return null;
-			}finally{//关闭session
-				session.close();//关闭Session
-			}
-		}
-		
-		//查询院校协议信息
-				public List<CollegeAgreement> queryCollegeAgreement(String queryString){
-					Session session=null;
-					try {
-						session=sessionFactory.openSession();
-						//创建查询
-						Query query=session.createQuery(queryString);
-						List list=query.list();
-						if(list.size()>0)
-							return list;
-						else{
-							return null;
-							}
-					}catch (Exception e) {
-						e.printStackTrace();
-						return null;
-					}finally{//关闭session
-						session.close();//关闭Session
-					}
 				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
+		
+	//查询院校协议信息
+	public List<CollegeAgreement> queryCollegeAgreement(String queryString){
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			//创建查询
+			Query query=session.createQuery(queryString);
+			List list=query.list();
+			if(list.size()>0)
+				return list;
+			else{
+				return null;
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
 }

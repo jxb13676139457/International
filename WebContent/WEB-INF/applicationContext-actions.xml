@@ -225,8 +225,15 @@
 	
 	<!-- 前台国外院校的bean -->
 	<bean id="priorCollegeAction" class="com.international.frontground.actions.college.PriorCollegeAction" scope="prototype">
-		<property name="pcd"><!-- 调用set方法给ud赋值，实例化 -->
+		<property name="pcd"><!-- 调用set方法给pcd赋值，实例化 -->
 			<ref bean="priCollegeDao"/>
+		</property>
+	</bean>	
+	
+	<!-- 前台模拟考试的bean -->
+	<bean id="priorExamAction" class="com.international.frontground.actions.ielts.PriorExamAction" scope="prototype">
+		<property name="ped"><!-- 调用set方法给ped赋值，实例化 -->
+			<ref bean="priExamDao"/>
 		</property>
 	</bean>	
 </beans>
