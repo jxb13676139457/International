@@ -254,10 +254,10 @@
                             <a href="excelAction!exportScore"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                             </button>
                         
-                         <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
+                         <!-- <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
 									<i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b>
 								</button>
-						<a class="btn btn-default" href="downLoad.action?fileName=正式考试的参与表信息模板.xls" style="width:140px;height:30px">	<i class="icon_download"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a>
+						<a class="btn btn-default" href="downLoad.action?fileName=正式考试的参与表信息模板.xls" style="width:140px;height:30px">	<i class="icon_download"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a> -->
                         </form>
                     </li>                    
                 </ul>

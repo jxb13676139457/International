@@ -222,7 +222,7 @@
                             <b>显示全部</b></a></button>                       
                              
                            <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportTrainingExcel?startTime=${startTime} && outTime=${outTime}"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+                            <a href="excelAction!exportTraining"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
                       
                         </form>
                     </li>                    
@@ -246,7 +246,6 @@
                                  <th>培训的课时</th>
                                  <th>培训的费用</th>
                                  <th>操作</th>
-                                 <th>索引</th>
                               </tr>
                            <s:iterator value="trainingList" var="training" status="st">
                               <tr>
@@ -263,7 +262,6 @@
                             
                                   </div>
                                   </td>
-                                  <td><s:property value="#training.trainingId"/></td>
                               </tr>
                               </s:iterator>                             
                            </tbody>

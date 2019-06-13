@@ -39,7 +39,9 @@
        style="margin-top:80px">    
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
-            <label style="color:red"><s:fielderror/></label>
+            <s:label name="errorMessage" style="color:red"></s:label>
+            <label style="color:red"><s:fielderror />
+            </label>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
               <input type="text" name="admins.adminId" class="form-control" placeholder="用户名" required />

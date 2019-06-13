@@ -203,7 +203,7 @@
 				<div class="col-lg-12">
 					<ol class="breadcrumb">
 								<li><i class="fa fa-home"></i><a href="indexAction">首页</a></li>
-						<li><i class="fa fa-table"></i>维护模拟考试信息</li>
+						<li><i class="fa fa-table"></i>维护考试信息</li>
 					</ol>
 				</div>
 			</div>

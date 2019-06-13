@@ -41,6 +41,18 @@
 		<property name="classDao">
 			<ref bean="classesDao"/>
 		</property>
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+		<property name="atd">
+			<ref bean="attendTrainingDao"/>
+		</property>
+		<property name="td">
+			<ref bean="trainingDao"/>
+		</property>
+		<property name="agencydao">
+			<ref bean="agencyDao"/>
+		</property>
 		<!-- <property name="ied">
 			<ref bean="importExcelDao"/>
 		</property> -->

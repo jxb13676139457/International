@@ -266,7 +266,7 @@
                             <a href="englishAgencyAction?searchAgency="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                               
                                 <button type="button" class="btn btn-default" style="width:80px;height:30px">
-                            <a href="exportEnglishAgencyExcel?searchName=${searchAgenchName }"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
+                            <a href="excelAction!exportAgency"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
                         
                         </form>
                     </li>                    
@@ -289,7 +289,7 @@
                                  <th>联系人</th>
                                  <th>职位</th>
                                  <th>联系电话</th>
-                                 <th>邮件</th>
+                                 <th>电子邮箱</th>
                                  <th>操作</th>
                               </tr>
                            <s:iterator value="agencyList" var="agency" status="st">
