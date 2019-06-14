@@ -51,6 +51,12 @@
 				<value>com/international/model/CollegeActivity.hbm.xml</value>
 				<value>com/international/model/CollegeAgreement.hbm.xml</value>
 				<value>com/international/model/ExchangeStudent.hbm.xml</value>
+				<value>com/international/model/AgencyAgreement.hbm.xml</value>
+				<value>com/international/model/AttendTraining.hbm.xml</value>
+				<value>com/international/model/Exam.hbm.xml</value>
+				<value>com/international/model/Score.hbm.xml</value>
+				<value>com/international/model/StudentActivity.hbm.xml</value>
+				<value>com/international/model/Teacher.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

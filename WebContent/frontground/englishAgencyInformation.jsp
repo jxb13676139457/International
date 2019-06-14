@@ -288,11 +288,11 @@
 				   <div class="service_wrapper">
 				     <div class="four columns">
 					    <div class="image_shadow">
-					      <a href="priorEnglishAgencyAction?status=1"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
+					      <a href="engAgenAgreeAction"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
 						</div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorEnglishAgencyAction?status=1"><b>雅思协议信息</b> </a></h5>
+				            <h5><a href="engAgenAgreeAction"><b>雅思协议信息</b> </a></h5>
 						  
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -362,7 +362,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	       <!-- <div class="main-body_list">
 	         
                 <form action="priorEnglishAgencyAction!searchAgencyProtocol" method="post">
                  
@@ -377,7 +377,7 @@
                             <a href="priorDownloadExcelAction!exportAgencyProtocolExcel?searchName= ${searchInformation} && exportElemt=${elemt}">导出</a></button>
                	</s:if>
               </form>
-            </div>
+            </div> -->
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
@@ -392,13 +392,13 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="agencyProtocolList" var="user" status="st">
+					  <s:iterator value="#session.priagreement" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.name"/></td>
-							<td> <s:property value="#user.id.title"/></td>
-							<td> <s:property value="#user.id.time"/></td>
-							<td> <s:property value="#user.id.ProtocolName"/></td>
-							<td> <s:property value="#user.id.type"/></td>
+							<td> <s:property value="#user.agen.agencyName"/></td>
+							<td> <s:property value="#user.title"/></td>
+							<td> <s:property value="#user.time"/></td>
+							<td> <s:property value="#user.FileName"/></td>
+							<td> <s:property value="#user.type"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

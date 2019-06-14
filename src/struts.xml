@@ -467,6 +467,12 @@
 			<result name="success">/frontground/index.jsp</result>
 			<result name="input">/frontground/index.jsp</result>
 		</action>
+		
+		<!-- 前台雅思协议的Action -->
+		<action name="engAgenAgreeAction" class="engAgenAgreeAction">
+			<result name="success">/frontground/englishAgencyInformation.jsp</result>
+			<result name="input">/frontground/englishAgencyInformation.jsp</result>
+		</action>
 	</package>
 	
 </struts>

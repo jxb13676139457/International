@@ -278,5 +278,12 @@
 			<ref bean="userDao"/>
 		</property>
 	</bean>
+	
+	<!-- 前台老师查询雅思机构协议的bean -->
+	<bean id="engAgenAgreeAction" class="com.international.frontground.actions.ielts.EngAgenAgreeAction">
+		<property name="pad">
+			<ref bean="priEngAgreeDao"/>
+		</property>
+	</bean>
 
 </beans>
