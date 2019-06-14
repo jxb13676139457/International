@@ -158,4 +158,58 @@ public class PriStudentDao {
 			session.close();
 		}
 	}
+	
+	//学生查询基本信息
+	public <T> T queryStuById(String stuId,String type) {
+		Session session = null;
+		try {
+			String hql = "";
+			if(type=="InternationalStudent") {
+				hql = "from InternationalStudent where studentId="+stuId;
+			}else if(type=="OverseasStudent") {
+				hql = "from OverseasStudent where studentId="+stuId;
+			}else if(type=="ExchangeStudent") {
+				hql = "from ExchangeStudent where studentNo="+stuId;
+			}else {
+				hql = "";
+			}
+			session = sessionFactory.openSession();
+			Query query = session.createQuery(hql);
+			List list = query.list();
+			System.out.println("查询到的个人信息："+list);
+			if(list.size()>0) {
+				return (T) list.get(0);
+			}else {
+				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			session.close();
+		}
+	}
+	
+	//学生查询自己参与的交流活动
+	public List<StudentActivity> queryStuActivityById(String stuId){
+		Session session = null;
+		try {
+			String hql = "";
+			session = sessionFactory.openSession();
+			hql = "from StudentActivity where studentId="+stuId;
+			Query query = session.createQuery(hql);
+			List list = query.list();
+			System.out.println("查询到的学生活动（夏令营）："+list);
+			if(list.size()>0) {
+				return list;
+			}else {
+				return null;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			session.close();
+		}
+	}
 }

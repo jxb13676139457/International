@@ -220,7 +220,7 @@
 									</li>
 									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
-				                        <li><a href="studentInformation.jsp" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
+				                        <li><a href="priorStudentAction!showPersonById" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
                                         <li><a href="priorExamAction!studentAgencySearch" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>

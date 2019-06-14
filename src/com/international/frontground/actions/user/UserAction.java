@@ -14,10 +14,11 @@ import com.international.model.Teacher;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 public class UserAction extends ActionSupport{
-	String    name=null;     //登录的用户名
-	String    password=null;  //登录的密码
-	String    newPassword=null; //确认密码
-	String    type=null;      //登录的类型
+	String name=null;     //登录的用户名
+	String password=null;  //旧密码
+	String newPassword=null; //新密码
+	String reqPassword=null;  //确认密码
+	String type=null;      //登录的类型
 	UserDao ud;
 	public UserAction(){
 		
@@ -55,6 +56,14 @@ public class UserAction extends ActionSupport{
 		this.newPassword = newPassword;
 	}
 
+	public String getReqPassword() {
+		return reqPassword;
+	}
+
+	public void setReqPassword(String reqPassword) {
+		this.reqPassword = reqPassword;
+	}
+
 	public String getType() {
 		return type;
 	}
@@ -62,7 +71,7 @@ public class UserAction extends ActionSupport{
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public  String execute() {
 		Map session=ActionContext.getContext().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();

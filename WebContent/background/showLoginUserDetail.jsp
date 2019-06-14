@@ -259,7 +259,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>密码</b></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="admin.password" value="${sessionScope.editAdmin.password }" style="width:300px" type="text" />
+                                              <input class="form-control" name="admin.password" value="${sessionScope.editAdmin.password }" style="width:300px" type="password" />
                                           </div>
                                           </div>
                                       </div>

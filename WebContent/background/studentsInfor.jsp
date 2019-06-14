@@ -474,7 +474,7 @@
                               <tr style="background-color:#ededed">
                                  <th>年级</th>
                                  <th>学号</th>
-                                 <th>密码</th>
+                                 <!-- <th>密码</th> -->
                                  <th>姓名</th>
                                  <th>性别</th>
                                  <th>班级</th>
@@ -486,7 +486,7 @@
                               <tr>
                                  <td><s:property value="#student.classes.grade"/></td>
                                  <td><s:property value="#student.studentId"/></td>
-                                 <td><s:property value="#student.password"/></td>
+                                 <%-- <td><s:property value="#student.password"/></td> --%>
                                  <td><s:property value="#student.studentName"/></td>
                                  <td><s:property value="#student.sex"/></td>
                                  <td><s:property value="#student.classes.className"/></td>
