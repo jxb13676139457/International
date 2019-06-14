@@ -55,7 +55,7 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="js/jquery.twitter.js"></script>
 
-
+	
     
    <style>
          span{
@@ -63,7 +63,7 @@
          }
    </style>
 </head>
-<body>	
+<body onload="getNews();getNotice();">	
 <!-- Image Back ground and pattern Back ground  -->
     <!-- <div id="pattern_bg"></div>  -->
      <img src="images/large/bg.jpg" alt="" id="background" />
@@ -376,34 +376,34 @@
 
 	<ul id="carousel-works" class="portfolio group"> 
 		<li class="four columns">
-			  <div class="panel panel-default " style="width:220px">
+			  <div id="hmnews" class="panel panel-default " style="width:440px;height:300px">
 						    <div class="panel-heading">
 						        <h3 class="panel-title" style="font-size:20px">
 						           <b>  新闻中心</b>
-						           <a href="priorNewsAction"><span  class="more">more>></span></a>
+						           <a href="priorNewsAction"><span  class="more" style="float:right">more>></span></a>
 						        </h3>
 						    </div>
-						   <s:iterator value="newsList" var="user" status="st">
+						   <!--<s:iterator value="#session.homeNewList" var="user" status="st">
 						    <div class="panel-body"> 
 		            
 						            <a href="<s:property value="#user.newsUrl"/>">
                                   <b> <s:property value="#user.title"/></b></a>                         
 						         <span><s:property value="#user.time"/>  </span>
 						    </div>					
-						  </s:iterator>
+						  </s:iterator>-->
 			           </div>
 		</li> 
 		<li class="four columns" style="margin-left:-40px">
-			 <div class="panel panel-default" style="width:220px">
+			 <div id="hmnotice" class="panel panel-default" style="width:440px;height:300px">
 						    <div class="panel-heading">
 						        <h3 class="panel-title" style="font-size:20px">
 						           <b>通知公告</b>
 						                                      
-						              <a href="priorNoticeAction"><span class="more" id="more">more>></span></a>                          
+						              <a href="priorNoticeAction"><span class="more" id="more" style="float:right">more>></span></a>                          
 						        </h3>
 						    </div>
 						    
-						   <s:iterator value="noticeList" var="user" status="st">
+						   <!--<s:iterator value="noticeList" var="user" status="st">
 							    <div class="panel-body">
 							            
 							     
@@ -413,11 +413,11 @@
 							         <span><s:property value="#user.time"/>  </span>
 							    </div>
 							   
-						  </s:iterator>
+						  </s:iterator>-->
 						  
 			      </div>
 		</li>
-		<li class="four columns" style="margin-left:-80px">
+		<!-- <li class="four columns" style="margin-left:-80px">
 
 			  <div class="panel panel-default" style="width:250px">
 						    <div class="panel-heading">
@@ -459,7 +459,7 @@
 						  </s:iterator>
 				    </div>
 
-		</li>
+		</li>-->
 
 
 	
@@ -498,5 +498,63 @@
 		
 	</div> <!-- End main_wrapper_inner -->	   
 </div> <!-- End main_wrapper -->
+
+<script type="text/javascript">
+	//前台首页获取新闻
+	//getNews();
+	function getNews(){
+		 $.ajax(			    		
+	   	   {
+	    	  type:"post",
+	    	  url:"http://localhost:8080/InternationalSys/frontground/homeAction!homeNews",
+	    	  data:{},
+	    	  dataType:"json",			    	
+	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	  async:true,
+	    	  traditional:true,
+	    	  success: function(data){		
+	    		  	var html="";
+	    		  	console.log(data);	
+	    		  	for(var i=0; i<data.length; i++){
+	    		  		html=html +'<div class="panel-body"> <a href="'+data[i].newsUrl+'"><b>'+data[i].title+'</b></a><span style="float:right;">'+data[i].time+'</span></div>';	
+	    		  		
+	    		  	}
+	    		  	$('#hmnews').append(html);
+	              },
+	              error: function(data){
+	            	  console.log(data);	
+	              }
+	    	  }			    	      
+	   	  );
+	   }
+	
+	//前台首页获取通知
+	function getNotice(){
+		 $.ajax(			    		
+	   	   {
+	    	  type:"post",
+	    	  url:"http://localhost:8080/InternationalSys/frontground/homeAction!homeNotice",
+	    	  data:{},
+	    	  dataType:"json",			    	
+	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	  async:true,
+	    	  traditional:true,
+	    	  success: function(data){		
+	    		  	var html="";
+	    		  	console.log(data);	
+	    		  	for(var i=0; i<data.length; i++){
+	    		  		html=html +'<div class="panel-body"> <a href="priorNoticeAction!getInformationByTitle.action?title='+data[i].title+'&time='+data[i].time+'"><b>'+data[i].title+'</b></a><span style="float:right;">'+data[i].time+'</span></div>';	
+	    		  		
+	    		  	}
+	    		  	$('#hmnotice').append(html);
+	              },
+	              error: function(data){
+	            	  console.log(data);	
+	              }
+	    	  }			    	      
+	   	  );
+	   }
+	</script>
+
 </body>
 </html>

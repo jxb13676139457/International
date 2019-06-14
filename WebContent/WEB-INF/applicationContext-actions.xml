@@ -271,5 +271,12 @@
 			<ref bean="priStudentDao"/>
 		</property>
 	</bean>
+	
+	<!-- 前台首页的bean -->
+	<bean id="homeAction" class="com.international.frontground.actions.user.HomeAction">
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+	</bean>
 
 </beans>

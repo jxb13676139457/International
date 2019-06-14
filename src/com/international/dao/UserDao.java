@@ -10,6 +10,8 @@ import org.hibernate.Transaction;
 
 import com.international.model.Admin;
 import com.international.model.InternationalStudent;
+import com.international.model.News;
+import com.international.model.Notice;
 import com.international.model.Teacher;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -314,6 +316,58 @@ public class UserDao {
 				return null;
 			}finally{//关闭session
 				session.close();//关闭Session
+			}
+		}
+		
+		//前台获取新闻(每次最多5条记录)
+		public List<News> queryByNews(String queryString){
+			Session session = null;
+			try{
+				session = sessionFactory.openSession();
+				//创建查询
+				Query query = session.createQuery(queryString);
+				//每次获取第一条数据的索引
+				if(query.list().size()<=5)//新闻条数小于5
+					query.setFirstResult(0);
+				else
+					query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
+				
+				//这一页显示的记录个数
+				query.setMaxResults(5);
+				//每次最多5条记录
+				List<News> list = query.list();
+				return list;
+			}catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}finally{
+				session.close();
+			}
+		}
+		
+		//前台获取通知(每次最多5条记录)
+		public List<Notice> queryByNotice(String queryString){
+			Session session = null;
+			try{
+				session = sessionFactory.openSession();
+				//创建查询
+				Query query = session.createQuery(queryString);
+				//每次获取第一条数据的索引
+				if(query.list().size()<=5)//通知条数小于5
+					query.setFirstResult(0);
+				else
+					query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
+			
+				//这一页显示的记录个数
+				query.setMaxResults(5);
+				//每次最多5条记录
+				List<Notice> list = query.list();
+				return list;
+			}catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}finally{
+				session.close();
 			}
 		}
 }

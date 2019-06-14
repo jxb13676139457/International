@@ -460,7 +460,12 @@
 		<action name="priorAbroadCollegeAction" class="priorAbroadCollegeAction">
 			<result name="success">/frontground/abroadCollegeProtocolInfor.jsp</result>			
 		</action> 
-
+		
+		<!-- 前台主页的Action -->
+		<action name="homeAction" class="homeAction">
+			<result name="success">/frontground/index.jsp</result>
+			<result name="input">/frontground/index.jsp</result>
+		</action>
 	</package>
 	
 </struts>
