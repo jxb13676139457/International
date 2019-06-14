@@ -95,10 +95,13 @@
 			
 		
 				<div class="top_info">
-					<p style="margin-right:90px">
+					<p id="cotr" style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
                        <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
+		             	 	<script>
+		             	 		$('#cotr').css('margin-right','255px');
+		             	 	</script>
 		             	     <s:if test="#studentName != null"> 
 		             	       
                                  
