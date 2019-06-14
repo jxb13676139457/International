@@ -243,8 +243,6 @@
 												<li><a href="priorStudentInformationAction!getOverseasStudentInformation?status=1"><b>出国学生</b></a></li>
 												<li><a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"><b>交换生</b></a></li>
 												<li><a href="priorStudentInformationAction!getStudentActivitiesInformation?status=1"><b>学生活动</b></a></li>
-		
-										
 											</ul>
 								         </li>
 								         
@@ -257,8 +255,6 @@
 								
 											</ul>
 								         </li>
-			                    	
-			                    	
 			                    	
 			                    	</s:else>
 			                    	
@@ -288,11 +284,11 @@
 				   <div class="service_wrapper">
 				     <div class="four columns">
 					    <div class="image_shadow">
-					      <a href="priorStudentInformationAction?status=1"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
+					      <a href="priorStudentAction!showInterStudent"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
 						</div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorStudentInformationAction?status=1"><b>国际班学生的信息</b> </a></h5>
+				            <h5><a href="priorStudentAction!showInterStudent"><b>国际班学生的信息</b> </a></h5>
 						  
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -314,11 +310,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
+					     <a href="priorStudentAction!showExchangeStudent"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"> <b> 交换学生的信息</b>  </a></h5>
+				            <h5><a href="priorStudentAction!showExchangeStudent"> <b> 交换学生的信息</b>  </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -355,7 +351,6 @@
 	       <div class="pb_title_wrapper">
 		       <h1 class="pb_title"><b style="text-align:center">国际班学生的信息</b></h1>
                <div class="clear"></div>
-            				 
           </div>  
 	         <div class="main_top_location">
 	         <hr>
@@ -364,7 +359,7 @@
 	         
 	       <div class="main-body_list">
 	         
-                 <form action="priorStudentInformationAction!searchStudent" method="post" role="form">
+                 <%-- <form action="priorStudentInformationAction!searchStudent" method="post" role="form">
                  
                    <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
 			    <button type="submit" class="btn btn-default" style="border-width:2px;width:80px;heigth:30px">搜索</button>
@@ -377,15 +372,15 @@
 			      <button type="button" class="btn btn-default" style="width:80px;height:33px">
                             <a href="priorDownloadExcelAction!exportInterStudentExcel?searchName=${searchInformation }">导出</a></button>
                	</s:if>
-              </form>
+              </form> --%>
+              <hr>
             </div>
-            <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
 				<table class="table table-striped" style="width:1050px">
 					<thead>
 						<tr>
-							<th> <b>年级</b> </th>
+							<th>  <b>年级</b> </th>
 							<th>  <b>学号</b></th>
 							<th>  <b>姓名</b></th>
 							<th>  <b>班级</b></th>
@@ -395,22 +390,22 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="studentList" var="user" status="st">
+					  <s:iterator value="interStudents" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.id.grade"/></td>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
-							<td> <s:property value="#user.id.className"/></td>
-							<td> <s:property value="#user.id.profession"/></td>
-							<td> <s:property value="#user.id.reserve2"/></td>
-							<td> <s:property value="#user.id.status"/></td>
+							<td> <s:property value="#user.classes.grade"/></td>
+							<td> <s:property value="#user.studentId"/></td>
+							<td> <s:property value="#user.studentName"/></td>
+							<td> <s:property value="#user.classes.className"/></td>
+							<td> <s:property value="#user.classes.major"/></td>
+							<td> <s:property value="#user.sex"/></td>
+							<td> <s:property value="#user.status"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
 			</table>
 			</div>  
 		  </div>
-		 <s:set name="status" value="#session.status"></s:set> 
+		<%--  <s:set name="status" value="#session.status"></s:set> 
 		   <div  style="text-align:center">
 		       <s:if test="#status==1"> 
                    <c:if test="${totalPage>0}">
@@ -446,8 +441,24 @@
                       
                       </s:else>
                      
-                  </div>
-
+                  </div> --%>
+                  
+                  <div style="text-align:center">
+	                  	<!-- 分页 -->
+				  		[<a href="priorStudentAction!showInterStudent?pageNo=1">首页</a>]
+							<c:choose>
+								<c:when test="${currentPage>1}">
+									[<a href="priorStudentAction!showInterStudent?pageNo=${currentPage-1}">上一页</a>]
+								</c:when>
+							</c:choose>
+							<c:choose>
+								<c:when test="${currentPage<totalPage}">
+									[<a href="priorStudentAction!showInterStudent?pageNo=${currentPage+1}">下一页</a>]
+								</c:when>
+							</c:choose>
+						[<a href="priorStudentAction!showInterStudent?pageNo=${totalPage}">尾页</a>]
+						第${currentPage}页/共${totalPage}页
+					</div>
 
         </div>
 			   

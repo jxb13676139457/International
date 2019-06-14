@@ -58,41 +58,30 @@
 
     
    <style>
-
          span{
-         
-         
             //float:right;
          }
-   
    </style>
-
-
 </head>
 <body>	
-
-
 <!-- Image Back ground and pattern Back ground  -->
-   
     <!-- <div id="pattern_bg"></div>  -->
      <img src="images/large/bg.jpg" alt="" id="background" />
-
-<div class="header_top_first" style="height:50px">
+	<div class="header_top_first" style="height:50px">
 		<div class="container sixteen columns header_top_inner">
 	    	<div class="eight columns align_left">
 				<div class="testimonials" style="margin-left:30px;margin-top:20px">
-				            <div class="testi_icon" ></div>
-                        	<ul>
-							 	 	<li>
-                            		<div class="testi-text dro" style="font-size:30px;">北京理工大学珠海学院</div>                                  
-                                    </li>
-									<li>	
-                            		<div class="testi-text dro"  style="font-size:30px">计算机学院</div>  
-									</li>
-                            </ul>						
+		            <div class="testi_icon" ></div>
+                    <ul>
+				 	 	<li>
+	               			<div class="testi-text dro" style="font-size:30px;">北京理工大学珠海学院</div>                                  
+	                    </li>
+						<li>	
+	                  		<div class="testi-text dro"  style="font-size:30px">计算机学院</div>  
+						</li>
+                    </ul>						
                 </div>			
 			</div>
-			
 		
 				<div class="top_info">
 					<p id="cotr" style="margin-right:90px">
@@ -103,19 +92,16 @@
 		             	 		$('#cotr').css('margin-right','255px');
 		             	 	</script>
 		             	     <s:if test="#studentName != null"> 
-		             	       
-                                 
 		             	          <li class="dropdown" id="accountmenu">
-		             	          
 		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
-					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+						                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" /></b>
+				             	  		</a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp; <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+				             	  		</b></a>
 				             	  </s:else>
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
@@ -123,20 +109,14 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				             
-							    
 		             	     </s:if>
 		             	     
 		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
-			           
-                              
-						  
 							     <li class="dropdown" id="accountmenu">
-							       	 
-					                    <s:if test='#session.loginUser3.sex=="男"'>
+					               <s:if test='#session.loginUser3.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
-				             	  </b></a>
+				             	  		</b></a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
@@ -149,15 +129,10 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
 		             	     </s:elseif>
 		             	     
 		             	     <s:else>
-			           
-                              
-						  
 							     <li class="dropdown" id="accountmenu">
-							       	 
 					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
@@ -174,12 +149,9 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
 		             	     </s:else>
-						
-					    
-					      
 		             	  </s:if>
+		             	  
 		             	   <s:else> 
 								<span style="display:block; margin-top:2px;">
 									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
@@ -190,13 +162,8 @@
 		             	   			}
 		             	   		</style>
 		             	   </s:else>
-		     
 		               </p>
-		
 				</div>
-				
-				
-						
         </div>  
   <div class="clear"></div>		
 </div>
@@ -247,16 +214,16 @@
 											<li><a href="priorAbroadCollegeAction?status=1"><b>国外院校活动</b></a></li>
 											<li><a
 												href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><b>国外院校协议</b></a></li>
-	
-										</ul></li>
+										</ul>
+									</li>
 										
-								<s:if test='#name !=null'>
-									<li><a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
-							
+								<s:if test='#name!=null'>
+									<li>
+										<a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
 									</li>
 									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
-				                        <li><a href="priorStudentInformationAction!getOneStudnetInformation" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
+				                        <li><a href="studentInformation.jsp" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
                                         <li><a href="priorExamAction!studentAgencySearch" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>
@@ -264,12 +231,10 @@
 			                    	<s:else>
 			                    		<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">学生信息</b></span></a>
 											<ul>
-												<li><a href="priorStudentInformationAction?status=1"><b>国际学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getOverseasStudentInformation?status=1"><b>出国学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"><b>交换生</b></a></li>
-												<li><a href="priorStudentInformationAction!getStudentActivitiesInformation?status=1"><b>学生活动</b></a></li>
-		
-										
+												<li><a href="priorStudentAction!showInterStudent"><b>国际学生</b></a></li>
+												<li><a href="priorStudentAction!showOverseasStudent"><b>出国学生</b></a></li>
+												<li><a href="priorStudentAction!showExchangeStudent"><b>交换生</b></a></li>
+												<li><a href="priorStudentAction!showStudentActivity"><b>学生活动</b></a></li>
 											</ul>
 								         </li>
 								         
@@ -279,7 +244,6 @@
 												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
 												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
-								
 											</ul>
 								         </li>
 			                    	</s:else>	

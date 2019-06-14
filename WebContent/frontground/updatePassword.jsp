@@ -139,45 +139,54 @@
                             </ul>						
                 </div>			
 			</div>
-			
-		
-				<div class="top_info">
-					<p style="margin-right:280px">
+			<div class="top_info">
+					<p style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
-                       <s:set name="name" value="#session.name"></s:set> 
+                       <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
 		             	     <s:if test="#studentName != null"> 
-		             	       
-                                 
 		             	          <li class="dropdown" id="accountmenu">
-		             	          
-		             	          <s:if test='#session.loginUser.reserve2=="男"'>
+		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
-					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+						                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" /></b>
+				             	  		</a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp; <b>欢迎：<s:property value="#session.loginUser.studentName" />
+				             	  		</b></a>
+				             	  </s:else>
+					                    <ul class="dropdown-menu">
+					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
+												<li class="divider"></li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
+					                    </ul>
+					                </li>
+		             	     </s:if>
+		             	     
+		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
+							     <li class="dropdown" id="accountmenu">
+					               <s:if test='#session.loginUser3.sex=="男"'>
+					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
+				             	  		</b></a>
+				             	  </s:if>
+				             	  <s:else>
+				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp;   <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
 				             	  </b></a>
 				             	  </s:else>
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				             
-							    
-		             	     </s:if>
+		             	     </s:elseif>
 		             	     
 		             	     <s:else>
-			           
-                              
-						  
 							     <li class="dropdown" id="accountmenu">
-							       	 
-					                    <s:if test='#session.loginUser.reserve1=="男"'>
+					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
 				             	  </b></a>
@@ -190,26 +199,24 @@
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
 		             	     </s:else>
-						
-					    
-					      
 		             	  </s:if>
+		             	  
 		             	   <s:else> 
-		             	   <a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
-		             	   
+								<span style="display:block; margin-top:2px;">
+									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
+								</span>
+		             	   		<style>
+		             	   			.btn-default{
+		             	   				background-color:rgb(51,51,51);
+		             	   			}
+		             	   		</style>
 		             	   </s:else>
-		     
 		               </p>
-		
 				</div>
-				
-				
-						
         </div>  
   <div class="clear"></div>		
 </div>
