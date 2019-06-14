@@ -366,22 +366,20 @@
 	       <div class="main-body_list">
 	         
                
-            <%--   <form action="priorStudentInformationAction!searchOverseasStudent" method="post">
+       <form action="" method="post">
                    
-                   <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
+                 <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
 			    <button type="submit" class="btn btn-default" style="border-width:2px;width:80px;heigth:30px">搜索</button>
 			     
-			     
-			     	    <button type="button" class="btn btn-default" style="width:100px;height:33px">
-                            <a href="priorStudentInformationAction!getOverseasStudentInformation?status=1">显示全部</b></a></button>
+			 <!--     	    <button type="button" class="btn btn-default" style="width:100px;height:33px">
+                            <a href="priorStudentAction!showOverseasStudent">显示全部</b></a></button> -->
                         
-			  
 			     <s:if test='#session.type=="other"'>
-			      <button type="button" class="btn btn-default" style="width:80px;height:33px">
-                            <a href="exportOverseasStudentExcel?searchName=${searchInformation }">导出</a></button>
+			      	 <button type="button" class="btn btn-default" style="width:80px;height:33px">
+                     <a href="excelAction!exportOverseasStudent">导出</a></button>
                	</s:if>
 	
-              </form> --%>
+              </form>
             </div>
 	         <hr>
 	       <div class="main-body_list">

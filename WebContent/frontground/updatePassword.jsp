@@ -408,12 +408,12 @@
 	         
                <form class="form-horizontal" action="" method="post" id="updatePasswordForm" >
 	         
-				<div class="form-group">
+				<%-- <div class="form-group">
 					<div class="col-sm-10">
 						<input type="hidden" class="form-control"  value="${sessionScope.name}"
 							   readonly  placeholder="请输入名字">
 					</div>
-				</div>
+				</div> --%>
 				
 				<div class="form-group" style="margin-left:300px">
 					<label for="firstname" class="col-sm-2 control-label">用户名:</label>

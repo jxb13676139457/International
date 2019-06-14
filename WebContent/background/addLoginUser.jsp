@@ -267,7 +267,7 @@
                                        <div  style="margin-left:250px">
                                           <label for="cemail" class="control-label col-lg-2">密码 <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="admin.password" value="888888" style="width:250px"  minlength="4" required/>
+                                              <input class="form-control"  type="password" name="admin.password" value="888888" style="width:250px"  minlength="4" required/>
                                           </div>
                                           </div>
                                       </div>

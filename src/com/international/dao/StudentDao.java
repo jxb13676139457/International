@@ -130,8 +130,10 @@ public class StudentDao {
 	
 	//根据国际班级名称查找国际班对象  
 	public InternationalClass queryByClassName(String className){
+		//System.out.println("学生的班级："+className);
 		//这一句是为了截取ajax传参过来的时候参数后面加多了", "这两个字符
-		className = className.substring(0,className.length()-2);
+		//className = className.substring(0,className.length()-2);
+		System.out.println("传过来的班级名称："+className);
 		Session session = null;
 		String hql = "from InternationalClass where className='"+className+"'";
 		try {

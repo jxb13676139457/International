@@ -1,22 +1,29 @@
 package com.international.frontground.actions.student;
 
 import java.util.List;
+import java.util.Map;
 
 import com.international.frontground.dao.PriStudentDao;
 import com.international.model.ExchangeStudent;
 import com.international.model.InternationalStudent;
 import com.international.model.OverseasStudent;
 import com.international.model.StudentActivity;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class PriorStudentAction extends ActionSupport{
 	
 	PriStudentDao psd;
+	//other查询
 	List<InternationalStudent> interStudents;
 	List<ExchangeStudent> exchangeStudents;
 	List<OverseasStudent> overseasStudents;
 	List<StudentActivity> studentActivities;
-	
+	//学生查询
+	InternationalStudent interStudent;
+	ExchangeStudent exchangeStudent;
+	OverseasStudent overseasStudent;
+	List<StudentActivity> studentActivity;
 	
 	private int id; //界面显示数据的索引
 	private final int pageSize=7; //每页显示记录的个数
@@ -81,7 +88,30 @@ public class PriorStudentAction extends ActionSupport{
 	public void setStudentActivities(List<StudentActivity> studentActivities) {
 		this.studentActivities = studentActivities;
 	}
-	
+	public InternationalStudent getInterStudent() {
+		return interStudent;
+	}
+	public void setInterStudent(InternationalStudent interStudent) {
+		this.interStudent = interStudent;
+	}
+	public ExchangeStudent getExchangeStudent() {
+		return exchangeStudent;
+	}
+	public void setExchangeStudent(ExchangeStudent exchangeStudent) {
+		this.exchangeStudent = exchangeStudent;
+	}
+	public OverseasStudent getOverseasStudent() {
+		return overseasStudent;
+	}
+	public void setOverseasStudent(OverseasStudent overseasStudent) {
+		this.overseasStudent = overseasStudent;
+	}
+	public List<StudentActivity> getStudentActivity() {
+		return studentActivity;
+	}
+	public void setStudentActivity(List<StudentActivity> studentActivity) {
+		this.studentActivity = studentActivity;
+	}
 	//教师查询国际班学生信息(分页处理)
 	public String showInterStudent() {
 		interStudents = psd.queryInterStudent();
@@ -200,6 +230,24 @@ public class PriorStudentAction extends ActionSupport{
 			currentPage = 0;
 			return "activityFail";
 		}
+	}
+	
+	//学生查询个人基本信息
+	public String showPersonById() {
+		Map session = ActionContext.getContext().getSession();
+		//拿到session存的登录对象
+		InternationalStudent student = (InternationalStudent) session.get("loginUser");
+		//拿到登录学生的学号
+		String stuId = student.getStudentId();
+		System.out.println(stuId);
+		String type1 = "InternationalStudent";
+		interStudent = psd.queryStuById(stuId,type1);
+		String type2 = "OverseasStudent";
+		overseasStudent = psd.queryStuById(stuId,type2);
+		String type3 = "ExchangeStudent";
+		exchangeStudent = psd.queryStuById(stuId,type3);
+		studentActivity = psd.queryStuActivityById(stuId);
+		return "showPersonSucc";
 	}
 	
 }

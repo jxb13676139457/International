@@ -20,7 +20,7 @@ public class LoginInterceptor extends AbstractInterceptor {
 
 		String userName=(String)session.get("userName");
 		if(userName!=null){
-			System.out.println("session有效，用户不为空");
+			//System.out.println("session有效，用户不为空");
 			return ai.invoke();
 		}else{ 
 			ActionContext ac=ai.getInvocationContext();
