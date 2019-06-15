@@ -14,8 +14,6 @@
 			<interceptor name="logInterceptor" class="com.international.interceptor.LoginInterceptor"/>
 		</interceptors>
 		
-		
-		
 		<!-- 后台登录的Action -->
 		<action name="loginAction" class="loginAction">
 			<!-- <result name="success">/background/index.jsp</result> -->
@@ -249,8 +247,11 @@
 		</action>
 		
 		<!-- 修改管理员密码的Action -->
-		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
+		<action name="updateInfoAction" class="updateInfoAction">
 			<result name="success">/background/login.jsp</result>
+			<result name="editSucc" type="redirectAction">
+    			<param name="actionName">exitAction</param>
+    		</result>
 			<result name="input">/background/profile.jsp</result>
 			<interceptor-ref name="logInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
@@ -337,14 +338,7 @@
 			<result name="login">/background/login.jsp</result>
 		</action>
 		
-		<!-- 修改管理员密码的Action -->
-		<action name="updateInfoAction" class="updateInfoAction" method="updateAdmin">
-			<result name="success">/background/login.jsp</result>
-			<result name="input">/background/profile.jsp</result>
-			<interceptor-ref name="logInterceptor"/>
-			<interceptor-ref name="defaultStack"/>
-			<result name="login">/background/login.jsp</result>
-		</action>
+		
 		
 		<!-- 退出系统的Action -->
 		<action name="exitAction" class="exitAction">
@@ -414,6 +408,10 @@
 			<result name="student">/frontground/index.jsp</result>
     		<result name="other">/frontground/index.jsp</result>
     		<result name="exitlogin">/frontground/index.jsp</result>
+    		<result name="editSucc" type="redirectAction">
+    			<param name="actionName">userAction!exitFront</param>
+    		</result>
+			<result name="editFail">/frontground/updatePassword.jsp</result>
 		</action>
 		
 		<!-- 前台国外院校的Action -->

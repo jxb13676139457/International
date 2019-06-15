@@ -59,7 +59,7 @@
     
    <style>
          span{
-            //float:right;
+            float:right;
          }
    </style>
 </head>
@@ -131,7 +131,7 @@
 					                </li>
 		             	     </s:elseif>
 		             	     
-		             	     <s:else>
+		             	     <%-- <s:else>
 							     <li class="dropdown" id="accountmenu">
 					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
@@ -149,7 +149,8 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-		             	     </s:else>
+		             	     </s:else> --%>
+		             	     
 		             	  </s:if>
 		             	  
 		             	   <s:else> 

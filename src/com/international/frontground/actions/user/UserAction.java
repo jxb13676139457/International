@@ -1,12 +1,20 @@
 package com.international.frontground.actions.user;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
+
+import com.international.common.ajaxAction;
 import com.international.dao.UserDao;
 import com.international.model.Admin;
 import com.international.model.InternationalStudent;
@@ -20,6 +28,7 @@ public class UserAction extends ActionSupport{
 	String reqPassword=null;  //确认密码
 	String type=null;      //登录的类型
 	UserDao ud;
+	
 	public UserAction(){
 		
 	}
@@ -76,7 +85,7 @@ public class UserAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		HttpServletRequest request=ServletActionContext.getRequest();
 		String hql=null;
-		String loginResult=null;//返回的actionResult来判断是学生登录还是老师或领导登录
+		String loginResult=null;//返回的actionResult来判断是学生登录还是老师登录
 		String hql2=null; 
 		System.out.println("名字："+ name +" psw: " + password + " type: " + type);
 		
@@ -95,13 +104,12 @@ public class UserAction extends ActionSupport{
 				loginResult = "student";
 			} else if (type.equals("other")) {
 				// 如果是教师或者是领导的话就执行这条
-				hql = "from Admin where adminId='"+name+"' and password='"+password+"'";
+				//hql = "from Admin where adminId='"+name+"' and password='"+password+"'";
 				hql2="from Teacher where teacherId='"+name+"' and password='"+password+"'";
 				loginResult = "other";
 			}
 			// 验证登录的账号和密码
 			if (ud.validLogin(hql)||ud.validLogin(hql2)) {
-				
 				if (loginResult.equals("student") && loginResult != null) {
 					List<InternationalStudent> list = new ArrayList<InternationalStudent>();
 					InternationalStudent loginStudent = new InternationalStudent();
@@ -112,13 +120,12 @@ public class UserAction extends ActionSupport{
 					if (list != null && list.size() > 0) {
 						loginStudent = list.get(0);
 						session.put("loginUser", loginStudent);
-						if(session.get("loginUser2")!=null||session.get("loginUser3")!=null){
-                			session.put("loginUser2" ,null);
+						if(session.get("loginUser3")!=null){
                 			session.put("loginUser3" ,null);
                 		}
 					}
 				}else{
-					Admin login2=new Admin();
+					/*Admin login2=new Admin();
                 	List<Admin> list=new ArrayList<Admin>();
                 	String str1="adminId= '"+ name+"'";
                  	String str2="password= '"+ password+"'";
@@ -131,22 +138,19 @@ public class UserAction extends ActionSupport{
                 			session.put("loginUser" ,null);
                 			session.put("loginUser3" ,null);
                 		}
-                	}
-                	else {
-                		Teacher login3=new Teacher();
-                    	List<Teacher> list3=new ArrayList<Teacher>();
-                    	String str3="teacherId= '"+ name+"'";
-                     	String str4="password= '"+ password+"'";
-                    	String strx="from Teacher where  "+ str3 + " and " + str4;
-                    	list3=ud.teacherLogin(strx);
-                    	if(list3!=null && list3.size()>0){
-                    		login3=list3.get(0);
-                    		session.put("loginUser3" ,login3);
-                    		if(session.get("loginUser")!=null||session.get("loginUser2")!=null){
-                    			session.put("loginUser" ,null);
-                    			session.put("loginUser2" ,null);
-                    		}
-                    	}
+                	}*/
+            		Teacher login3=new Teacher();
+                	List<Teacher> list3=new ArrayList<Teacher>();
+                	String str3="teacherId= '"+ name+"'";
+                 	String str4="password= '"+ password+"'";
+                	String strx="from Teacher where  "+ str3 + " and " + str4;
+                	list3=ud.teacherLogin(strx);
+                	if(list3!=null && list3.size()>0){
+                		login3=list3.get(0);
+                		session.put("loginUser3" ,login3);
+                		if(session.get("loginUser")!=null){
+                			session.put("loginUser",null);
+                		}
                 	}
                 }
 				//存储登录者的信息进session,显示在界面的右上角
@@ -171,6 +175,22 @@ public class UserAction extends ActionSupport{
 		session.clear();
 		System.out.println("清除session成功");
 		return "exitlogin";
+	}
+	
+	//前台修改密码
+	public String editPassword(){
+		//String message = "";
+		Map session = ActionContext.getContext().getSession();
+		System.out.println("前台action获得的ID:"+name);
+		if(ud.updatePassword(name,password,newPassword,reqPassword)) {
+			addFieldError("tip","修改密码成功");
+			//message = "修改密码成功";
+			return "editSucc";
+		}else {
+			addFieldError("tip","修改密码失败，检查旧密码是否正确以及新密码和确认密码是否一致");
+			return "editFail";
+			//message = "修改密码失败";
+		}
 	}
 	
 }

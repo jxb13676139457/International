@@ -79,41 +79,24 @@
    </style>
    
      	<script type="text/javascript">
-			
-			      function toSubmit(){
-                       
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  
-
-                                      url:"http://localhost:8080/Graduate/loginAction!updatePassword.action",
-					    	    	
- 		
-				    	  		      data:$("#updatePasswordForm").serialize(),
-					    	    	  dataType:"json",	
-					    	    	  async:false,
-					    	        
-					    	    	  success: function(data){
-			    	    	
-					    	    		  if(data!=null && data!=""){
-					    	    			
-					    	    			  alert(data);
-					    	    			  
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-
-			      }
-			</script> 
+	      function toSubmit(){
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+                         url:"http://localhost:8080/InternationalSys/background/userAction!editPassword",
+    	  		      data:$("#updatePasswordForm").serialize(),
+	    	    	  dataType:"json",	
+	    	    	  async:false,
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+		       );
+	      }
+		</script> 
      
-
-
 </head>
 <body>	
 
@@ -393,56 +376,64 @@
      <div class="port_inner">
 	 		
 		<div class="main-top" style="padding-top:20px">
-	            <div class="sixteen columns">
-	       <div class="pb_title_wrapper">
-		       <h1 class="pb_title"><b style="text-align:center">修改密码</b></h1>
-               <div class="clear"></div>
-            				 
-          </div>  
+	       <div class="sixteen columns">
+		       <div class="pb_title_wrapper">
+			       <h1 class="pb_title"><b style="text-align:center">修改密码</b></h1>
+	               <div class="clear"></div>
+	               <s:label name="tip" style="color:red"></s:label>
+	          </div>  
 	         <div class="main_top_location">
 	         <hr>
 	         </div>
 	      </div>
 	         
 	       <div class="main-body_list">
-	         
-               <form class="form-horizontal" action="" method="post" id="updatePasswordForm" >
-	         
-				<%-- <div class="form-group">
+	       		
+               <form class="form-horizontal" action="userAction!editPassword" method="post" id="updatePasswordForm" >
+				<div class="form-group">
 					<div class="col-sm-10">
 						<input type="hidden" class="form-control"  value="${sessionScope.name}"
 							   readonly  placeholder="请输入名字">
 					</div>
-				</div> --%>
+				</div>
 				
-				<div class="form-group" style="margin-left:300px">
+				<div class="form-group" style="margin-left:300px;">
 					<label for="firstname" class="col-sm-2 control-label">用户名:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="name"  value="${sessionScope.name}"
-							   readonly  placeholder="请输入名字">
+						<input type="text" class="form-control" name="name"  value="${sessionScope.loginIn}"
+							   readonly>
 					</div>
 				</div>
+				
+				<div class="form-group" style="margin-left:300px">
+					<label for="lastname" class="col-sm-2 control-label">旧密码:</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" name="password" 
+							   placeholder="请输入旧密码">
+					</div>
+				</div>
+				
 				<div class="form-group" style="margin-left:300px">
 					<label for="lastname" class="col-sm-2 control-label">新密码:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="password" 
-							   placeholder="请输入密码">
+						<input type="password" class="form-control" name="newPassword" 
+							   placeholder="请输入新密码">
 					</div>
 				</div>
 				
 				<div class="form-group" style="margin-left:300px">
 					<label for="lastname" class="col-sm-2 control-label">确认密码:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="newPassword" 
+						<input type="password" class="form-control" name="reqPassword" 
 							   placeholder="请输入确认密码">
 					</div>
 				</div>
-
-				<div class="form-group" style="margin-left:450px">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" onclick="toSubmit()"><b>确认修改</b></button>
+				
+					<div class="form-group" style="margin-left:450px">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default"><b>确认修改</b></button>
+						</div>
 					</div>
-				</div>
 			</form>
 		  </div>
 

@@ -19,6 +19,8 @@ public class UserDao {
 
 	SessionFactory sessionFactory;
 	Admin admin;
+	Teacher teacher;
+	InternationalStudent student;
 	
 	public UserDao(){}
 	
@@ -33,6 +35,18 @@ public class UserDao {
 	}
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+	public Teacher getTeacher() {
+		return teacher;
+	}
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
+	public InternationalStudent getStudent() {
+		return student;
+	}
+	public void setStudent(InternationalStudent student) {
+		this.student = student;
 	}
 
 	//检验后台登录
@@ -65,7 +79,6 @@ public class UserDao {
 	public boolean updateAdminInfo(Admin admin,String oldPwd,String newPwd,String reqPwd,String userName) {
 		Session session = null;
 		Transaction tran;
-		//boolean flag = false;
 		System.out.println(admin.getAdminId()+","+oldPwd+","+newPwd+","+userName);
 		try {
 			session = sessionFactory.openSession();
@@ -80,19 +93,68 @@ public class UserDao {
 				return false;
 			}else {
 				admin = list.get(0);
-				//System.out.println(reqPwd);
 				if(reqPwd.equals(newPwd)) {   //两次密码输入一致
-					System.out.println("密码一致");
-					admin.setPassword(newPwd);
-					admin.setUserName(userName);
-					tran = session.beginTransaction();
-					session.update(admin);
-					tran.commit();
-					return true;
+					if(admin.getPassword().equals(oldPwd)) {   //旧密码输入正确
+						System.out.println("旧密码输入正确");
+						admin.setPassword(newPwd);
+						admin.setUserName(userName);
+						tran = session.beginTransaction();
+						session.update(admin);
+						tran.commit();
+						return true;
+					}else {
+						System.out.println("旧密码输入失败");
+						return false;
+					}
 				}else {
 					System.out.println("两次密码输入不一致");
 					return false;
 				}
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			session.close();
+		}
+	}
+	
+	//前台用户修改密码
+	public boolean updatePassword(String id,String password,String newPassword,String reqPassword) {
+		Session session = null;
+		Transaction tran;
+		System.out.println(id+","+password+","+newPassword+","+reqPassword);
+		try {
+			session = sessionFactory.openSession();
+			student = (InternationalStudent) session.get(InternationalStudent.class,id);
+			teacher = (Teacher) session.get(Teacher.class,id);
+			System.out.println(student+","+teacher);
+			tran = session.beginTransaction();
+			if(newPassword.equals(reqPassword)) {  //两次密码输入一致
+				if(student!=null && teacher==null) {
+					if(student.getPassword().equals(password)) {  //确认旧密码正确
+						System.out.println("旧密码输入正确");
+						student.setPassword(newPassword);
+						session.update(student);
+					}else {
+						System.out.println("旧密码输入错误");
+						return false;
+					}
+				}else if(student==null && teacher!=null) {
+					if(teacher.getPassword().equals(password)) {
+						System.out.println("旧密码输入正确");
+						teacher.setPassword(newPassword);
+						session.update(teacher);
+					}else {
+						System.out.println("旧密码输入错误");
+						return false;
+					}
+				}
+				tran.commit();
+				return true;
+			}else {
+				System.out.println("两次密码输入不一致");
+				return false;
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -277,97 +339,95 @@ public class UserDao {
 		}
 	}
 		
-		//前台其他获取登录信息
-		public List<Admin> otherLogin(String queryString){
-			Session session=null;
-			try {
-				session=sessionFactory.openSession();
-				//创建查询
-				Query query=session.createQuery(queryString);
-				List list=query.list();
-				if(list.size()>0)
-					return list;
-				else{
-					return null;
-					}
-			}catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}finally{//关闭session
-				session.close();//关闭Session
-			}
-		}
-		
-		//前台老师获取登录信息
-		public List<Teacher> teacherLogin(String queryString){
-			Session session=null;
-			try {
-				session=sessionFactory.openSession();
-				//创建查询
-				Query query=session.createQuery(queryString);
-				List list=query.list();
-				if(list.size()>0)
-					return list;
-				else{
-					return null;
-					}
-			}catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}finally{//关闭session
-				session.close();//关闭Session
-			}
-		}
-		
-		//前台获取新闻(每次最多5条记录)
-		public List<News> queryByNews(String queryString){
-			Session session = null;
-			try{
-				session = sessionFactory.openSession();
-				//创建查询
-				Query query = session.createQuery(queryString);
-				//每次获取第一条数据的索引
-				if(query.list().size()<=5)//新闻条数小于5
-					query.setFirstResult(0);
-				else
-					query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
-				
-				//这一页显示的记录个数
-				query.setMaxResults(5);
-				//每次最多5条记录
-				List<News> list = query.list();
+	//前台其他获取登录信息   不需要了
+	/*public List<Admin> otherLogin(String queryString){
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			//创建查询
+			Query query=session.createQuery(queryString);
+			List list=query.list();
+			if(list.size()>0)
 				return list;
-			}catch (Exception e) {
-				e.printStackTrace();
+			else{
 				return null;
-			}finally{
-				session.close();
-			}
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
 		}
-		
-		//前台获取通知(每次最多5条记录)
-		public List<Notice> queryByNotice(String queryString){
-			Session session = null;
-			try{
-				session = sessionFactory.openSession();
-				//创建查询
-				Query query = session.createQuery(queryString);
-				//每次获取第一条数据的索引
-				if(query.list().size()<=5)//通知条数小于5
-					query.setFirstResult(0);
-				else
-					query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
-			
-				//这一页显示的记录个数
-				query.setMaxResults(5);
-				//每次最多5条记录
-				List<Notice> list = query.list();
+	}*/
+	
+	//前台老师获取登录信息
+	public List<Teacher> teacherLogin(String queryString){
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			//创建查询
+			Query query=session.createQuery(queryString);
+			List list=query.list();
+			if(list.size()>0)
 				return list;
-			}catch (Exception e) {
-				e.printStackTrace();
+			else{
 				return null;
-			}finally{
-				session.close();
-			}
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
 		}
+	}
+		
+	//前台获取新闻(每次最多5条记录)
+	public List<News> queryByNews(String queryString){
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			//创建查询
+			Query query = session.createQuery(queryString);
+			//每次获取第一条数据的索引
+			if(query.list().size()<=5)//新闻条数小于5
+				query.setFirstResult(0);
+			else
+				query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
+			//这一页显示的记录个数
+			query.setMaxResults(5);
+			//每次最多5条记录
+			List<News> list = query.list();
+			return list;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			session.close();
+		}
+	}
+		
+	//前台获取通知(每次最多5条记录)
+	public List<Notice> queryByNotice(String queryString){
+		Session session = null;
+		try{
+			session = sessionFactory.openSession();
+			//创建查询
+			Query query = session.createQuery(queryString);
+			//每次获取第一条数据的索引
+			if(query.list().size()<=5)//通知条数小于5
+				query.setFirstResult(0);
+			else
+				query.setFirstResult((query.list().size()-5)); //设置这一页显示的第一条记录的索引
+			//这一页显示的记录个数
+			query.setMaxResults(5);
+			//每次最多5条记录
+			List<Notice> list = query.list();
+			return list;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{
+			session.close();
+		}
+	}
 }

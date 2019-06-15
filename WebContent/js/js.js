@@ -1,8 +1,7 @@
 
-
 function deleteLoginUser(id){
 	
-	if(confirm("È·¶¨ÒªÉ¾³ýÂð£¿")){
+	if(confirm("È·ï¿½ï¿½ÒªÉ¾ï¿½ï¿½ï¿½ï¿½")){
 		
 		location.href="adminUserAction!deleteLoginUser?id="+id;
 				

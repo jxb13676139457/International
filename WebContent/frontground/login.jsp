@@ -116,7 +116,7 @@
 			</div>
 			  <br>
 	             <input type="radio" id="type" name="type" value="student" checked/><b>学生</b>
-	             <input type="radio" id="type" name="type" value="other" style="margin-left:15px"/><b>其他</b>
+	             <input type="radio" id="type" name="type" value="other" style="margin-left:15px"/><b>老师</b>
 			<button type="button" style="width:280px" class="btn btn-primary" onclick="test()"><b>登录</b></button>
 		</form>
 	</div>  
