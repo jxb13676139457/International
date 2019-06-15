@@ -210,10 +210,10 @@
 												class="icon-feature"></i><b style="font-size: 16px">国外院校</b></span></a>
 										<ul>
 											<li><a
-												href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b></a></li>
-											<li><a href="priorAbroadCollegeAction?status=1"><b>国外院校活动</b></a></li>
+												href="priorCollegeAction"><b>国外院校信息</b></a></li>
+											<li><a href="priorCollegeAction!exqueryActivity"><b>国外院校活动</b></a></li>
 											<li><a
-												href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><b>国外院校协议</b></a></li>
+												href="priorCollegeAction!exqueryAgreement"><b>国外院校协议</b></a></li>
 										</ul>
 									</li>
 										
@@ -240,7 +240,7 @@
 								         
 								         	<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">雅思信息</b></span></a>
 											<ul>
-												<li><a href="priorEnglishAgencyAction?status=1"><b>雅思机构协议信息</b></a></li>
+												<li><a href="EngAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
 												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
 												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
