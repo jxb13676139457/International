@@ -1,6 +1,6 @@
 
 /* Import fonts */
-@import url(http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic);
+
 @import url(line-icons.css);
 
 body {
@@ -22,8 +22,8 @@ ul li {
 }
 
   #logo{
-            width: 40px;//重置大小，最终图片大小确定
-            transform:scale(2);//设置缩放比例
+            width: 40px;//锟斤拷锟矫达拷小锟斤拷锟斤拷锟斤拷图片锟斤拷小确锟斤拷
+            transform:scale(2);//锟斤拷锟斤拷锟斤拷锟脚憋拷锟斤拷
    }
 a, a:hover, a:focus {
     text-decoration: none;
