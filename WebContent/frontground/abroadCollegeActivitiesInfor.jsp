@@ -290,11 +290,11 @@
 				      <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="beforeInformation.jsp"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
+					     <a href="index.jsp"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="beforeInformation.jsp"> <b> 首&nbsp;&nbsp;页</b>  </a></h5>
+				            <h5><a href="index.jsp"> <b> 首&nbsp;&nbsp;页</b>  </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -303,11 +303,11 @@
 				   <div class="service_wrapper">
 				     <div class="four columns">
 					    <div class="image_shadow">
-					      <a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
+					      <a href="priorCollegeAction"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
 						</div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b> </a></h5>
+				            <h5><a href="priorCollegeAction"><b>国外院校信息</b> </a></h5>
 						  
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -330,11 +330,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryAgreement"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"> <b>国外院校协议</b> </a></h5>
+				            <h5><a href="priorCollegeAction!exqueryAgreement"> <b>国外院校协议</b> </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>

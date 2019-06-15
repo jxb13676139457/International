@@ -287,11 +287,11 @@
 				      <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="beforeInformation.jsp"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
+					     <a href="index.jsp"><img src="images/icons/s4.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="beforeInformation.jsp"> <b>首&nbsp;&nbsp;页</b>  </a></h5>
+				            <h5><a href="index.jsp"> <b>首&nbsp;&nbsp;页</b>  </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -300,11 +300,11 @@
 				   <div class="service_wrapper">
 				     <div class="four columns">
 					    <div class="image_shadow">
-					      <a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
+					      <a href="priorCollegeAction"><img src="images/icons/s1.png" class="scale-with-grid"/></a>
 						</div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b> </a></h5>
+				            <h5><a href="priorCollegeAction"><b>国外院校信息</b> </a></h5>
 						  
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -313,11 +313,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeAction?status=1"><img src="images/icons/s2.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryActivity"><img src="images/icons/s2.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeAction?status=1"> <b>国外院校活动的信息</b> </a></h5>
+				            <h5><a href="priorCollegeAction!exqueryActivity"> <b>国外院校活动的信息</b> </a></h5>
 						 
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -396,7 +396,7 @@
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="collegeAgreements" var="collegeAgreements" status="st">
+					  <s:iterator value="#session.pricollAgreement" var="collegeAgreements" status="st">
 						<tr>
 							<td> <s:property value="#collegeAgreements.coll.collegeName"/></td>
 							<td> <s:property value="#collegeAgreements.title"/></td>
