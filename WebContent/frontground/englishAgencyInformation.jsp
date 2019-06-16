@@ -364,7 +364,7 @@
 	         
 	       <!-- <div class="main-body_list">
 	         
-                <form action="priorEnglishAgencyAction!searchAgencyProtocol" method="post">
+              <%--   <form action="priorEnglishAgencyAction!searchAgencyProtocol" method="post">
                  
         	  <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
 			    <button type="submit"  class="btn btn-default"  style="border-width:2px;width:80px;heigth:30px">搜索</button>
@@ -376,6 +376,7 @@
 			      <button type="button"  class="btn btn-default"  style="width:80px;height:33px">
                             <a href="priorDownloadExcelAction!exportAgencyProtocolExcel?searchName= ${searchInformation} && exportElemt=${elemt}">导出</a></button>
                	</s:if>
+
               </form>
             </div> -->
             <hr>

@@ -302,11 +302,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><img src="images/icons/s2.png" class="scale-with-grid"/></a>
+					     <a href="priorEnglishAgencyTrainingAction"><img src="images/icons/s2.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"> <b>雅思培训计划信息</b> </a></h5>
+				            <h5><a href="priorEnglishAgencyTrainingAction"> <b>雅思培训计划信息</b> </a></h5>
 						 
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
@@ -363,7 +363,7 @@
 	         </div>
 	      </div>
 	         
-	       <div class="main-body_list">
+	      <%--  <div class="main-body_list">
 	         
               <form action="priorEnglishAgencyAction!searchParticipateTrainingInfor" method="post">
                  
@@ -379,7 +379,7 @@
                	</s:if>
 	
               </form>
-            </div>
+            </div> --%>
             
             <hr>
 	       <div class="main-body_list">
@@ -387,27 +387,29 @@
 				<table class="table table-striped" style="width:1050px">
 					<thead>
 						<tr>
-							<th><b>学号</b></th>
-				            <th><b>姓名</b></th>
-				            <th><b>班级</b></th>
-				            <th><b>雅思机构</b></th>
-				            <th><b>培训开始时间</b></th>
-				            <th><b>培训结束时间</b></th>
-				            <th><b>培训学分</b></th>
-				            <th><b>培训学期</b></th>
+                                 <th>学号</th>
+                                 <th>姓名</th>
+                                 <th>班级</th>
+                                 <th>专业</th>
+                                 <th>培训的机构</th>
+                                 <th>培训开始时间</th>
+                                 <th>培训结束时间</th>
+                                 <th>培训课时</th>
+                                 <th>费用</th>
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="trainList" var="user" status="st">
+					 <s:iterator value="attendTrainings" var="attend" status="st">
 						<tr>
-							<td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
-							<td> <s:property value="#user.id.className"/></td>
-							<td> <s:property value="#user.id.agencyName"/></td>
-							<td> <s:property value="#user.id.startTime"/></td>
-							<td> <s:property value="#user.id.outTime"/></td>
-							<td> <s:property value="#user.id.courseHours"/></td>
-							<td> <s:property value="#user.id.semester"/></td>
+							<td><s:property value="#attend.interStudent.studentId"/></td>
+                                 <td><s:property value="#attend.interStudent.studentName"/></td>
+                                 <td><s:property value="#attend.interStudent.classes.className"/></td>
+                                 <td><s:property value="#attend.interStudent.classes.major"/></td>
+                                 <td><s:property value="#attend.training.agencies.agencyName"/></td>
+                                 <td><s:property value="#attend.training.startTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#attend.training.endTime.toString().substring(0,10)"/></td>
+                                 <td><s:property value="#attend.training.courseHours"/></td>
+                                 <td><s:property value="#attend.training.courseFee"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>

@@ -11,6 +11,7 @@
 	
 		<!-- 定义用户自定义拦截器 -->
 		<interceptors>
+			<interceptor name="frontLogInterceptor" class="com.international.interceptor.FrontGroundLoginInterceptor"/>
 			<interceptor name="logInterceptor" class="com.international.interceptor.LoginInterceptor"/>
 		</interceptors>
 		
@@ -362,9 +363,6 @@
 				<!-- 缓冲区大小设置 -->
 				<param name="bufferSize">1024</param>
 			</result>
-			<interceptor-ref name="logInterceptor"/>
-			<interceptor-ref name="defaultStack"/>
-			<result name="login">/background/login.jsp</result>
     	</action>
 
     	<action name="trainingAction" class="trainingAction">
@@ -420,6 +418,12 @@
 			<result name="input">/frontground/abroadCollegeInformation.jsp</result>
 			<result name="activity">/frontground/abroadCollegeActivitiesInfor.jsp</result>
 			<result name="agreement">/frontground/abroadCollegeProtocolInfor.jsp</result>
+			<result name="agreement1">/frontground/loadProtocol.jsp</result>
+			<result name="successSearch">/frontground/protocolContent.jsp</result>	
+			<param name="savePath">/upload</param>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>
 		</action>
 		
 		<!-- 前台雅思考试信息的Action -->
@@ -429,6 +433,9 @@
 			<result name="othersearch">/frontground/participateSimulationExamInform.jsp</result>
 			<result name="otherfor">/frontground/participateFormalExamInfor.jsp</result>
 			<result name="studentfor">/frontground/studentEnglishAgencyInfor.jsp</result>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>
 		</action>
 		
 		<!-- 前台other查询学生的Action -->
@@ -445,21 +452,44 @@
 		</action>
 
 		<action name="priorNewsAction" class="priorNewsAction">
-			<result name="success">/frontground/newsCenter.jsp</result>			
+			<result name="success">/frontground/newsCenter.jsp</result>	
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>		
 		</action> 
 
 		<action name="priorNoticeAction" class="priorNoticeAction">
-			<result name="success">/frontground/informCenter.jsp</result>			
+			<result name="success">/frontground/informCenter.jsp</result>
+			<result name="successSearch">/frontground/informContent.jsp</result>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>		
 		</action> 
 		
 		<action name="priorPolicyAction" class="priorPolicyAction">
-			<result name="success">/frontground/policiesCenter.jsp</result>			
+			<result name="success">/frontground/policiesCenter.jsp</result>	
+			<result name="successSearch">/frontground/informContent.jsp</result>	
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>	
 		</action> 
 		
 		<action name="priorAbroadCollegeAction" class="priorAbroadCollegeAction">
-			<result name="success">/frontground/abroadCollegeProtocolInfor.jsp</result>			
+			<result name="success">/frontground/abroadCollegeProtocolInfor.jsp</result>		
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>	
 		</action> 
 		
+
+		<action name="priorEnglishAgencyTrainingAction" class="priorEnglishAgencyTrainingAction">
+			<result name="success">/frontground/participateTrainingInformation.jsp</result>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>
+		</action>
+		
+
 		<!-- 前台主页的Action -->
 		<action name="homeAction" class="homeAction">
 			<result name="success">/frontground/index.jsp</result>
@@ -471,6 +501,7 @@
 			<result name="success">/frontground/englishAgencyInformation.jsp</result>
 			<result name="input">/frontground/englishAgencyInformation.jsp</result>
 		</action>
+
 	</package>
 	
 </struts>

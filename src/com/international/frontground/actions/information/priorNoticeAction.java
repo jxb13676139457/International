@@ -11,11 +11,13 @@ import com.opensymphony.xwork2.ActionSupport;
 public class priorNoticeAction extends ActionSupport {
 
 	
-
+	private String title;
 	private NoticeDao nd;
 	private List<Notice> notices;
 	private Notice notice;
 	Map<String, Object> m;
+	
+	
 	public NoticeDao getNd() {
 		return nd;
 	}
@@ -40,17 +42,35 @@ public class priorNoticeAction extends ActionSupport {
 	public void setM(Map m) {
 		this.m = m;
 	}
-	
-	
-
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String execute() {
 		System.out.println("nd = "+nd);
 		System.out.println("execute默认方法被调用");
 		m=ActionContext.getContext().getSession();
 		notices=nd.queryAllNotice();
+		for(int i=0;i<notices.size();i++) {
+			notices.get(i).setTime(notices.get(i).getTime().substring(0, 10));
+		}
 		m.put("notices", notices);
 		System.out.println("notices = "+notices);
 
 		return SUCCESS;
+	}
+	
+	
+	public String getInformationByTitle() {
+		m=ActionContext.getContext().getSession();
+		System.out.println("title = "+title);
+		notices=nd.getInformationByTitle(title);
+		notice=notices.get(0);
+		notice.setTime(notice.getTime().substring(0, 10));
+		System.out.println("notice = "+notice);
+		m.put("notice", notice);
+		return "successSearch";
 	}
 }

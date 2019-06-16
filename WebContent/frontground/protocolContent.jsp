@@ -397,9 +397,9 @@
                           
                            <tr>
                             <td align="center" class="t4" style="padding-top:20px">
-                                   <b>时间： <s:property value="#session.currentInformation.time"/> </b>  &nbsp;&nbsp;&nbsp;
-                              <b>作者： <s:property value="#session.currentInformation.author"/></b> &nbsp;&nbsp;&nbsp;
-                             <b>来源： <s:property value="#session.currentInformation.source"/></b> &nbsp;&nbsp;&nbsp;
+                                   <b>时间： <s:property value="#session.collegeAgreement.time"/> </b>  &nbsp;&nbsp;&nbsp;
+                             <%--  <b>作者： <s:property value="#session.collegeAgreement.author"/></b> &nbsp;&nbsp;&nbsp;
+                             <b>来源： <s:property value="#session.collegeAgreement.source"/></b> &nbsp;&nbsp;&nbsp; --%>
                             </td>
                             
                           </tr>
@@ -421,8 +421,8 @@
                 
               <div class="main_right">
             
-             <p style="margin-left:100px"><b style="font-size:20px">附件：<a href="downLoad.action?fileName=<s:property value="#session.currentInformation.name"/>">
-                                <s:property value="#session.currentInformation.name"/>
+             <p style="margin-left:100px"><b style="font-size:20px">附件：<a href="downLoad.action?fileName=<s:property value="#session.collegeAgreement.fileName"/>">
+                                <s:property value="#session.collegeAgreement.title"/>
                                   </a></b></p>
             </div>
 

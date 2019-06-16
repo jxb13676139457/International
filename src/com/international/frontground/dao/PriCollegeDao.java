@@ -84,4 +84,30 @@ public class PriCollegeDao {
 			session.close();//关闭Session
 		}
 	}
+	public List<CollegeAgreement> getInformationByTitle(String title) {
+		System.out.println("getInformationByTitle被调用");
+		
+		Session session=null;
+		try {
+			session=sessionFactory.openSession();
+			System.out.println("session = "+session);
+			//获取所有数据
+			String queryString="from CollegeAgreement where title ='"+title+"'";			
+			//创建查询
+			Query query=session.createQuery(queryString);
+			System.out.println("query = "+query);
+			//执行查询获得的结果,list中的每一个元素代表一个College的对象
+			List list=query.list();//list集合包含InternationalClass表里所有数据
+			if(list.size()>0)
+				return list;
+			else{
+				return null;
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally{//关闭session
+			session.close();//关闭Session
+		}
+	}
 }

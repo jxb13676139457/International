@@ -374,7 +374,8 @@
 		           <s:iterator value="policyList" var="policy" status="st">
 		             <li>
 		                 <div style="float:left">
-		                      <a href="priorPolicyAction!getInformationByTitle.action?title=<s:property value="#policy.title"/>&time=<s:property value="#policy.time"/>">
+		                      <%-- <a href="priorPolicyAction!getInformationByTitle.action?title=<s:property value="#policy.title"/>&time=<s:property value="#policy.time"/>"> --%>
+		                      <a href="downLoad.action?fileName=<s:property value="#policy.fileName"/>">
                               <b style="font-size:20px"> <s:property value="#policy.title"/></b></a>
 	 	                 </div>
 		                   
