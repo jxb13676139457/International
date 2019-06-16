@@ -124,42 +124,56 @@
 			
 		
 				<div class="top_info">
-					<p style="margin-right:280px">
+					<p id="cotr" style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
-                       <s:set name="name" value="#session.name"></s:set> 
+                       <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
+		             	 	<script>
+		             	 		$('#cotr').css('margin-right','255px');
+		             	 	</script>
 		             	     <s:if test="#studentName != null"> 
-		             	       
-                                 
 		             	          <li class="dropdown" id="accountmenu">
-		             	          
-		             	          <s:if test='#session.loginUser.reserve2=="男"'>
+		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
-					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+						                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" /></b>
+				             	  		</a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp; <b>欢迎：<s:property value="#session.loginUser.studentName" />
+				             	  		</b></a>
+				             	  </s:else>
+					                    <ul class="dropdown-menu">
+					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
+												<li class="divider"></li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
+					                    </ul>
+					                </li>
+		             	     </s:if>
+		             	     
+		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
+							     <li class="dropdown" id="accountmenu">
+					               <s:if test='#session.loginUser3.sex=="男"'>
+					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
+				             	  		</b></a>
+				             	  </s:if>
+				             	  <s:else>
+				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp;   <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
 				             	  </b></a>
 				             	  </s:else>
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				             
-							    
-		             	     </s:if>
+		             	     </s:elseif>
 		             	     
-		             	     <s:else>
-			           
-                              
-						  
+		             	     <%-- <s:else>
 							     <li class="dropdown" id="accountmenu">
-							       	 
-					                    <s:if test='#session.loginUser.reserve1=="男"'>
+					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
 				             	  </b></a>
@@ -172,22 +186,24 @@
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
-		             	     </s:else>
-						
-					    
-					      
+		             	     </s:else> --%>
+		             	     
 		             	  </s:if>
+		             	  
 		             	   <s:else> 
-		             	   <a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
-		             	   
+								<span style="display:block; margin-top:2px;">
+									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
+								</span>
+		             	   		<style>
+		             	   			.btn-default{
+		             	   				background-color:rgb(51,51,51);
+		             	   			}
+		             	   		</style>
 		             	   </s:else>
-		     
 		               </p>
-		
 				</div>
 				
 				
@@ -219,73 +235,74 @@
 			     <div class="header_top_inner">
 				    <div class="container sixteen columns">
 				         <!-- begin navigation -->
-					 <div class="main_menu" >
+					  <div class="main_menu" >
 						<nav id="dropdown" style="margin-top:12px;margin-left:-15px;width:1200">
 							<ul class="sf-menu clearfix" >								
-								<li><a href="beforeInformation.jsp" class="trigger"><span><i class="icon-home" ></i><b style="font-size:16px">首页</b></span></a>
-						
-								</li>
-								<li><a href="priorNewsAction" class="trigger"><span><i class="icon-staff"></i><b  style="font-size:16px">新闻中心</b></span></a>
-						
-								</li>
-								<li><a href="priorNoticeAction" class="trigger"><span><i class="icon-service"></i><b  style="font-size:16px">通知公告</b></span></a>
-						
-								</li>
-								<li><a href="priorPolicyAction" class="trigger"><span><i class="icon-port"></i><b  style="font-size:16px">政策法规</b></span></a>
-						
-								</li>
-								<li><a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
-						
-								</li>
-								<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">国外院校</b></span></a>
-									<ul>
-										<li><a href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b></a></li>
-										<li><a href="priorAbroadCollegeAction?status=1"><b>国外院校活动</b></a></li>
-										<li><a href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><b>国外院校协议</b></a></li>
-								
-									</ul>
-								</li>
-
-								 <s:if test='#name !=null'>
+								<li class="change"><a href="index.jsp"
+										class="trigger"><span><i class="icon-home"></i><b
+												style="font-size: 16px">首页</b></span></a></li>
+									<li class="change"><a href="priorNewsAction" class="trigger"><span><i
+												class="icon-staff"></i><b style="font-size: 16px">新闻中心</b></span></a></li>
+									<li class="change"><a href="priorNoticeAction" class="trigger"><span><i
+												class="icon-service"></i><b style="font-size: 16px">通知公告</b></span></a>
+	
+									</li>
+									<li class="change"><a href="priorPolicyAction" class="trigger"><span><i
+												class="icon-port"></i><b style="font-size: 16px">政策法规</b></span></a></li>
+	
+									<li class="change"><a href="#" class="trigger"><span><i
+												class="icon-feature"></i><b style="font-size: 16px">国外院校</b></span></a>
+										<ul>
+											<li><a
+												href="priorCollegeAction"><b>国外院校信息</b></a></li>
+											<li><a href="priorCollegeAction!exqueryActivity"><b>国外院校活动</b></a></li>
+											<li><a
+												href="priorCollegeAction!exqueryAgreement"><b>国外院校协议</b></a></li>
+										</ul>
+									</li>
+										
+								<s:if test='#name!=null'>
+									<li>
+										<a href="priorCollegeAction!exqueryAgreement1" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
+									</li>
+									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
-				                        <li><a href="priorStudentInformationAction!getOneStudnetInformation" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
-                                        <li><a href="priorEnglishAgencyAction!getOneStudnetInformation" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
+				                        <li><a href="priorStudentAction!showPersonById" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
+                                        <li><a href="priorExamAction!studentAgencySearch" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>
-			                    	
+			                    	<!-- 如果是老师或其他 -->
 			                    	<s:else>
 			                    		<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">学生信息</b></span></a>
 											<ul>
-												<li><a href="priorStudentInformationAction?status=1"><b>国际学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getOverseasStudentInformation?status=1"><b>出国学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"><b>交换生</b></a></li>
-												<li><a href="priorStudentInformationAction!getStudentActivitiesInformation?status=1"><b>学生活动</b></a></li>
-		
-										
+												<li><a href="priorStudentAction!showInterStudent"><b>国际学生</b></a></li>
+												<li><a href="priorStudentAction!showOverseasStudent"><b>出国学生</b></a></li>
+												<li><a href="priorStudentAction!showExchangeStudent"><b>交换生</b></a></li>
+												<li><a href="priorStudentAction!showStudentActivity"><b>学生活动</b></a></li>
 											</ul>
 								         </li>
 								         
 								         	<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">雅思信息</b></span></a>
 											<ul>
-												<li><a href="priorEnglishAgencyAction?status=1"><b>雅思机构协议信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateSimulationExamInfor?status=1"><b>雅思模拟考试信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateFormalExamViewInfor?status=1"><b>雅思正式考试信息</b></a></li>
-								
+												<li><a href="engAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
+												<li><a href="priorEnglishAgencyTrainingAction"><b>雅思培训计划信息</b></a></li>
+												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
+												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
 											</ul>
 								         </li>
-			                    	
-			                    	
-			                    	
+			                    	</s:else>	
+			                    	</s:if>	
+			                    	<s:else>
+			                    		<style>
+			                    			.change{
+			                    				width:200px;
+			                    			}
+			                    			.change span{
+			                    				margin-left:35px;
+			                    			}
+			                    		</style>
 			                    	</s:else>
-			                    	
-			                    	
-			                    	</s:if>
-			                    	
-			                    	
-								
 								   <li></li>
-							
 							</ul>
 						</nav>	
                        </div>						
@@ -345,11 +362,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeProtocolAction"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryAgreement1"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeProtocolAction"> <b>协议下载</b> </a></h5>
+				            <h5><a href="priorCollegeAction!exqueryAgreement1"> <b>协议下载</b> </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
