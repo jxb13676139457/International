@@ -242,7 +242,7 @@
 								         	<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">雅思信息</b></span></a>
 											<ul>
 												<li><a href="EngAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
-												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
+												<li><a href="priorEnglishAgencyTrainingAction"><b>雅思培训计划信息</b></a></li>
 												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
 											</ul>
