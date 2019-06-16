@@ -257,7 +257,7 @@
                                   <form class="form-validate form-horizontal" id="addExStuForm" method="post" action="">                                                         
                                       <div class="form-group ">
                                          <div  style="margin-left:250px;margin-top:-10px">
-                                          <label for="cname" class="control-label col-lg-2"><d>学号</d><span class="required" style="color:red">*</span></label>
+                                          <label for="cname" class="control-label col-lg-2"><b>学号</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
                                               <input class="form-control" name="exchangeStudent.studentNo"  id="studentNo"
                                             	  onkeyup="value=value.replace(/[^\d]/g,'')"   placeholder="只能输入数字"
