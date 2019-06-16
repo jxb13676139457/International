@@ -15,12 +15,10 @@ public class FrontGroundLoginInterceptor extends AbstractInterceptor {
 		Map session=ai.getInvocationContext().getSession();
 
 		String studentName=(String)session.get("loginUser");
-		String adminName=(String) session.get("loginUser2");
-		String teacherName=(String) session.get("loginUser3");
+		Object teacherName=session.get("loginUser3");
 		System.out.println("studentName = "+studentName);
-		System.out.println("adminName = "+adminName);
 		System.out.println("teacherName = "+teacherName);
-		if(studentName!=null || adminName!=null || teacherName!=null){
+		if(studentName!=null || teacherName!=null){
 			System.out.println("session有效，用户不为空");
 			return ai.invoke();
 		}else{ 
