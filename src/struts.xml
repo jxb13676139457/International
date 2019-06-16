@@ -421,9 +421,9 @@
 			<result name="agreement1">/frontground/loadProtocol.jsp</result>
 			<result name="successSearch">/frontground/protocolContent.jsp</result>	
 			<param name="savePath">/upload</param>
-			<interceptor-ref name="frontLogInterceptor"/>
+			<!-- <interceptor-ref name="frontLogInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
-			<result name="frontgroundlogin">/frontground/login.jsp</result>
+			<result name="frontgroundlogin">/frontground/login.jsp</result> -->
 		</action>
 		
 		<!-- 前台雅思考试信息的Action -->
@@ -449,29 +449,32 @@
 			<result name="activitySucc">/frontground/studentActivitiesInfor.jsp</result>
 			<result name="activityFail">/frontground/studentActivitiesInfor.jsp</result>
 			<result name="showPersonSucc">/frontground/studentInformation.jsp</result>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>
 		</action>
 
 		<action name="priorNewsAction" class="priorNewsAction">
 			<result name="success">/frontground/newsCenter.jsp</result>	
-			<interceptor-ref name="frontLogInterceptor"/>
+			<!-- <interceptor-ref name="frontLogInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
-			<result name="frontgroundlogin">/frontground/login.jsp</result>		
+			<result name="frontgroundlogin">/frontground/login.jsp</result>		 -->
 		</action> 
 
 		<action name="priorNoticeAction" class="priorNoticeAction">
 			<result name="success">/frontground/informCenter.jsp</result>
 			<result name="successSearch">/frontground/informContent.jsp</result>
-			<interceptor-ref name="frontLogInterceptor"/>
+			<!-- <interceptor-ref name="frontLogInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
-			<result name="frontgroundlogin">/frontground/login.jsp</result>		
+			<result name="frontgroundlogin">/frontground/login.jsp</result>	 -->	
 		</action> 
 		
 		<action name="priorPolicyAction" class="priorPolicyAction">
 			<result name="success">/frontground/policiesCenter.jsp</result>	
 			<result name="successSearch">/frontground/informContent.jsp</result>	
-			<interceptor-ref name="frontLogInterceptor"/>
+			<!-- <interceptor-ref name="frontLogInterceptor"/>
 			<interceptor-ref name="defaultStack"/>
-			<result name="frontgroundlogin">/frontground/login.jsp</result>	
+			<result name="frontgroundlogin">/frontground/login.jsp</result>	 -->
 		</action> 
 		
 		<action name="priorAbroadCollegeAction" class="priorAbroadCollegeAction">
@@ -500,6 +503,9 @@
 		<action name="engAgenAgreeAction" class="engAgenAgreeAction">
 			<result name="success">/frontground/englishAgencyInformation.jsp</result>
 			<result name="input">/frontground/englishAgencyInformation.jsp</result>
+			<interceptor-ref name="frontLogInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			<result name="frontgroundlogin">/frontground/login.jsp</result>
 		</action>
 
 	</package>
