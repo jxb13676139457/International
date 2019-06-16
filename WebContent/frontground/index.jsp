@@ -195,7 +195,7 @@
 					 <div class="main_menu" >
 						<nav id="dropdown" style="margin-top:12px;margin-left:-15px;width:1200">
 							<ul class="sf-menu clearfix" >								
-								<li class="change"><a href="beforeInformation.jsp"
+								<li class="change"><a href="index.jsp"
 										class="trigger"><span><i class="icon-home"></i><b
 												style="font-size: 16px">首页</b></span></a></li>
 									<li class="change"><a href="priorNewsAction" class="trigger"><span><i
