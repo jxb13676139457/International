@@ -362,7 +362,6 @@
 	         </div>
 	      </div>
 	         
-
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
