@@ -372,7 +372,7 @@
 	           <s:iterator value="notices" var="notices" status="st">
 	             <li>
 	                 <div style="float:left">
-	                        <a href="priorNoticeAction!getInformationByTitle.action?title=<s:property value="#user.title"/>&time=<s:property value="#user.time"/>">
+	                        <a href="priorNoticeAction!getInformationByTitle?title=<s:property value="#notices.title"/>&time=<s:property value="#user.time"/>">
                                   <b style="font-size:20px"> <s:property value="#notices.title"/></b></a>
  	                 </div>
 	                      <div style="float:right">

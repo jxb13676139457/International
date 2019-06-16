@@ -13,10 +13,40 @@ public class PriorCollegeAction extends ActionSupport{
 	List<College> showCollege;
 	List<CollegeActivity> showCollegeActivity;
 	List<CollegeAgreement> showCollegeAgreement;
+	private String title;
+	CollegeAgreement collegeAgreement;
+	Map<String, Object> m;
+	
 	public PriorCollegeAction(){
 		
 	}
 	
+	
+	
+	public CollegeAgreement getCollegeAgreement() {
+		return collegeAgreement;
+	}
+
+
+
+	public void setCollegeAgreement(CollegeAgreement collegeAgreement) {
+		this.collegeAgreement = collegeAgreement;
+	}
+
+
+
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
 	public List<CollegeAgreement> getShowCollegeAgreement() {
 		return showCollegeAgreement;
 	}
@@ -83,5 +113,28 @@ public class PriorCollegeAction extends ActionSupport{
 		}
 		session.put("pricollAgreement", showCollegeAgreement);
 		return "agreement";
+	}
+	
+	public String exqueryAgreement1() {
+		Map session=ActionContext.getContext().getSession();
+		String hql="from CollegeAgreement";
+		showCollegeAgreement=pcd.queryCollegeAgreement(hql);
+		for(int i=0;i<showCollegeAgreement.size();i++) {
+			showCollegeAgreement.get(i).setTime(showCollegeAgreement.get(i).getTime().substring(0, 10));
+		}
+		session.put("showCollegeAgreement", showCollegeAgreement);
+		System.out.println("showCollegeAgreement = "+showCollegeAgreement);
+		return "agreement1";
+	}
+	
+	public String getInformationByTitle() {
+		m=ActionContext.getContext().getSession();
+		System.out.println("title = "+title);
+		showCollegeAgreement=pcd.getInformationByTitle(title);
+		collegeAgreement=showCollegeAgreement.get(0);
+		collegeAgreement.setTime(collegeAgreement.getTime().substring(0, 10));
+		System.out.println("collegeAgreement = "+collegeAgreement);
+		m.put("collegeAgreement", collegeAgreement);
+		return "successSearch";
 	}
 }

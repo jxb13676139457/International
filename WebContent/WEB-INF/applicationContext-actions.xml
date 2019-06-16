@@ -265,4 +265,10 @@
 		</property>
 	</bean>	
 
+	<bean id="priorEnglishAgencyTrainingAction" class="com.international.frontground.actions.ielts.priorEnglishAgencyTrainingAction">
+		<property name="atd">
+			<ref bean="attendTrainingDao"/>
+		</property>
+	</bean>
+
 </beans>

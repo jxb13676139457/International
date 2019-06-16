@@ -379,7 +379,7 @@
                     
                            <tr>
                             <td align="center" class="t2" style="font-size:24px;font-weight:bold">
-                              <s:property value="#session.currentInformation.title"/>                                                                     
+                              <s:property value="#session.notice.title"/>                                                                     
                             </td>
                           </tr>
                           
@@ -389,9 +389,9 @@
                           
                            <tr>
                             <td align="center" class="t4" style="padding-top:20px">
-                              <b>时间： <s:property value="#session.currentInformation.time"/> </b> &nbsp;&nbsp;&nbsp;
-                              <b>作者： <s:property value="#session.currentInformation.author"/></b>&nbsp;&nbsp;&nbsp;
-                             <b>来源： <s:property value="#session.currentInformation.source"/></b>&nbsp;&nbsp;&nbsp;
+                              <b>时间： <s:property value="#session.notice.time"/> </b> &nbsp;&nbsp;&nbsp;
+                              <b>作者： <s:property value="#session.notice.author"/></b>&nbsp;&nbsp;&nbsp;
+                             <b>来源： <s:property value="#session.notice.source"/></b>&nbsp;&nbsp;&nbsp;
                               <hr>
                             </td>
                             

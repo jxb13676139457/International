@@ -333,7 +333,7 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeProtocolAction"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction!exqueryAgreement1"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
@@ -371,15 +371,15 @@
 	       <div class="main-body_list">
 	        <ul>
 	             
-	           <s:iterator value="UserList" var="user" status="st">
+	           <s:iterator value="showCollegeAgreement" var="showCollegeAgreement" status="st">
 	             <li>
 	                 <div style="float:left">
-	                       <a href="priorAbroadCollegeProtocolAction!getInformationByTitle.action?title=<s:property value="#user.title"/>&time=<s:property value="#user.time"/>">
-                             <b style="font-size:20px"> <s:property value="#user.title"/></b></a>
+	                       <a href="priorCollegeAction!getInformationByTitle?title=<s:property value="#showCollegeAgreement.title"/>&time=<s:property value="#showCollegeAgreement.time"/>">
+                             <b style="font-size:20px"> <s:property value="#showCollegeAgreement.title"/></b></a>
  	                 </div>
 	                
  	                 <div style="float:right">
- 	                  <span style="margin-right:150px"><b><s:property value="#user.time"/></b></span>
+ 	                  <span style="margin-right:150px"><b><s:property value="#showCollegeAgreement.time"/></b></span>
 	                </div>
 	             </li>
 	             
