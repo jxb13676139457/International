@@ -55,64 +55,53 @@
 <script src="js/jquery.prettyPhoto.js"></script>
 <script type="text/javascript" src="js/jquery.twitter.js"></script>
 
-
+	
     
    <style>
-
          span{
-         
-         
-            //float:right;
+            float:right;
          }
-   
    </style>
-
-
 </head>
-<body>	
-
-
+<body onload="getNews();getNotice();">	
 <!-- Image Back ground and pattern Back ground  -->
-   
     <!-- <div id="pattern_bg"></div>  -->
      <img src="images/large/bg.jpg" alt="" id="background" />
-
-<div class="header_top_first" style="height:50px">
+	<div class="header_top_first" style="height:50px">
 		<div class="container sixteen columns header_top_inner">
 	    	<div class="eight columns align_left">
 				<div class="testimonials" style="margin-left:30px;margin-top:20px">
-				            <div class="testi_icon" ></div>
-                        	<ul>
-							 	 	<li>
-                            		<div class="testi-text dro" style="font-size:30px;">北京理工大学珠海学院</div>                                  
-                                    </li>
-									<li>	
-                            		<div class="testi-text dro"  style="font-size:30px">计算机学院</div>  
-									</li>
-                            </ul>						
+		            <div class="testi_icon" ></div>
+                    <ul>
+				 	 	<li>
+	               			<div class="testi-text dro" style="font-size:30px;">北京理工大学珠海学院</div>                                  
+	                    </li>
+						<li>	
+	                  		<div class="testi-text dro"  style="font-size:30px">计算机学院</div>  
+						</li>
+                    </ul>						
                 </div>			
 			</div>
-			
 		
 				<div class="top_info">
-					<p style="margin-right:90px">
+					<p id="cotr" style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
                        <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
+		             	 	<script>
+		             	 		$('#cotr').css('margin-right','255px');
+		             	 	</script>
 		             	     <s:if test="#studentName != null"> 
-		             	       
-                                 
 		             	          <li class="dropdown" id="accountmenu">
-		             	          
 		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
-					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+						                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" /></b>
+				             	  		</a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp; <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+				             	  		</b></a>
 				             	  </s:else>
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
@@ -120,20 +109,14 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				             
-							    
 		             	     </s:if>
 		             	     
 		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
-			           
-                              
-						  
 							     <li class="dropdown" id="accountmenu">
-							       	 
-					                    <s:if test='#session.loginUser3.sex=="男"'>
+					               <s:if test='#session.loginUser3.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
-				             	  </b></a>
+				             	  		</b></a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
@@ -146,15 +129,10 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
 		             	     </s:elseif>
 		             	     
-		             	     <s:else>
-			           
-                              
-						  
+		             	     <%-- <s:else>
 							     <li class="dropdown" id="accountmenu">
-							       	 
 					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
@@ -171,12 +149,10 @@
 												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
-		             	     </s:else>
-						
-					    
-					      
+		             	     </s:else> --%>
+		             	     
 		             	  </s:if>
+		             	  
 		             	   <s:else> 
 								<span style="display:block; margin-top:2px;">
 									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
@@ -187,13 +163,8 @@
 		             	   			}
 		             	   		</style>
 		             	   </s:else>
-		     
 		               </p>
-		
 				</div>
-				
-				
-						
         </div>  
   <div class="clear"></div>		
 </div>
@@ -240,20 +211,20 @@
 												class="icon-feature"></i><b style="font-size: 16px">国外院校</b></span></a>
 										<ul>
 											<li><a
-												href="priorAbroadCollegeAction!getAbroadCollegeInfor?status=1"><b>国外院校信息</b></a></li>
-											<li><a href="priorAbroadCollegeAction?status=1"><b>国外院校活动</b></a></li>
+												href="priorCollegeAction"><b>国外院校信息</b></a></li>
+											<li><a href="priorCollegeAction!exqueryActivity"><b>国外院校活动</b></a></li>
 											<li><a
-												href="priorAbroadCollegeAction!getAbroadCollegeProtocolInfor?status=1"><b>国外院校协议</b></a></li>
-	
-										</ul></li>
+												href="priorCollegeAction!exqueryAgreement"><b>国外院校协议</b></a></li>
+										</ul>
+									</li>
 										
-								<s:if test='#name !=null'>
-									<li><a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
-							
+								<s:if test='#name!=null'>
+									<li>
+										<a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
 									</li>
 									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
-				                        <li><a href="priorStudentInformationAction!getOneStudnetInformation" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
+				                        <li><a href="priorStudentAction!showPersonById" class="trigger"><span><i class="icon-staff"></i><b style="font-size:16px">个人信息</b></span></a></li>	
                                         <li><a href="priorExamAction!studentAgencySearch" class="trigger"><span><i class="icon-service"></i><b style="font-size:16px">雅思信息</b></span></a></li>	
                                 
 			                    	</s:if>
@@ -261,22 +232,19 @@
 			                    	<s:else>
 			                    		<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">学生信息</b></span></a>
 											<ul>
-												<li><a href="priorStudentInformationAction?status=1"><b>国际学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getOverseasStudentInformation?status=1"><b>出国学生</b></a></li>
-												<li><a href="priorStudentInformationAction!getExchangeStudentInformation?status=1"><b>交换生</b></a></li>
-												<li><a href="priorStudentInformationAction!getStudentActivitiesInformation?status=1"><b>学生活动</b></a></li>
-		
-										
+												<li><a href="priorStudentAction!showInterStudent"><b>国际学生</b></a></li>
+												<li><a href="priorStudentAction!showOverseasStudent"><b>出国学生</b></a></li>
+												<li><a href="priorStudentAction!showExchangeStudent"><b>交换生</b></a></li>
+												<li><a href="priorStudentAction!showStudentActivity"><b>学生活动</b></a></li>
 											</ul>
 								         </li>
 								         
 								         	<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">雅思信息</b></span></a>
 											<ul>
-												<li><a href="priorEnglishAgencyAction?status=1"><b>雅思机构协议信息</b></a></li>
+												<li><a href="EngAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
 												<li><a href="priorEnglishAgencyAction!getParticipateTrainingInfor?status=1"><b>雅思培训计划信息</b></a></li>
 												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
-								
 											</ul>
 								         </li>
 			                    	</s:else>	
@@ -409,34 +377,34 @@
 
 	<ul id="carousel-works" class="portfolio group"> 
 		<li class="four columns">
-			  <div class="panel panel-default " style="width:220px">
+			  <div id="hmnews" class="panel panel-default " style="width:440px;height:300px">
 						    <div class="panel-heading">
 						        <h3 class="panel-title" style="font-size:20px">
 						           <b>  新闻中心</b>
-						           <a href="priorNewsAction"><span  class="more">more>></span></a>
+						           <a href="priorNewsAction"><span  class="more" style="float:right">more>></span></a>
 						        </h3>
 						    </div>
-						   <s:iterator value="newsList" var="user" status="st">
+						   <!--<s:iterator value="#session.homeNewList" var="user" status="st">
 						    <div class="panel-body"> 
 		            
 						            <a href="<s:property value="#user.newsUrl"/>">
                                   <b> <s:property value="#user.title"/></b></a>                         
 						         <span><s:property value="#user.time"/>  </span>
 						    </div>					
-						  </s:iterator>
+						  </s:iterator>-->
 			           </div>
 		</li> 
 		<li class="four columns" style="margin-left:-40px">
-			 <div class="panel panel-default" style="width:220px">
+			 <div id="hmnotice" class="panel panel-default" style="width:440px;height:300px">
 						    <div class="panel-heading">
 						        <h3 class="panel-title" style="font-size:20px">
 						           <b>通知公告</b>
 						                                      
-						              <a href="priorNoticeAction"><span class="more" id="more">more>></span></a>                          
+						              <a href="priorNoticeAction"><span class="more" id="more" style="float:right">more>></span></a>                          
 						        </h3>
 						    </div>
 						    
-						   <s:iterator value="noticeList" var="user" status="st">
+						   <!--<s:iterator value="noticeList" var="user" status="st">
 							    <div class="panel-body">
 							            
 							     
@@ -446,11 +414,11 @@
 							         <span><s:property value="#user.time"/>  </span>
 							    </div>
 							   
-						  </s:iterator>
+						  </s:iterator>-->
 						  
 			      </div>
 		</li>
-		<li class="four columns" style="margin-left:-80px">
+		<!-- <li class="four columns" style="margin-left:-80px">
 
 			  <div class="panel panel-default" style="width:250px">
 						    <div class="panel-heading">
@@ -492,7 +460,7 @@
 						  </s:iterator>
 				    </div>
 
-		</li>
+		</li>-->
 
 
 	
@@ -531,5 +499,63 @@
 		
 	</div> <!-- End main_wrapper_inner -->	   
 </div> <!-- End main_wrapper -->
+
+<script type="text/javascript">
+	//前台首页获取新闻
+	//getNews();
+	function getNews(){
+		 $.ajax(			    		
+	   	   {
+	    	  type:"post",
+	    	  url:"http://localhost:8080/InternationalSys/frontground/homeAction!homeNews",
+	    	  data:{},
+	    	  dataType:"json",			    	
+	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	  async:true,
+	    	  traditional:true,
+	    	  success: function(data){		
+	    		  	var html="";
+	    		  	console.log(data);	
+	    		  	for(var i=0; i<data.length; i++){
+	    		  		html=html +'<div class="panel-body"> <a href="'+data[i].newsUrl+'"><b>'+data[i].title+'</b></a><span style="float:right;">'+data[i].time+'</span></div>';	
+	    		  		
+	    		  	}
+	    		  	$('#hmnews').append(html);
+	              },
+	              error: function(data){
+	            	  console.log(data);	
+	              }
+	    	  }			    	      
+	   	  );
+	   }
+	
+	//前台首页获取通知
+	function getNotice(){
+		 $.ajax(			    		
+	   	   {
+	    	  type:"post",
+	    	  url:"http://localhost:8080/InternationalSys/frontground/homeAction!homeNotice",
+	    	  data:{},
+	    	  dataType:"json",			    	
+	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+	    	  async:true,
+	    	  traditional:true,
+	    	  success: function(data){		
+	    		  	var html="";
+	    		  	console.log(data);	
+	    		  	for(var i=0; i<data.length; i++){
+	    		  		html=html +'<div class="panel-body"> <a href="priorNoticeAction!getInformationByTitle.action?title='+data[i].title+'&time='+data[i].time+'"><b>'+data[i].title+'</b></a><span style="float:right;">'+data[i].time+'</span></div>';	
+	    		  		
+	    		  	}
+	    		  	$('#hmnotice').append(html);
+	              },
+	              error: function(data){
+	            	  console.log(data);	
+	              }
+	    	  }			    	      
+	   	  );
+	   }
+	</script>
+
 </body>
 </html>

@@ -264,6 +264,27 @@
 			<ref bean="priExamDao"/>
 		</property>
 	</bean>	
+	
+	<!-- 前台老师查询学生的bean -->
+	<bean id="priorStudentAction" class="com.international.frontground.actions.student.PriorStudentAction">
+		<property name="psd">
+			<ref bean="priStudentDao"/>
+		</property>
+	</bean>
+	
+	<!-- 前台首页的bean -->
+	<bean id="homeAction" class="com.international.frontground.actions.user.HomeAction">
+		<property name="ud">
+			<ref bean="userDao"/>
+		</property>
+	</bean>
+	
+	<!-- 前台老师查询雅思机构协议的bean -->
+	<bean id="engAgenAgreeAction" class="com.international.frontground.actions.ielts.EngAgenAgreeAction">
+		<property name="pad">
+			<ref bean="priEngAgreeDao"/>
+		</property>
+	</bean>
 
 	<bean id="priorEnglishAgencyTrainingAction" class="com.international.frontground.actions.ielts.priorEnglishAgencyTrainingAction">
 		<property name="atd">

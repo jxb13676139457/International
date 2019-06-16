@@ -327,7 +327,7 @@
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">旧密码  <span style="color:red">*</span></label>
                                                       <div class="col-lg-4">
-                                                          <input type="password" class="form-control" name="oldPwd" id="oldPwd" placeholder=" " minLength="4" required/>
+                                                          <input type="password" class="form-control" name="oldPwd" id="oldPwd"  placeholder="请输入旧密码" minLength="4" required/>
                                                           <span id="errTip" style="color:red;"></span>
                                                       </div>
                                                   </div>
@@ -346,19 +346,19 @@
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">新密码  <span style="color:red">*</span></label>
                                                       <div class="col-lg-4">
-                                                          <input type="password" class="form-control" name="newPwd" id="newPwd" placeholder=" " minLength="4" required/>
+                                                          <input type="password" class="form-control" name="newPwd" id="newPwd" placeholder="请输入新密码" minLength="4" required/>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">确认密码  <span style="color:red">*</span></label>
                                                       <div class="col-lg-4">
-                                                          <input type="password" class="form-control" name="reqPwd" id="reqPwd" placeholder=" " minLength="4" required/>
+                                                          <input type="password" class="form-control" name="reqPwd" id="reqPwd" placeholder="请输入确认密码" minLength="4" required/>
                                                       </div>
                                                   </div>
                                                   <div class="form-group">
                                                       <label class="col-lg-2 control-label">真实姓名 <span style="color:red">*</span></label>
                                                       <div class="col-lg-4">
-                                                          <input type="text" name="userName" value="${sessionScope.admin.userName }" class="form-control" id="email" placeholder=" " required>
+                                                          <input type="text" name="userName" value="${sessionScope.admin.userName }" class="form-control" id="email" required>
                                                       </div>
                                                   </div>                                            
                                                   <div class="form-group">

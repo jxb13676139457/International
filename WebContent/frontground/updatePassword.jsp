@@ -79,41 +79,24 @@
    </style>
    
      	<script type="text/javascript">
-			
-			      function toSubmit(){
-                       
-			    		  $.ajax(		  
-					    	      {
-					    	    	  
-					    	    	  type:"post",
-					    	    	  
-
-                                      url:"http://localhost:8080/Graduate/loginAction!updatePassword.action",
-					    	    	
- 		
-				    	  		      data:$("#updatePasswordForm").serialize(),
-					    	    	  dataType:"json",	
-					    	    	  async:false,
-					    	        
-					    	    	  success: function(data){
-			    	    	
-					    	    		  if(data!=null && data!=""){
-					    	    			
-					    	    			  alert(data);
-					    	    			  
-					    	    		  }
-					    	    		
-					                   }
-					  					    	  
-					    	      }
-					    	      			    	  
-					    	  );
-
-			      }
-			</script> 
+	      function toSubmit(){
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+                         url:"http://localhost:8080/InternationalSys/background/userAction!editPassword",
+    	  		      data:$("#updatePasswordForm").serialize(),
+	    	    	  dataType:"json",	
+	    	    	  async:false,
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+		       );
+	      }
+		</script> 
      
-
-
 </head>
 <body>	
 
@@ -139,45 +122,54 @@
                             </ul>						
                 </div>			
 			</div>
-			
-		
-				<div class="top_info">
-					<p style="margin-right:280px">
+			<div class="top_info">
+					<p style="margin-right:90px">
                   <s:set name="studentName" value="#session.loginUser.studentName"></s:set> 
-                       <s:set name="name" value="#session.name"></s:set> 
+                       <s:set name="name" value="#session.loginIn"></s:set> 
 		             	 <s:if test="#name != null"> 
 		             	     <s:if test="#studentName != null"> 
-		             	       
-                                 
 		             	          <li class="dropdown" id="accountmenu">
-		             	          
-		             	          <s:if test='#session.loginUser.reserve2=="男"'>
+		             	          <s:if test='#session.loginUser.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
-					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" />
-				             	  </b></a>
+						                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser.studentName" /></b>
+				             	  		</a>
 				             	  </s:if>
 				             	  <s:else>
 				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp; <b>欢迎：<s:property value="#session.loginUser.studentName" />
+				             	  		</b></a>
+				             	  </s:else>
+					                    <ul class="dropdown-menu">
+					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
+												<li class="divider"></li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
+					                    </ul>
+					                </li>
+		             	     </s:if>
+		             	     
+		             	     <s:elseif test="#session.loginUser3.teacherName!=null">
+							     <li class="dropdown" id="accountmenu">
+					               <s:if test='#session.loginUser3.sex=="男"'>
+					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50%;"> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
+				             	  		</b></a>
+				             	  </s:if>
+				             	  <s:else>
+				             	     <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
+					                    <img alt="" src="images/girl.jpg" class="img-circle" style="border-radius:50% ">&nbsp;&nbsp;   <b>欢迎：<s:property value="#session.loginUser3.teacherName" />
 				             	  </b></a>
 				             	  </s:else>
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				             
-							    
-		             	     </s:if>
+		             	     </s:elseif>
 		             	     
 		             	     <s:else>
-			           
-                              
-						  
 							     <li class="dropdown" id="accountmenu">
-							       	 
-					                    <s:if test='#session.loginUser.reserve1=="男"'>
+					                    <s:if test='#session.loginUser2.sex=="男"'>
 					                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="font-size:20px;color:white; border-radius:50%">
 					                    <img alt="" src="images/boy.jpg" class="img-circle" style="border-radius:50% "> &nbsp;&nbsp;  <b>欢迎：<s:property value="#session.loginUser2.userName" />
 				             	  </b></a>
@@ -190,26 +182,24 @@
 					                    <ul class="dropdown-menu">
 					                      	<li ><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 												<li class="divider"></li>
-												<li> <a href="login.jsp"><b>注销</b></a> </li>
+												<li> <a href="userAction!exitFront"><b>注销</b></a> </li>
 					                    </ul>
 					                </li>
-				          
 		             	     </s:else>
-						
-					    
-					      
 		             	  </s:if>
+		             	  
 		             	   <s:else> 
-		             	   <a href="login.jsp"  style="font-size:20px"><i class="icon_group"></i>登录</a>
-		             	   
+								<span style="display:block; margin-top:2px;">
+									<a href="login.jsp"  style="font-size:15px;" class="btn btn-default">登录</a>
+								</span>
+		             	   		<style>
+		             	   			.btn-default{
+		             	   				background-color:rgb(51,51,51);
+		             	   			}
+		             	   		</style>
 		             	   </s:else>
-		     
 		               </p>
-		
 				</div>
-				
-				
-						
         </div>  
   <div class="clear"></div>		
 </div>
@@ -386,21 +376,20 @@
      <div class="port_inner">
 	 		
 		<div class="main-top" style="padding-top:20px">
-	            <div class="sixteen columns">
-	       <div class="pb_title_wrapper">
-		       <h1 class="pb_title"><b style="text-align:center">修改密码</b></h1>
-               <div class="clear"></div>
-            				 
-          </div>  
+	       <div class="sixteen columns">
+		       <div class="pb_title_wrapper">
+			       <h1 class="pb_title"><b style="text-align:center">修改密码</b></h1>
+	               <div class="clear"></div>
+	               <s:label name="tip" style="color:red"></s:label>
+	          </div>  
 	         <div class="main_top_location">
 	         <hr>
 	         </div>
 	      </div>
 	         
 	       <div class="main-body_list">
-	         
-               <form class="form-horizontal" action="" method="post" id="updatePasswordForm" >
-	         
+	       		
+               <form class="form-horizontal" action="userAction!editPassword" method="post" id="updatePasswordForm" >
 				<div class="form-group">
 					<div class="col-sm-10">
 						<input type="hidden" class="form-control"  value="${sessionScope.name}"
@@ -408,34 +397,43 @@
 					</div>
 				</div>
 				
-				<div class="form-group" style="margin-left:300px">
+				<div class="form-group" style="margin-left:300px;">
 					<label for="firstname" class="col-sm-2 control-label">用户名:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="name"  value="${sessionScope.name}"
-							   readonly  placeholder="请输入名字">
+						<input type="text" class="form-control" name="name"  value="${sessionScope.loginIn}"
+							   readonly>
 					</div>
 				</div>
+				
+				<div class="form-group" style="margin-left:300px">
+					<label for="lastname" class="col-sm-2 control-label">旧密码:</label>
+					<div class="col-sm-10">
+						<input type="password" class="form-control" name="password" 
+							   placeholder="请输入旧密码">
+					</div>
+				</div>
+				
 				<div class="form-group" style="margin-left:300px">
 					<label for="lastname" class="col-sm-2 control-label">新密码:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="password" 
-							   placeholder="请输入密码">
+						<input type="password" class="form-control" name="newPassword" 
+							   placeholder="请输入新密码">
 					</div>
 				</div>
 				
 				<div class="form-group" style="margin-left:300px">
 					<label for="lastname" class="col-sm-2 control-label">确认密码:</label>
 					<div class="col-sm-10">
-						<input type="password" class="form-control" name="newPassword" 
+						<input type="password" class="form-control" name="reqPassword" 
 							   placeholder="请输入确认密码">
 					</div>
 				</div>
-
-				<div class="form-group" style="margin-left:450px">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default" onclick="toSubmit()"><b>确认修改</b></button>
+				
+					<div class="form-group" style="margin-left:450px">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="submit" class="btn btn-default"><b>确认修改</b></button>
+						</div>
 					</div>
-				</div>
 			</form>
 		  </div>
 

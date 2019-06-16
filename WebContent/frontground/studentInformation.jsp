@@ -365,7 +365,7 @@
 	         
 	       <div class="main-body_list">
 	        <div class="row">
-		        <div class="col-xs-3" id="myScrollspy" style="background-color:	#EBEBEB">
+		        <!-- <div class="col-xs-3" id="myScrollspy" style="background-color:	#EBEBEB">
 		            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
 		                <li><a href="#section-1"><b>基本信息</b></a></li>
 		                <li><a href="#section-2"><b>出国信息</b></a></li>
@@ -373,109 +373,102 @@
 		                <li><a href="#section-4"><b>活动信息</b></a></li>
 		                <li><a href="updatePassword.jsp"><b>修改密码</b></a></li>
 		            </ul>
-		        </div>
+		        </div> -->
 	        
-	       
 	       <div class="col-xs-9">
-            <h3 id="section-1">基本信息</h3>
+            <h3 id="section-1"><b>基本信息</b></h3>
               <div class="table-responsive">
 				<table class="table table-striped"  style="width:750px">
 					<thead>
 						<tr>
-							<th>年级</th>
-							<th>学号</th>
-							<th>姓名</th>
-							<th>班级</th>
-							<th>性别</th>
-							<th>专业</th>
+							<th><b>年级</b></th>
+							<th><b>学号</b></th>
+							<th><b>姓名</b></th>
+							<th><b>班级</b></th>
+							<th><b>性别</b></th>
+							<th><b>专业</b></th>
 						</tr>
 					</thead>
 					<tbody>
-						  <s:iterator value="studentList" var="user" status="st">
-						<tr>
-							<td> <s:property value="#user.grade"/></td>
-							<td> <s:property value="#user.studentNo"/></td>
-							<td> <s:property value="#user.studentName"/></td>
-							<td> <s:property value="#user.interClass.className"/></td>
-							<td> <s:property value="#user.reserve2"/></td>
-							<td> <s:property value="#user.profession"/></td>
-						</tr>
-						</s:iterator>
-						
+						  <s:iterator value="interStudent" var="user" status="st">
+							<tr>
+								<td> <s:property value="#user.classes.grade"/></td>
+								<td> <s:property value="#user.studentId"/></td>
+								<td> <s:property value="#user.studentName"/></td>
+								<td> <s:property value="#user.classes.className"/></td>
+								<td> <s:property value="#user.sex"/></td>
+								<td> <s:property value="#user.classes.major"/></td>
+							</tr>
+						  </s:iterator>
 					</tbody>
 			</table>
 			</div>  
             
             <hr>
 
-            <h3 id="section-2">出国信息</h3>
+            <h3 id="section-2"><b>出国信息</b></h3>
              <div class="table-responsive">
 				<table class="table table-striped" style="width:730px">
 					<thead>
 						<tr>			
-							<th>学号</th>
-							<th>姓名</th>
-						<!-- 	<th>班级</th>
-							<th>专业</th> -->
-						<!-- 	<th>性别</th> -->
-							<th>出国时间</th>
-							<th>出国大学</th>
-							<th>替换课程</th>
-							<th>替换学分</th>
-							<th>出国类型</th>
+							<th><b>学号</b></th>
+							<th><b>姓名</b></th>
+							<th><b>班级</b></th>
+							<th><b>专业</b></th>
+							<th><b>性别</b></th>
+							<th><b>出国院校就读专业</b></th>
+							<th><b>出国时间</b></th>
+							<th><b>出国的院校</b></th>
+							<th><b>类型</b></th>
+							<th><b>出国津贴</b></th>
 						</tr>
 					</thead>
 					<tbody>
-						  <s:iterator value="overSeasList" var="user" status="st">
+						  <s:iterator value="overseasStudent" var="user" status="st">
 						<tr>
-							<td> <s:property value="#user.studentNo"/></td>
+							<td> <s:property value="#user.studentId"/></td>
 							<td> <s:property value="#user.studentName"/></td>
-						<%-- 	<td> <s:property value="#user.classNo"/></td>
-							<td> <s:property value="#user.profession"/></td> --%>
-							<%-- <td> <s:property value="#user.sex"/></td> --%>
-							<td> <s:property value="#user.outTime"/></td>
-							<td> <s:property value="#user.college"/></td>
-						
-							<td> <s:property value="#user.replaceCourse"/></td>
-							<td> <s:property value="#user.replaceCredit"/></td>
-							<td> <s:property value="#user.type"/></td>
+							<td> <s:property value="#user.classes.className"/></td>
+							<td> <s:property value="#user.classes.major"/></td>
+							<td> <s:property value="#user.sex"/></td>
+							<td> <s:property value="#user.outMajor"/></td>
+							<td> <s:property value="#user.outTime.toString().substring(0,10)"/></td>
+							<td> <s:property value="#user.college.collegeName"/></td>
+							<td> <s:property value="#user.college.type"/></td>
+							<td> <s:property value="#user.subsidy"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
 			</table>
 			</div>  
             <hr>
-            <h3 id="section-3">交换信息</h3>
+            <h3 id="section-3"><b>交换信息</b></h3>
             
              <div class="table-responsive">
 				<table class="table table-striped" style="width:730px">
 					<thead>
 						<tr>
-							<th>学号</th>
-							<th>姓名</th>
-						<!-- 	<th>班级</th>
-							<th>专业</th>
-							<th>性别</th> -->
-							<th>交换时间</th>
-							<th>交换大学</th>
-							<th>替换课程</th>
-							<th>替换学分</th>
+							<th><b>学号</b></th>
+							<th><b>姓名</b></th>
+							<th><b>班级</b></th>
+							<th><b>专业</b></th>
+							<th><b>性别</b></th>
+							<th><b>交换开始时间</b></th>
+							<th><b>交换结束时间</b></th>
+							<th><b>交换的院校</b></th>
 						</tr>
 					</thead>
 					<tbody>
-						 <s:iterator value="exchangeList" var="user" status="st">
+						 <s:iterator value="exchangeStudent" var="user" status="st">
 						<tr>
 							<td> <s:property value="#user.studentNo"/></td>
 							<td> <s:property value="#user.studentName"/></td>
-						<%-- 	<td> <s:property value="#user.classNo"/></td>
-							<td> <s:property value="#user.profession"/></td>
-							<td> <s:property value="#user.sex"/></td> --%>
-							<td> <s:property value="#user.outTime"/></td>
-							<td> <s:property value="#user.college"/></td>
-						
-							<td> <s:property value="#user.replaceCourse"/></td>
-							<td> <s:property value="#user.replaceCredit"/></td>
-					
+							<td> <s:property value="#user.classNo"/></td>
+							<td> <s:property value="#user.major"/></td>
+							<td> <s:property value="#user.sex"/></td>
+							<td> <s:property value="#user.startTime.toString().substring(0,10)"/></td>
+							<td> <s:property value="#user.endTime.toString().substring(0,10)"/></td>
+							<td> <s:property value="#user.exchangeCollege"/></td>
 						</tr>
 						</s:iterator>
 					</tbody>
@@ -484,29 +477,34 @@
 			
 			<hr>
 			
-		  <h3 id="section-4">交流活动信息</h3>
+		  <h3 id="section-4"><b>交流活动信息</b></h3>
             
              <div class="table-responsive">
 				<table class="table table-striped" style="width:730px">
 					<thead>
 						<tr>
-						         <th>学号</th>
-							     <th>姓名</th>
-                                 <th>国外院校</th>
-                                 <th>活动主题</th>
-                                 <th>活动时间</th>
+					         <th><b>学号</b></th>
+						     <th><b>姓名</b></th>
+                             <th><b>活动主题</b></th>
+                             <th><b>院校</b></th>
+                             <th><b>开始时间</b></th>
+                             <th><b>结束时间</b></th>
+                             <th><b>费用</b></th>
+                             <th><b>币种</b></th>
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="activitiesList" var="user" status="st">
-						<tr>
-						    <td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
-							<td> <s:property value="#user.id.name"/></td>
-							<td> <s:property value="#user.id.title"/></td>
-							<td> <s:property value="#user.id.time"/></td>
-
-						</tr>
+					  <s:iterator value="studentActivity" var="user" status="st">
+							<tr>
+							    <td> <s:property value="#user.studentId"/></td>
+								<td> <s:property value="#user.studentName"/></td>
+								<td> <s:property value="#user.activityName"/></td>
+								<td> <s:property value="#user.college.collegeName"/></td>
+								<td> <s:property value="#user.startTime.toString().substring(0,10)"/></td>
+								<td> <s:property value="#user.endTime.toString().substring(0,10)"/></td>
+								<td> <s:property value="#user.fee"/></td>
+								<td> <s:property value="#user.currency"/></td>
+							</tr>
 						</s:iterator>
 					</tbody>
 			</table>

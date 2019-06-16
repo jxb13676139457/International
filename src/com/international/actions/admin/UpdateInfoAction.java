@@ -52,14 +52,14 @@ public class UpdateInfoAction extends ActionSupport {
 	public void setReqPwd(String reqPwd) {
 		this.reqPwd = reqPwd;
 	}
-	//修改管理员信息
+	//修改管理员密码
 	public String updateAdmin() {
 		Map session = ActionContext.getContext().getSession();
 		admin = (Admin)session.get("admin");
 		//System.out.println(admin.getUserName());
 		if(ud.updateAdminInfo(admin,oldPwd,newPwd,reqPwd,userName)) {
-			System.out.println("测试");
-			return SUCCESS;
+			System.out.println("修改成功");
+			return "editSucc";
 		}else {
 			addFieldError("oldPwd","修改管理员信息失败");
 			return INPUT;

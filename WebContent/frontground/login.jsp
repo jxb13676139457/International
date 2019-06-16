@@ -89,94 +89,37 @@
 		#login_control {  
 		    padding: 0 28px;  
 		}  
-		
   </style>
-
 		<script type="text/javascript">
-		function test(){
-		document.forms[0].action="userAction";
-		document.forms[0].submit();
-		}
+			function test(){
+				document.forms[0].method="post";
+				document.forms[0].action="userAction";
+				document.forms[0].submit();
+			}
 		</script>
-		
-		
   </head>
   
   <body>  
-<div id="login_frame">  
-  
-    <p id="image_logo"></p>  
-  
-   	<form>
-   	  <h2><b>国际合作交流管理系统</b></h2><br>
-	  <label  style="color:red"><s:fielderror/></label>
-	  
-	<div class="input-group">
-			
+	<div id="login_frame">  
+	    <p id="image_logo"></p>  
+	   	<form>
+	   	  <h2><b>国际合作交流管理系统</b></h2><br>
+		  <label  style="color:red"><s:fielderror/></label>
+		  <div class="input-group">
 			  <span class="input-group-addon" id="basic-addon1"><p class="glyphicon glyphicon-user" style="height:10px"></p></span>
-			
 			  <input id="userName" name="name" type="text" class="form-control" placeholder="用户名" aria-describedby="basic-addon1" >
-
 			</div>
-			
 			<br>
-			
-			
 			<div class="input-group">
-			
 			  <span class="input-group-addon" id="basic-addon1"><p class="glyphicon glyphicon-lock" style="height:10px"></p></span>
-			
-			  <input id="passWord" name="password" type="password" class="form-control"  placeholder="密码" aria-describedby="basic-addon1" />
-
+			  <input id="passWord" name="password" type="password" class="form-control" placeholder="密码" aria-describedby="basic-addon1" />
 			</div>
 			  <br>
-			  
-                <input type="radio" id="type" name="type" value="student" checked/><b>学生</b>
-                <input type="radio" id="type" name="type" value="other" style="margin-left:15px"/><b>其他</b>
-           
-			
-			
+	             <input type="radio" id="type" name="type" value="student" checked/><b>学生</b>
+	             <input type="radio" id="type" name="type" value="other" style="margin-left:15px"/><b>老师</b>
 			<button type="button" style="width:280px" class="btn btn-primary" onclick="test()"><b>登录</b></button>
-			
 		</form>
-</div>  
+	</div>  
   
 </body>  
-  <!--  
-	<body  style="background:url(images/4.jpg) no-repeat center fixed;background-size:contain;">
-	     <h2>国际合作交流系统</h2><br>
-	         <label  style="color:red"><s:fielderror/></label>
-	    <!-- <label  style="color:red">${ sessionScope.fault}</label>  -->    
-	    <!--  
-		<form>
-			<div class="input-group">
-			
-			  <span class="input-group-addon" id="basic-addon1"><p class="glyphicon glyphicon-user" style="height:10px"></p></span>
-			
-			  <input id="userName" name="name" type="text" class="form-control" placeholder="username" aria-describedby="basic-addon1" >
-
-			</div>
-			
-			<br>
-			
-			
-			<div class="input-group">
-			
-			  <span class="input-group-addon" id="basic-addon1"><p class="glyphicon glyphicon-lock" style="height:10px"></p></span>
-			
-			  <input id="passWord" name="password" type="password" class="form-control"  placeholder="password" aria-describedby="basic-addon1" />
-
-			</div>
-			  <br>
-			  
-                <input type="radio" id="type" name="type" value="student" checked/>学生
-                <input type="radio" id="type" name="type" value="other" style="margin-left:15px"/>其他
-           
-			
-			
-			<button type="button" style="width:280px" class="btn btn-primary" onclick="test()">login</button>
-			
-		</form>
-  </body>
-  -->
 </html>

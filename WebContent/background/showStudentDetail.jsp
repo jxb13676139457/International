@@ -60,6 +60,26 @@
 	    	      }
 	    	  );
 	      }
+	      
+	      /* function toReset(){
+	    	  var password = $("#password").val();
+	    	  console.log("重置的密码："+password);
+	    	  $.ajax(		  
+		    	      {
+		    	    	  type:"post",
+		    	    	  url:"http://localhost:8080/InternationalSys/background/internationalStudentAction!editStudent?password="+password,
+			    	  	  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+	    	  		      //data:$("#studentForm").serialize(),
+		    	    	  dataType:"json",	
+		    	    	  async:false,
+		    	    	  success: function(data){
+		    	    		  if(data!=null && data!=""){
+		    	    			  alert(data);
+		    	    		  }
+		                   }
+		    	      }
+		    	  );
+	      } */
 	</script>
   </head>
 
@@ -266,7 +286,7 @@
                                           <div  style="margin-left:250px;margin-top:-10px"> 
                                           <label for="cemail" class="control-label col-lg-2"><b>密码</b> <span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control"  type="text" name="interStudent.password"  style="width:300px" value="${sessionScope.editStudent.password }"
+                                              <input class="form-control"  type="password" id="password" name="interStudent.password"  style="width:300px" value="${sessionScope.editStudent.password}"
                                               minlength="6" required/>
                                           </div>
                                           </div>
@@ -294,7 +314,7 @@
                                          <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>班级</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                              <input class="form-control" name="className"  type="text" style="width:300px"  value="${sessionScope.editStudent.classes.className}" required/>
+                                              <input class="form-control" id="className" name="className"  type="text" style="width:300px"  value="${sessionScope.editStudent.classes.className}" required/>
                                           </div>
                                           </div>
                                       </div>
@@ -322,7 +342,7 @@
                                           <div class="col-lg-offset-2 col-lg-10">
                                               <button class="btn btn-primary" onclick="toSubmit()">更新 </button>
                                           </div>
-                                          </div>
+                                        </div>
                                       </div>
                                   </form>
                               </div>

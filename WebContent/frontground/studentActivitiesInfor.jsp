@@ -361,25 +361,26 @@
 	         <div class="main_top_location">
 	         <hr>
 	         </div>
+	         
+	         <s:if test='#session.type=="other"'>
+			      <button type="button" class="btn btn-default" style="width:80px;height:33px">
+                            <a href="excelAction!exportStudentActivity">导出</a></button>
+             </s:if>
+               	
 	      </div>
 	         
-	       <div class="main-body_list">
-	         
-             
-              <form action="priorStudentInformationAction!searchStudentActivities" method="post">            
+	      <!--  <div class="main-body_list">
+             <form action="" method="post">            
    
-			      <input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
+			  	<input type="text" style="border-width:2px;width:200px;heigth:30px" name="searchInformation"  placeholder="请输入关键字">
 			    <button type="submit" class="btn btn-default" style="border-width:2px;width:80px;heigth:30px">搜索</button>
-			     
+			    
 			     	    <button type="button" class="btn btn-default" style="width:100px;height:33px">
-                            <a href="priorStudentInformationAction!getStudentActivitiesInformation?status=1">显示全部</b></a></button>
+                            <a href="priorStudentAction!showStudentActivity">显示全部</b></a></button>
                         
-			     <s:if test='#session.type=="other"'>
-			      <button type="button" class="btn btn-default" style="width:80px;height:33px">
-                            <a href="priorDownloadExcelAction!exportStudentActivitiesExcel?searchName=${searchInformation }">导出</a></button>
-               	</s:if>
-              </form>
-            </div>
+			     
+          	 </form>
+            </div> -->
 	      
 	      <hr>
 	         
@@ -388,22 +389,27 @@
 				<table class="table table-striped" style="width:1050px">
 					<thead>
 						<tr>
-						         <th><b>学号</b></th>
-							     <th><b>姓名</b></th>
-                                 <th><b>国外院校</b></th>
-                                 <th><b>活动主题</b></th>
-                                 <th><b>活动时间</b></th>
-                                                   
+					         <th><b>学号</b></th>
+						     <th><b>姓名</b></th>
+                             <th><b>国外院校</b></th>
+                             <th><b>活动主题</b></th>
+                             <th><b>活动开始时间</b></th>
+                             <th><b>活动结束时间</b></th>
+                             <th><b>活动费用</b></th>
+                             <th><b>费用币种</b></th>
 						</tr>
 					</thead>
 					<tbody>
-					  <s:iterator value="activitiesList" var="user" status="st">
+					  <s:iterator value="studentActivities" var="user" status="st">
 						<tr>
-						    <td> <s:property value="#user.id.studentNo"/></td>
-							<td> <s:property value="#user.id.studentName"/></td>
-							<td> <s:property value="#user.id.name"/></td>
-							<td> <s:property value="#user.id.title"/></td>
-							<td> <s:property value="#user.id.time"/></td>
+						    <td> <s:property value="#user.studentId"/></td>
+							<td> <s:property value="#user.studentName"/></td>
+							<td> <s:property value="#user.college.collegeName"/></td>
+							<td> <s:property value="#user.activityName"/></td>
+							<td> <s:property value="#user.startTime.toString().substring(0,10)"/></td>
+							<td> <s:property value="#user.endTime.toString().substring(0,10)"/></td>
+							<td> <s:property value="#user.fee"/></td>
+							<td> <s:property value="#user.currency"/></td>
 
 						</tr>
 						</s:iterator>
@@ -412,43 +418,22 @@
 			</div>  
 		  </div>
 		  
-		    <s:set name="status" value="#session.status"></s:set> 
-		   <div  style="text-align:center">
-		    <s:if test="#status==1"> 
-                   <c:if test="${totalPage>0}">
-                         [<a href="priorStudentInformationAction!getStudentActivitiesInformation?pageNo=1"><b>首页</b></a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="priorStudentInformationAction!getStudentActivitiesInformation?pageNo=${currentPage-1}"><b>上一页</b></a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="priorStudentInformationAction!getStudentActivitiesInformation?pageNo=${currentPage+1}"><b>下一页</b></a>]
-                          </c:if>
-         
-                         [<a href="priorStudentInformationAction!getStudentActivitiesInformation?pageNo=${totalPage}"><b>尾页</b></a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      </s:if>
-                      
-                      <s:else>
-                      
-                          <c:if test="${totalPage>0}">
-                         [<a href="priorStudentInformationAction!searchStudentActivities?pageNo=1 & temp=1"><b>首页</b></a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="priorStudentInformationAction!searchStudentActivities?pageNo=${currentPage-1} & temp=1"><b>上一页</b></a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="priorStudentInformationAction!searchStudentActivities?pageNo=${currentPage+1} & temp=1"><b>下一页</b></a>]
-                          </c:if>
-         
-                         [<a href="priorStudentInformationAction!searchStudentActivities?pageNo=${totalPage} & temp=1"><b>尾页</b></a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      </s:else>
-                  </div>
+    		<div style="text-align:center">
+                 	<!-- 分页 -->
+		  		[<a href="priorStudentAction!showStudentActivity?pageNo=1">首页</a>]
+					<c:choose>
+						<c:when test="${currentPage>1}">
+							[<a href="priorStudentAction!showStudentActivity?pageNo=${currentPage-1}">上一页</a>]
+						</c:when>
+					</c:choose>
+					<c:choose>
+						<c:when test="${currentPage<totalPage}">
+							[<a href="priorStudentAction!showStudentActivity?pageNo=${currentPage+1}">下一页</a>]
+						</c:when>
+					</c:choose>
+				[<a href="priorStudentAction!showStudentActivity?pageNo=${totalPage}">尾页</a>]
+				第${currentPage}页/共${totalPage}页
+			</div>
 
 
         </div>

@@ -189,7 +189,7 @@ public class InternationalStudentAction extends ActionSupport {
 	public void editStudent() throws IOException{
 		//System.out.println("测试是否有进入修改action");
 		interStudent.setClasses(sd.queryByClassName(className));
-		System.out.println("测试："+interStudent.getClasses().getClassName());
+		//System.out.println("测试："+interStudent.getClasses().getClassName());
 		String message = "";
 		if(sd.updateStudent(interStudent)) {
 			System.out.println("更新成功");

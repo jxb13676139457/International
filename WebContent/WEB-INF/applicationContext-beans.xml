@@ -146,5 +146,19 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
+	
+	<!-- 前台老师查询学生信息的bean -->
+	<bean id="priStudentDao" class="com.international.frontground.dao.PriStudentDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	
+	<!-- 前台老师查询雅思机构协议信息的bean -->
+	<bean id="priEngAgreeDao" class="com.international.frontground.dao.PriEngAgreeDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 </beans>
 						

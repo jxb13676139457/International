@@ -324,7 +324,7 @@ public class ExcelAction extends ActionSupport {
 		return null; 
 	} 
 	
-	//导入交换生Excel数据     
+	//导入交换生Excel数据       (未完成)
 	public void importExchangeStudentExcel() throws IOException{
 		System.out.println("测试进入此导入action");
 		System.out.println("前台传过来的file："+file);
@@ -341,7 +341,7 @@ public class ExcelAction extends ActionSupport {
 		}
 	}
 	
-	//上传excel文件
+	//上传excel文件   （未完成）
 	public String Fileupload(){
         String realPath = ServletActionContext.getServletContext().getRealPath(this.getSavePath()+"\\"+this.excelName);
         System.out.println(realPath);
@@ -378,8 +378,6 @@ public class ExcelAction extends ActionSupport {
 //		}
 //		return "import";
 	}
-	
-	//导出培训机构
 	
 //	@SuppressWarnings("deprecation")
 //	public String getSavePath() {
