@@ -14,7 +14,7 @@ public class FrontGroundLoginInterceptor extends AbstractInterceptor {
 		
 		Map session=ai.getInvocationContext().getSession();
 
-		String studentName=(String)session.get("loginUser");
+		Object studentName=(String)session.get("loginUser");
 		Object teacherName=session.get("loginUser3");
 		System.out.println("studentName = "+studentName);
 		System.out.println("teacherName = "+teacherName);
