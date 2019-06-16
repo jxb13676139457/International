@@ -220,7 +220,7 @@
 										
 								<s:if test='#name!=null'>
 									<li>
-										<a href="priorAbroadCollegeProtocolAction" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
+										<a href="priorCollegeAction!exqueryAgreement1" class="trigger"><span><i class="icon-blog"></i><b  style="font-size:16px">相关下载</b></span></a>
 									</li>
 									<!-- 如果是学生 -->
 				                    <s:if test='#session.type=="student"'>
@@ -241,7 +241,7 @@
 								         
 								         	<li><a href="#" class="trigger"><span><i class="icon-feature"></i><b style="font-size:16px">雅思信息</b></span></a>
 											<ul>
-												<li><a href="EngAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
+												<li><a href="engAgenAgreeAction"><b>雅思机构协议信息</b></a></li>
 												<li><a href="priorEnglishAgencyTrainingAction"><b>雅思培训计划信息</b></a></li>
 												<li><a href="priorExamAction!otherExamSearch"><b>雅思模拟考试信息</b></a></li>
 												<li><a href="priorExamAction!otherScoreSearch"><b>雅思正式考试信息</b></a></li>
