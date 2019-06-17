@@ -23,7 +23,7 @@ public class InternationalStudentAction extends ActionSupport {
 	StudentDao sd;
 	private String loginUserName = "";  //筛选搜索用户名
 	private int id; //界面显示数据的索引
-	private final int pageSize=4; //每页显示记录的个数
+	private final int pageSize=8; //每页显示记录的个数
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage; //当前页
 	private int totalPage; //总页数
@@ -126,6 +126,8 @@ public class InternationalStudentAction extends ActionSupport {
 	public String showStudent(){
 		//查询所有数据存于集合对象中
 		interStudents = sd.queryInterStudents(loginUserName);
+		Map session = ActionContext.getContext().getSession();
+		session.put("searchInterStudent",loginUserName);
 		//System.out.println("查询全部的："+interStudents);
 		if(interStudents!=null) {
 			if(interStudents.size()%pageSize==0){

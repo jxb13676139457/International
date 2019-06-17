@@ -24,7 +24,7 @@ public class OverseasStudentAction extends ActionSupport{
 	OverseasStuDao osd;
 	private String loginUserName = "";  //筛选搜索用户名
 	private int id; //界面显示数据的索引
-	private final int pageSize=4; //每页显示记录的个数
+	private final int pageSize=8; //每页显示记录的个数
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage; //当前页
 	private int totalPage; //总页数
@@ -121,6 +121,8 @@ public class OverseasStudentAction extends ActionSupport{
 		//System.out.println("测试有无进入此action");
 		//查询所有数据存于集合对象中
 		overseas = osd.queryOverseas(loginUserName);
+		Map session = ActionContext.getContext().getSession();
+		session.put("searchOverseasStudent",loginUserName);
 		//System.out.println("查询全部的："+interStudents);
 		if(overseas!=null) {
 			if(overseas.size()%pageSize==0){
