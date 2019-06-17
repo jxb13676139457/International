@@ -359,46 +359,22 @@
                         </table>
                          </section>
                      </div> 
-               <s:set name="status" value="#session.status"></s:set> 
-		       <div  style="text-align:center">
-		          <s:if test="#status==1"> 
-                   <c:if test="${totalPage>0}">
-                         [<a href="exchangeStudentAction?pageNo=1&loginUserName=${sessionScope.searchExStudent}">首页</a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="exchangeStudentAction?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchExStudent}">上一页</a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="exchangeStudentAction?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchExStudent}">下一页</a>]
-                          </c:if>
-         
-                         [<a href="exchangeStudentAction?pageNo=${totalPage}&loginUserName=${sessionScope.searchExStudent}">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      
-                     </s:if>
-                     
-                     <s:else>
-                            <c:if test="${totalPage>0}">
-                         [<a href="exchangeStudentAction!searchStudent?pageNo=1 & temp=1"">首页</a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="exchangeStudentAction!searchStudent?pageNo=${currentPage-1} & temp=1"">上一页</a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="exchangeStudentAction!searchStudent?pageNo=${currentPage+1} & temp=1"">下一页</a>]
-                          </c:if>
-         
-                         [<a href="exchangeStudentAction!searchStudent?pageNo=${totalPage} & temp=1"">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                     
-                     </s:else>
-                  </div>
-                     
-                
+               <div  style="text-align:center">
+                   <!-- 分页 -->
+			  		[<a href="exchangeStudentAction!showStudent?pageNo=1&loginUserName=${sessionScope.searchExStudent}">首页</a>]
+						<c:choose>
+							<c:when test="${currentPage>1}">
+								[<a href="exchangeStudentAction!showStudent?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchExStudent}">上一页</a>]
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test="${currentPage<totalPage}">
+								[<a href="exchangeStudentAction!showStudent?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchExStudent}">下一页</a>]
+							</c:when>
+						</c:choose>
+					[<a href="exchangeStudentAction!showStudent?pageNo=${totalPage}&loginUserName=${sessionScope.searchExStudent}">尾页</a>]
+					第${currentPage}页/共${totalPage}页
+                </div>
               </div>
               <!-- page end-->
           </section>

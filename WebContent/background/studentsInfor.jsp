@@ -516,41 +516,7 @@
                         </table>
                          </section>
                      </div> 
-      		<%--  <s:set name="status" value="#session.status"></s:set>  --%>
 		       <div  style="text-align:center">
-		         <%--  <s:if test="#status==1"> 
-                      <c:if test="${totalPage>0}">
-                         [<a href="studentInformationAction?pageNo=1">首页</a>]
-                         <c:if test="${currentPage>1}">
-                             [<a href="studentInformationAction?pageNo=${currentPage-1}">上一页</a>]
-                        </c:if>
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="studentInformationAction?pageNo=${currentPage+1}">下一页</a>]
-                          </c:if>
-                         [<a href="studentInformationAction?pageNo=${totalPage}">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                  </s:if>
-                      
-                   <s:else>
-                   
-                        <c:if test="${totalPage>0}">
-                      [<a href="studentInformationAction!searchStudent?pageNo=1 & temp=1">首页</a>]
-      
-                      <c:if test="${currentPage>1}">
-                          [<a href="studentInformationAction!searchStudent?pageNo=${currentPage-1} & temp=1">上一页</a>]
-                     </c:if>
-      
-                      <c:if test="${currentPage<totalPage}">
-                         [<a href="studentInformationAction!searchStudent?pageNo=${currentPage+1} & temp=1">下一页</a>]
-                       </c:if>
-      
-                      [<a href="studentInformationAction!searchStudent?pageNo=${totalPage} & temp=1">尾页</a>]	
-                                                                                                  第${currentPage}页/共${totalPage}页
-                   </c:if>
-                   
-                   </s:else> --%>
-                   
                    <!-- 分页 -->
 			  		[<a href="internationalStudentAction!showStudent?pageNo=1&loginUserName=${sessionScope.searchInterStudent}">首页</a>]
 						<c:choose>
