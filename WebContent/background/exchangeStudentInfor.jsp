@@ -289,7 +289,7 @@
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
                              	<a href="addExchangeStudent.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                              <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                             	<a href="exchangeStudentAction!showStudent"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                             	<a href="exchangeStudentAction!showStudent?pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
                              	<a href="excelAction!exportExchangeSudent"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                              </button>

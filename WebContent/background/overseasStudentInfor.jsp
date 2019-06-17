@@ -264,7 +264,7 @@
                 <!--  search form start -->
                 <ul class="nav top-menu">                    
                     <li>
-                       <form class="navbar-form" action="overseasStudentAction!showStudent" method="post">
+                       <form class="navbar-form" action="overseasStudentAction!showStudent?pageNo=1" method="post">
                             <input class="form-control" name="loginUserName" placeholder="输入查找的关键字" type="text" required/>
                             <button type="submit" class="btn btn-default" style="width:80px;height:30px"><i class=" icon_search"></i>&nbsp;&nbsp;<b>搜索</b></button>
                             <button type="button" class="btn btn-default" style="width:80px;height:30px"><a href="addOverStudent.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
