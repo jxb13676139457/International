@@ -134,7 +134,7 @@ public class ScoreDao {
 		try{
 			session=sessionFactory.openSession();
 			//根据id获取要删除的用户
-			Score score=(Score)session.get(AgencyAgreement.class, scoreId);
+			Score score=(Score)session.get(Score.class, scoreId);
 			//删除plane数据
 			Transaction trans=session.beginTransaction();
 			session.delete(score);//删除数据

@@ -778,3 +778,58 @@ function getStudentInformation1(){
   	  
   	  
   }
+  
+//获取考试的类型(添加成绩用到)
+  function getEType(){
+   
+
+   var temp=1;
+   var agencyName= $("#agencyName").find("option:selected").text();   	  
+   var startTime= $("#startTime").find("option:selected").text();
+   var location= $("#location").find("option:selected").text();
+  	  $.ajax(		  
+     	      {
+     	    	  
+     	    	  type:"post",
+     	    	  url:"http://localhost:8080/InternationalSys/background/scoreAction!togetExamType",
+     	    	  data:{agencyName:agencyName,startTime:startTime,location:location},
+     	    	  async:false,
+     	    	  dataType:"json",			    	
+     	    	  contentType: "application/x-www-form-urlencoded; charset=utf-8", 
+     	    	  traditional:true,
+     	    	  success: function(data){
+     	    		  
+     	    			 var html="";
+  	    	    		 html=html +'<option selected>--请选择考试类型--</option>';
+
+  	                     for(var i=0; i<data.length; i++){
+  	                    	
+  	                    	   for(var j=0; j<i; j++){
+  	                    				 
+  	                    		 if(data[i].examType==(data[j].examType)){
+  	                    			 temp=0;
+  	                    			 break;
+  	                    		 }
+  	                    	 }
+  	                    	 if(temp==1){
+  	                    		 html=html +'<option value=""+ data[i].examType+"">'+data[i].examType+'</option>';
+  	                    	 }
+  	                    	 temp=1;
+  	                     }
+  	                     
+                      $('#examType').html(html);
+                    },   
+                    error: function(data){
+                 	   
+                 		 var html="";
+                 		 $('#examType').html(html);
+                    }   	  
+     	    	  
+     	      }
+
+     	  );
+  	  
+  	  
+  	  
+  	  
+  }

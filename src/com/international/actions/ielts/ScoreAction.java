@@ -407,4 +407,27 @@ public class ScoreAction extends ActionSupport{
     	ajaxAction.toJson(ServletActionContext.getResponse(),searchExam);
     		
     }
+    
+  //获取考试类型
+    public void togetExamType() throws IOException{
+    	System.out.println("获取到的机构名："+ agencyName);
+    	startTime=startTime.substring(0, 16);
+    	System.out.println("获取到的时间："+ startTime);
+    	System.out.println("获取到的地点："+ location);
+    	List<Agency> interAgency=new ArrayList();
+    	List<Exam> searchExam=new ArrayList();
+    	String hx="from Agency where agencyName='"+agencyName+"'";
+    	interAgency=scd.queryByhqlA(hx);
+    	if(interAgency!=null) {
+    		String hd="from Exam where agencyId ='"+interAgency.get(0).getAgencyId()+"' and convert(varchar,time,120) like '%"+startTime+"%' and location='"+location+"'";
+    		searchExam=scd.queryByhqlE(hd);
+    	}
+    	else {
+    		String hq="from Exam where agencyId is null and convert(varchar,time,120) like '%"+startTime+"%' and location='"+location+"'";
+    		searchExam=scd.queryByhqlE(hq);
+    	}
+    	
+    	ajaxAction.toJson(ServletActionContext.getResponse(),searchExam);
+    		
+    }
 }

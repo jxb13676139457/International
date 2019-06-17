@@ -230,6 +230,8 @@ public class InternationalStudentAction extends ActionSupport {
 	
 	//加入国际班学生   
 	public void addInterStudent() throws IOException {
+		major = major.substring(0,major.length()-2);
+		newClassName = newClassName.substring(0,newClassName.length()-2);
 		//System.out.println("测试是否进入此action");
 		String message = "";
 		//System.out.println(interStudent);

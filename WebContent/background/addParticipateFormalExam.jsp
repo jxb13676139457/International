@@ -336,8 +336,8 @@
                                           <label for="cname" class="control-label col-lg-2"><b>考试类型</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">  
                                                <select id="examType" name="examType" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;">
-                                               		<option value="正式考试">正式考试</option>
-                                                    <option value="模拟考试" selected>模拟考试</option>
+                                               		<!-- <option value="正式考试">正式考试</option>
+                                                    <option value="模拟考试" selected>模拟考试</option> -->
                                                </select>
                                           </div>
                                           </div>
@@ -358,7 +358,7 @@
                                       <div  style="margin-left:250px;margin-top:-10px">
                                           <label for="cname" class="control-label col-lg-2"><b>考试的地点</b><span class="required" style="color:red">*</span></label>
                                           <div class="col-lg-10">
-                                            <select id="location" name="location" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;"></select>
+                                            <select id="location" name="location" style="width:300px;height:35px;border-radius:5px;-webkit-border-radius:3px;-moz-border-radius:3px;" onchange="getEType()"></select>
                                           </div>
                                           </div>
                                       </div>
