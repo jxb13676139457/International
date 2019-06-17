@@ -316,7 +316,7 @@
                      </div> 
           <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#1==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="englishAgencyAction?pageNo=1">首页</a>]
          
