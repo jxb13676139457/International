@@ -344,11 +344,11 @@
                    <div class="service_wrapper">
 				     <div class="four columns">
 					   <div class="image_shadow">
-					     <a href="priorAbroadCollegeProtocolAction"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
+					     <a href="priorCollegeAction"><img src="images/icons/s3.png" class="scale-with-grid"/></a>
 					   </div>
 				      <div class="service_wrapper_inner"> 	      
 					    
-				            <h5><a href="priorAbroadCollegeProtocolAction"> <b>协议下载</b> </a></h5>
+				            <h5><a href="priorCollegeAction"> <b>院校信息</b> </a></h5>
 						
 					  </div> <!-- End service wrapper inner --> 
 					 </div>
