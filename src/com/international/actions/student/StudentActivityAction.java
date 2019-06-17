@@ -22,7 +22,7 @@ public class StudentActivityAction extends ActionSupport{
 	
 	private String loginUserName = "";  //筛选搜索用户名
 	private int id; //界面显示数据的索引
-	private final int pageSize=4; //每页显示记录的个数
+	private final int pageSize=8; //每页显示记录的个数
 	private int pageNo=1; //计数器,从第1页开始显示
 	private int currentPage; //当前页
 	private int totalPage; //总页数
@@ -104,6 +104,8 @@ public class StudentActivityAction extends ActionSupport{
 	public String showStuActivity(){
 		//查询所有数据存于集合对象中
 		studentActivites = sad.queryStuActivities(loginUserName);
+		Map session = ActionContext.getContext().getSession();
+		session.put("searchStudentActivity",loginUserName);
 		//System.out.println("查询全部的："+studentActivites);
 		if(studentActivites!=null) {
 			if(studentActivites.size()%pageSize==0){

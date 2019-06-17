@@ -363,17 +363,17 @@
 		       <div  style="text-align:center">
 		          <s:if test="#status==1"> 
                    <c:if test="${totalPage>0}">
-                         [<a href="exchangeStudentAction?pageNo=1">首页</a>]
+                         [<a href="exchangeStudentAction?pageNo=1&loginUserName=${sessionScope.searchExStudent}">首页</a>]
          
                          <c:if test="${currentPage>1}">
-                             [<a href="exchangeStudentAction?pageNo=${currentPage-1}">上一页</a>]
+                             [<a href="exchangeStudentAction?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchExStudent}">上一页</a>]
                         </c:if>
          
                          <c:if test="${currentPage<totalPage}">
-                            [<a href="exchangeStudentAction?pageNo=${currentPage+1}">下一页</a>]
+                            [<a href="exchangeStudentAction?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchExStudent}">下一页</a>]
                           </c:if>
          
-                         [<a href="exchangeStudentAction?pageNo=${totalPage}">尾页</a>]	
+                         [<a href="exchangeStudentAction?pageNo=${totalPage}&loginUserName=${sessionScope.searchExStudent}">尾页</a>]	
                                                                                                      第${currentPage}页/共${totalPage}页
                       </c:if>
                       
