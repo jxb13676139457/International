@@ -372,18 +372,18 @@
                       </s:else> --%>
                       
                       <!-- 分页 -->
-			  		[<a href="studentActivityAction!showStuActivity?pageNo=1">首页</a>]
+			  		[<a href="studentActivityAction!showStuActivity?pageNo=1&loginUserName=${sessionScope.searchStudentActivity}">首页</a>]
 						<c:choose>
 							<c:when test="${currentPage>1}">
-								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage-1}">上一页</a>]
+								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchStudentActivity}">上一页</a>]
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${currentPage<totalPage}">
-								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage+1}">下一页</a>]
+								[<a href="studentActivityAction!showStuActivity?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchStudentActivity}">下一页</a>]
 							</c:when>
 						</c:choose>
-					[<a href="studentActivityAction!showStuActivity?pageNo=${totalPage}">尾页</a>]
+					[<a href="studentActivityAction!showStuActivity?pageNo=${totalPage}&loginUserName=${sessionScope.searchStudentActivity}">尾页</a>]
 					第${currentPage}页/共${totalPage}页
 					
                   </div>

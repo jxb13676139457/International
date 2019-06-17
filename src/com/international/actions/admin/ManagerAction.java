@@ -120,6 +120,8 @@ public class ManagerAction extends ActionSupport {
 		//map.put("search",loginUserName);
 		//查询所有数据存于集合对象中
 		admins = ud.queryAdmins(loginUserName);
+		Map session = ActionContext.getContext().getSession();
+		session.put("searchLoginUser",loginUserName);
 		System.out.println("查询全部的："+admins);
 		if(admins!=null) {
 			if(admins.size()%pageSize==0){

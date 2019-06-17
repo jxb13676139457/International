@@ -44,6 +44,9 @@ public class priorNewsAction extends ActionSupport {
 		System.out.println("execute默认方法被调用");
 		m=ActionContext.getContext().getSession();
 		newsList=nd.queryAllNews();
+		for(int i=0;i<newsList.size();i++) {
+			newsList.get(i).setTime(newsList.get(i).getTime().substring(0, 10));
+		}
 		m.put("newsList", newsList);
 		System.out.println("newsList = "+newsList);
 

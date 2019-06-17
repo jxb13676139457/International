@@ -552,18 +552,18 @@
                    </s:else> --%>
                    
                    <!-- 分页 -->
-			  		[<a href="internationalStudentAction!showStudent?pageNo=1">首页</a>]
+			  		[<a href="internationalStudentAction!showStudent?pageNo=1&loginUserName=${sessionScope.searchInterStudent}">首页</a>]
 						<c:choose>
 							<c:when test="${currentPage>1}">
-								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage-1}">上一页</a>]
+								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchInterStudent}">上一页</a>]
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${currentPage<totalPage}">
-								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage+1}">下一页</a>]
+								[<a href="internationalStudentAction!showStudent?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchInterStudent}">下一页</a>]
 							</c:when>
 						</c:choose>
-					[<a href="internationalStudentAction!showStudent?pageNo=${totalPage}">尾页</a>]
+					[<a href="internationalStudentAction!showStudent?pageNo=${totalPage}&loginUserName=${sessionScope.searchInterStudent}">尾页</a>]
 					第${currentPage}页/共${totalPage}页
                 </div>
               </div>

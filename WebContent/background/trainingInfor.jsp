@@ -218,7 +218,7 @@
                             <a href="addTraining.jsp">
                              <i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="trainingAction?searchStartTime=&searchEndTime="><i class="icon_menu"></i>&nbsp;&nbsp;
+                            <a href="trainingAction?searchStartTime=&searchEndTime=&pageNo=1"><i class="icon_menu"></i>&nbsp;&nbsp;
                             <b>显示全部</b></a></button>                       
                              
                            <button type="button" class="btn btn-default" style="width:80px;height:30px">

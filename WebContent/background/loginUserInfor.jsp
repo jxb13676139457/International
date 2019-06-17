@@ -415,18 +415,18 @@
                   </s:else> --%>
                   
                   	<!-- 分页 -->
-			  		[<a href="managerAction!showOperator?pageNo=1">首页</a>]
+			  		[<a href="managerAction!showOperator?pageNo=1&loginUserName=${sessionScope.searchLoginUser}">首页</a>]
 						<c:choose>
 							<c:when test="${currentPage>1}">
-								[<a href="managerAction!showOperator?pageNo=${currentPage-1}">上一页</a>]
+								[<a href="managerAction!showOperator?pageNo=${currentPage-1}&loginUserName=${sessionScope.searchLoginUser}">上一页</a>]
 							</c:when>
 						</c:choose>
 						<c:choose>
 							<c:when test="${currentPage<totalPage}">
-								[<a href="managerAction!showOperator?pageNo=${currentPage+1}">下一页</a>]
+								[<a href="managerAction!showOperator?pageNo=${currentPage+1}&loginUserName=${sessionScope.searchLoginUser}">下一页</a>]
 							</c:when>
 						</c:choose>
-					[<a href="managerAction!showOperator?pageNo=${totalPage}">尾页</a>]
+					[<a href="managerAction!showOperator?pageNo=${totalPage}&loginUserName=${sessionScope.searchLoginUser}">尾页</a>]
 					第${currentPage}页/共${totalPage}页
                   </div>
               </div>        
