@@ -67,17 +67,18 @@ public class TrainingDao {
 			String hql1="convert(varchar,startTime,120) like '%"+searchStartTime+"%'";
 			String hql2="convert(varchar,endTime,120) like '%"+searchEndTime+"%'";
 			
-			String str = hql1+" or "+hql2;
+			String str = hql1+" and "+hql2;
 			//获取所有数据
 			String queryString="";
-			if(!searchStartTime.equals("") && searchStartTime!=null && !searchEndTime.equals("") && searchEndTime!=null) {
+			/*if(!searchStartTime.equals("") && searchStartTime!=null && !searchEndTime.equals("") && searchEndTime!=null) {
 				queryString="from Training where "+str;
 			}else if(searchStartTime.equals("") || searchStartTime==null) {
 				queryString="from Training where "+hql2;
 			}else if(searchEndTime.equals("") || searchEndTime==null) {
 				queryString="from Training where "+hql1;
-			}
-				
+			}*/
+			queryString = "from Training where "+str;
+	
 			System.out.println("========queryString = "+queryString+" ========");
 			//创建查询
 			Query query=session.createQuery(queryString);

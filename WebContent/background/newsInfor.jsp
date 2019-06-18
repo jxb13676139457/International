@@ -312,7 +312,7 @@
                            <s:iterator value="newsList" var="news" status="st">
                               <tr>
                                  <td><s:property value="#news.title"/></td>                              
-                                 <td><s:property value="#news.time"/></td>       
+                                 <td><s:property value="#news.time.substring(0,10)"/></td>       
                                  <td><s:property value="#news.source"/></td>      
                                  <td><s:property value="#news.author"/></td> 
                                  <td> <a href="<s:property value="#news.newsUrl"/>">

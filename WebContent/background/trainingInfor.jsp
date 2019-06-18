@@ -250,8 +250,8 @@
                            <s:iterator value="trainingList" var="training" status="st">
                               <tr>
                                  <td><s:property value="#training.agencies.agencyName"/></td>
-                                 <td><s:property value="#training.startTime"/></td>
-                                 <td><s:property value="#training.endTime"/></td>
+                                 <td><s:property value="#training.startTime.substring(0,10)"/></td>
+                                 <td><s:property value="#training.endTime.substring(0,10)"/></td>
                                  <td><s:property value="#training.courseHours"/></td>
                                  <td><s:property value="#training.courseFee"/></td>
                                  <td>

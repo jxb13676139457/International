@@ -313,7 +313,7 @@
                            <s:iterator value="policyList" var="policy" status="st">
                               <tr>
                                  <td><s:property value="#policy.title"/></td>                              
-                                 <td><s:property value="#policy.time"/></td>       
+                                 <td><s:property value="#policy.time.substring(0,10)"/></td>       
                                  <td><s:property value="#policy.source"/></td>      
                                   <td><a href="downLoad.action?fileName=<s:property value="#policy.fileName"/>">
                                   <s:property value="#policy.fileName"/></a></td>             
