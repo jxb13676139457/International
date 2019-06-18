@@ -263,7 +263,7 @@
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addEnglishAgency.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="englishAgencyAction?searchAgency="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="englishAgencyAction?pageNo=1&searchAgency="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                               
                                 <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="excelAction!exportAgency"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a></button>
@@ -316,7 +316,7 @@
                      </div> 
           <s:set name="status" value="#session.status"></s:set> 
 		       <div  style="text-align:center">
-		          <s:if test="#1==1"> 
+		          <s:if test="1==1"> 
                    <c:if test="${totalPage>0}">
                          [<a href="englishAgencyAction?pageNo=1">首页</a>]
          

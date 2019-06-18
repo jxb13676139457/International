@@ -30,12 +30,14 @@ public class DocDownloadAction extends ActionSupport{
 		return downFileName;
 	}
 	//返回文件流的方法
-    public InputStream getAttrInputStream(){
+    public InputStream getAttrInputStream() throws Exception{
     	System.out.println(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName));
         return ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName);
     }
     public String execute() throws Exception {
-    	
+    	System.out.println(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName));
+    	if(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\"+fileName)==null)
+    		return "nofile";
 		return "download";
 	}
 }

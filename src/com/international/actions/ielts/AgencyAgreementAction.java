@@ -224,8 +224,13 @@ public class AgencyAgreementAction extends ActionSupport{
 	 */
 	public String deleteObject() {
 		System.out.println("要删除的id:" + id);
-		if(aad.deleteAgreement(id))
+		String deletepath=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +aad.getAgencyAgreementInforById(id).getFileName());
+		File deleteFile=new File(deletepath);//要删除的文件对象
+		if(aad.deleteAgreement(id)) {
+			if (deleteFile.exists() && deleteFile.isFile())
+				deleteFile.delete();
 			return "deleteSuccess";
+		}
 		else
 			return "deleteError";
 	}

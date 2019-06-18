@@ -212,8 +212,13 @@ public class PolicyAction extends ActionSupport {
 	public String deletePolicy() {
 
 		System.out.println("要删除的id:" + id);
-		if(pd.deletePolicy(id))
+		String deletepath=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +pd.getPolicyInforById(id).getFileName());
+		File deleteFile=new File(deletepath);//要删除的文件对象
+		if(pd.deletePolicy(id)) {
+			if (deleteFile.exists() && deleteFile.isFile())
+				deleteFile.delete();
 			return "deleteSuccess";
+		}
 		else
 			return "deleteError";
 	}

@@ -363,6 +363,7 @@
 				<!-- 缓冲区大小设置 -->
 				<param name="bufferSize">1024</param>
 			</result>
+			<result name="nofile">/background/404.html</result>
     	</action>
 
     	<action name="trainingAction" class="trainingAction">

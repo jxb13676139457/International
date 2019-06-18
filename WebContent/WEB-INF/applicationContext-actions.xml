@@ -210,7 +210,7 @@
 	</bean>
 
 	<!-- 学生参与雅思培训计划的bean -->
-	<bean id="attendTrainingAction" class="com.international.actions.ielts.AttendTrainingAction">
+	<bean id="attendTrainingAction" class="com.international.actions.ielts.AttendTrainingAction" scope="prototype">
 		<property name="atd">
 			<ref bean="attendTrainingDao"/>
 		</property>
@@ -286,7 +286,7 @@
 		</property>
 	</bean>
 
-	<bean id="priorEnglishAgencyTrainingAction" class="com.international.frontground.actions.ielts.priorEnglishAgencyTrainingAction">
+	<bean id="priorEnglishAgencyTrainingAction" class="com.international.frontground.actions.ielts.priorEnglishAgencyTrainingAction" scope="prototype">
 		<property name="atd">
 			<ref bean="attendTrainingDao"/>
 		</property>

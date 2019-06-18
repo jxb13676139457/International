@@ -256,8 +256,13 @@ public class CollegeAgreementAction extends ActionSupport{
 	 */
 	public String deleteObject() {
 		System.out.println("要删除的id:" + id);
-		if(agd.deleteAgreement(id))
+		String deletepath=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +agd.getCollegeAgreementInforById(id).getFileName());
+		File deleteFile=new File(deletepath);//要删除的文件对象
+		if(agd.deleteAgreement(id)) {
+			if (deleteFile.exists() && deleteFile.isFile())
+				deleteFile.delete();
 			return "deleteSuccess";
+		}
 		else
 			return "deleteError";
 	}
@@ -295,7 +300,6 @@ public class CollegeAgreementAction extends ActionSupport{
 		String path=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +this.uploadFileName);
 		String deletepath=ServletActionContext.getServletContext().getRealPath(this.getSavePath()+ "\\" +updateAgreement.getFileName());
 		//判断文件是否上传，如果上传的话将会创建该目录 
-		//System.out.println(ServletActionContext.getServletContext().getResourceAsStream("/upload"+"\\" +"jsp作用.txt"));
 		System.out.println(path);
 		if(uploadFileName!=null&&!uploadFileName.equals("")) {
 			File target= new File(path); // 定义目标文件对象

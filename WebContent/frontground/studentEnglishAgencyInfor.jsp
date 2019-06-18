@@ -38,8 +38,8 @@
 
 
 <!-- jquery -->
- <script src="js/bootstrap.min.js"></script>
   <script src="js/jquery-3.2.1.min.js"></script>
+ <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="js/jquery.carouFredSel-6.1.0-packed.js" type="text/javascript"></script>
 <script src="js/jquery.tipsy.js" type="text/javascript"></script>

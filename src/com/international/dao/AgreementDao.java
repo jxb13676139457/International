@@ -146,7 +146,7 @@ public class AgreementDao {
 			session=sessionFactory.openSession();
 			//根据id获取要删除的用户
 			CollegeAgreement collegeAgreement=(CollegeAgreement)session.get(CollegeAgreement.class, agreementId);
-			//删除plane数据
+			//删除CollegeAgreement数据
 			Transaction trans=session.beginTransaction();
 			session.delete(collegeAgreement);//删除数据
 			trans.commit();

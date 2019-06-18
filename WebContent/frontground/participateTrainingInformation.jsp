@@ -402,7 +402,7 @@
             <hr>
 	       <div class="main-body_list">
 	           <div class="table-responsive">
-				<table class="table table-striped" style="width:1050px">
+				<table class="table table-striped" style="width:1000px">
 					<thead>
 						<tr>
                                  <th>学号</th>

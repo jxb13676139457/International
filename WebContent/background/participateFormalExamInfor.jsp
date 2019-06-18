@@ -248,7 +248,7 @@
                                <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="addParticipateFormalExam.jsp"><i class="icon_plus_alt2"></i>&nbsp;&nbsp;<b>添加</b></a></button>
                               <button type="button" class="btn btn-default" style="width:120px;height:30px">
-                            <a href="scoreAction?search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
+                            <a href="scoreAction?pageNo=1&search="><i class="icon_menu"></i>&nbsp;&nbsp;<b>显示全部</b></a></button>
                              
                          <button type="button" class="btn btn-default" style="width:80px;height:30px">
                             <a href="excelAction!exportScore"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
