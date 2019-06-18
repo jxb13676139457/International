@@ -418,7 +418,7 @@
 	            
 	            <div class="news_c" >
 	            
-	            <div style="margin-left:50px;margin-top:20px;width:650px;font-size:20px"> <s:property value="#session.currentInformation.content" escapeHtml="false"/> </div>
+	            <div style="margin-left:50px;margin-top:20px;width:650px;font-size:20px"> <s:property value="#session.notice.content" escapeHtml="false"/> </div>
 
 	            </div>
 	            

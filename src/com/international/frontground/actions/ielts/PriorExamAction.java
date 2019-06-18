@@ -45,6 +45,8 @@ public class PriorExamAction extends ActionSupport{
 		String hql="from Score where examId in (select examId from Exam where examType='模拟考试')";
 		System.out.println(hql);
 		showSimExam=ped.querySimScore(hql);
+		if(showSimExam==null)
+			return "othersearch";
 		for(int i=0;i<showSimExam.size();i++) {
 			showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
 		}
@@ -58,6 +60,8 @@ public class PriorExamAction extends ActionSupport{
 		String hql="from Score where examId in (select examId from Exam where examType='正式考试')";
 		System.out.println(hql);
 		showSimExam=ped.querySimScore(hql);
+		if(showSimExam==null)
+			return "otherfor";
 		for(int i=0;i<showSimExam.size();i++) {
 			showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
 		}
@@ -73,23 +77,29 @@ public class PriorExamAction extends ActionSupport{
 		//存正式考试
 		String hql1="from Score where examId in (select examId from Exam where examType='正式考试') and studentId='"+stname.getStudentId()+"'";
 		showSimExam=ped.querySimScore(hql1);
-		for(int i=0;i<showSimExam.size();i++) {
-			showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
+		if(showSimExam!=null) {
+			for(int i=0;i<showSimExam.size();i++) {
+				showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
+			}
 		}
 		session.put("priforscore", showSimExam);
 		//存模拟考试
 		String hql2="from Score where examId in (select examId from Exam where examType='模拟考试') and studentId='"+stname.getStudentId()+"'";
 		showSimExam=ped.querySimScore(hql2);
-		for(int i=0;i<showSimExam.size();i++) {
-			showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
+		if(showSimExam!=null) {
+			for(int i=0;i<showSimExam.size();i++) {
+				showSimExam.get(i).getExm().setTime(showSimExam.get(i).getExm().getTime().substring(0, 16));
+			}
 		}
 		session.put("priexmscore", showSimExam);
 		//存雅思培训
 		String hql3="from AttendTraining where studentId='"+stname.getStudentId()+"'";
 		showTraining=ped.queryTraining(hql3);
-		for(int i=0;i<showTraining.size();i++) {
-			showTraining.get(i).getTraining().setStartTime(showTraining.get(i).getTraining().getStartTime().substring(0, 10));
-			showTraining.get(i).getTraining().setEndTime(showTraining.get(i).getTraining().getEndTime().substring(0, 10));
+		if(showTraining!=null) {
+			for(int i=0;i<showTraining.size();i++) {
+				showTraining.get(i).getTraining().setStartTime(showTraining.get(i).getTraining().getStartTime().substring(0, 10));
+				showTraining.get(i).getTraining().setEndTime(showTraining.get(i).getTraining().getEndTime().substring(0, 10));
+			}
 		}
 		session.put("pritrain", showTraining);
 		return "studentfor";
