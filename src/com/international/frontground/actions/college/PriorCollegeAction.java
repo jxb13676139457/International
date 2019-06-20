@@ -83,8 +83,10 @@ public class PriorCollegeAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		String hql="from College";
 		showCollege=pcd.queryCollege(hql);
-		for(int i=0;i<showCollege.size();i++) {
-			showCollege.get(i).setStartTime(showCollege.get(i).getStartTime().substring(0, 10));
+		if(showCollege!=null) {
+			for(int i=0;i<showCollege.size();i++) {
+				showCollege.get(i).setStartTime(showCollege.get(i).getStartTime().substring(0, 10));
+			}
 		}
 		//System.out.println(showCollege.get(0).getCollegeName());
 		session.put("pricollege", showCollege);
@@ -96,8 +98,10 @@ public class PriorCollegeAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		String hql="from CollegeActivity";
 		showCollegeActivity=pcd.queryCollegeActivity(hql);
-		for(int i=0;i<showCollegeActivity.size();i++) {
-			showCollegeActivity.get(i).setTime(showCollegeActivity.get(i).getTime().substring(0, 10));
+		if(showCollegeActivity!=null) {
+			for(int i=0;i<showCollegeActivity.size();i++) {
+				showCollegeActivity.get(i).setTime(showCollegeActivity.get(i).getTime().substring(0, 10));
+			}
 		}
 		session.put("pricollActivity", showCollegeActivity);
 		return "activity";
@@ -108,8 +112,10 @@ public class PriorCollegeAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		String hql="from CollegeAgreement";
 		showCollegeAgreement=pcd.queryCollegeAgreement(hql);
-		for(int i=0;i<showCollegeAgreement.size();i++) {
-			showCollegeAgreement.get(i).setTime(showCollegeAgreement.get(i).getTime().substring(0, 10));
+		if(showCollegeAgreement!=null) {
+			for(int i=0;i<showCollegeAgreement.size();i++) {
+				showCollegeAgreement.get(i).setTime(showCollegeAgreement.get(i).getTime().substring(0, 10));
+			}
 		}
 		session.put("pricollAgreement", showCollegeAgreement);
 		return "agreement";
@@ -119,8 +125,10 @@ public class PriorCollegeAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		String hql="from CollegeAgreement";
 		showCollegeAgreement=pcd.queryCollegeAgreement(hql);
-		for(int i=0;i<showCollegeAgreement.size();i++) {
-			showCollegeAgreement.get(i).setTime(showCollegeAgreement.get(i).getTime().substring(0, 10));
+		if(showCollegeAgreement!=null) {
+			for(int i=0;i<showCollegeAgreement.size();i++) {
+				showCollegeAgreement.get(i).setTime(showCollegeAgreement.get(i).getTime().substring(0, 10));
+			}
 		}
 		session.put("showCollegeAgreement", showCollegeAgreement);
 		System.out.println("showCollegeAgreement = "+showCollegeAgreement);
