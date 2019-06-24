@@ -32,8 +32,10 @@ public class EngAgenAgreeAction extends ActionSupport{
 		Map session=ActionContext.getContext().getSession();
 		String hql="from AgencyAgreement";
 		showAgreement=pad.queryAgencyAgreement(hql);
-		for(int i=0;i<showAgreement.size();i++) {
-			showAgreement.get(i).setTime(showAgreement.get(i).getTime().substring(0, 10));
+		if(showAgreement!=null) {
+			for(int i=0;i<showAgreement.size();i++) {
+				showAgreement.get(i).setTime(showAgreement.get(i).getTime().substring(0, 10));
+			}
 		}
 		//System.out.println(showCollege.get(0).getCollegeName());
 		session.put("priagreement", showAgreement);

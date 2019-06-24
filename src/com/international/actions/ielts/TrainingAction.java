@@ -134,6 +134,7 @@ public class TrainingAction extends ActionSupport {
 		
 			//根据当前页查询要在该页上显示的数据
 			trainingList=td.queryTraining(searchStartTime,searchEndTime,pageNo,pageSize);
+			System.out.println("trainingList大小 = "+trainingList.size());
 			for(int i=0;i<trainingList.size();i++) {
 				trainingList.get(i).setStartTime(trainingList.get(i).getStartTime().substring(0, 10));
 				trainingList.get(i).setEndTime(trainingList.get(i).getEndTime().substring(0, 10));
