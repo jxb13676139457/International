@@ -1,6 +1,6 @@
 # International
 基于SSH+Bootstrap框架技术整合搭建的国际交流管理系统，使用Java语言编写代码，分为前台用户系统和后台管理系统。
-使用到的技术栈：struts2、spring3、hibernate4、bootstrap、jQuery、ajax、jsp
-开发环境：win10操作系统、本地服务器tomcat8.5、开发工具eclipse、数据库SQL Server2012
+使用到的技术栈：struts2、spring3、hibernate4、bootstrap、jQuery、ajax、jsp。
+开发环境：win10操作系统、本地服务器tomcat8.5、开发工具eclipse、数据库SQL Server2012。
 此为小江组成的3人小组为学校老师做的一个项目，目前正在筹备部署上线到学院的服务器，该系统的需求愿景是提高数据的安全性以及简化老师的日常工作，后台管理系统的主要功能是添加信息、删除信息、修改信息、查询信息、导入导出excel、下载上传文件，前台用户系统的主要功能是浏览信息、导出信息。系统都做了权限控制开放菜单项，使用的是session这种方式。
 
