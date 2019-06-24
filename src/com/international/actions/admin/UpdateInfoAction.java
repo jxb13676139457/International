@@ -58,6 +58,7 @@ public class UpdateInfoAction extends ActionSupport {
 		admin = (Admin)session.get("admin");
 		//System.out.println(admin.getUserName());
 		if(ud.updateAdminInfo(admin,oldPwd,newPwd,reqPwd,userName)) {
+			addFieldError("tip","修改密码成功");
 			System.out.println("修改成功");
 			return "editSucc";
 		}else {

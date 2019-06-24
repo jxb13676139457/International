@@ -85,30 +85,29 @@
 			function gotoShowAction(){
 				location.href="managerAction!showOperator";
 			}
-	     	//上传excel文件
-			function ajax(url){
-				var file=document.getElementById('file').files[0];
-				if(file==undefined){
-					alert('请选择文件');
-					return 
-				}
-				var data = new FormData();
-				data.append("file", file);
-				$.ajax({
-					type: 'post',
-					url: url,
-					data: data,
-					cache: false,
-					processData: false,
-					contentType: false,
-					success: function (data) {
-						alert(data.msg);
-					}, 
-					error: function () {
-						alert("上传失败");
-						},
-				});
-			}
+	     	
+			//导入excel文件
+			function importExcel(){
+	    	  var formData = new FormData($("#studentExcel")[0]);  // 要求使用的html对象
+	    	  //console.log(formData);
+    		  $.ajax(		  
+	    	      {
+	    	    	  type:"post",
+	    	    	  url:"http://localhost:8080/InternationalSys/background/importExcelAction!importExStudentExcel",
+	    	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:formData,
+	    	    	  dataType:"json",	
+	    	    	  async:false,			    
+	    	          contentType: false,  
+	    	          processData: false, 
+	    	    	  success: function(data){
+	    	    		  if(data!=null && data!=""){
+	    	    			  alert(data);
+	    	    		  }
+	                   }
+	    	      }
+	    	  );
+	      	}
     	</script>
   </head>
 
@@ -293,17 +292,47 @@
                              <button type="button" class="btn btn-default" style="width:80px;height:30px">
                              	<a href="excelAction!exportExchangeSudent"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                              </button>
+                             <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
+									<a href="#"><i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b></a>
+							 </button>
+							 <a class="btn btn-default" href="excelAction!downloadExStudent" style="width:140px;height:30px"><i class="icon_upload"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a>
                         </form>
-                        
-                        <%-- <form method="post" id="uploadForm">
-                        	<input type="file" id="file" name="file"/>
-                         	<input type="button" onclick="ajax('${pageContext.request.contextPath}/background/excelAction!Fileupload')" value="开始上传">
-                        </form> --%>
                     </li>                    
                 </ul>
                 <!--  search form end -->                
               </div>
 			</div>
+			
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								导入交换生EXCEL表
+							</h4>					
+						</div>
+						<div class="modal-body">
+						   <form enctype="multipart/form-data" id="studentExcel" method="post">
+				                 <input id="file-zh" name="upload" type="file" multiple>	
+				                 <br/><br/>
+				                 <b><a class="btn btn-primary">导入前请先下载交换生Excel表模板，按规范导入，仅支持.xls后缀的excel文件</a></b>	
+				            </form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+							</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="importExcel()">
+								提交
+							</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+					
 			<div class="row"></div>
               <!-- page start-->
 

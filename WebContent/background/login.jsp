@@ -49,6 +49,10 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
                 <input type="password" name="admins.password" class="form-control" placeholder="密码" required/>
+               <%--  <span class="input-group-addon">
+                	<img alt="闭眼" src="/background/img/icons/view_off.png" width="20px" height="20px"/>
+                	<img alt="睁眼" src="/background/img/icons/view.png" width="20px" height="20px"/>
+                </span> --%>
             </div>
             <!-- 随机验证码 -->
             <%-- <div class="input-group">

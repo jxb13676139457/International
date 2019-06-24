@@ -12,7 +12,7 @@
 		</property>
 	</bean>	
 	
-	<!-- 导入导出的bean -->
+	<!-- 导出的bean -->
 	<bean id="excelAction" class="com.international.common.ExcelAction" scope="prototype">
 		<property name="sd">
 			<ref bean="studentDao"/>
@@ -53,9 +53,22 @@
 		<property name="agencydao">
 			<ref bean="agencyDao"/>
 		</property>
-		<!-- <property name="ied">
-			<ref bean="importExcelDao"/>
-		</property> -->
+	</bean>
+	
+	<!-- 导入的bean -->
+	<bean id="importExcelAction" class="com.international.common.ImportExcelAction">
+		<property name="esd">
+			<ref bean="exchangeStuDao"/>
+		</property>
+		<property name="sd">
+			<ref bean="studentDao"/>
+		</property>
+		<property name="osd">
+			<ref bean="overseasStuDao"/>
+		</property>
+		<property name="sad">
+			<ref bean="stuActivityDao"/>
+		</property>
 	</bean>
 	
 	<!-- 国外院校的bean -->

@@ -2,17 +2,17 @@ package com.international.common;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
@@ -23,14 +23,13 @@ import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.international.dao.ActivityDao;
 import com.international.dao.AgencyDao;
@@ -59,20 +58,15 @@ import com.international.model.OverseasStudent;
 import com.international.model.Score;
 import com.international.model.StudentActivity;
 import com.international.model.Training;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ExcelAction extends ActionSupport {
 	
 	private static final long serialVersionUID = 1821670445298887284L;
 	
-	private File excelFile;
-	private MultipartFile file;
-	private String excelName;
-	private String result;
+	private String uploadFileName;
+	private File upload;
 	private String savePath;
-	private String allowedTypes;
-	private String uploadContentType;
 	private List<InternationalStudent> interStudentList = new ArrayList<InternationalStudent>();
 	private List<ExchangeStudent> exStudentList = new ArrayList<ExchangeStudent>();
 	
@@ -91,23 +85,23 @@ public class ExcelAction extends ActionSupport {
 	AgencyDao agencydao;
 	ImportExcelDao ied;
 	
-	public String getUploadContentType() {
-		return uploadContentType;
+	public String getSavePath() {
+		return savePath;
 	}
-	public void setUploadContentType(String uploadContentType) {
-		this.uploadContentType = uploadContentType;
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
-	public String getAllowedTypes() {
-		return allowedTypes;
+	public String getUploadFileName() {
+		return uploadFileName;
 	}
-	public void setAllowedTypes(String allowedTypes) {
-		this.allowedTypes = allowedTypes;
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
 	}
-	public String getResult() {
-		return result;
+	public File getUpload() {
+		return upload;
 	}
-	public void setResult(String result) {
-		this.result = result;
+	public void setUpload(File upload) {
+		this.upload = upload;
 	}
 	public AgencyDao getAgencydao() {
 		return agencydao;
@@ -169,20 +163,8 @@ public class ExcelAction extends ActionSupport {
 	public void setIed(ImportExcelDao ied) {
 		this.ied = ied;
 	}
-	public File getExcelFile() {
-		return excelFile;
-	}
-	public void setExcelFile(File excelFile) {
-		this.excelFile = excelFile;
-	}
 	public List<InternationalStudent> getInterStudentList() {
 		return interStudentList;
-	}
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
 	}
 	public void setInterStudentList(List<InternationalStudent> interStudentList) {
 		this.interStudentList = interStudentList;
@@ -192,12 +174,6 @@ public class ExcelAction extends ActionSupport {
 	}
 	public void setExStudentList(List<ExchangeStudent> exStudentList) {
 		this.exStudentList = exStudentList;
-	}
-	public String getExcelName() {
-		return excelName;
-	}
-	public void setExcelName(String excelName) {
-		this.excelName = excelName;
 	}
 	public CollegeDao getCd() {
 		return cd;
@@ -223,13 +199,6 @@ public class ExcelAction extends ActionSupport {
 	public void setScoredao(ScoreDao scoredao) {
 		this.scoredao = scoredao;
 	}
-	public String getSavePath() {
-        return savePath = ServletActionContext.getServletContext().getRealPath(
-                "/uploadExcel");
-    }
-    public void setSavePath(String savePath) {
-        this.savePath = savePath;
-    }
 
 	private HSSFWorkbook workbook;
 	private HSSFCell cell = null;  //Excel的列 
@@ -323,66 +292,6 @@ public class ExcelAction extends ActionSupport {
 		outputSetting("国际班学生表.xls");
 		return null; 
 	} 
-	
-	//导入交换生Excel数据       (未完成)
-	public void importExchangeStudentExcel() throws IOException{
-		System.out.println("测试进入此导入action");
-		System.out.println("前台传过来的file："+file);
-		try {
-			List<ExchangeStudent> exStudent = ImportUtil.readExcel(file);
-			for(int i=0;i<exStudent.size();i++) {
-				if(esd.addExStudent(exStudent.get(i))) {
-					System.out.println("插入第"+i+"条交换生数据");
-				};
-				
-			}
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	//上传excel文件   （未完成）
-	public String Fileupload(){
-        String realPath = ServletActionContext.getServletContext().getRealPath(this.getSavePath()+"\\"+this.excelName);
-        System.out.println(realPath);
-        System.out.println(allowedTypes);
-        System.out.println(uploadContentType);
-		//定义目标对象文件，保存文件
-        File newExcel = new File(realPath);
-        if(newExcel!=null) {
-        	try {
-                FileUtils.copyFile(excelFile, newExcel);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            // 删除临时文件
-            excelFile.delete();
-            return "uploadExcelSuccess";
-        }else {
-        	System.out.println("没有上传文件");
-        	return "error";
-        }
-        
-    
-    }
-		
-	//导入国际班学生数据   (此功能未完成)
-	public void importInterStudentExcel() throws Exception{
-//		try {
-//			Map session = ActionContext.getContext().getSession();
-//			System.out.println(this.getSavePath());
-//			session.put("savePath", this.getSavePath());
-//			FileUtils.copyFile(excelFile, new File(this.getSavePath()));
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		return "import";
-	}
-	
-//	@SuppressWarnings("deprecation")
-//	public String getSavePath() {
-//		return ServletActionContext.getRequest().getRealPath(savePath)+"\\"+this.excelFile;
-//	}
 	
 	//导出合作的雅思培训机构
 	public String exportAgency() throws Exception{
@@ -1409,4 +1318,136 @@ public class ExcelAction extends ActionSupport {
 		} 
 	}
 	
+	//下载国际班学生Excel模板
+	public String downloadInterStudent() {
+		String []tableHeader={"学号","姓名","性别","密码","班级","年级","专业","状态"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			//根据是否取出数据，设置header信息 
+			header.setCenter("国际班学生表"); 
+			row = sheet.createRow(0); 
+			row.setHeight((short)400);
+			//表头
+			for(int k = 0;k < cellNumber;k++){
+				cell = row.createCell((short) k);//创建第0行第k列 
+				cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+				sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+				font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+				font.setFontHeight((short)350); //设置单元字体高度 
+				style1.setFont(font);//设置字体风格 
+				cell.setCellStyle(style1); 
+			}
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("国际班学生Excel模板.xls");
+		return null;
+	}
+	
+	//下载交换生Excel模板
+	public String downloadExStudent() {
+		String []tableHeader={"学号","姓名","性别","班级","专业","交换开始时间","交换结束时间","交换的院校"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			header.setCenter("交换生表"); 
+			row = sheet.createRow(0); 
+			row.setHeight((short)400);
+			//表头
+			for(int k = 0;k < cellNumber;k++){
+				cell = row.createCell((short) k);//创建第0行第k列 
+				cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+				sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+				font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+				font.setFontHeight((short)350); //设置单元字体高度 
+				style1.setFont(font);//设置字体风格 
+				cell.setCellStyle(style1); 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("交换生Excel模板.xls");
+		return null;
+	}
+	
+	//下载出国生Excel模板
+	public String downloadOverseasStudent() {
+		String []tableHeader={"学号","姓名","性别","班级","专业","出国的院校","出国院校就读专业","出国时间","获得的本校学位","获得的外校学位","获得的本校奖学金","本校奖学金金额","获得的外校奖学金","外校奖学金金额","外校币种","合作类型","出国津贴(RMB)"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			header.setCenter("出国学生表"); 
+			row = sheet.createRow(0); 
+			row.setHeight((short)400);
+			//表头
+			for(int k = 0;k < cellNumber;k++){
+				cell = row.createCell((short) k);//创建第0行第k列 
+				cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+				sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+				font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+				font.setFontHeight((short)350); //设置单元字体高度 
+				style1.setFont(font);//设置字体风格 
+				cell.setCellStyle(style1); 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("出国学生Excel模板.xls");
+		return null;
+	}
+	
+	//下载学生活动Excel模板
+	public String downloadStudentActivity() {
+		String []tableHeader={"活动主题","学号","姓名","合作国外院校","活动内容","活动开始时间","活动结束时间","活动费用","费用币种"}; 
+		short cellNumber=(short)tableHeader.length;//表的列数 
+		workbook = new HSSFWorkbook(); //创建一个Excel 
+		style = workbook.createCellStyle(); //设置表头的类型 
+		style.setAlignment(HorizontalAlignment.CENTER); 
+		style1 = workbook.createCellStyle(); //设置数据类型 
+		style1.setAlignment(HorizontalAlignment.CENTER); 
+		HSSFFont font = workbook.createFont(); //设置字体 
+		HSSFSheet sheet = workbook.createSheet("sheet1"); //创建一个sheet 
+		HSSFHeader header = sheet.getHeader();//设置sheet的头 
+		try {              
+			header.setCenter("学生参与活动表"); 
+			row = sheet.createRow(0); 
+			row.setHeight((short)400);
+			//表头
+			for(int k = 0;k < cellNumber;k++){
+				cell = row.createCell((short) k);//创建第0行第k列 
+				cell.setCellValue(tableHeader[k]);//设置第0行第k列的值 
+				sheet.setColumnWidth((short)k,(short)8000);//设置列的宽度 
+				font.setColor(HSSFFont.COLOR_NORMAL); // 设置单元格字体的颜色. 
+				font.setFontHeight((short)350); //设置单元字体高度 
+				style1.setFont(font);//设置字体风格 
+				cell.setCellStyle(style1); 
+			} 
+		} catch (Exception e) { 
+			e.printStackTrace(); 
+		} 
+		outputSetting("学生活动Excel模板.xls");
+		return null;
+	}
 }

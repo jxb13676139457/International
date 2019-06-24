@@ -24,12 +24,13 @@
 			<result name="input">/background/login.jsp</result>
 		</action> 
 		
-		<!-- 导入导出Excel的Action -->
+		<!-- 导出Excel的Action -->
 		<action name="excelAction" class="excelAction">
-			 <!-- <result name="uploadExcelSuccess">/background/exchangeStudentInfor.jsp</result>    
-             <result name="error">/background/exchangeStudentInfor.jsp</result> 
-             //允许上传的文件类型，这个是2007EXCEL，即XLSX后缀   
-             <param name="allowedTypes">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/octet-stream</param> -->  
+		
+		</action>
+		<!-- 导入Excel的Action -->
+		<action name="importExcelAction" class="importExcelAction">
+			<param name="savePath">/upload</param>
 		</action>
 		
 		<!-- 国外院校的Action -->

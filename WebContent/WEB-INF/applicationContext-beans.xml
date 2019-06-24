@@ -25,7 +25,6 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>	
-	
 
 	<bean id="classesDao" class="com.international.dao.ClassesDao">
 		<property name="sessionFactory">

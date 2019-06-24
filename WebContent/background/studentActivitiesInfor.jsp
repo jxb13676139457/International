@@ -89,6 +89,28 @@
     		function gotoExitAction(){
     			location.href="exitAction";
     		}
+    		//导入excel文件
+    		function importExcel(){
+    	   	  var formData = new FormData($("#studentExcel")[0]);  // 要求使用的html对象
+    	   	  //console.log(formData);
+    		  $.ajax(		  
+    	   	      {
+    	   	    	  type:"post",
+    	   	    	  url:"http://localhost:8080/InternationalSys/background/importExcelAction!importStudentActivityExcel",
+    	   	  		  //注：如果没有文件，只是简单的表单数据则可以使用 $('#formid').serialize();
+    	  		      data:formData,
+    	   	    	  dataType:"json",	
+    	   	    	  async:false,			    
+    	   	          contentType: false,  
+    	   	          processData: false, 
+    	   	    	  success: function(data){
+    	   	    		  if(data!=null && data!=""){
+    	   	    			  alert(data);
+    	   	    		  }
+    	              }
+    	   	      }
+    	   	  );
+    	    }
 	    </script>
   </head>
 
@@ -275,12 +297,47 @@
                         	<button type="button" class="btn btn-default" style="width:80px;height:30px">
                             	<a href="excelAction!exportStudentActivity"><i class="icon_upload"></i>&nbsp;&nbsp;<b>导出</b></a>
                             </button>
+                            <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="width:80px;height:30px; float:rigtht">
+									<a href="#"><i class="icon_download"></i>&nbsp;&nbsp;<b>导入</b></a>
+							</button>
+							<a class="btn btn-default" href="excelAction!downloadStudentActivity" style="width:140px;height:30px"><i class="icon_upload"></i>&nbsp;&nbsp;<b>下载Excel模板</b></a>
                         </form>
                     </li>                    
                 </ul>
                 <!--  search form end -->                
               </div>
 			</div>
+			
+			<!-- 模态框（Modal） -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" id="myModalLabel">
+								导入学生活动EXCEL表
+							</h4>					
+						</div>
+						<div class="modal-body">
+						   <form enctype="multipart/form-data" id="studentExcel" method="post">
+				                 <input id="file-zh" name="upload" type="file" multiple>	
+				                 <br/><br/>
+				                 <b><a class="btn btn-primary">导入前请先下载学生活动Excel表模板，按规范导入</a></b>	
+				            </form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+							</button>
+							<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="importExcel()">
+								提交
+							</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal -->
+			</div>
+			
 			<div class="row"></div>
               <!-- page start-->
 
@@ -334,44 +391,9 @@
                         </table>
                          </section>
                      </div> 
-            <%--  <s:set name="status" value="#session.status"></s:set>  --%>
+           
 		       <div  style="text-align:center">
-		          <%-- <s:if test="#status==1"> 
-                   <c:if test="${totalPage>0}">
-                         [<a href="studentActivitiesAction?pageNo=1">首页</a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="studentActivitiesAction?pageNo=${currentPage-1}">上一页</a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="studentActivitiesAction?pageNo=${currentPage+1}">下一页</a>]
-                          </c:if>
-         
-                         [<a href="studentActivitiesAction?pageNo=${totalPage}">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      </s:if>
-                      
-                      <s:else>
-                          <c:if test="${totalPage>0}">
-                         [<a href="studentActivitiesAction!searchInformationbyName?pageNo=1 & temp=1">首页</a>]
-         
-                         <c:if test="${currentPage>1}">
-                             [<a href="studentActivitiesAction!searchInformationbyName?pageNo=${currentPage-1} & temp=1">上一页</a>]
-                        </c:if>
-         
-                         <c:if test="${currentPage<totalPage}">
-                            [<a href="studentActivitiesAction!searchInformationbyName?pageNo=${currentPage+1} & temp=1">下一页</a>]
-                          </c:if>
-         
-                         [<a href="studentActivitiesAction!searchInformationbyName?pageNo=${totalPage} & temp=1">尾页</a>]	
-                                                                                                     第${currentPage}页/共${totalPage}页
-                      </c:if>
-                      
-                      </s:else> --%>
-                      
-                      <!-- 分页 -->
+                    <!-- 分页 -->
 			  		[<a href="studentActivityAction!showStuActivity?pageNo=1&loginUserName=${sessionScope.searchStudentActivity}">首页</a>]
 						<c:choose>
 							<c:when test="${currentPage>1}">

@@ -135,6 +135,27 @@ public class ExchangeStuDao {
 		}
 	}
 	
+	//根据学号查询数据库是否有这个交换生
+	public boolean queryByStudentNo(String stuNo) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			String hql = "from ExchangeStudent where studentNo="+stuNo;
+			Query query = session.createQuery(hql);
+			List list = query.list();
+			if(list.size()>0) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			session.close();
+		}
+	}
+	
 	//修改国际班学生信息  
 	public boolean updateStudent(ExchangeStudent newStudent) {
 		Session session = null;

@@ -2,6 +2,9 @@ package com.international.model;
 
 import java.util.Date;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
+import cn.afterturn.easypoi.excel.annotation.ExcelTarget;
+
 public class ExchangeStudent {
 	//此表按照单表来操作，只用作记录
 	private int id;

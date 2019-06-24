@@ -221,4 +221,45 @@ public class StudentDao {
 		}
 	}
 	
+	//根据国际班级名称查找国际班对象  
+	public int queryByClassId(String className){
+		//System.out.println("学生的班级："+className);
+		//这一句是为了截取ajax传参过来的时候参数后面加多了", "这两个字符
+		//className = className.substring(0,className.length()-2);
+		System.out.println("传过来的班级名称："+className);
+		Session session = null;
+		String hql = "select classId from InternationalClass where className='"+className+"'";
+		try {
+			session = sessionFactory.openSession();
+			Query query = session.createQuery(hql);
+			InternationalClass interClass = (InternationalClass) query.list().get(0);
+			return interClass.getClassId();
+		}catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			session.close();
+		}
+	}
+	
+	/*//根据学号查询数据库是否有这个国际班学生
+	public boolean queryByStudentId(String stuId) {
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			String hql = "from InternationalStudent where studentId="+stuId;
+			Query query = session.createQuery(hql);
+			List list = query.list();
+			if(list.size()>0) {
+				return true;
+			}else {
+				return false;
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			session.close();
+		}
+	}*/
 }
