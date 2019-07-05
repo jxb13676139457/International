@@ -38,34 +38,41 @@ public class ActivityDao {
 			//hql语句
 			String hql1="title like '%"+title+"%'";
 			String hql2="convert(varchar,time,120) like '%"+time+"%'";
-			String hql3="collegeName like '%"+name+"%'";
-
+			//String hql3="collegeName like '%"+name+"%'";
+			String hql3="";
+			if(title.equals("")&&time.equals(""))
+				hql3="collegeName like '%"+name+"%'";
+			else if(!name.equals(""))
+				hql3="collegeName like '%"+name+"%'";
+			else
+				hql3="collegeName = '"+name+"'";
 			//查询名字
 			String queryName="from College where "+hql3;
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
-			if(list1.isEmpty()) {
+			/*if (list1.isEmpty()) {
 				return null;
-			}
+			}*/
 			//int value=0;
 			//int value=list1.get(0).getCollegeId();
 			//String hql4="coll like '%"+value+"%'";
 			int value;
 			String hql4="";
-			for(int i=0;i<list1.size();i++) {
-				if(i==0) {
-					value=list1.get(i).getCollegeId();
-					hql4=hql4+" collegeId = '"+value+"'";
-				}
-				else {
-					value=list1.get(i).getCollegeId();
-					hql4=hql4+" or collegeId = '"+value+"'";
+			if (!list1.isEmpty()||!title.equals("")||!time.equals("")) {
+				for(int i=0;i<list1.size();i++) {
+					if(i==0) {
+						value=list1.get(i).getCollegeId();
+						hql4=hql4+"and collegeId = '"+value+"'";
+					}
+					else {
+						value=list1.get(i).getCollegeId();
+						hql4=hql4+" or collegeId = '"+value+"'";
+					}
 				}
 				
-			}
 			
 			
-			String str=hql1+" and "+hql2+" and "+hql4;
+			String str=hql1+" and "+hql2+hql4;
 			//获取所有数据
 			String queryString="from CollegeActivity where "+str;
 			//创建查询
@@ -77,6 +84,9 @@ public class ActivityDao {
 			else{
 				return null;
 				}
+			}
+			else
+				return null;
 		}catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -95,34 +105,38 @@ public class ActivityDao {
 			//hql语句
 			String hql1="title like '%"+title+"%'";
 			String hql2="convert(varchar,time,120) like '%"+time+"%'";
-			String hql3="collegeName like '%"+name+"%'";
-
+			//String hql3="collegeName like '%"+name+"%'";
+			String hql3="";
+			if(title.equals("")&&time.equals(""))
+				hql3="collegeName like '%"+name+"%'";
+			else if(!name.equals(""))
+				hql3="collegeName like '%"+name+"%'";
+			else
+				hql3="collegeName = '"+name+"'";
 			
 			//查询名字
 			String queryName="from College where "+hql3;
 			Query query1=session.createQuery(queryName);
 			List<College> list1=query1.list();
 			
+			int value;
+			String hql4="";
+			if (!list1.isEmpty()||!title.equals("")||!time.equals("")) {
+				for (int i = 0; i < list1.size(); i++) {
+					if (i == 0) {
+						value = list1.get(i).getCollegeId();
+						hql4 = hql4 + "and collegeId = '" + value + "'";
+					} else {
+						value = list1.get(i).getCollegeId();
+						hql4 = hql4 + " or collegeId = '" + value + "'";
+					}
 
-
-			  int value;
-			  String hql4="";
-			  for(int i=0;i<list1.size();i++) {
-				if(i==0) {
-					value=list1.get(i).getCollegeId();
-					hql4=hql4+" collegeId = '"+value+"'";
 				}
-				else {
-					value=list1.get(i).getCollegeId();
-					hql4=hql4+" or collegeId = '"+value+"'";
-				}
-				
-			}
-
+			
 			//int value=list1.get(0).getCollegeId();
 			//String hql4="coll like '%"+value+"%'";
 			
-			String str=hql1+" and "+hql2+" and "+hql4;
+			String str=hql1+" and "+hql2+hql4;
 			//获取所有数据
 			String queryString="from CollegeActivity where "+str;
 			//创建查询
@@ -135,6 +149,9 @@ public class ActivityDao {
 			//每次最多6条记录
 			List<CollegeActivity> list=query.list();
 			return list;
+			}
+			else
+				return null;
 		}catch (Exception e) {
 			e.printStackTrace();
 			return null;

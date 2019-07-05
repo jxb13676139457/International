@@ -52,8 +52,12 @@
 		
 		<action name="internationClassAction" class="internationClassAction">
 			<result name="success">/background/internationalClassInfor.jsp</result>
-			<result name="deleteSuccess">/background/internationalClassInfor.jsp</result>
-			<result name="deleteError">/background/internationalClassInfor.jsp</result>
+			<result name="deleteSuccess" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
+			<result name="deleteError" type="redirectAction">
+				<param name="actionName">internationClassAction</param>
+			</result>
 			<result name="lookSuccess">/background/showClassDetail.jsp</result>
 			<result name="lookError">/background/internationalClassInfor.jsp</result>
 			<result name="updateError">/background/internationalClassInfor.jsp</result>

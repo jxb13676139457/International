@@ -54,6 +54,8 @@ public class priorPolicyAction extends ActionSupport {
 		System.out.println("execute默认方法被调用");
 		m=ActionContext.getContext().getSession();
 		policyList=pd.queryAllPolicy();
+		if(policyList==null)
+			return SUCCESS;
 		for(int i=0;i<policyList.size();i++) {
 			policyList.get(i).setTime(policyList.get(i).getTime().substring(0, 10));
 		}

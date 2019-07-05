@@ -163,6 +163,8 @@ public class CollegeActivityAction extends ActionSupport{
 	}
 	public String execute() throws Exception{
 		m=ActionContext.getContext().getSession();
+		if(!activityTime.equals(""))
+			activityTime=activityTime.substring(0, 10);
 		collegeActivities=ad.queryAllActivity(titles,activityTime,search);
 		//查询到是空直接返回
 		if(collegeActivities==null) {
@@ -170,7 +172,6 @@ public class CollegeActivityAction extends ActionSupport{
 			//currentPage=0;
 			return SUCCESS;
 		}
-			
 		//计算总页数
 		if(collegeActivities.size()%pageSize==0){
 			totalPage=collegeActivities.size()/pageSize;
@@ -184,6 +185,7 @@ public class CollegeActivityAction extends ActionSupport{
 		}
 		//根据当前页查询要在该页上显示的数据
 		collegeActivities=ad.queryActivity(titles,activityTime,search, pageNo, pageSize);
+		System.out.println("cxcx");
 		for(int i=0;i<collegeActivities.size();i++) {
 			collegeActivities.get(i).setTime(collegeActivities.get(i).getTime().substring(0, 10));
 		}

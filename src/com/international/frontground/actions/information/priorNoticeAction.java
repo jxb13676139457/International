@@ -53,6 +53,8 @@ public class priorNoticeAction extends ActionSupport {
 		System.out.println("execute默认方法被调用");
 		m=ActionContext.getContext().getSession();
 		notices=nd.queryAllNotice();
+		if(notices==null)
+			return SUCCESS;
 		for(int i=0;i<notices.size();i++) {
 			notices.get(i).setTime(notices.get(i).getTime().substring(0, 10));
 		}
